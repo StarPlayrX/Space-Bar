@@ -66,6 +66,7 @@
 		5F77D8F422E3FEBC00E8C4F3 /* emulogic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = emulogic.ttf; path = "../../../../../Volumes/mojaveBackUp/Users/todd/uf-emoji-video-game1/Breaking Beer/Breaking Beer/emulogic.ttf"; sourceTree = "<group>"; };
 		5F77D8F722E3FED800E8C4F3 /* hextileset.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = hextileset.sks; sourceTree = "<group>"; };
 		5F77D8FE22E4005700E8C4F3 /* emulogic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = emulogic.ttf; path = "../../../../../Volumes/mojaveBackUp/Users/todd/uf-emoji-video-game1/Breaking Beer/Breaking Beer/emulogic.ttf"; sourceTree = "<group>"; };
+		5FC5E32722E40F1F00E1159A /* Space-Bar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Space-Bar.entitlements"; sourceTree = "<group>"; };
 		EA69D556203FC42F008D9359 /* level8-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level8-ipad.sks"; sourceTree = "<group>"; };
 		EA69D558203FC43B008D9359 /* level8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level8.sks; sourceTree = "<group>"; };
 		EA69D55A203FC481008D9359 /* level9-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level9-ipad.sks"; sourceTree = "<group>"; };
@@ -188,6 +189,7 @@
 		EAFBF6A22036591D0086084A /* Space-Bar */ = {
 			isa = PBXGroup;
 			children = (
+				5FC5E32722E40F1F00E1159A /* Space-Bar.entitlements */,
 				5F77D8FB22E4002100E8C4F3 /* AppDelegate */,
 				5F77D8FA22E4000E00E8C4F3 /* Controllers */,
 				5F77D8F922E3FFC500E8C4F3 /* GameLogic */,
@@ -492,13 +494,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Bruss.Todd.Space-Bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Space-Bar/Space-Bar-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -511,13 +516,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Bruss.Todd.Space-Bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Space-Bar/Space-Bar-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
