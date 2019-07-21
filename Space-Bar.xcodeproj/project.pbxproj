@@ -1,0 +1,551 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5F77D8DB22E3FCC100E8C4F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F77D8DA22E3FCC100E8C4F3 /* AppDelegate.swift */; };
+		5F77D8DD22E3FCE800E8C4F3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F77D8DC22E3FCE800E8C4F3 /* GameScene.swift */; };
+		5F77D8DF22E3FCF900E8C4F3 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F77D8DE22E3FCF800E8C4F3 /* GameViewController.swift */; };
+		5F77D8E522E3FDF900E8C4F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8E122E3FDF900E8C4F3 /* LaunchScreen.storyboard */; };
+		5F77D8E622E3FDF900E8C4F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8E322E3FDF900E8C4F3 /* Main.storyboard */; };
+		5F77D8EF22E3FE9F00E8C4F3 /* Knock.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8EB22E3FE9F00E8C4F3 /* Knock.m4a */; };
+		5F77D8F022E3FE9F00E8C4F3 /* Dah.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8EC22E3FE9F00E8C4F3 /* Dah.m4a */; };
+		5F77D8F122E3FE9F00E8C4F3 /* Bip.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8ED22E3FE9F00E8C4F3 /* Bip.m4a */; };
+		5F77D8F222E3FE9F00E8C4F3 /* Dat.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8EE22E3FE9F00E8C4F3 /* Dat.m4a */; };
+		5F77D8F522E3FEBC00E8C4F3 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8F322E3FEBC00E8C4F3 /* GameScene.sks */; };
+		5F77D8F622E3FEBC00E8C4F3 /* emulogic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8F422E3FEBC00E8C4F3 /* emulogic.ttf */; };
+		5F77D8F822E3FED800E8C4F3 /* hextileset.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8F722E3FED800E8C4F3 /* hextileset.sks */; };
+		EA69D557203FC42F008D9359 /* level8-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D556203FC42F008D9359 /* level8-ipad.sks */; };
+		EA69D559203FC43B008D9359 /* level8.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D558203FC43B008D9359 /* level8.sks */; };
+		EA69D55B203FC482008D9359 /* level9-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D55A203FC481008D9359 /* level9-ipad.sks */; };
+		EA69D55D203FC488008D9359 /* level9.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D55C203FC488008D9359 /* level9.sks */; };
+		EA69D55F203FC4CE008D9359 /* level10-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D55E203FC4CE008D9359 /* level10-ipad.sks */; };
+		EA69D561203FC4D4008D9359 /* level10.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D560203FC4D4008D9359 /* level10.sks */; };
+		EA69D563203FCA95008D9359 /* level11.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D562203FCA95008D9359 /* level11.sks */; };
+		EA69D565203FCA9E008D9359 /* level11-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D564203FCA9E008D9359 /* level11-ipad.sks */; };
+		EA69D567203FCB28008D9359 /* level13-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D566203FCB28008D9359 /* level13-ipad.sks */; };
+		EA69D569203FCB2E008D9359 /* level13.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D568203FCB2E008D9359 /* level13.sks */; };
+		EA69D56B203FCB98008D9359 /* level14.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D56A203FCB98008D9359 /* level14.sks */; };
+		EA69D56D203FCBA0008D9359 /* level14-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D56C203FCBA0008D9359 /* level14-ipad.sks */; };
+		EA69D56F203FCC1F008D9359 /* level15.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D56E203FCC1F008D9359 /* level15.sks */; };
+		EA69D571203FCC2D008D9359 /* level15-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D570203FCC2D008D9359 /* level15-ipad.sks */; };
+		EABB3AF9203B64C6000217E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EABB3AF8203B64C6000217E1 /* Assets.xcassets */; };
+		EABB3AFB203CFA27000217E1 /* level1.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3AFA203CFA27000217E1 /* level1.sks */; };
+		EABB3AFD203CFA49000217E1 /* level2-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3AFC203CFA49000217E1 /* level2-ipad.sks */; };
+		EABB3AFF203CFC00000217E1 /* level3-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3AFE203CFC00000217E1 /* level3-ipad.sks */; };
+		EABB3B01203CFC08000217E1 /* level3.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B00203CFC08000217E1 /* level3.sks */; };
+		EABB3B03203CFC38000217E1 /* levelX.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B02203CFC38000217E1 /* levelX.sks */; };
+		EABB3B05203CFC42000217E1 /* levelX-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B04203CFC42000217E1 /* levelX-ipad.sks */; };
+		EABB3B07203CFFCD000217E1 /* level4.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B06203CFFCD000217E1 /* level4.sks */; };
+		EABB3B09203CFFE1000217E1 /* level4-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B08203CFFE1000217E1 /* level4-ipad.sks */; };
+		EABB3B0B203D00F6000217E1 /* level5-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B0A203D00F6000217E1 /* level5-ipad.sks */; };
+		EABB3B0D203D0102000217E1 /* level5.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B0C203D0102000217E1 /* level5.sks */; };
+		EABB3B0F203D0255000217E1 /* level6.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B0E203D0255000217E1 /* level6.sks */; };
+		EABB3B11203D025C000217E1 /* level6-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B10203D025C000217E1 /* level6-ipad.sks */; };
+		EABB3B13203D0737000217E1 /* level7.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B12203D0737000217E1 /* level7.sks */; };
+		EABB3B15203D073E000217E1 /* level7-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B14203D073E000217E1 /* level7-ipad.sks */; };
+		EABCDA882037E0FB0027FA89 /* level2.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABCDA872037E0FB0027FA89 /* level2.sks */; };
+		EAFBF6CC203659E60086084A /* level1-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EAFBF6C0203659E60086084A /* level1-ipad.sks */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5F77D8DA22E3FCC100E8C4F3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5F77D8DC22E3FCE800E8C4F3 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		5F77D8DE22E3FCF800E8C4F3 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		5F77D8E222E3FDF900E8C4F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5F77D8E422E3FDF900E8C4F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		5F77D8EB22E3FE9F00E8C4F3 /* Knock.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Knock.m4a; sourceTree = "<group>"; };
+		5F77D8EC22E3FE9F00E8C4F3 /* Dah.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dah.m4a; sourceTree = "<group>"; };
+		5F77D8ED22E3FE9F00E8C4F3 /* Bip.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bip.m4a; sourceTree = "<group>"; };
+		5F77D8EE22E3FE9F00E8C4F3 /* Dat.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dat.m4a; sourceTree = "<group>"; };
+		5F77D8F322E3FEBC00E8C4F3 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		5F77D8F422E3FEBC00E8C4F3 /* emulogic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = emulogic.ttf; path = "../../../../../Volumes/mojaveBackUp/Users/todd/uf-emoji-video-game1/Breaking Beer/Breaking Beer/emulogic.ttf"; sourceTree = "<group>"; };
+		5F77D8F722E3FED800E8C4F3 /* hextileset.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = hextileset.sks; sourceTree = "<group>"; };
+		5F77D8FE22E4005700E8C4F3 /* emulogic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = emulogic.ttf; path = "../../../../../Volumes/mojaveBackUp/Users/todd/uf-emoji-video-game1/Breaking Beer/Breaking Beer/emulogic.ttf"; sourceTree = "<group>"; };
+		EA69D556203FC42F008D9359 /* level8-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level8-ipad.sks"; sourceTree = "<group>"; };
+		EA69D558203FC43B008D9359 /* level8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level8.sks; sourceTree = "<group>"; };
+		EA69D55A203FC481008D9359 /* level9-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level9-ipad.sks"; sourceTree = "<group>"; };
+		EA69D55C203FC488008D9359 /* level9.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level9.sks; sourceTree = "<group>"; };
+		EA69D55E203FC4CE008D9359 /* level10-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level10-ipad.sks"; sourceTree = "<group>"; };
+		EA69D560203FC4D4008D9359 /* level10.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level10.sks; sourceTree = "<group>"; };
+		EA69D562203FCA95008D9359 /* level11.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level11.sks; sourceTree = "<group>"; };
+		EA69D564203FCA9E008D9359 /* level11-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level11-ipad.sks"; sourceTree = "<group>"; };
+		EA69D566203FCB28008D9359 /* level13-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level13-ipad.sks"; sourceTree = "<group>"; };
+		EA69D568203FCB2E008D9359 /* level13.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level13.sks; sourceTree = "<group>"; };
+		EA69D56A203FCB98008D9359 /* level14.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level14.sks; sourceTree = "<group>"; };
+		EA69D56C203FCBA0008D9359 /* level14-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level14-ipad.sks"; sourceTree = "<group>"; };
+		EA69D56E203FCC1F008D9359 /* level15.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level15.sks; sourceTree = "<group>"; };
+		EA69D570203FCC2D008D9359 /* level15-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level15-ipad.sks"; sourceTree = "<group>"; };
+		EABB3AF8203B64C6000217E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EABB3AFA203CFA27000217E1 /* level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level1.sks; sourceTree = "<group>"; };
+		EABB3AFC203CFA49000217E1 /* level2-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level2-ipad.sks"; sourceTree = "<group>"; };
+		EABB3AFE203CFC00000217E1 /* level3-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level3-ipad.sks"; sourceTree = "<group>"; };
+		EABB3B00203CFC08000217E1 /* level3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level3.sks; sourceTree = "<group>"; };
+		EABB3B02203CFC38000217E1 /* levelX.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = levelX.sks; sourceTree = "<group>"; };
+		EABB3B04203CFC42000217E1 /* levelX-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "levelX-ipad.sks"; sourceTree = "<group>"; };
+		EABB3B06203CFFCD000217E1 /* level4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level4.sks; sourceTree = "<group>"; };
+		EABB3B08203CFFE1000217E1 /* level4-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level4-ipad.sks"; sourceTree = "<group>"; };
+		EABB3B0A203D00F6000217E1 /* level5-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level5-ipad.sks"; sourceTree = "<group>"; };
+		EABB3B0C203D0102000217E1 /* level5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level5.sks; sourceTree = "<group>"; };
+		EABB3B0E203D0255000217E1 /* level6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level6.sks; sourceTree = "<group>"; };
+		EABB3B10203D025C000217E1 /* level6-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level6-ipad.sks"; sourceTree = "<group>"; };
+		EABB3B12203D0737000217E1 /* level7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level7.sks; sourceTree = "<group>"; };
+		EABB3B14203D073E000217E1 /* level7-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level7-ipad.sks"; sourceTree = "<group>"; };
+		EABCDA872037E0FB0027FA89 /* level2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level2.sks; sourceTree = "<group>"; };
+		EAFBF6A02036591D0086084A /* Space-Bar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space-Bar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAFBF6BD203659E50086084A /* Space-Bar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Space-Bar-Bridging-Header.h"; sourceTree = "<group>"; };
+		EAFBF6C0203659E60086084A /* level1-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level1-ipad.sks"; sourceTree = "<group>"; };
+		EAFBF6DD20365A9A0086084A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EAFBF69D2036591D0086084A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5F61921522E404BB00ED685B /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				5F77D8ED22E3FE9F00E8C4F3 /* Bip.m4a */,
+				5F77D8EC22E3FE9F00E8C4F3 /* Dah.m4a */,
+				5F77D8EE22E3FE9F00E8C4F3 /* Dat.m4a */,
+				5F77D8EB22E3FE9F00E8C4F3 /* Knock.m4a */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		5F77D8E022E3FDF900E8C4F3 /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				5F77D8E122E3FDF900E8C4F3 /* LaunchScreen.storyboard */,
+				5F77D8E322E3FDF900E8C4F3 /* Main.storyboard */,
+			);
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		5F77D8F922E3FFC500E8C4F3 /* GameLogic */ = {
+			isa = PBXGroup;
+			children = (
+				5F77D8DC22E3FCE800E8C4F3 /* GameScene.swift */,
+				5F77D8F322E3FEBC00E8C4F3 /* GameScene.sks */,
+				5F77D8F722E3FED800E8C4F3 /* hextileset.sks */,
+			);
+			path = GameLogic;
+			sourceTree = "<group>";
+		};
+		5F77D8FA22E4000E00E8C4F3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5F77D8DE22E3FCF800E8C4F3 /* GameViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		5F77D8FB22E4002100E8C4F3 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				5F77D8DA22E3FCC100E8C4F3 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		5F77D8FC22E4003E00E8C4F3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				5F77D8FE22E4005700E8C4F3 /* emulogic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		EAFBF6972036591D0086084A = {
+			isa = PBXGroup;
+			children = (
+				5F61921522E404BB00ED685B /* Sounds */,
+				5F77D8FC22E4003E00E8C4F3 /* Fonts */,
+				EAFBF6A22036591D0086084A /* Space-Bar */,
+				EAFBF6A12036591D0086084A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EAFBF6A12036591D0086084A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EAFBF6A02036591D0086084A /* Space-Bar.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EAFBF6A22036591D0086084A /* Space-Bar */ = {
+			isa = PBXGroup;
+			children = (
+				5F77D8FB22E4002100E8C4F3 /* AppDelegate */,
+				5F77D8FA22E4000E00E8C4F3 /* Controllers */,
+				5F77D8F922E3FFC500E8C4F3 /* GameLogic */,
+				5F77D8E022E3FDF900E8C4F3 /* Base.lproj */,
+				5F77D8F422E3FEBC00E8C4F3 /* emulogic.ttf */,
+				EAFBF6DD20365A9A0086084A /* Info.plist */,
+				EABB3AF8203B64C6000217E1 /* Assets.xcassets */,
+				EAFBF6DF203663520086084A /* levels */,
+				EAFBF6BD203659E50086084A /* Space-Bar-Bridging-Header.h */,
+			);
+			path = "Space-Bar";
+			sourceTree = "<group>";
+		};
+		EAFBF6DF203663520086084A /* levels */ = {
+			isa = PBXGroup;
+			children = (
+				EAFBF6C0203659E60086084A /* level1-ipad.sks */,
+				EABB3AFA203CFA27000217E1 /* level1.sks */,
+				EABCDA872037E0FB0027FA89 /* level2.sks */,
+				EABB3AFC203CFA49000217E1 /* level2-ipad.sks */,
+				EABB3B00203CFC08000217E1 /* level3.sks */,
+				EABB3AFE203CFC00000217E1 /* level3-ipad.sks */,
+				EABB3B06203CFFCD000217E1 /* level4.sks */,
+				EABB3B08203CFFE1000217E1 /* level4-ipad.sks */,
+				EABB3B0C203D0102000217E1 /* level5.sks */,
+				EABB3B0A203D00F6000217E1 /* level5-ipad.sks */,
+				EABB3B0E203D0255000217E1 /* level6.sks */,
+				EABB3B10203D025C000217E1 /* level6-ipad.sks */,
+				EABB3B12203D0737000217E1 /* level7.sks */,
+				EABB3B14203D073E000217E1 /* level7-ipad.sks */,
+				EA69D558203FC43B008D9359 /* level8.sks */,
+				EA69D556203FC42F008D9359 /* level8-ipad.sks */,
+				EA69D55C203FC488008D9359 /* level9.sks */,
+				EA69D55A203FC481008D9359 /* level9-ipad.sks */,
+				EA69D560203FC4D4008D9359 /* level10.sks */,
+				EA69D55E203FC4CE008D9359 /* level10-ipad.sks */,
+				EA69D562203FCA95008D9359 /* level11.sks */,
+				EA69D564203FCA9E008D9359 /* level11-ipad.sks */,
+				EA69D568203FCB2E008D9359 /* level13.sks */,
+				EA69D566203FCB28008D9359 /* level13-ipad.sks */,
+				EA69D56A203FCB98008D9359 /* level14.sks */,
+				EA69D56C203FCBA0008D9359 /* level14-ipad.sks */,
+				EA69D56E203FCC1F008D9359 /* level15.sks */,
+				EA69D570203FCC2D008D9359 /* level15-ipad.sks */,
+				EABB3B02203CFC38000217E1 /* levelX.sks */,
+				EABB3B04203CFC42000217E1 /* levelX-ipad.sks */,
+			);
+			name = levels;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EAFBF69F2036591D0086084A /* Space-Bar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EAFBF6B82036591D0086084A /* Build configuration list for PBXNativeTarget "Space-Bar" */;
+			buildPhases = (
+				EAFBF69C2036591D0086084A /* Sources */,
+				EAFBF69D2036591D0086084A /* Frameworks */,
+				EAFBF69E2036591D0086084A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Space-Bar";
+			productName = "Space-Bar";
+			productReference = EAFBF6A02036591D0086084A /* Space-Bar.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EAFBF6982036591D0086084A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "Todd Bruss";
+				TargetAttributes = {
+					EAFBF69F2036591D0086084A = {
+						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1020;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = EAFBF69B2036591D0086084A /* Build configuration list for PBXProject "Space-Bar" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EAFBF6972036591D0086084A;
+			productRefGroup = EAFBF6A12036591D0086084A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EAFBF69F2036591D0086084A /* Space-Bar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EAFBF69E2036591D0086084A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA69D571203FCC2D008D9359 /* level15-ipad.sks in Resources */,
+				EABB3AFB203CFA27000217E1 /* level1.sks in Resources */,
+				EA69D565203FCA9E008D9359 /* level11-ipad.sks in Resources */,
+				EA69D557203FC42F008D9359 /* level8-ipad.sks in Resources */,
+				EA69D561203FC4D4008D9359 /* level10.sks in Resources */,
+				EABB3B07203CFFCD000217E1 /* level4.sks in Resources */,
+				EA69D56D203FCBA0008D9359 /* level14-ipad.sks in Resources */,
+				EABB3AFD203CFA49000217E1 /* level2-ipad.sks in Resources */,
+				5F77D8F222E3FE9F00E8C4F3 /* Dat.m4a in Resources */,
+				EABB3B01203CFC08000217E1 /* level3.sks in Resources */,
+				EA69D56B203FCB98008D9359 /* level14.sks in Resources */,
+				EABB3B0B203D00F6000217E1 /* level5-ipad.sks in Resources */,
+				EA69D55F203FC4CE008D9359 /* level10-ipad.sks in Resources */,
+				EA69D567203FCB28008D9359 /* level13-ipad.sks in Resources */,
+				EABB3B11203D025C000217E1 /* level6-ipad.sks in Resources */,
+				EA69D559203FC43B008D9359 /* level8.sks in Resources */,
+				5F77D8F122E3FE9F00E8C4F3 /* Bip.m4a in Resources */,
+				EABB3B05203CFC42000217E1 /* levelX-ipad.sks in Resources */,
+				5F77D8E522E3FDF900E8C4F3 /* LaunchScreen.storyboard in Resources */,
+				5F77D8E622E3FDF900E8C4F3 /* Main.storyboard in Resources */,
+				EA69D56F203FCC1F008D9359 /* level15.sks in Resources */,
+				5F77D8F022E3FE9F00E8C4F3 /* Dah.m4a in Resources */,
+				EABB3B03203CFC38000217E1 /* levelX.sks in Resources */,
+				EA69D55B203FC482008D9359 /* level9-ipad.sks in Resources */,
+				EABB3B0F203D0255000217E1 /* level6.sks in Resources */,
+				EABB3B13203D0737000217E1 /* level7.sks in Resources */,
+				EABB3AFF203CFC00000217E1 /* level3-ipad.sks in Resources */,
+				EA69D563203FCA95008D9359 /* level11.sks in Resources */,
+				EA69D55D203FC488008D9359 /* level9.sks in Resources */,
+				EAFBF6CC203659E60086084A /* level1-ipad.sks in Resources */,
+				EABB3B0D203D0102000217E1 /* level5.sks in Resources */,
+				EABCDA882037E0FB0027FA89 /* level2.sks in Resources */,
+				5F77D8F822E3FED800E8C4F3 /* hextileset.sks in Resources */,
+				EABB3B15203D073E000217E1 /* level7-ipad.sks in Resources */,
+				EABB3B09203CFFE1000217E1 /* level4-ipad.sks in Resources */,
+				5F77D8F522E3FEBC00E8C4F3 /* GameScene.sks in Resources */,
+				5F77D8EF22E3FE9F00E8C4F3 /* Knock.m4a in Resources */,
+				5F77D8F622E3FEBC00E8C4F3 /* emulogic.ttf in Resources */,
+				EABB3AF9203B64C6000217E1 /* Assets.xcassets in Resources */,
+				EA69D569203FCB2E008D9359 /* level13.sks in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EAFBF69C2036591D0086084A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F77D8DF22E3FCF900E8C4F3 /* GameViewController.swift in Sources */,
+				5F77D8DB22E3FCC100E8C4F3 /* AppDelegate.swift in Sources */,
+				5F77D8DD22E3FCE800E8C4F3 /* GameScene.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5F77D8E122E3FDF900E8C4F3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5F77D8E222E3FDF900E8C4F3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		5F77D8E322E3FDF900E8C4F3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5F77D8E422E3FDF900E8C4F3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EAFBF6B62036591D0086084A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EAFBF6B72036591D0086084A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EAFBF6B92036591D0086084A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 469UCUB275;
+				INFOPLIST_FILE = "Space-Bar/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Bruss.Todd.Space-Bar";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Space-Bar/Space-Bar-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EAFBF6BA2036591D0086084A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 469UCUB275;
+				INFOPLIST_FILE = "Space-Bar/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Bruss.Todd.Space-Bar";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Space-Bar/Space-Bar-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EAFBF69B2036591D0086084A /* Build configuration list for PBXProject "Space-Bar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAFBF6B62036591D0086084A /* Debug */,
+				EAFBF6B72036591D0086084A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EAFBF6B82036591D0086084A /* Build configuration list for PBXNativeTarget "Space-Bar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAFBF6B92036591D0086084A /* Debug */,
+				EAFBF6BA2036591D0086084A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EAFBF6982036591D0086084A /* Project object */;
+}
