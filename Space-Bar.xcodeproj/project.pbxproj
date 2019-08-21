@@ -17,8 +17,8 @@
 		5F77D8F122E3FE9F00E8C4F3 /* Bip.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8ED22E3FE9F00E8C4F3 /* Bip.m4a */; };
 		5F77D8F222E3FE9F00E8C4F3 /* Dat.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8EE22E3FE9F00E8C4F3 /* Dat.m4a */; };
 		5F77D8F522E3FEBC00E8C4F3 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8F322E3FEBC00E8C4F3 /* GameScene.sks */; };
-		5F77D8F622E3FEBC00E8C4F3 /* emulogic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8F422E3FEBC00E8C4F3 /* emulogic.ttf */; };
 		5F77D8F822E3FED800E8C4F3 /* hextileset.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8F722E3FED800E8C4F3 /* hextileset.sks */; };
+		5F83175D230CD7E0005B4A1B /* emulogic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F83175C230CCFAC005B4A1B /* emulogic.ttf */; };
 		EA69D557203FC42F008D9359 /* level8-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D556203FC42F008D9359 /* level8-ipad.sks */; };
 		EA69D559203FC43B008D9359 /* level8.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D558203FC43B008D9359 /* level8.sks */; };
 		EA69D55B203FC482008D9359 /* level9-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D55A203FC481008D9359 /* level9-ipad.sks */; };
@@ -63,9 +63,8 @@
 		5F77D8ED22E3FE9F00E8C4F3 /* Bip.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bip.m4a; sourceTree = "<group>"; };
 		5F77D8EE22E3FE9F00E8C4F3 /* Dat.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dat.m4a; sourceTree = "<group>"; };
 		5F77D8F322E3FEBC00E8C4F3 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		5F77D8F422E3FEBC00E8C4F3 /* emulogic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = emulogic.ttf; path = "../../../../../Volumes/mojaveBackUp/Users/todd/uf-emoji-video-game1/Breaking Beer/Breaking Beer/emulogic.ttf"; sourceTree = "<group>"; };
 		5F77D8F722E3FED800E8C4F3 /* hextileset.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = hextileset.sks; sourceTree = "<group>"; };
-		5F77D8FE22E4005700E8C4F3 /* emulogic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = emulogic.ttf; path = "../../../../../Volumes/mojaveBackUp/Users/todd/uf-emoji-video-game1/Breaking Beer/Breaking Beer/emulogic.ttf"; sourceTree = "<group>"; };
+		5F83175C230CCFAC005B4A1B /* emulogic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = emulogic.ttf; sourceTree = "<group>"; };
 		5FC5E32722E40F1F00E1159A /* Space-Bar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Space-Bar.entitlements"; sourceTree = "<group>"; };
 		EA69D556203FC42F008D9359 /* level8-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level8-ipad.sks"; sourceTree = "<group>"; };
 		EA69D558203FC43B008D9359 /* level8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level8.sks; sourceTree = "<group>"; };
@@ -163,7 +162,7 @@
 		5F77D8FC22E4003E00E8C4F3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				5F77D8FE22E4005700E8C4F3 /* emulogic.ttf */,
+				5F83175C230CCFAC005B4A1B /* emulogic.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -194,7 +193,6 @@
 				5F77D8FA22E4000E00E8C4F3 /* Controllers */,
 				5F77D8F922E3FFC500E8C4F3 /* GameLogic */,
 				5F77D8E022E3FDF900E8C4F3 /* Base.lproj */,
-				5F77D8F422E3FEBC00E8C4F3 /* emulogic.ttf */,
 				EAFBF6DD20365A9A0086084A /* Info.plist */,
 				EABB3AF8203B64C6000217E1 /* Assets.xcassets */,
 				EAFBF6DF203663520086084A /* levels */,
@@ -337,7 +335,7 @@
 				EABB3B09203CFFE1000217E1 /* level4-ipad.sks in Resources */,
 				5F77D8F522E3FEBC00E8C4F3 /* GameScene.sks in Resources */,
 				5F77D8EF22E3FE9F00E8C4F3 /* Knock.m4a in Resources */,
-				5F77D8F622E3FEBC00E8C4F3 /* emulogic.ttf in Resources */,
+				5F83175D230CD7E0005B4A1B /* emulogic.ttf in Resources */,
 				EABB3AF9203B64C6000217E1 /* Assets.xcassets in Resources */,
 				EA69D569203FCB2E008D9359 /* level13.sks in Resources */,
 			);
@@ -495,14 +493,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Bruss.Todd.Space-Bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Space-Bar/Space-Bar-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -517,14 +517,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Bruss.Todd.Space-Bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Space-Bar/Space-Bar-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

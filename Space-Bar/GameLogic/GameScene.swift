@@ -83,42 +83,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         
         var str = "1"
         
-        var runBoard = gameLevel
         
-        runBoard = gameLevel % 85
-        
-            
-        switch runBoard {
-        case 1..<16 :
-            str = "1"
-        case 16..<20 :
-            str = "2"
-        case 20..<25 :
-            str = "3"
-        case 25..<30 :
-            str = "4"
-        case 30..<35 :
-            str = "5"
-        case 35..<40 :
-            str = "6"
-        case 40..<45 :
-            str = "7"
-        case 45..<50 :
-            str = "7"
-        case 50..<55 :
-            str = "7"
-        case 55..<60 :
-            str = "8"
-        case 60..<65 :
-            str = "8"
-        case 70..<75 :
-            str = "9"
-        case 80..<85 :
-            str = "10"
-        default:
-            str = "10"
-        }
-        
+        str = String(gameLevel % 15)
+     
         
         let filename = "level" + str + String(ipadString)
         // + String(playLevel)
