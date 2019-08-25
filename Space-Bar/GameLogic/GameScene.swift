@@ -44,7 +44,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     var height = CGFloat()
     var centerWidth = CGFloat()
     var centerHeight = CGFloat()
-    var realCenterHeight = CGFloat()
 
     //Initial Variables
     var brickCounter = Int(0)
@@ -80,13 +79,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         
         //let playLevel = gameLevel % 5
         //print("playLevel:", playLevel)
-        
-        var str = "1"
-        
-        
-        str = String(gameLevel % 15)
+            
+        let str = String(gameLevel % 15)
      
-        
         let filename = "level" + str + String(ipadString)
         // + String(playLevel)
         
@@ -98,7 +93,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                     space.name = "Space"
                     
                     //This becomes our pseudo anchor point
-                    center.position = CGPoint(x: centerWidth, y: realCenterHeight)
+                    center.position = CGPoint(x: centerWidth, y: centerHeight)
                     
                     space.position = CGPoint(x: 0, y: centerHeight - 240)
                     
@@ -115,6 +110,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         backParalax.position = CGPoint(x: CGFloat(centerWidth), y: CGFloat(centerHeight))
         
         let starryNightTexture = SKTexture(imageNamed: "starfield1")
+        
         let moveGroundSprite = SKAction.moveBy(x: 0, y: -starryNightTexture.size().height, duration: TimeInterval(0.012 * starryNightTexture.size().height))
         let resetGroundSprite = SKAction.moveBy(x: 0, y: starryNightTexture.size().height, duration: 0.0)
         let moveGroundSpritesForever = SKAction.repeatForever(SKAction.sequence([moveGroundSprite,resetGroundSprite]))
@@ -215,7 +211,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             
         case 1:
             let coinToss = arc4random_uniform(11) + 1
-            print("coinToss",coinToss)
+            //print("coinToss",coinToss)
             switch coinToss {
                 
             case 1 :
@@ -853,20 +849,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         
     }
     
-
-    
-    
     override func didMove(to view: SKView) {
         self.view?.isMultipleTouchEnabled = false
         
         width = self.frame.width
         height = self.frame.height
         
-        
         centerWidth = width / 2
         centerHeight = height / 2
-        realCenterHeight = height / 2
-
         
         //stand in for our anchorPoint
         //this is used because our scene's anchor is 0,0
@@ -875,16 +865,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         anchorNode.position = anchor
         self.addChild(anchorNode)
         
-        
-       
-
         //iPhone X
-        if settings.mode == 4 {
-            height = (self.frame.height - 144)
+        if deviceType == .iPhoneX {
+           height = (self.frame.height - 144)
            centerHeight = height / 2
         } else if
-            //i[ad
-            settings.mode == 1 {
+            deviceType == .iPad {
             ipadString = "-ipad";
         }
         
@@ -1016,7 +1002,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         rightMidNode.physicsBody?.isDynamic = false
         rightMidNode.physicsBody?.affectedByGravity = false
         rightMidNode.size = CGSize(width: 32, height: 64)
-        rightMidNode.position = CGPoint(x: centerWidth - (corneredge / 2),y: 0)
+        
+        if deviceType == .iPhoneX {
+            rightMidNode.position = CGPoint(x: centerWidth - (corneredge / 2),y: 0)
+        } else {
+            rightMidNode.position = CGPoint(x: centerWidth - (corneredge / 2),y: 0)
+        }
+        
         anchorNode.addChild(rightMidNode)
         
         //centercourt circle
@@ -1184,13 +1176,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         goalNode.size = CGSize(width: goalTexture.size().width, height: goalTexture.size().height) //Needed to size
         goalNode.physicsBody?.restitution = 0
         goalNode.name = "goal"
-       
-
+    
         anchorNode.addChild(goalNode)
         
         drawParallax()
-        
-        
         
        /*
         if let soundURL: URL = Bundle.main.url(forResource: "david", withExtension: "mp3") {
@@ -1330,10 +1319,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             //Levels Up
             if brickCounter <= 0 {
                 
-                gameLevel = gameLevel + 1
+                gameLevel += 1
                 levelLabel.text = String(gameLevel)
 
-                gameLives = gameLives + 1
+                gameLives += 1
                 livesLabel.text = String(gameLives)
 
 
@@ -1341,7 +1330,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                 resetGameBoard(firstBody: firstBody)
             }
             
-        case ballCategory | wallCategory :
+        case ballCategory | wallCategory  :
             
             self.run(wallSound)
             
@@ -1358,6 +1347,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                     a.run(ballaction)
                 }
             }
+        case ballCategory | midCategory :
+            
+            self.run(wallSound)
+            gameScore += 2
+            self.run(wallSound)
+
+        case midCategory | ballCategory :
+            
+            self.run(wallSound)
+            gameScore += 2
+            self.run(wallSound)
+
         case ballCategory | goalCategory :
             
          

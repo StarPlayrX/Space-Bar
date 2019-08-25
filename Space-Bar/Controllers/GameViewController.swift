@@ -13,8 +13,12 @@ import GameplayKit
 typealias appsettings =  (level: Int, highlevel: Int, emoji: Int, score: Int, highscore: Int, lives: Int, music: Bool, sound: Bool, stick: Bool, mode: Int)
 var settings : appsettings = (level: 1, highlevel: 1, emoji: 1, score: 0, highscore: 0, lives: 3, music: true, sound: true, stick: true, mode: 0)
 
+var deviceType = UIDevice().type
+
 class GameViewController: UIViewController {
     
+    /*
+     No longer in use
     func getDeviceSize() {
         // iPhone detection
         let screenWidth = Int(UIScreen.main.bounds.size.width)
@@ -33,30 +37,22 @@ class GameViewController: UIViewController {
             settings.mode = 4
         }
     }
-
+    */
+    
     func setSceneSizeForGame(scene:SKScene ) -> Void {
+            
         //Put this in a common area
-        if (settings.mode == 2 ) {
+        if ( deviceType == .iPhone) {
             // iPhone
             scene.size = CGSize(width: 687, height: 1222)
             
-        } else if (settings.mode == 4) {
+        } else if (deviceType == .iPhoneX ) {
             // iPhone X
             scene.size = CGSize(width: 687, height: 1488)
-     
-            // 750 x 1624
-            // 687 x 1488
-            
-            // 687 x 1624 / 750 = #
-            
+    
         } else {
             //iPad
-            //scene.size = CGSize(width: 1000, height: 1334)
             scene.size = CGSize(width: 900, height: 1200)
-            
-           
-            
-
         }
     }
 
@@ -64,7 +60,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getDeviceSize()
+        //getDeviceSize()
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
