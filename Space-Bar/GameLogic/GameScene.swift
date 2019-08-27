@@ -15,6 +15,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     // Our Game's Actors
     let paddleNode = SKSpriteNode() //available to the entire class
     let ballNode = SKSpriteNode() //da ball
+    var ballEmoji = SKLabelNode()
+
     let goalNode = SKSpriteNode() //da ball
     
     //Music Player
@@ -127,6 +129,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     
     //add Puck
     func addPuck() {
+        
         ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 24)
         ballNode.physicsBody?.categoryBitMask = ballCategory
         ballNode.physicsBody?.contactTestBitMask = paddleCategory + wallCategory + goalCategory + upperLeftCornerCategory + lowerLeftCornerCategory + upperRightCornerCategory + lowerRightCornerCategory
@@ -142,23 +145,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         ballNode.physicsBody?.linearDamping =  0
         ballNode.physicsBody?.angularDamping = 0
         ballNode.physicsBody?.restitution = 1.0
-        ballNode.physicsBody?.mass = 0
+        ballNode.physicsBody?.mass = 1.0
         ballNode.physicsBody?.fieldBitMask = vortexCategory
-
         ballNode.name = "ball"
         ballNode.position = CGPoint(x:0,y:0 )
         ballNode.speed = CGFloat(1.0)
         ballNode.physicsBody?.velocity = (CGVector(dx: -250, dy: 750))
         anchorNode.addChild(ballNode)
         
-        let ballEmoji = SKLabelNode(fontNamed:"Apple Color Emoji")
+        ballEmoji = SKLabelNode(fontNamed:"Apple Color Emoji")
         ballEmoji.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         ballEmoji.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         ballEmoji.alpha = 1.0
         ballEmoji.position = CGPoint(x: 0, y: 0)
         ballEmoji.zPosition = 50
-        ballEmoji.text = "💿"
-        ballEmoji.fontSize = 48
+        ballEmoji.text = puckArray[puck]
+        ballEmoji.fontSize = 48 * 2
+
         ballNode.addChild(ballEmoji)
     }
     
@@ -1339,11 +1342,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             if cp.x < 0 {
                 if let a = firstBody.node {
                     let ballaction = SKAction.applyImpulse( CGVector(dx: 50 , dy: 0), duration: 2)
+                    let rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
+                    ballNode.run(rotateAction)
                     a.run(ballaction)
+                    //a.run(rotateAction)
                 }
             } else {
                 if let a = firstBody.node {
                     let ballaction = SKAction.applyImpulse( CGVector(dx: -50 , dy: 0), duration: 2)
+                    let rotateAction = SKAction.rotate(byAngle: -.pi, duration: 2)
+                    ballNode.run(rotateAction)
                     a.run(ballaction)
                 }
             }
@@ -1411,7 +1419,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             if let a = firstBody.node {
                 let ballaction = SKAction.applyImpulse( CGVector(dx: 0 , dy: 75), duration: 1)
                 a.run(ballaction)
+                
             }
+            
+            let rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
+            ballNode.run(rotateAction)
+            
+        case ballCategory |  paddleCategory :
+            
+            self.run(paddleSound)
+            
+            if let a = firstBody.node {
+                let ballaction = SKAction.applyImpulse( CGVector(dx: 0 , dy: 75), duration: 1)
+                a.run(ballaction)
+            }
+            
+            let rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
+            ballNode.run(rotateAction)
             
         case ballCategory | lowerLeftCornerCategory :
             
@@ -1420,6 +1444,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             if let a = firstBody.node {
                 let ballaction = SKAction.applyImpulse( CGVector(dx: 25 , dy: 50), duration: 2)
                 a.run(ballaction)
+                
+                let rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
+                ballNode.run(rotateAction)
             }
             
         case ballCategory | upperLeftCornerCategory :
@@ -1429,6 +1456,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             if let a = firstBody.node {
                 let ballaction = SKAction.applyImpulse( CGVector(dx: 25 , dy: -50), duration: 2)
                 a.run(ballaction)
+                
+                let rotateAction = SKAction.rotate(byAngle: -.pi, duration: 2)
+                ballNode.run(rotateAction)
             }
         
         case ballCategory | lowerRightCornerCategory :
@@ -1438,6 +1468,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             if let a = firstBody.node {
                 let ballaction = SKAction.applyImpulse( CGVector(dx: -25 , dy: 50), duration: 2)
                 a.run(ballaction)
+                
+                let rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
+                ballNode.run(rotateAction)
             }
             
         case ballCategory | upperRightCornerCategory :
@@ -1447,6 +1480,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             if let a = firstBody.node {
                 let ballaction = SKAction.applyImpulse( CGVector(dx: -25 , dy: -50), duration: 2)
                 a.run(ballaction)
+                
+                let rotateAction = SKAction.rotate(byAngle: -.pi, duration: 2)
+                ballNode.run(rotateAction)
             }
             
         default :

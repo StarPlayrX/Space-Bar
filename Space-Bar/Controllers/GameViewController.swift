@@ -15,6 +15,10 @@ var settings : appsettings = (level: 1, highlevel: 1, emoji: 1, score: 0, highsc
 
 var deviceType = UIDevice().type
 
+
+let view = SKView()
+var forever = SKAction()
+
 class GameViewController: UIViewController {
     
     /*
@@ -64,7 +68,7 @@ class GameViewController: UIViewController {
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
+            if let scene = SKScene(fileNamed: "GameMenu") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFit
                 
