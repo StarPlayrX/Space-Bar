@@ -13,6 +13,8 @@ import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     // Our Game's Actors
+    
+    var  swapper = false;
     let paddleNode = SKSpriteNode() //available to the entire class
     let ballNode = SKSpriteNode() //da ball
     var ballEmoji = SKLabelNode()
@@ -1273,7 +1275,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     //MARK: didBeginContact
     func didBegin(_ contact: SKPhysicsContact) {
         
-    
+        swapper = !swapper;
+        
+        if swapper {
+            let rotateAction = SKAction.rotate(byAngle: .pi * 1, duration: 2)
+            ballNode.run(rotateAction)
+        } else {
+            let rotateAction = SKAction.rotate(byAngle: .pi * -1, duration: 2)
+            ballNode.run(rotateAction)
+        }
         //print(contact.bodyA.categoryBitMask, contact.bodyB.categoryBitMask)
 
         if  ( contact.bodyA.node == nil || contact.bodyB.node == nil ) {
@@ -1292,6 +1302,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         let catMask = firstBody.categoryBitMask | secondBody.categoryBitMask
         
         //print(firstBody.categoryBitMask,secondBody.categoryBitMask)
+        
+        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
+        ballNode.run(rotateAction)
         
         switch catMask {
 
@@ -1342,16 +1355,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             if cp.x < 0 {
                 if let a = firstBody.node {
                     let ballaction = SKAction.applyImpulse( CGVector(dx: 50 , dy: 0), duration: 2)
-                    let rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
-                    ballNode.run(rotateAction)
                     a.run(ballaction)
                     //a.run(rotateAction)
                 }
             } else {
                 if let a = firstBody.node {
                     let ballaction = SKAction.applyImpulse( CGVector(dx: -50 , dy: 0), duration: 2)
-                    let rotateAction = SKAction.rotate(byAngle: -.pi, duration: 2)
-                    ballNode.run(rotateAction)
                     a.run(ballaction)
                 }
             }
@@ -1419,12 +1428,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             if let a = firstBody.node {
                 let ballaction = SKAction.applyImpulse( CGVector(dx: 0 , dy: 75), duration: 1)
                 a.run(ballaction)
-                
             }
-            
-            let rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
-            ballNode.run(rotateAction)
-            
+        
         case ballCategory |  paddleCategory :
             
             self.run(paddleSound)
@@ -1434,9 +1439,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                 a.run(ballaction)
             }
             
-            let rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
-            ballNode.run(rotateAction)
-            
         case ballCategory | lowerLeftCornerCategory :
             
             self.run(wallSound)
@@ -1444,9 +1446,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             if let a = firstBody.node {
                 let ballaction = SKAction.applyImpulse( CGVector(dx: 25 , dy: 50), duration: 2)
                 a.run(ballaction)
-                
-                let rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
-                ballNode.run(rotateAction)
             }
             
         case ballCategory | upperLeftCornerCategory :
@@ -1456,9 +1455,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             if let a = firstBody.node {
                 let ballaction = SKAction.applyImpulse( CGVector(dx: 25 , dy: -50), duration: 2)
                 a.run(ballaction)
-                
-                let rotateAction = SKAction.rotate(byAngle: -.pi, duration: 2)
-                ballNode.run(rotateAction)
             }
         
         case ballCategory | lowerRightCornerCategory :
@@ -1468,9 +1464,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             if let a = firstBody.node {
                 let ballaction = SKAction.applyImpulse( CGVector(dx: -25 , dy: 50), duration: 2)
                 a.run(ballaction)
-                
-                let rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
-                ballNode.run(rotateAction)
             }
             
         case ballCategory | upperRightCornerCategory :
@@ -1480,9 +1473,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             if let a = firstBody.node {
                 let ballaction = SKAction.applyImpulse( CGVector(dx: -25 , dy: -50), duration: 2)
                 a.run(ballaction)
-                
-                let rotateAction = SKAction.rotate(byAngle: -.pi, duration: 2)
-                ballNode.run(rotateAction)
             }
             
         default :
