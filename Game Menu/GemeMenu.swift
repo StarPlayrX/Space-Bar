@@ -11,13 +11,21 @@ import AudioToolbox
 import AVFoundation
 
 
-var puckArray: Array = ["🏀", "🏀","⚾️","🥎","⚽️","🎾","🏐","📀","💿","🌐","😃","🍪", "⚪️", "🔴", "🔵", "🔵"]
-var puckTextArray: Array = ["basketball","basketball","baseball","softball","futbol","tennis ball","volleyball","cd","dvd","meridan","smiley","cookie","white puck","red circle","blue circle","blue circle"]
+/*
+🥋🎽🛹🛷⛸🥌
+🥍🏏🥅🏹🎣🥊
+🥏🎱🏓🏸🏒🏑
+🏀🏈🥎🎾🏐🏉
+ 
+ 😂🤣😊😇🙂🙃
+*/
+var puckArray: Array = ["😂","😂","🤣", "😊", "😇", "🙂", "🙃","🥋", "🎽", "🛹", "🛷", "⛸", "🥌", "🥍","🏏","🥅","🏹","🎣", "🥊", "🥊"]
+var puckTextArray: Array = ["primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary"]
 
 var insArray: Array = ["🐝","🐝","🐛","🦋","🐞","🦎","🐙","🐟","🐬","🐬"]
 var insTextArray: Array = ["bee","bee","caterpillar","butterfly","lady bug","gecko","squid","fish","dolphin","dolphin"]
 
-var frtArray: Array = ["🍎","🍎","🍐","🍊","🍋","🍉","🥝","🥑","🍅","🍅"]
+var frtArray: Array = ["🍎","🍎","🍐","🍊","🍋","🍉","🥝","🥑","🍅test","🍅"]
 var frtTextArray: Array = ["apple","apple","pear","tangerine","lemon","watermelon","kiwi","avocado", "tomato","tomato"]
 
 
@@ -43,8 +51,8 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
     var minfrt = 1
     
     var emojifontsize = CGFloat(150)
-    var puckLabel: SKLabelNode = SKLabelNode(fontNamed: "Apple Color Emoji")
-    var puckTextLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
+    var puckLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
+    var puckTextLabel: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
     
     var insLabel: SKLabelNode = SKLabelNode(fontNamed: "Apple Color Emoji")
     var insTextLabel: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
@@ -54,7 +62,6 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
     
     var textLabel: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
     var textLabel2: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         super.touchesBegan(touches as Set<UITouch>, with: event)
@@ -185,7 +192,7 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                                 let skView = self.view! as SKView
                                 skView.showsFPS = false
                                 skView.showsNodeCount = false
-                                skView.showsPhysics = true
+                                skView.showsPhysics = false
                                 skView.showsFields = false
                                 skView.preferredFramesPerSecond = 60
                                 skView.clearsContextBeforeDrawing = true

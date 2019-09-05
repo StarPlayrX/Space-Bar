@@ -132,7 +132,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     //add Puck
     func addPuck() {
         
-        ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 24)
+        ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 30)
         ballNode.physicsBody?.categoryBitMask = ballCategory
         ballNode.physicsBody?.contactTestBitMask = paddleCategory + wallCategory + goalCategory + upperLeftCornerCategory + lowerLeftCornerCategory + upperRightCornerCategory + lowerRightCornerCategory
         
@@ -155,16 +155,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         ballNode.physicsBody?.velocity = (CGVector(dx: -250, dy: 750))
         anchorNode.addChild(ballNode)
         
-        ballEmoji = SKLabelNode(fontNamed:"Apple Color Emoji")
+        
+        ballEmoji = SKLabelNode(fontNamed:"SpaceBarColors")
         ballEmoji.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         ballEmoji.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         ballEmoji.alpha = 1.0
         ballEmoji.position = CGPoint(x: 0, y: 0)
         ballEmoji.zPosition = 50
         ballEmoji.text = puckArray[puck]
-        ballEmoji.fontSize = 48 * 2
+        ballEmoji.fontSize = 60 //* 2
 
         ballNode.addChild(ballEmoji)
+        
+        //let copy = ballNode.copy() as! SKSpriteNode
+        //copy.position = CGPoint(x:-40,y:-40 )
+        //anchorNode.addChild(copy)
     }
     
     //Starts up the reading the tilemap
@@ -176,7 +181,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     //Draws our Bricks for us
     func Drawbricks(BricksNode: SKSpriteNode, TileMapNode:SKTileMapNode, center: CGPoint) {
         //SpriteNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 48, height: 48))
-        BricksNode.physicsBody = SKPhysicsBody(circleOfRadius: 24)
+        BricksNode.physicsBody = SKPhysicsBody(circleOfRadius: 25)
         BricksNode.zPosition = 50
         BricksNode.physicsBody?.restitution = 1.0
         BricksNode.physicsBody?.categoryBitMask = brickCategory
@@ -195,642 +200,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         BricksNode.position = center //CHECK THIS OUT
         space.addChild(BricksNode)
         
-        let spriteLabelNode = SKLabelNode(fontNamed:"Apple Color Emoji")
+        let spriteLabelNode = SKLabelNode(fontNamed:"SpaceBarColors")
         spriteLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         spriteLabelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         spriteLabelNode.alpha = 1.0
         spriteLabelNode.position = CGPoint(x: 0, y: 0)
         var str = "🚘" //future include variants
-        spriteLabelNode.fontSize = 48
+        spriteLabelNode.fontSize = 50
         
         //future read the tile map emojis instead
-        
+        gameLevel = 3
         var playLevel = gameLevel
         
-    
+
+        var levelart = [ Int : [String] ]()
+        levelart[0] = ["😀","😃","😄","😁","😆","😅"] //😀😃😄😁😆😅
+        levelart[1] = ["😀","😃","😄","😁","😆","😅"] //😀😃😄😁😆😅
+        levelart[2] = ["😂","🤣","😊","😇","🙂","🙃"] //😂🤣😊😇🙂🙃
+        levelart[3] = ["😉","😌","😍","🥰","😘","😗"] //😉😌😍🥰😘😗
+        levelart[4] = ["😉","😌","😍","🥰","😘","😗"] //😉😌😍🥰😘😗
         
-        playLevel = gameLevel % 15
         
+        print ( playLevel % 3)
+        //playLevel = gameLevel % 3
         
-        switch playLevel {
-            
-        case 1:
-            let coinToss = arc4random_uniform(11) + 1
-            //print("coinToss",coinToss)
-            switch coinToss {
-                
-            case 1 :
-                str = "🚘"
-            case 2 :
-                str = "🌕"
-            case 3 :
-                str = "🚀"
-            case 4 :
-                let coin = arc4random_uniform(2) +  1
-                switch coin {
-                case 1 :
-                    str = "👩🏻‍🚀"
-                case 2 :
-                    str = "👩‍🚀"
-                case 3 :
-                    str = "👩🏼‍🚀"
-                default:
-                    str = "👩🏽‍🚀"
-                }
-            case 5 :
-                let coin = arc4random_uniform(2) +  1
-                switch coin {
-                case 1 :
-                    str = "👨🏻‍🚀"
-                case 2 :
-                    str = "👨‍🚀"
-                case 3 :
-                    str = "👨🏼‍🚀"
-                default:
-                    str = "👨🏽‍🚀"
-                }
-            case 6 :
-                let coin = arc4random_uniform(2) +  1
-                switch coin {
-                case 1 :
-                    str = "🌏"
-                case 2 :
-                    str = "🌍"
-                case 3 :
-                    str = "🌎"
-                default:
-                    str = "🌎"
-                }
-            case 8 :
-                str = "🕹"
-            case 9 :
-                str = "🖲"
-            case 10 :
-                str = "🛰"
-            case 11 :
-                str = "📡"
-            default :
-                str = "🚀"
-            }
-            
-        case 2:
-            let coinToss = arc4random_uniform(10) + 1
-            
-            switch coinToss {
-                
-            case 1 :
-                str = "🍋"
-            case 2 :
-                str = "🍎"
-            case 3 :
-                str = "🍏"
-            case 4 :
-                str = "🍒"
-            case 5 :
-                str = "🍓"
-            case 6 :
-                str = "🍌"
-            case 7 :
-                str = "🍇"
-            case 8 :
-                str = "🍊"
-            case 9 :
-                str = "🍒"
-            case 10 :
-                str = "🍉"
-            default :
-                str = "🍎"
-            }
-            
-        case 3:
-            let coinToss = arc4random_uniform(13) + 1
-            
-            switch coinToss {
-                
-            case 1 :
-                str = "🚖"
-            case 2 :
-                str = "🚔"
-            case 3 :
-                str = "🚍"
-            case 4 :
-                str = "🚘"
-            case 5 :
-                str = "🚕"
-            case 6 :
-                str = "🚙"
-            case 7 :
-                str = "🚗"
-            case 8 :
-                str = "🚜"
-            case 9 :
-                str = "🚚"
-            case 10 :
-                str = "🚛"
-            case 11 :
-                str = "🚌"
-            case 12 :
-                str = "🚍"
-            case 13 :
-                str = "🚓"
-            default :
-                str = "🚒"
-            }
-            
-        case 4:
-            let coinToss = arc4random_uniform(12) + 1
-            
-            switch coinToss {
-                
-            case 1 :
-                str = "👾"
-            case 2 :
-                str = "👽"
-            case 3 :
-                str = "🚀"
-            case 4 :
-                str = "🛰"
-            case 5 :
-                str = "📡"
-            case 6 :
-                str = "💫"
-            case 7 :
-                str = "✨"
-            case 8 :
-                str = "🌟"
-            case 9 :
-                str = "⭐️"
-            case 10 :
-                str = "🚈"
-            case 11 :
-                str = "🚄"
-            case 12 :
-                str = "🖲"
-            default :
-                str = "🖲"
-            }
-        case 5:
-            let coinToss = arc4random_uniform(9) + 1
-            
-            switch coinToss {
-                
-            case 1 :
-                str = "🏀"
-            case 2 :
-                str = "🏈"
-            case 3 :
-                str = "🏉"
-            case 4 :
-                str = "🏐"
-            case 5 :
-                str = "⚾️"
-            case 6 :
-                str = "⚽️"
-            case 7 :
-                str = "🎾"
-            case 8 :
-                str = "🎱"
-            default :
-                str = "🏀"
-            }
-        case 6:
-            let coinToss = arc4random_uniform(12) + 1
-            
-            switch coinToss {
-                
-            case 1 :
-                str = "🍩"
-            case 2 :
-                str = "🍪"
-            case 3 :
-                str = "🍫"
-            case 4 :
-                str = "🍬"
-            case 5 :
-                str = "🍭"
-            case 6 :
-                str = "🍦"
-            case 7 :
-                str = "🍧"
-            case 8 :
-                str = "🍨"
-            case 9 :
-                str = "🍯"
-            case 10 :
-                str = "🍰"
-            case 11 :
-                str = "🎂"
-            case 12 :
-                str = "🥧"
-            default :
-                str = "🍩"
-            }
-        case 7:
-            let coinToss = arc4random_uniform(13) + 1
-            
-            switch coinToss {
-                
-            case 1 :
-                str = "🐵"
-            case 2 :
-                str = "🐶"
-            case 3 :
-                str = "🐸"
-            case 4 :
-                str = "🐹"
-            case 5 :
-                str = "🐻"
-            case 6 :
-                str = "🐼"
-            case 7 :
-                str = "🦁"
-            case 8 :
-                str = "🦊"
-            case 9 :
-                str = "😸"
-            case 10 :
-                str = "🐨"
-            case 11 :
-                str = "🐯"
-            case 12 :
-                str = "🐮"
-            case 13 :
-                str = "🐲"
-            default :
-                str = "🐵"
-            }
-        case 8:
-            let coinToss = arc4random_uniform(18) + 1
-            
-            switch coinToss {
-                
-            case 1 :
-                str = "💒"
-            case 2 :
-                str = "🏚"
-            case 3 :
-                str = "🏠"
-            case 4 :
-                str = "🏢"
-            case 5 :
-                str = "🏣"
-            case 6 :
-                str = "🏤"
-            case 7 :
-                str = "🏥"
-            case 8 :
-                str = "🏦"
-            case 9 :
-                str = "🏨"
-            case 10 :
-                str = "🏰"
-            case 11 :
-                str = "🕋"
-            case 12 :
-                str = "🕌"
-            case 13 :
-                str = "🕍"
-            case 14 :
-                str = "🗼"
-            case 15 :
-                str = "🗽"
-            case 16 :
-                str = "🏯"
-            case 17 :
-                str = "🏬"
-            case 18 :
-                str = "⛪️"
-            default :
-                str = "🏰"
-            }
-        case 9:
-            let coinToss = arc4random_uniform(18) + 1
-            
-            switch coinToss {
-                
-            case 1 :
-                str = "😀"
-            case 2 :
-                str = "😍"
-            case 3 :
-                str = "😤"
-            case 4 :
-                str = "😡"
-            case 5 :
-                str = "😱"
-            case 6 :
-                str = "🤯"
-            case 7 :
-                str = "🤓"
-            case 8 :
-                str = "🤪"
-            case 9 :
-                str = "😎"
-            case 10 :
-                str = "🤮"
-            case 11 :
-                str = "😵"
-            case 12 :
-                str = "🤒"
-            case 13 :
-                str = "🤑"
-            case 14 :
-                str = "😇"
-            case 15 :
-                str = "😃"
-            case 16 :
-                str = "😜"
-            case 17 :
-                str = "☺️"
-            case 18 :
-                str = "🤩"
-            default :
-                str = "🤩"
-            }
-        case 10:
-            let coinToss = arc4random_uniform(16) + 1
-            
-            switch coinToss {
-                
-            case 1 :
-                str = "🍟"
-            case 2 :
-                str = "🍔"
-            case 3 :
-                str = "🍕"
-            case 4 :
-                str = "🌮"
-            case 5 :
-                str = "🥫"
-            case 6 :
-                str = "🍞"
-            case 7 :
-                str = "🥨"
-            case 8 :
-                str = "🧀"
-            case 9 :
-                str = "🥚"
-            case 10 :
-                str = "🍖"
-            case 11 :
-                str = "🥪"
-            case 12 :
-                str = "🥤"
-            case 13 :
-                str = "🥑"
-            case 14 :
-                str = "🌶"
-            case 15 :
-                str = "🌽"
-            case 16 :
-                str = "🥐"
-            default :
-                str = "🍔"
-            }
-        case 11:
-            let coinToss = arc4random_uniform(24) + 1
-            
-            switch coinToss {
-                
-            case 1 :
-                str = "👩‍🎨"
-            case 2 :
-                str = "👨‍🎨"
-            case 3 :
-                str = "👨‍🌾"
-            case 4 :
-                str = "👩‍🌾"
-            case 5 :
-                str = "👩‍🍳"
-            case 6 :
-                str = "👨‍🍳"
-            case 7 :
-                str = "👩‍🎓"
-            case 8 :
-                str = "👨‍🎓"
-            case 9 :
-                str = "👩‍🎤"
-            case 10 :
-                str = "👨‍🎤"
-            case 11 :
-                str = "👩‍💼"
-            case 12 :
-                str = "👨‍💼"
-            case 13 :
-                str = "👩‍🔧"
-            case 14 :
-                str = "👨‍🔧"
-            case 15 :
-                str = "👩‍🔬"
-            case 16 :
-                str = "👨‍🔬"
-            case 17 :
-                str = "👩‍🚒"
-            case 18 :
-                str = "👨‍🚒"
-            case 19 :
-                str = "👩‍⚖️"
-            case 20 :
-                str = "👨‍⚖️"
-            case 21 :
-                str = "👩‍🎓"
-            case 22 :
-                str = "👨‍🎓"
-            case 23 :
-                str = "🕵️‍♂️"
-            case 24 :
-                str = "🕵️‍♀️"
-            default :
-                str = "👩‍🚒"
-            }
-        case 12:
-            let coinToss = arc4random_uniform(12) + 1
-            
-            switch coinToss {
-                
-            case 1 :
-                str = "🧡"
-            case 2 :
-                str = "❤️"
-            case 3 :
-                str = "💛"
-            case 4 :
-                str = "💚"
-            case 5 :
-                str = "💙"
-            case 6 :
-                str = "💜"
-            case 7 :
-                str = "💔"
-            case 8 :
-                str = "💖"
-            case 9 :
-                str = "💝"
-            case 10 :
-                str = "😍"
-            case 11 :
-                str = "💕"
-            case 12 :
-                str = "💘"
-            default :
-                str = "🧡"
-            }
-        case 13:
-            let coinToss = arc4random_uniform(12) + 1
-            
-            switch coinToss {
-                
-            case 1 :
-                str = "⏰"
-            case 2 :
-                str = "⏱"
-            case 3 :
-                str = "⏳"
-            case 4 :
-                str = "⌛️"
-            case 5 :
-                str = "⏲"
-            case 6 :
-                str = "🕰"
-            case 7 :
-                str = "🛡"
-            case 8 :
-                str = "📻"
-            case 9 :
-                str = "📺"
-            case 10 :
-                str = "☎️"
-            case 11 :
-                str = "📠"
-            case 12 :
-                str = "📟"
-            default :
-                str = "⏰"
-            }
-        case 14:
-            let coinToss = arc4random_uniform(21) + 1
-            
-            switch coinToss {
-                
-            case 1 :
-                str = "🧙‍♀️"
-            case 2 :
-                str = "🧙‍♂️"
-            case 3 :
-                str = "🧝‍♀️"
-            case 4 :
-                str = "🧝‍♂️"
-            case 5 :
-                str = "🧛‍♀️"
-            case 6 :
-                str = "🧛‍♂️"
-            case 7 :
-                str = "🧟‍♀️"
-            case 8 :
-                str = "🧟‍♂️"
-            case 9 :
-                str = "🧞‍♀️"
-            case 10 :
-                str = "🧞‍♂️"
-            case 11 :
-                str = "🧜‍♀️"
-            case 12 :
-                str = "🧜‍♂️"
-            case 13 :
-                str = "🧚‍♀️"
-            case 14 :
-                str = "🧚‍♂️"
-            default :
-                str = "🧟‍♀️"
-            }
-        case 15:
-            let coinToss = arc4random_uniform(19) + 1
-            
-            switch coinToss {
-                
-            case 1 :
-                str = "🌈"
-            case 2 :
-                str = "🏰"
-            case 3 :
-                str = "🦄"
-            case 4 :
-                str = "🐴"
-            case 5 :
-                str = "🔮"
-            case 6 :
-                str = "👑"
-            case 7 :
-                str = "🤴"
-            case 8 :
-                str = "👸"
-            case 9 :
-                str = "👸🏻"
-            case 10 :
-                str = "🤴🏻"
-            case 11 :
-                str = "🤴🏼"
-            case 12 :
-                str = "👸🏼"
-            case 13 :
-                str = "👸🏽"
-            case 14 :
-                str = "🤴🏽"
-            case 15 :
-                str = "🛡"
-            case 16 :
-                str = "🗡"
-            case 17 :
-                str = "⚔️"
-            case 18 :
-                str = "🤺"
-            case 19 :
-                str = "🍀"
-            case 20 :
-                str = "☘️"
-            default :
-                str = "🦄"
-            }
+        print(gameLevel)
+        let artwork =  levelart[playLevel]
         
-        default:
-            let coinToss = arc4random_uniform(14) + 1
-            
-            switch coinToss {
-                
-            case 1 :
-                str = "🥃"
-            case 2 :
-                str = "🥛"
-            case 3 :
-                str = "🥤"
-            case 4 :
-                str = "🍻"
-            case 5 :
-                str = "🍾"
-            case 6 :
-                str = "🍵"
-            case 7 :
-                str = "🍶"
-            case 8 :
-                str = "🍷"
-            case 9 :
-                str = "🍸"
-            case 10 :
-                str = "🍹"
-            case 11 :
-                str = "🍺"
-            case 13 :
-                str = "🍼"
-            case 14 :
-                str = "☕️"
-            default :
-                str = "🍺"
-            }
+        if let art = artwork {
+            let coinToss = Int(arc4random_uniform(UInt32(art.count)) )
+            spriteLabelNode.text = art[coinToss]
+            BricksNode.addChild(spriteLabelNode)
         }
-        
-        spriteLabelNode.text = str
-        BricksNode.addChild(spriteLabelNode)
-        
+    
     }
     
     func drawBricks(BricksTileMap: SKTileMapNode) {

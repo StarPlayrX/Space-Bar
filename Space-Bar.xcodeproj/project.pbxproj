@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F163D18231C8A2500E341FD /* SpaceBarColors.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5F163D17231C8A2500E341FD /* SpaceBarColors.otf */; };
 		5F77D8DB22E3FCC100E8C4F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F77D8DA22E3FCC100E8C4F3 /* AppDelegate.swift */; };
 		5F77D8DD22E3FCE800E8C4F3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F77D8DC22E3FCE800E8C4F3 /* GameScene.swift */; };
 		5F77D8DF22E3FCF900E8C4F3 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F77D8DE22E3FCF800E8C4F3 /* GameViewController.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F163D17231C8A2500E341FD /* SpaceBarColors.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpaceBarColors.otf; sourceTree = "<group>"; };
 		5F77D8DA22E3FCC100E8C4F3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F77D8DC22E3FCE800E8C4F3 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		5F77D8DE22E3FCF800E8C4F3 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 		5F77D8FC22E4003E00E8C4F3 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				5F163D17231C8A2500E341FD /* SpaceBarColors.otf */,
 				5F83175C230CCFAC005B4A1B /* emulogic.ttf */,
 			);
 			path = Fonts;
@@ -337,6 +340,7 @@
 				5F77D8E622E3FDF900E8C4F3 /* Main.storyboard in Resources */,
 				EA69D56F203FCC1F008D9359 /* level15.sks in Resources */,
 				5F77D8F022E3FE9F00E8C4F3 /* Dah.m4a in Resources */,
+				5F163D18231C8A2500E341FD /* SpaceBarColors.otf in Resources */,
 				EABB3B03203CFC38000217E1 /* levelX.sks in Resources */,
 				EA69D55B203FC482008D9359 /* level9-ipad.sks in Resources */,
 				EABB3B0F203D0255000217E1 /* level6.sks in Resources */,
