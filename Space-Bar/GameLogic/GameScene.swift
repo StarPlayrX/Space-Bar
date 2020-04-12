@@ -516,8 +516,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         
         //add our paddle
         let paddleTexture = SKTexture(imageNamed: "paddle")
-        let paddlePhysicsBody = SKPhysicsBody(texture: paddleTexture, alphaThreshold: 0.1, size: paddleTexture.size())
-        
+        //let paddlePhysicsBody = SKPhysicsBody(texture: paddleTexture, alphaThreshold: 1.0, size: paddleTexture.size())
+        let paddlePhysicsBody = SKPhysicsBody(rectangleOf: paddleTexture.size())
+
         paddleNode.texture = paddleTexture
         paddleNode.physicsBody = paddlePhysicsBody
         paddleNode.physicsBody?.friction = 1
@@ -565,8 +566,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         //add our paddle
         let goalTexture = SKTexture(imageNamed: "goal")
         
-        let goalPhysicsBody = SKPhysicsBody(texture: goalTexture, alphaThreshold: 0.1, size: goalTexture.size())
-        
+        //let goalPhysicsBody = SKPhysicsBody(texture: goalTexture, alphaThreshold: 0.1, size: goalTexture.size())
+        let goalPhysicsBody = SKPhysicsBody(rectangleOf: goalTexture.size())
+
         goalNode.texture = goalTexture
         goalNode.physicsBody = goalPhysicsBody
         goalNode.physicsBody?.affectedByGravity = false

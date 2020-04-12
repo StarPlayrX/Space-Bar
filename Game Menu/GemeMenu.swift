@@ -20,7 +20,7 @@ import AVFoundation
  😂🤣😊😇🙂🙃
 */
 var puckArray: Array = ["😂","😂","🤣", "😊", "😇", "🙂", "🙃","🥋", "🎽", "🛹", "🛷", "⛸", "🥌", "🥍","🏏","🥅","🏹","🎣", "🥊", "🥊"]
-var puckTextArray: Array = ["primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary"]
+var puckTextArray: Array = ["primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary"]
 
 var insArray: Array = ["🐝","🐝","🐛","🦋","🐞","🦎","🐙","🐟","🐬","🐬"]
 var insTextArray: Array = ["bee","bee","caterpillar","butterfly","lady bug","gecko","squid","fish","dolphin","dolphin"]
