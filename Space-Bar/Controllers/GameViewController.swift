@@ -85,13 +85,8 @@ class GameViewController: UIViewController {
                 view.allowsTransparency = false
                 view.showsFPS = true
                 view.showsNodeCount = false
-                
                 view.presentScene(scene)
             }
-            
-       
-            
-
         }
     }
 

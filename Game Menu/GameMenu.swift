@@ -87,6 +87,7 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             let touchedNode = atPoint(location)
             
             if let name = touchedNode.name {
+                //print(touchedNode as Any)
                 
                 func puckRight() {
                     puck >= minpuck ? (puck -= 1) : (puck = maxpuck)

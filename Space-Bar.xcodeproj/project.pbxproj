@@ -74,6 +74,7 @@
 		5FCEE07E2313415E0002A5CF /* GameMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
 		5FCEE080231341680002A5CF /* GameMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameMenu.sks; sourceTree = "<group>"; };
 		5FEF4F56230E164F00E20643 /* iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPhone.swift; sourceTree = "<group>"; };
+		6FC71CB026D1A709005BA5E8 /* Space-Bar copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Space-Bar copy-Info.plist"; path = "/Users/m1/Documents/GitHub/Space-Bar/Space-Bar copy-Info.plist"; sourceTree = "<absolute>"; };
 		EA69D556203FC42F008D9359 /* level8-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level8-ipad.sks"; sourceTree = "<group>"; };
 		EA69D558203FC43B008D9359 /* level8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level8.sks; sourceTree = "<group>"; };
 		EA69D55A203FC481008D9359 /* level9-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level9-ipad.sks"; sourceTree = "<group>"; };
@@ -194,6 +195,7 @@
 				5F77D8FC22E4003E00E8C4F3 /* Fonts */,
 				EAFBF6A22036591D0086084A /* Space-Bar */,
 				EAFBF6A12036591D0086084A /* Products */,
+				6FC71CB026D1A709005BA5E8 /* Space-Bar copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -451,7 +453,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -505,7 +507,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -524,11 +526,13 @@
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Bruss.Todd.Space-Bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Space-Bar/Space-Bar-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -548,11 +552,13 @@
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Bruss.Todd.Space-Bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Space-Bar/Space-Bar-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

@@ -14,7 +14,7 @@ import AVFoundation
 class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     // Our Game's Actors
     
-    var  swapper = false;
+    var swapper = false
     let paddleNode = SKSpriteNode() //available to the entire class
     let ballNode = SKSpriteNode() //da ball
     var ballEmoji = SKLabelNode()
@@ -78,9 +78,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     
     //ipad Level
     var ipadString = ""
-
+    
     var levelart = [ Int : [String] ]()
-
+    
     
     func drawLevel() {
         
@@ -91,22 +91,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         
         space.removeAllChildren()
         bricksTileMap.removeAllChildren()
-    
+        
         space = SKReferenceNode(fileNamed: filename)
         space.name = "Space"
         space.position = CGPoint(x: 0, y: centerHeight - 240)
         bricksTileMap = space.childNode(withName: "//bricks") as! SKTileMapNode //as! SKTileMapNode
-
+        
         for center in children {
             if (center.name == "Center") {
-
                 center.addChild(space)
                 break
             }
         }
         
         bricksTileMap.removeFromParent()
-
+        
     }
     
     func drawParallax() {
@@ -134,9 +133,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         
         ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 30)
         ballNode.physicsBody?.categoryBitMask = ballCategory
-        ballNode.physicsBody?.contactTestBitMask = paddleCategory + wallCategory + goalCategory + upperLeftCornerCategory + lowerLeftCornerCategory + upperRightCornerCategory + lowerRightCornerCategory
+        ballNode.physicsBody?.contactTestBitMask =
+            paddleCategory + wallCategory + goalCategory + upperLeftCornerCategory +
+            lowerLeftCornerCategory + upperRightCornerCategory + lowerRightCornerCategory
         
-        ballNode.physicsBody?.collisionBitMask = paddleCategory + brickCategory + wallCategory + upperLeftCornerCategory + lowerLeftCornerCategory + upperRightCornerCategory + lowerRightCornerCategory + midCategory
+        ballNode.physicsBody?.collisionBitMask =
+            paddleCategory + brickCategory + wallCategory + upperLeftCornerCategory +
+            lowerLeftCornerCategory + upperRightCornerCategory + lowerRightCornerCategory + midCategory
         
         ballNode.zPosition = 50
         
@@ -150,12 +153,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         ballNode.physicsBody?.mass = 1.0
         ballNode.physicsBody?.fieldBitMask = vortexCategory
         ballNode.name = "ball"
-        ballNode.position = CGPoint(x:0,y:0 )
+        ballNode.position = CGPoint(x:0,y:0)
         ballNode.speed = CGFloat(1.0)
         ballNode.physicsBody?.velocity = (CGVector(dx: -250, dy: 750))
         anchorNode.addChild(ballNode)
-        
-        
+    
         ballEmoji = SKLabelNode(fontNamed:"SpaceBarColors")
         ballEmoji.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         ballEmoji.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -166,10 +168,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         ballEmoji.fontSize = 60 //* 2
         
         ballNode.addChild(ballEmoji)
-        
-        //let copy = ballNode.copy() as! SKSpriteNode
-        //copy.position = CGPoint(x:-40,y:-40 )
-        //anchorNode.addChild(copy)
     }
     
     //Starts up the reading the tilemap
@@ -206,8 +204,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         spriteLabelNode.alpha = 1.0
         spriteLabelNode.position = CGPoint(x: 0, y: 0)
         spriteLabelNode.fontSize = 50
-        
-   
         let artwork = levelart[gameLevel]
         
         if let art = artwork {
@@ -247,8 +243,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         levelart[1] = ["😀","😃","😄","😁","😆","😅"] //😀😃😄😁😆😅
         levelart[2] = ["😂","🤣","😊","😇","🙂","🙃"] //😂🤣😊😇🙂🙃
         levelart[3] = ["😉","😌","😍","🥰","😘","😗"] //😉😌😍🥰😘😗
-        levelart[4] = ["😉","😌","😍","🥰","😘","😗"] //😉😌😍🥰😘😗
-        
+        levelart[4] = ["👹","👿","🤑","🤒","🤠","🤢"] //😉😌😍🥰😘😗
         levelart[5] = ["😀","😃","😄","😁","😆","😅"] //😀😃😄😁😆😅
         levelart[6] = ["😀","😃","😄","😁","😆","😅"] //😀😃😄😁😆😅
         levelart[7] = ["😂","🤣","😊","😇","🙂","🙃"] //😂🤣😊😇🙂🙃
@@ -550,7 +545,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         paddleNode.physicsBody?.restitution = 0.0
         paddleNode.name = "paddle"
         scene?.addChild(paddleNode)
-    
+        
         addPuck()
         
         //add our paddle
