@@ -16,16 +16,33 @@ import AVFoundation
 🥍🏏🥅🏹🎣🥊
 🥏🎱🏓🏸🏒🏑
 🏀🏈🥎🎾🏐🏉
- 
- 😂🤣😊😇🙂🙃
+😂🤣😊😇🙂🙃
 */
-var puckArray: Array = ["😂","😂","🤣", "😊", "😇", "🙂", "🙃","🥋", "🎽", "🛹", "🛷", "⛸", "🥌", "🥍","🏏","🥅","🏹","🎣", "🥊", "🥊"]
-var puckTextArray: Array = ["primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary","primary"]
+
+var puckArray: Array = [
+    "😂",
+    "😂","🤣","😊","😇","🙂","🙃",
+    "🥋","🎽","🛹","🛷","⛸","🥌",
+    "🥍","🏏","🥅","🏹","🎣","🥊",
+    "🥏","🎱","🏓","🏸","🏒","🏑",
+    "🏀","🏈","🥎","🎾","🏐","🏉",
+    "🥊"
+]
+
+var puckTextArray: Array = [
+    "dual blue",
+    "dual blue","dual red","dual orange","dual purple","dual green","dual magenta",
+    "blue basket","red basket","orange basket","purple basket","green basket","magenta basket",
+    "blue tennis","red tennis","orange tennis","pink tennis","green tennis","magenta tennis",
+    "blue cross","red cross","orange cross","purple cross","green cross","magenta cross",
+    "blue plus","red plus","orange plus","purple plus","green plus","magenta plus",
+    "magenta crosshairs"
+]
 
 var insArray: Array = ["🐝","🐝","🐛","🦋","🐞","🦎","🐙","🐟","🐬","🐬"]
 var insTextArray: Array = ["bee","bee","caterpillar","butterfly","lady bug","gecko","squid","fish","dolphin","dolphin"]
 
-var frtArray: Array = ["🍎","🍎","🍐","🍊","🍋","🍉","🥝","🥑","🍅test","🍅"]
+var frtArray: Array = ["🍎","🍎","🍐","🍊","🍋","🍉","🥝","🥑","🍅","🍅"]
 var frtTextArray: Array = ["apple","apple","pear","tangerine","lemon","watermelon","kiwi","avocado", "tomato","tomato"]
 
 
@@ -70,37 +87,29 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             let touchedNode = atPoint(location)
             
             if let name = touchedNode.name {
-                //print(touchedNode as Any)
                 
-                
-                
-                //Animals
-                if name == "animal-right" {
-                    if puck <= maxpuck {
-                        puck = puck + 1
-                    }
-                    
-                    if puck  <= maxpuck  {
-                        //do nothing
-                    } else {
-                        puck = minpuck
-                    }
-                    
-                    puckLabel.text = puckArray[ puck ]
-                    puckTextLabel.text = puckTextArray [ puck ]
+                func puckRight() {
+                    puck >= minpuck ? (puck -= 1) : (puck = maxpuck)
                 }
                 
-                if name == "animal-left" {
-                    if puck >= minpuck {
-                        puck = puck - 1
+                func puckLeft() {
+                    puck <= maxpuck ? (puck += 1) : (puck = minpuck)
+                }
+                
+                func puckCommon() {
+                    if puckArray.indices.contains(puck) {
+                        puckLabel.text = puckArray[puck]
+                        puckTextLabel.text = puckTextArray[puck]
                     }
-                    
-                    if puck >= minpuck  {
-                        puckLabel.text = puckArray[ puck ]
-                    } else {
-                        puck = maxpuck
-                        puckLabel.text = puckArray[ puck ]
-                    }
+                }
+                
+                //Animals
+                if name == "puck-right" {
+                    puckRight()
+                    puckCommon()
+                } else if name == "puck-left" {
+                    puckLeft()
+                    puckCommon()
                 }
                 
                 //Insects / ins
@@ -245,7 +254,7 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
         defineSprite (
             texture: "switchleft",
             scene: self,
-            name: "animal-left",
+            name: "puck-left",
             category: 0,
             collision: 0,
             contact: 0,
@@ -266,7 +275,7 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
         defineSprite (
             texture: "switchright",
             scene: self,
-            name: "animal-right",
+            name: "puck-right",
             category: 0,
             collision: 0,
             contact: 0,
@@ -409,16 +418,16 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             let vshift = CGFloat(20)
             //let lalpha = CGFloat(0.75)
             
-            if name == "animal-left" {
+            if name == "puck-left" {
                 
-                sprite.position =  (scene.childNode(withName: "animals")?.position)!
+                sprite.position =  (scene.childNode(withName: "pucks")?.position)!
                 sprite.position.x = sprite.position.x - spc
                 
                 puckLabel.fontSize = CGFloat(fontsize)
                 puckLabel.name = "puckLabel"
                 puckLabel.horizontalAlignmentMode = .center
                 puckLabel.verticalAlignmentMode = .center
-                puckLabel.position = (scene.childNode(withName: "animals")?.position)!
+                puckLabel.position = (scene.childNode(withName: "pucks")?.position)!
                 puckLabel.position.y = sprite.position.y + vspc - vshift
                 scene.addChild(puckLabel)
                 
@@ -427,15 +436,15 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                 puckTextLabel.name = "puckTextLabel"
                 puckTextLabel.horizontalAlignmentMode = .center
                 puckTextLabel.verticalAlignmentMode = .center
-                puckTextLabel.position = (scene.childNode(withName: "animals")?.position)!
+                puckTextLabel.position = (scene.childNode(withName: "pucks")?.position)!
                 puckTextLabel.position.y = sprite.position.y - vspc - vshift
                 
                 scene.addChild(puckTextLabel)
             }
             
-            if name == "animal-right" {
+            if name == "puck-right" {
                 
-                sprite.position =  (scene.childNode(withName: "animals")?.position)!
+                sprite.position =  (scene.childNode(withName: "pucks")?.position)!
                 sprite.position.x = sprite.position.x + spc
             }
             

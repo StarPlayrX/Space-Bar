@@ -20,7 +20,7 @@
 		5F77D8F522E3FEBC00E8C4F3 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8F322E3FEBC00E8C4F3 /* GameScene.sks */; };
 		5F77D8F822E3FED800E8C4F3 /* hextileset.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8F722E3FED800E8C4F3 /* hextileset.sks */; };
 		5F83175D230CD7E0005B4A1B /* emulogic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F83175C230CCFAC005B4A1B /* emulogic.ttf */; };
-		5FCEE07F2313415E0002A5CF /* GemeMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCEE07E2313415E0002A5CF /* GemeMenu.swift */; };
+		5FCEE07F2313415E0002A5CF /* GameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCEE07E2313415E0002A5CF /* GameMenu.swift */; };
 		5FCEE081231341680002A5CF /* GameMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FCEE080231341680002A5CF /* GameMenu.sks */; };
 		5FEF4F57230E165000E20643 /* iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FEF4F56230E164F00E20643 /* iPhone.swift */; };
 		EA69D557203FC42F008D9359 /* level8-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D556203FC42F008D9359 /* level8-ipad.sks */; };
@@ -71,7 +71,7 @@
 		5F77D8F722E3FED800E8C4F3 /* hextileset.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = hextileset.sks; sourceTree = "<group>"; };
 		5F83175C230CCFAC005B4A1B /* emulogic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = emulogic.ttf; sourceTree = "<group>"; };
 		5FC5E32722E40F1F00E1159A /* Space-Bar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Space-Bar.entitlements"; sourceTree = "<group>"; };
-		5FCEE07E2313415E0002A5CF /* GemeMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GemeMenu.swift; sourceTree = "<group>"; };
+		5FCEE07E2313415E0002A5CF /* GameMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
 		5FCEE080231341680002A5CF /* GameMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameMenu.sks; sourceTree = "<group>"; };
 		5FEF4F56230E164F00E20643 /* iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPhone.swift; sourceTree = "<group>"; };
 		EA69D556203FC42F008D9359 /* level8-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level8-ipad.sks"; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 		5FCEE07D2313413D0002A5CF /* Game Menu */ = {
 			isa = PBXGroup;
 			children = (
-				5FCEE07E2313415E0002A5CF /* GemeMenu.swift */,
+				5FCEE07E2313415E0002A5CF /* GameMenu.swift */,
 				5FCEE080231341680002A5CF /* GameMenu.sks */,
 			);
 			path = "Game Menu";
@@ -285,7 +285,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Todd Bruss";
 				TargetAttributes = {
 					EAFBF69F2036591D0086084A = {
@@ -371,7 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F77D8DF22E3FCF900E8C4F3 /* GameViewController.swift in Sources */,
-				5FCEE07F2313415E0002A5CF /* GemeMenu.swift in Sources */,
+				5FCEE07F2313415E0002A5CF /* GameMenu.swift in Sources */,
 				5F77D8DB22E3FCC100E8C4F3 /* AppDelegate.swift in Sources */,
 				5FEF4F57230E165000E20643 /* iPhone.swift in Sources */,
 				5F77D8DD22E3FCE800E8C4F3 /* GameScene.swift in Sources */,
@@ -425,6 +425,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -484,6 +485,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
