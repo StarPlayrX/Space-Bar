@@ -507,47 +507,15 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             }
             
             if name == "frt-right" {
-                
                 sprite.position =  (scene.childNode(withName: "fruit")?.position)!
                 sprite.position.x = sprite.position.x + spc
             }
             
-            
-            
-            
             if name == "speaker" {
-                
-                sprite.position =  (scene.childNode(withName: "speaker")?.position)!
-                
-                textLabel.fontSize = CGFloat(37)
-                textLabel.fontColor = UIColor.white
-                textLabel.name = "speaker"
-                textLabel.horizontalAlignmentMode = .left
-                textLabel.verticalAlignmentMode = .center
-                textLabel.position = (scene.childNode(withName: "text")?.position)!
-                //textLabel.position.y = sprite.position.y + vspc - vshift
-
-                textLabel.text = "Kids, ask your parents to"
-                scene.addChild(textLabel)
-                
-                textLabel2.fontSize = CGFloat(37)
-                textLabel2.fontColor = UIColor.white
-                textLabel2.name = "speaker"
-                textLabel2.horizontalAlignmentMode = .left
-                textLabel2.verticalAlignmentMode = .center
-                textLabel2.position = (scene.childNode(withName: "text2")?.position)!
-                textLabel2.text = "match the words with emojis."
-                scene.addChild(textLabel2)
+             
             }
             
             puckSet = 1
-            
-           /* while animalsSet == animals2 {
-                animalsSet = Int(arc4random_uniform(8) + 1)
-                animals2 = Int(arc4random_uniform(8) + 1)
-                puck = animals2
-            }*/
-            
             
             insSet = 0
             var ins2 = 0
@@ -558,7 +526,6 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                 ins = ins2
             }
       
-            
             frtSet = 0
             var frt2 = 0
             
@@ -568,8 +535,6 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                 frt = frt2
             }
          
-        
-            //sprite.zPosition = 200
             sprite.alpha = alpha
             sprite.name = name
             
