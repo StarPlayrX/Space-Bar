@@ -689,12 +689,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                         localCounter += 1
                     }
                 }
-                
                 bricksChecksum = localCounter
             }
            
-            print("space", space!.children.count - 2, "checksum", bricksChecksum)
-            // Some times counter is off
+            // There are two mysterious "bricks" that do not seem to exist
+            // print("space ->", space!.children.count - 2, "checksum ->", bricksChecksum)
             if let count = space?.children.count, count - 2 <= 0 || bricksChecksum <= 0 {
             
                var array1 = [SKAction]()
