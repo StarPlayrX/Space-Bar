@@ -62,7 +62,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     let brickSound = SKAction.playSoundFileNamed("Bip.m4a", waitForCompletion: false)
     let paddleSound = SKAction.playSoundFileNamed("Knock.m4a", waitForCompletion: false)
     let wallSound = SKAction.playSoundFileNamed("Dat.m4a", waitForCompletion: false)
-    
     let backParalax = SKNode() //Center Node
     
     //corners
@@ -77,26 +76,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     var paddleHeight = CGFloat(4)
     
     //ipad Level
-    var ipadString = ""
-    
+    var iPadString = ""
     var levelart = [ Int : [String] ]()
-    
     
     func drawLevel() {
         
-        let str = String(gameLevel)
-        
-        let filename = "level" + str + ".sks"
-        print("filename", filename)
+        let lvlStr = String(gameLevel)
+        let filename = "level\(lvlStr)\(iPadString).sks"
         
         space.removeAllChildren()
         bricksTileMap.removeAllChildren()
         
         space = SKReferenceNode(fileNamed: filename)
         space.name = "Space"
-        space.position = CGPoint(x: 0, y: centerHeight - 240)
-        bricksTileMap = space.childNode(withName: "//bricks") as! SKTileMapNode //as! SKTileMapNode
         
+        print("iPadString", iPadString)
+        space.position = iPadString.isEmpty ? CGPoint(x: 0, y: centerHeight - 240) : CGPoint(x: 0, y: centerHeight - 365)
+        
+        bricksTileMap = space.childNode(withName: "//bricks") as! SKTileMapNode
         for center in children {
             if (center.name == "Center") {
                 center.addChild(space)
@@ -105,7 +102,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         }
         
         bricksTileMap.removeFromParent()
-        
     }
     
     func drawParallax() {
@@ -157,7 +153,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         ballNode.speed = CGFloat(1.0)
         ballNode.physicsBody?.velocity = (CGVector(dx: -250, dy: 750))
         anchorNode.addChild(ballNode)
-    
+        
         ballEmoji = SKLabelNode(fontNamed:"SpaceBarColors")
         ballEmoji.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         ballEmoji.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -184,7 +180,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         BricksNode.physicsBody?.restitution = 1.0
         BricksNode.physicsBody?.categoryBitMask = brickCategory
         BricksNode.physicsBody?.collisionBitMask = ballCategory
-        
         BricksNode.physicsBody?.fieldBitMask = ballCategory
         BricksNode.physicsBody?.contactTestBitMask = ballCategory
         BricksNode.physicsBody?.allowsRotation = false
@@ -239,32 +234,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     
     override func didMove(to view: SKView) {
         
-        levelart[0] = ["😀","😃","😄","😁","😆","😅"] //😀😃😄😁😆😅
-        levelart[1] = ["😀","😃","😄","😁","😆","😅"] //😀😃😄😁😆😅
-        levelart[2] = ["😂","🤣","😊","😇","🙂","🙃"] //😂🤣😊😇🙂🙃
-        levelart[3] = ["😉","😌","😍","🥰","😘","😗"] //😉😌😍🥰😘😗
-        levelart[4] = ["👹","👿","🤑","🤒","🤠","🤢"] //😉😌😍🥰😘😗
-        levelart[5] = ["😀","😃","😄","😁","😆","😅"] //😀😃😄😁😆😅
-        levelart[6] = ["😀","😃","😄","😁","😆","😅"] //😀😃😄😁😆😅
-        levelart[7] = ["😂","🤣","😊","😇","🙂","🙃"] //😂🤣😊😇🙂🙃
-        levelart[8] = ["😉","😌","😍","🥰","😘","😗"] //😉😌😍🥰😘😗
-        levelart[9] = ["😉","😌","😍","🥰","😘","😗"] //😉😌😍🥰😘😗
-        
-        levelart[10] = ["😀","😃","😄","😁","😆","😅"] //😀😃😄😁😆😅
-        levelart[11] = ["😀","😃","😄","😁","😆","😅"] //😀😃😄😁😆😅
-        levelart[12] = ["😂","🤣","😊","😇","🙂","🙃"] //😂🤣😊😇🙂🙃
-        levelart[13] = ["😉","😌","😍","🥰","😘","😗"] //😉😌😍🥰😘😗
-        levelart[14] = ["😉","😌","😍","🥰","😘","😗"] //😉😌😍🥰😘😗
-        
-        levelart[15] = ["😉","😌","😍","🥰","😘","😗"] //😉😌😍🥰😘😗
-        levelart[16] = ["😉","😌","😍","🥰","😘","😗"] //😉😌😍🥰😘😗
-        
-        
+        let screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
+
+        levelart[0] = ["😀","😃","😄","😁","😆","😅"]
+        levelart[1] = ["😀","😃","😄","😁","😆","😅"]
+        levelart[2] = ["😂","🤣","😊","😇","🙂","🙃"]
+        levelart[3] = ["😉","😌","😍","🥰","😘","😗"]
+        levelart[4] = ["👹","👿","🤑","🤒","🤠","🤢"]
+        levelart[5] = ["🥳","😟","😞","😔","😒","😏"]
+        levelart[6] = ["😰","😑","😓","😥","😨","🤫"]
+        levelart[7] = ["😕","😖","😣","😩","😫","🙁"]
+        levelart[8] = ["😦","😧","😮","😯","😲","😪"]
+        levelart[9] = ["😱","😳","🤬","🤯","🥵","🥶"]
+        levelart[10] = ["😎","🤓","🤨","🤩","🤪","🧐"]
+        levelart[11] = ["😠","😡","😢","😤","😭","🥺"]
+        levelart[12] = ["🥏","🥎","🏑","🏐","🎾","🎱"]
+        levelart[13] = ["😐","😑","😓","😨","😶","🤗"]
+        levelart[14] = ["😏","😒","😔","😞","😟","🥳"]
+        levelart[15] = ["😉","😌","😍","🥰","😘","😗"]
+        levelart[16] = ["😉","😌","😍","🥰","😘","😗"]
         
         self.view?.isMultipleTouchEnabled = false
         
-        width = self.frame.width
-        height = self.frame.height
+        width = (self.scene?.size.width)!
+        height = (self.scene?.size.height)!
         
         centerWidth = width / 2
         centerHeight = height / 2
@@ -272,23 +265,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         //stand in for our anchorPoint
         //this is used because our scene's anchor is 0,0
         //for the field node to work properly
-        anchor = CGPoint(x: centerWidth ,y: centerHeight)
+        anchor = CGPoint(x: centerWidth, y: centerHeight)
         anchorNode.position = anchor
         self.addChild(anchorNode)
-        
-        //iPhone X
-        if deviceType == .iPhoneX {
+    
+        if screenType == .iPhone {
+            // Dunno yet
+        } else if screenType == .iPhoneX {
             height = (self.frame.height - 144)
             centerHeight = height / 2
-        } else if
-            deviceType == .iPad {
-            ipadString = "-ipad";
+        } else if screenType == .iPad {
+            iPadString = "-ipad"
         }
-        
-        
-        
-        //print(settings)
-        
         
         ///drawbricks here
         drawLevel()
@@ -327,18 +315,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         scoreLabel.alpha = 0.95
         
         anchorNode.addChild(scoreLabel)
-        
         drawBricks(BricksTileMap: bricksTileMap)
-        
-        /*
-         let barrierNode = SKNode()
-         let f = CGRect(x: -centerWidth + 24, y: 200 , width: width - 48, height: (height / 4) + 24)
-         barrierNode.physicsBody = SKPhysicsBody(edgeLoopFrom: f)
-         barrierNode.physicsBody?.categoryBitMask = barrierCategory
-         barrierNode.physicsBody?.fieldBitMask = 0
-         
-         anchorNode.addChild(barrierNode)
-         */
         
         
         let frame = CGRect(x: -centerWidth, y: -centerHeight, width: width + 1, height: height - 55)
@@ -359,7 +336,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         scene?.physicsWorld.contactDelegate = self
         
         //Setup our Vortex
-        
         let field = SKFieldNode.vortexField()
         field.strength = 1
         field.falloff = -0.1
@@ -375,7 +351,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         field.physicsBody?.fieldBitMask = ballCategory
         field.physicsBody?.restitution = 0
         anchorNode.addChild(field)
-        
         
         //left mid corner piece
         let leftMidNode = SKSpriteNode()
@@ -396,7 +371,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         leftMidNode.position = CGPoint(x: -centerWidth + (corneredge / 2),y: 0)
         anchorNode.addChild(leftMidNode)
         
-        
         //right mid corner piece
         let rightMidNode = SKSpriteNode()
         let rightMidTexture = SKTexture(imageNamed: "rightmid")
@@ -413,13 +387,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         rightMidNode.physicsBody?.isDynamic = false
         rightMidNode.physicsBody?.affectedByGravity = false
         rightMidNode.size = CGSize(width: 32, height: 64)
-        
-        if deviceType == .iPhoneX {
-            rightMidNode.position = CGPoint(x: centerWidth - (corneredge / 2),y: 0)
-        } else {
-            rightMidNode.position = CGPoint(x: centerWidth - (corneredge / 2),y: 0)
-        }
-        
+        rightMidNode.position = CGPoint(x: centerWidth - (corneredge / 2) ,y: 0)
         anchorNode.addChild(rightMidNode)
         
         //centercourt circle
@@ -428,7 +396,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         centerCourtNode.texture = centerCourtTexture;
         centerCourtNode.size = centerCourtTexture.size();
         centerCourtNode.position = CGPoint(x:0,y:0);
-        
         anchorNode.addChild(centerCourtNode)
         
         //centercourt line
@@ -438,7 +405,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         centerCourtLineNode.size = CGSize(width: (-centerWidth * 2) + 64, height: 4)
         centerCourtLineNode.position = CGPoint(x:0,y:0);
         anchorNode.addChild(centerCourtLineNode)
-        
         
         //lower left corner
         let lowerLeftNode = SKSpriteNode()
@@ -477,8 +443,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         lowerRightNode.size = CGSize(width: 64, height: 64)
         lowerRightNode.position = CGPoint(x:centerWidth - corneredge,y: -centerHeight + 32)
         anchorNode.addChild(lowerRightNode)
-        
-        
         
         //upper left corner
         let upperLeftNode = SKSpriteNode()
@@ -539,7 +503,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         paddleNode.physicsBody?.collisionBitMask = ballCategory
         
         //leave as is for now until we decide to use convert point or not
-        
         paddleNode.position = CGPoint(x:self.frame.width / 2,y:self.frame.height / paddleHeight)
         paddleNode.size = CGSize(width: 180.0, height: 40.0) //Needed to size
         paddleNode.physicsBody?.restitution = 0.0
@@ -551,8 +514,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         //add our paddle
         let goalTexture = SKTexture(imageNamed: "goal")
         
-        //let goalPhysicsBody = SKPhysicsBody(texture: goalTexture, alphaThreshold: 0.1, size: goalTexture.size())
-        let goalPhysicsBody = SKPhysicsBody(rectangleOf: goalTexture.size())
+        let goalPhysicsBody = SKPhysicsBody(texture: goalTexture, alphaThreshold: 0.1, size: goalTexture.size())
+        //let goalPhysicsBody = SKPhysicsBody(rectangleOf: goalTexture.size())
         
         goalNode.texture = goalTexture
         goalNode.physicsBody = goalPhysicsBody
@@ -600,11 +563,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             let action = SKAction.moveTo(x: pos.x, duration: 0.002)
             paddleNode.run(action)
         }
-        
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -622,7 +583,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
-    
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
@@ -679,7 +639,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             return
         }
         
-        
         // Defaults for bodyA and BodyB
         var firstBody = contact.bodyB
         var secondBody = contact.bodyA
@@ -689,9 +648,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             secondBody = contact.bodyB
         }
         let catMask = firstBody.categoryBitMask | secondBody.categoryBitMask
-        
-        //print(firstBody.categoryBitMask,secondBody.categoryBitMask)
-        
         let rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
         ballNode.run(rotateAction)
         
@@ -732,7 +688,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                 gameLives += 1
                 livesLabel.text = String(gameLives)
                 
-                
                 //Reset
                 resetGameBoard(firstBody: firstBody)
             }
@@ -746,9 +701,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             if cp.x < 0 {
                 if let a = firstBody.node {
                     let ballaction = SKAction.applyImpulse( CGVector(dx: 50 , dy: 0), duration: 2)
-                    a.run(ballaction)
-                    //a.run(rotateAction)
-                }
+                    a.run(ballaction)                }
             } else {
                 if let a = firstBody.node {
                     let ballaction = SKAction.applyImpulse( CGVector(dx: -50 , dy: 0), duration: 2)
@@ -768,8 +721,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             self.run(wallSound)
             
         case ballCategory | goalCategory :
-            
-            
             self.run(goalSound)
             
             //remove the puck
@@ -794,7 +745,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                     self.run(SKAction.sequence([action1, action2, action3]))
                 } else {
                     //game over sequence
-                    
                     resetGameBoard(firstBody: firstBody)
                     
                     //reset labels
@@ -807,10 +757,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                     
                     gameScore = 0
                     scoreLabel.text = String(gameScore)
-                    
                 }
             }
-            
             
         case paddleCategory | ballCategory :
             

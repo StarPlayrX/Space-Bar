@@ -22,7 +22,7 @@
 		5F83175D230CD7E0005B4A1B /* emulogic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5F83175C230CCFAC005B4A1B /* emulogic.ttf */; };
 		5FCEE07F2313415E0002A5CF /* GameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCEE07E2313415E0002A5CF /* GameMenu.swift */; };
 		5FCEE081231341680002A5CF /* GameMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FCEE080231341680002A5CF /* GameMenu.sks */; };
-		5FEF4F57230E165000E20643 /* iPhone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FEF4F56230E164F00E20643 /* iPhone.swift */; };
+		6F55698626D1F9300060D0E7 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F55698526D1F9300060D0E7 /* ScreenSize.swift */; };
 		EA69D557203FC42F008D9359 /* level8-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D556203FC42F008D9359 /* level8-ipad.sks */; };
 		EA69D559203FC43B008D9359 /* level8.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D558203FC43B008D9359 /* level8.sks */; };
 		EA69D55B203FC482008D9359 /* level9-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D55A203FC481008D9359 /* level9-ipad.sks */; };
@@ -73,7 +73,7 @@
 		5FC5E32722E40F1F00E1159A /* Space-Bar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Space-Bar.entitlements"; sourceTree = "<group>"; };
 		5FCEE07E2313415E0002A5CF /* GameMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
 		5FCEE080231341680002A5CF /* GameMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameMenu.sks; sourceTree = "<group>"; };
-		5FEF4F56230E164F00E20643 /* iPhone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPhone.swift; sourceTree = "<group>"; };
+		6F55698526D1F9300060D0E7 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
 		6FC71CB026D1A709005BA5E8 /* Space-Bar copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Space-Bar copy-Info.plist"; path = "/Users/m1/Documents/GitHub/Space-Bar/Space-Bar copy-Info.plist"; sourceTree = "<absolute>"; };
 		EA69D556203FC42F008D9359 /* level8-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level8-ipad.sks"; sourceTree = "<group>"; };
 		EA69D558203FC43B008D9359 /* level8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level8.sks; sourceTree = "<group>"; };
@@ -146,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				5F77D8DC22E3FCE800E8C4F3 /* GameScene.swift */,
+				6F55698526D1F9300060D0E7 /* ScreenSize.swift */,
 				5F77D8F322E3FEBC00E8C4F3 /* GameScene.sks */,
 				5F77D8F722E3FED800E8C4F3 /* hextileset.sks */,
 			);
@@ -163,7 +164,6 @@
 		5F77D8FB22E4002100E8C4F3 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				5FEF4F56230E164F00E20643 /* iPhone.swift */,
 				5F77D8DA22E3FCC100E8C4F3 /* AppDelegate.swift */,
 			);
 			path = AppDelegate;
@@ -372,10 +372,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F55698626D1F9300060D0E7 /* ScreenSize.swift in Sources */,
 				5F77D8DF22E3FCF900E8C4F3 /* GameViewController.swift in Sources */,
 				5FCEE07F2313415E0002A5CF /* GameMenu.swift in Sources */,
 				5F77D8DB22E3FCC100E8C4F3 /* AppDelegate.swift in Sources */,
-				5FEF4F57230E165000E20643 /* iPhone.swift in Sources */,
 				5F77D8DD22E3FCE800E8C4F3 /* GameScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
