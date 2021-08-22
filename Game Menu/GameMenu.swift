@@ -200,10 +200,10 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
 
                                 // Configure the view.
                                 let skView = self.view! as SKView
-                                skView.showsFPS = true
-                                skView.showsNodeCount = true
-                                skView.showsPhysics = true
-                                skView.showsFields = true
+                                skView.showsFPS = false
+                                skView.showsNodeCount = false
+                                skView.showsPhysics = false
+                                skView.showsFields = false
                                 skView.preferredFramesPerSecond = 60
                                 skView.clearsContextBeforeDrawing = true
                                 skView.isAsynchronous = true
