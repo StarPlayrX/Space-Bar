@@ -90,11 +90,11 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                 //print(touchedNode as Any)
                 
                 func puckRight() {
-                    puck >= minpuck ? (puck -= 1) : (puck = maxpuck)
+                    puck = puck >= minpuck ? puck - 1 : maxpuck
                 }
                 
                 func puckLeft() {
-                    puck <= maxpuck ? (puck += 1) : (puck = minpuck)
+                    puck = puck <= maxpuck ? puck + 1 : minpuck
                 }
                 
                 func puckCommon() {
@@ -200,10 +200,10 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
 
                                 // Configure the view.
                                 let skView = self.view! as SKView
-                                skView.showsFPS = false
-                                skView.showsNodeCount = false
-                                skView.showsPhysics = false
-                                skView.showsFields = false
+                                skView.showsFPS = true
+                                skView.showsNodeCount = true
+                                skView.showsPhysics = true
+                                skView.showsFields = true
                                 skView.preferredFramesPerSecond = 60
                                 skView.clearsContextBeforeDrawing = true
                                 skView.isAsynchronous = true

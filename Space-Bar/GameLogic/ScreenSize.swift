@@ -28,8 +28,18 @@ struct ScreenSize {
         
         if ratio == 8.0 {
             screenType = .iPad
-            scene.size = CGSize(width: size.width, height: size.height)
+            scene.size = CGSize(width: 810.0, height: 1080.0)
+        } else if ratio == 7.0 {
+            screenType = .iPad
+            scene.size = CGSize(width: 810.0, height: 1080.0 - 20)
+        } else if ratio == 6.0 {
+            screenType = .iPhone
+            scene.size = CGSize(width: 375.0 * 2.0, height: 667.0 * 2.0)
+        } else if ratio == 5.0 {
+            screenType = .iPhoneProMax
+            scene.size = CGSize(width: 700, height: 1300)
         }
+        
         
         print(ratio,size)
         

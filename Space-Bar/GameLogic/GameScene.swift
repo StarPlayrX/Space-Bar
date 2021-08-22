@@ -39,7 +39,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     let upperRightCornerCategory = UInt32(2048)
     
     var bricksTileMap = SKTileMapNode()
-    var space = SKReferenceNode()
+    var space : SKReferenceNode? = nil
     
     //Positioning variables
     var anchor = CGPoint()
@@ -84,23 +84,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         let lvlStr = String(gameLevel)
         let filename = "level\(lvlStr)\(iPadString).sks"
         
-        space.removeAllChildren()
-        bricksTileMap.removeAllChildren()
-        
+        space?.removeAllChildren()
+        space = nil
         space = SKReferenceNode(fileNamed: filename)
-        space.name = "Space"
+        space?.name = "Space"
+        space?.position = iPadString.isEmpty ? CGPoint(x: 0, y: centerHeight - 240) : CGPoint(x: 0, y: centerHeight - 340)
         
-        print("iPadString", iPadString)
-        space.position = iPadString.isEmpty ? CGPoint(x: 0, y: centerHeight - 240) : CGPoint(x: 0, y: centerHeight - 365)
+        bricksTileMap = space?.childNode(withName: "//bricks") as! SKTileMapNode
         
-        bricksTileMap = space.childNode(withName: "//bricks") as! SKTileMapNode
         for center in children {
             if (center.name == "Center") {
+                guard let space = space else { return }
+                center.position = CGPoint(x: centerWidth, y: centerHeight)
                 center.addChild(space)
                 break
             }
         }
         
+        bricksTileMap.removeAllChildren()
         bricksTileMap.removeFromParent()
     }
     
@@ -127,7 +128,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     //add Puck
     func addPuck() {
         
-        ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 30)
+        ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 20)
         ballNode.physicsBody?.categoryBitMask = ballCategory
         ballNode.physicsBody?.contactTestBitMask =
             paddleCategory + wallCategory + goalCategory + upperLeftCornerCategory +
@@ -174,8 +175,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     
     //Draws our Bricks for us
     func Drawbricks(BricksNode: SKSpriteNode, TileMapNode:SKTileMapNode, center: CGPoint) {
-        //SpriteNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 48, height: 48))
-        BricksNode.physicsBody = SKPhysicsBody(circleOfRadius: 25)
+        
+        let spriteLabelNode = SKLabelNode(fontNamed:"SpaceBarColors")
+        spriteLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+        spriteLabelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+        spriteLabelNode.alpha = 1.0
+        spriteLabelNode.position = CGPoint(x: 0, y: 0)
+        spriteLabelNode.fontSize = 50
+        let artwork = levelart[gameLevel]
+        
+        if let art = artwork {
+            let coinToss = Int(arc4random_uniform(UInt32(art.count)) )
+            spriteLabelNode.text = art[coinToss]
+            brickCounter += 1
+            BricksNode.addChild(spriteLabelNode)
+        }
+        
+        if let texture = self.view?.texture(from: spriteLabelNode) {
+            BricksNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
+        } else {
+            // This fall back should not happen, but we may use this in the future for iOS' that fail
+            BricksNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 50))
+        }
+        
         BricksNode.zPosition = 50
         BricksNode.physicsBody?.restitution = 1.0
         BricksNode.physicsBody?.categoryBitMask = brickCategory
@@ -190,23 +212,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         BricksNode.physicsBody?.friction = 0.0
         BricksNode.physicsBody?.mass = 1.0
         BricksNode.name = "brick"
-        BricksNode.position = center //CHECK THIS OUT
-        space.addChild(BricksNode)
-        
-        let spriteLabelNode = SKLabelNode(fontNamed:"SpaceBarColors")
-        spriteLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
-        spriteLabelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-        spriteLabelNode.alpha = 1.0
-        spriteLabelNode.position = CGPoint(x: 0, y: 0)
-        spriteLabelNode.fontSize = 50
-        let artwork = levelart[gameLevel]
-        
-        if let art = artwork {
-            let coinToss = Int(arc4random_uniform(UInt32(art.count)) )
-            spriteLabelNode.text = art[coinToss]
-            BricksNode.addChild(spriteLabelNode)
-        }
-        
+        BricksNode.position = center
+        space?.addChild(BricksNode)
     }
     
     func drawBricks(BricksTileMap: SKTileMapNode) {
@@ -219,7 +226,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                 
                 //print(center)
                 if (tileDefinition !== nil) {
-                    brickCounter += 1
                     let center = BricksTileMap.centerOfTile(atColumn: col, row: row)
                     tileMapRun(TileMapNode: BricksTileMap, center: center)
                 }
@@ -235,20 +241,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     override func didMove(to view: SKView) {
         
         let screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
-
-        levelart[0] = ["😀","😃","😄","😁","😆","😅"]
-        levelart[1] = ["😀","😃","😄","😁","😆","😅"]
-        levelart[2] = ["😂","🤣","😊","😇","🙂","🙃"]
-        levelart[3] = ["😉","😌","😍","🥰","😘","😗"]
-        levelart[4] = ["👹","👿","🤑","🤒","🤠","🤢"]
-        levelart[5] = ["🥳","😟","😞","😔","😒","😏"]
-        levelart[6] = ["😰","😑","😓","😥","😨","🤫"]
-        levelart[7] = ["😕","😖","😣","😩","😫","🙁"]
-        levelart[8] = ["😦","😧","😮","😯","😲","😪"]
-        levelart[9] = ["😱","😳","🤬","🤯","🥵","🥶"]
+        
+        levelart[0] =  ["😀","😃","😄","😁","😆","😅"]
+        levelart[1] =  ["😀","😃","😄","😁","😆","😅"]
+        levelart[2] =  ["😂","🤣","😊","😇","🙂","🙃"]
+        levelart[3] =  ["😉","😌","😍","🥰","😘","😗"]
+        levelart[4] =  ["👹","👿","🤑","🤒","🤠","🤢"]
+        levelart[5] =  ["🥳","😟","😞","😔","😒","😏"]
+        levelart[6] =  ["😰","😑","😓","😥","😨","🤫"]
+        
+        levelart[7] =  ["😕","😖","😣","😩","😫","🙁"]
+        levelart[8] =  ["😦","😧","😮","😯","😲","😪"]
+        levelart[9] =  ["😱","😳","🤬","🤯","🥵","🥶"]
         levelart[10] = ["😎","🤓","🤨","🤩","🤪","🧐"]
         levelart[11] = ["😠","😡","😢","😤","😭","🥺"]
         levelart[12] = ["🥏","🥎","🏑","🏐","🎾","🎱"]
+        
         levelart[13] = ["😐","😑","😓","😨","😶","🤗"]
         levelart[14] = ["😏","😒","😔","😞","😟","🥳"]
         levelart[15] = ["😉","😌","😍","🥰","😘","😗"]
@@ -268,12 +276,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         anchor = CGPoint(x: centerWidth, y: centerHeight)
         anchorNode.position = anchor
         self.addChild(anchorNode)
-    
+        
         if screenType == .iPhone {
             // Dunno yet
-        } else if screenType == .iPhoneX {
-            height = (self.frame.height - 144)
-            centerHeight = height / 2
+        } else if screenType == .iPhoneProMax {
+            //
         } else if screenType == .iPad {
             iPadString = "-ipad"
         }
@@ -593,9 +600,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         let fadeOut = SKAction.fadeAlpha(to: 0.0, duration: 0.25)
         let wait = SKAction.wait(forDuration: 0.25)
         let fadeIn = SKAction.fadeAlpha(to: 1.0, duration: 0.25)
-        let s = space
         let r = SKAction.run {
-            s.removeAllChildren()
+            self.space?.removeAllChildren()
         }
         
         let d = SKAction.run {
@@ -604,7 +610,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         
         
         let seq = SKAction.sequence([fadeOut,r,wait,d,fadeIn])
-        space.run(seq)
+        space?.run(seq)
         
         //Reset the puck
         if let puck = firstBody.node {
@@ -623,21 +629,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     }
     //MARK: didBeginContact
     func didBegin(_ contact: SKPhysicsContact) {
-        
-        swapper = !swapper;
-        
-        if swapper {
-            let rotateAction = SKAction.rotate(byAngle: .pi * 1, duration: 2)
-            ballNode.run(rotateAction)
-        } else {
-            let rotateAction = SKAction.rotate(byAngle: .pi * -1, duration: 2)
-            ballNode.run(rotateAction)
-        }
-        //print(contact.bodyA.categoryBitMask, contact.bodyB.categoryBitMask)
-        
-        if  ( contact.bodyA.node == nil || contact.bodyB.node == nil ) {
+        if contact.bodyA.node == nil || contact.bodyB.node == nil {
             return
         }
+      
+        guard
+            let _ = contact.bodyA.node,
+            let _ = contact.bodyB.node
+        else {
+            return
+        }
+        
+        swapper.toggle()
+        let toggle = swapper ? 1 : -1
+        
+        var rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(toggle), duration: 2)
+        ballNode.run(rotateAction)
         
         // Defaults for bodyA and BodyB
         var firstBody = contact.bodyB
@@ -647,42 +654,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             firstBody = contact.bodyA
             secondBody = contact.bodyB
         }
+        
         let catMask = firstBody.categoryBitMask | secondBody.categoryBitMask
-        let rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
+        
+        rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
         ballNode.run(rotateAction)
         
         switch catMask {
         
         case ballCategory | brickCategory :
-            
+            brickCounter -= 1
+            print(brickCounter)
             self.run(brickSound)
-            
+
             if let a = secondBody.node {
-                
-                gameScore = gameScore + 1
-                scoreLabel.text = String(gameScore)
-                brickCounter = brickCounter - 1
                 let action = SKAction.removeFromParent()
-                
                 a.run(action)
-            }
-            
-            if let b = firstBody.node {
                 
-                if brickCounter <= 0 {
-                    b.removeFromParent()
-                } else {
-                    //let ballaction = SKAction.applyImpulse( CGVector(dx: 0 , dy: -25), duration: 1)
-                    // b.run(ballaction)
-                }
+                gameScore += 1
+                scoreLabel.text = String(gameScore)
             }
             
-            //Levels Up
-            if brickCounter <= 0 {
+            if let ball = firstBody.node, gameLevel > 6 {
+                let ballaction = SKAction.applyImpulse( CGVector(dx: 0 , dy: gameLevel * toggle), duration: 1)
+                ball.run(ballaction)
+            } else if let fork = firstBody.node, brickCounter <= 0 {
+                fork.removeFromParent()
                 
                 gameLevel += 1
                 gameLevel %= 15
-                drawLevel()
                 levelLabel.text = String(gameLevel)
                 
                 gameLives += 1
@@ -690,9 +690,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                 
                 //Reset
                 resetGameBoard(firstBody: firstBody)
+                drawLevel()
             }
-            
-        case ballCategory | wallCategory  :
+        
+        case ballCategory | wallCategory :
             
             self.run(wallSound)
             
@@ -749,10 +750,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                     
                     //reset labels
                     brickCounter = 0
-                    gameLives = 9
+                    gameLives = settings.lives
                     livesLabel.text = String(gameLives)
                     
-                    gameLevel = 1
+                    gameLevel = settings.level
                     levelLabel.text = String(gameLevel)
                     
                     gameScore = 0
