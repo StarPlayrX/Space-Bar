@@ -634,10 +634,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     }
     //MARK: didBeginContact
     func didBegin(_ contact: SKPhysicsContact) {
-        if contact.bodyA.node == nil || contact.bodyB.node == nil {
-            return
-        }
-      
+
         guard
             let _ = contact.bodyA.node,
             let _ = contact.bodyB.node
@@ -799,7 +796,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             applyVector(dx: -25, dy: 50, node: firstBody.node, duration: 1.5)
             
         default :
-            return
+            applyVector(dx: 0, dy: 1, node: firstBody.node, duration: 3)
         }
         
         scoreLabel.text = String(gameScore)
