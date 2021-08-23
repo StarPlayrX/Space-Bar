@@ -20,49 +20,46 @@ import AVFoundation
 */
 
 var puckArray: Array = [
-    "😂",
     "😂","🤣","😊","😇","🙂","🙃",
     "🥋","🎽","🛹","🛷","⛸","🥌",
     "🥍","🏏","🥅","🏹","🎣","🥊",
     "🥏","🎱","🏓","🏸","🏒","🏑",
     "🏀","🏈","🥎","🎾","🏐","🏉",
-    "🥊"
 ]
 
 var puckTextArray: Array = [
-    "dual blue",
     "dual blue","dual red","dual orange","dual purple","dual green","dual magenta",
     "blue basket","red basket","orange basket","purple basket","green basket","magenta basket",
     "blue tennis","red tennis","orange tennis","pink tennis","green tennis","magenta tennis",
     "blue cross","red cross","orange cross","purple cross","green cross","magenta cross",
     "blue plus","red plus","orange plus","purple plus","green plus","magenta plus",
-    "magenta crosshairs"
 ]
 
-var insArray: Array = ["🐝","🐝","🐛","🦋","🐞","🦎","🐙","🐟","🐬","🐬"]
-var insTextArray: Array = ["bee","bee","caterpillar","butterfly","lady bug","gecko","squid","fish","dolphin","dolphin"]
+var insArray: Array = ["🔇","🔊"]
+var insTextArray: Array = ["no sound fx","sound fx"]
 
 var frtArray: Array = ["🍎","🍎","🍐","🍊","🍋","🍉","🥝","🥑","🍅","🍅"]
 var frtTextArray: Array = ["apple","apple","pear","tangerine","lemon","watermelon","kiwi","avocado", "tomato","tomato"]
 
 
-var puck = 1
-var ins = 1
+var speakerBool = true
+
+var puck = 0
+var ins = 0
 var frt = 1
 var food = 1
 
-var puckSet = 1
 var insSet = 1
 var frtSet = 1
 var foodSet = 1
 
 class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
     
-    var maxpuck = puckArray.count - 2
-    var minpuck = 1
+    var maxpuck = puckArray.count - 1
+    var minpuck = 0
     
-    var maxins = 8
-    var minins = 1
+    var maxins = insArray.count - 1
+    var minins = 0
     
     var maxfrt = 8
     var minfrt = 1
@@ -71,10 +68,10 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
     var puckLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
     var puckTextLabel: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
     
-    var insLabel: SKLabelNode = SKLabelNode(fontNamed: "Apple Color Emoji")
+    var insLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
     var insTextLabel: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
     
-    var frtLabel: SKLabelNode = SKLabelNode(fontNamed: "Apple Color Emoji")
+    var frtLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
     var frtTextLabel: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
     
     var textLabel: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
@@ -90,11 +87,11 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                 //print(touchedNode as Any)
                 
                 func puckRight() {
-                    puck = puck >= minpuck ? puck - 1 : maxpuck
+                    puck = puck > minpuck ? puck - 1 : maxpuck
                 }
                 
                 func puckLeft() {
-                    puck = puck <= maxpuck ? puck + 1 : minpuck
+                    puck = puck < maxpuck ? puck + 1 : minpuck
                 }
                 
                 func puckCommon() {
@@ -112,35 +109,24 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                     puckLeft()
                     puckCommon()
                 }
-                
-                //Insects / ins
-                if name == "ins-left" {
-                    if ins >= minins {
-                        ins = ins - 1
+    
+                func speaker() {
+                    speakerBool.toggle()
+                    ins = speakerBool ? 1 : 0
+                    
+                    if insArray.indices.contains(ins) {
+                        insLabel.text = insArray[ins]
+                        insTextLabel.text = insTextArray[ins]
                     }
                     
-                    if ins >= minins  {
-                        insLabel.text = insArray[ ins ]
-                    } else {
-                        ins = maxins
-                        insLabel.text = insArray[ ins ]
-                    }
-                }
-                
-                
-                if name == "ins-right" {
-                    if ins <= maxins {
-                        ins = ins + 1
-                    }
+                    settings.sound = speakerBool
                     
-                    if ins  <= maxins  {
-                        insLabel.text = insArray[ ins ]
-                    } else {
-                        ins  = minins
-                        insLabel.text = insArray[ ins ]
-                    }
+                    print("settings.sound",settings.sound)
                 }
                 
+                (name == "ins-left" || name == "ins-right") ? speaker() : ()
+             
+                            
                 //Fruit / frt
                 if name == "frt-left" {
                     if frt >= minfrt {
@@ -369,30 +355,7 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             speed: 0,
             alphaThreshold: 0,
             fontsize: Float(emojifontsize)
-            ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
-        
-        
-        //animals Button
-        //Right
-        defineSprite (
-            texture: "speaker",
-            scene: self,
-            name: "speaker",
-            category: 0,
-            collision: 0,
-            contact: 0,
-            field: 0,
-            dynamic: false,
-            allowRotation: false,
-            affectedGravity: false,
-            zPosition: 10,
-            alpha: 0.75,
-            speed: 0,
-            alphaThreshold: 0,
-            fontsize: Float(emojifontsize)
-            ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2  )
-        
-        
+            ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2)
     }
     
     struct defineSprite {
@@ -515,23 +478,16 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
              
             }
             
-            puckSet = 1
             
-            insSet = 0
-            var ins2 = 0
+           
             
-            while insSet == ins2 {
-                insSet = Int(arc4random_uniform(8) + 1)
-                ins2 = Int(arc4random_uniform(8) + 1)
-                ins = ins2
-            }
-      
+           
             frtSet = 0
             var frt2 = 0
             
             while frtSet == frt2 {
-                frtSet = Int(arc4random_uniform(8) + 1)
-                frt2 = Int(arc4random_uniform(8) + 1)
+                frtSet = Int(arc4random_uniform(2) + 1)
+                frt2 = Int(arc4random_uniform(2) + 1)
                 frt = frt2
             }
          
@@ -541,7 +497,11 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             scene.addChild(sprite)
             
             puckLabel.text = puckArray[puck]
-            puckTextLabel.text = puckTextArray[puckSet]
+            puckTextLabel.text = puckTextArray[puck]
+            
+            insSet = 1
+            let ins2 = 1
+            
             insLabel.text = insArray[ins2]
             insTextLabel.text = insTextArray[insSet]
             

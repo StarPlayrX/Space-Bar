@@ -57,11 +57,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     let scoreLabel = SKLabelNode(fontNamed:"emulogic")
     let levelLabel = SKLabelNode(fontNamed:"emulogic")
     let livesLabel = SKLabelNode(fontNamed:"emulogic")
-    
+
     let goalSound = SKAction.playSoundFileNamed("Dah.m4a", waitForCompletion: false)
     let brickSound = SKAction.playSoundFileNamed("Bip.m4a", waitForCompletion: false)
     let paddleSound = SKAction.playSoundFileNamed("Knock.m4a", waitForCompletion: false)
     let wallSound = SKAction.playSoundFileNamed("Dat.m4a", waitForCompletion: false)
+    
     let backParalax = SKNode() //Center Node
     
     //corners
@@ -667,7 +668,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         switch catMask {
         
         case ballCategory | brickCategory :
-            self.run(brickSound)
+            
+            if settings.sound { run(brickSound) }
             
             gameScore += 1
 
@@ -720,33 +722,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         
         case ballCategory | wallCategory :
             
-            self.run(wallSound)
-            
+            if settings.sound { run(wallSound) }
             let cp = contact.contactPoint
-            
-            if cp.x < 0 {
-                if let a = firstBody.node {
-                    let ballaction = SKAction.applyImpulse( CGVector(dx: 50 , dy: 0), duration: 2)
-                    a.run(ballaction)                }
-            } else {
-                if let a = firstBody.node {
-                    let ballaction = SKAction.applyImpulse( CGVector(dx: -50 , dy: 0), duration: 2)
-                    a.run(ballaction)
-                }
-            }
+            cp.x < 0 ? applyVector(dx: 50, dy: 0, node: firstBody.node, duration: 1.5) : applyVector(dx: -50, dy: 0, node: firstBody.node, duration: 1.5)
+        
         case ballCategory | midCategory :
             
-            self.run(wallSound)
+            if settings.sound { run(wallSound) }
             gameScore += 2
             
-        case midCategory | ballCategory :
-            
-            self.run(wallSound)
-            gameScore += 2
-            
+            let cp = contact.contactPoint
+            cp.x < 0 ? applyVector(dx: 25, dy: 0, node: firstBody.node, duration: 1.5) : applyVector(dx: 25, dy: 0, node: firstBody.node, duration: 1.5)
+            cp.y < 0 ? applyVector(dx: 0, dy: 50, node: firstBody.node, duration: 1.5) : applyVector(dx: 0, dy: -50, node: firstBody.node, duration: 1.5)
+
         case ballCategory | goalCategory :
-            self.run(goalSound)
-            
+            if settings.sound { run(wallSound) }
+
             //remove the puck
             if let puck = firstBody.node {
                 //lives to come
@@ -754,15 +745,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                 gameLives -= 1
                 livesLabel.text = String(gameLives)
                 
-                let action1 = SKAction.run {
-                    puck.removeFromParent()
-                }
-                
+                let action1 = SKAction.run { puck.removeFromParent() }
                 let action2 = SKAction.wait(forDuration: 0.5)
-                
-                let action3 = SKAction.run {
-                    self.addPuck()
-                }
+                let action3 = SKAction.run { self.addPuck() }
                 
                 if gameLives > 0 {
                     livesLabel.text = String(gameLives)
@@ -782,66 +767,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                     scoreLabel.text = String(gameScore)
                 }
             }
-            
-        case paddleCategory | ballCategory:
-            
-            self.run(paddleSound)
-            gameScore += 1
-
-            if let a = firstBody.node {
-                let ballaction = SKAction.applyImpulse( CGVector(dx: 0 , dy: 75), duration: 1)
-                a.run(ballaction)
-            }
-            
+        
         case ballCategory | paddleCategory:
             
-            self.run(paddleSound)
+            if settings.sound { run(paddleSound) }
             gameScore += 1
-
-            if let a = firstBody.node {
-                let ballaction = SKAction.applyImpulse( CGVector(dx: 0 , dy: 75), duration: 1)
-                a.run(ballaction)
-            }
+            applyVector(dx: 0, dy: 75, node: firstBody.node, duration: 1.0)
             
         case ballCategory | lowerLeftCornerCategory:
             gameScore += 3
 
-            self.run(wallSound)
-            
-            if let a = firstBody.node {
-                let ballaction = SKAction.applyImpulse( CGVector(dx: 25 , dy: 50), duration: 2)
-                a.run(ballaction)
-            }
-            
+            if settings.sound { run(wallSound) }
+            applyVector(dx: 25, dy: 50, node: firstBody.node, duration: 1.5)
+
         case ballCategory | upperLeftCornerCategory:
             gameScore += 1
 
-            self.run(wallSound)
-            
-            if let a = firstBody.node {
-                let ballaction = SKAction.applyImpulse( CGVector(dx: 25 , dy: -50), duration: 2)
-                a.run(ballaction)
-            }
+            if settings.sound { run(wallSound) }
+            applyVector(dx: 25, dy: -50, node: firstBody.node, duration: 1.5)
             
         case ballCategory | lowerRightCornerCategory :
             gameScore += 3
 
-            self.run(wallSound)
-            
-            if let a = firstBody.node {
-                let ballaction = SKAction.applyImpulse( CGVector(dx: -25 , dy: 50), duration: 2)
-                a.run(ballaction)
-            }
+            if settings.sound { run(wallSound) }
+            applyVector(dx: -25, dy: -50, node: firstBody.node, duration: 1.5)
             
         case ballCategory | upperRightCornerCategory :
             gameScore += 1
 
-            self.run(wallSound)
-            
-            if let a = firstBody.node {
-                let ballaction = SKAction.applyImpulse( CGVector(dx: -25 , dy: -50), duration: 2)
-                a.run(ballaction)
-            }
+            if settings.sound { run(wallSound) }
+            applyVector(dx: -25, dy: 50, node: firstBody.node, duration: 1.5)
             
         default :
             return
@@ -849,5 +804,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         
         scoreLabel.text = String(gameScore)
 
+    }
+    
+    func applyVector(dx: CGFloat, dy: CGFloat, node: SKNode?, duration: Double) {
+        if let node = node {
+            let action = SKAction.applyImpulse( CGVector(dx: dx , dy: dy), duration: duration)
+            node.run(action)
+        }
     }
 }
