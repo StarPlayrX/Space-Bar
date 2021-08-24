@@ -19,6 +19,12 @@ import AVFoundation
  */
 
 
+/*
+
+
+ 
+ 
+ */
 var puckArray: Array = [
     "😂","🤣","😊","😇","🙂","🙃",
     "🥋","🎽","🛹","🛷","⛸","🥌",
@@ -27,8 +33,7 @@ var puckArray: Array = [
     "🏀","🏈","🥎","🎾","🏐","🏉",
 ]
 
-
-var levelArray = ["😀","😂","😉","👹","🥳","😰","😕","😦","😱","😎","😠","🥏","😐","😏","😉"]
+var levelArray = ["😀","🥳","😂","🥴","😉","😕","😙","😬","😲","🤕","🤪","🤬","🤭","🥋","🥺","😨"]
 
 var puckTextArray: Array = [
     "dual blue","dual red","dual orange","dual purple","dual green","dual magenta",
@@ -87,11 +92,11 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             if let name = touchedNode.name {
                 //print(touchedNode as Any)
                 
-                func puckRight() {
+                func puckLeft() {
                     puck = puck > minpuck ? puck - 1 : maxpuck
                 }
                 
-                func puckLeft() {
+                func puckRight() {
                     puck = puck < maxpuck ? puck + 1 : minpuck
                 }
                 
@@ -127,11 +132,11 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                 
                 (name == "ins-left" || name == "ins-right") ? speaker() : ()
                 
-                func levelRight() {
+                func levelLeft() {
                     level = level > minlevel ? level - 1 : maxlevel
                 }
                 
-                func levelLeft() {
+                func levelRight() {
                     level = level < maxlevel ? level + 1 : minlevel
                 }
                 

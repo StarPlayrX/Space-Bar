@@ -38,8 +38,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     let lowerRightCornerCategory = UInt32(512)
     let upperLeftCornerCategory = UInt32(1024)
     let upperRightCornerCategory = UInt32(2048)
-    
-    var bricksTileMap = SKTileMapNode()
     var space : SKReferenceNode? = nil
     
     //Positioning variables
@@ -98,10 +96,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                 break
             }
         }
-        
-      
         drawBricks(BricksTileMap: tilemap)
-
     }
     
     func drawParallax() {
@@ -109,7 +104,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         backParalax.position = CGPoint(x: CGFloat(centerWidth), y: CGFloat(centerHeight))
         
         let starryNightTexture = SKTexture(imageNamed: "starfield1")
-        
         let moveGroundSprite = SKAction.moveBy(x: 0, y: -starryNightTexture.size().height, duration: TimeInterval(0.012 * starryNightTexture.size().height))
         let resetGroundSprite = SKAction.moveBy(x: 0, y: starryNightTexture.size().height, duration: 0.0)
         let moveGroundSpritesForever = SKAction.repeatForever(SKAction.sequence([moveGroundSprite,resetGroundSprite]))
@@ -229,6 +223,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         BricksTileMap.removeFromParent()
     }
     
+
     override func didMove(to view: SKView) {
         
         let screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
@@ -240,14 +235,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         levelart[4] =  ["👹","👿","🤑","🤒","🤠","🤢"]
         levelart[5] =  ["🥳","😟","😞","😔","😒","😏"]
         levelart[6] =  ["😰","😑","😓","😥","😨","🤫"]
-        
         levelart[7] =  ["😕","😖","😣","😩","😫","🙁"]
         levelart[8] =  ["😦","😧","😮","😯","😲","😪"]
         levelart[9] =  ["😱","😳","🤬","🤯","🥵","🥶"]
         levelart[10] = ["😎","🤓","🤨","🤩","🤪","🧐"]
         levelart[11] = ["😠","😡","😢","😤","😭","🥺"]
         levelart[12] = ["🥏","🥎","🏑","🏐","🎾","🎱"]
-        
         levelart[13] = ["😐","😑","😓","😨","😶","🤗"]
         levelart[14] = ["😏","😒","😔","😞","😟","🥳"]
         levelart[15] = ["😉","😌","😍","🥰","😘","😗"]
@@ -308,9 +301,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         scoreLabel.text = String(gameScore)
         scoreLabel.fontSize = 36
         scoreLabel.alpha = 0.95
-        
         anchorNode.addChild(scoreLabel)
-        
         
         let frame = CGRect(x: -centerWidth, y: -centerHeight, width: width + 1, height: height - 55)
         //border for the paddle, ball and our beer
@@ -337,7 +328,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         field.xScale = 1.0
         field.yScale = -1.0
         field.zPosition = -100
-        
         field.position = CGPoint(x:0,y:0)
         field.physicsBody?.affectedByGravity = false //true
         field.physicsBody?.isDynamic = false //false
@@ -509,7 +499,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         
         let goalPhysicsBody = SKPhysicsBody(texture: goalTexture, alphaThreshold: 0.1, size: goalTexture.size())
         //let goalPhysicsBody = SKPhysicsBody(rectangleOf: goalTexture.size())
-        
         goalNode.texture = goalTexture
         goalNode.physicsBody = goalPhysicsBody
         goalNode.physicsBody?.affectedByGravity = false
@@ -534,19 +523,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         ///drawbricks here
         drawLevel()
         
-
         /*
          if let soundURL: URL = Bundle.main.url(forResource: "david", withExtension: "mp3") {
          audioPlayer = try! AVAudioPlayer(contentsOf: soundURL)
          audioPlayer.play()
          }
          */
-        
     }
     
     
     func touchDown(atPoint pos : CGPoint) {
-        
         let constraint = CGFloat(128)
         if (pos.x >= constraint && pos.x <= self.frame.width - constraint) {
             let action = SKAction.moveTo(x: pos.x, duration: 0.002)
@@ -679,30 +665,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             print("space ->", space!.children.count - 2, "checksum ->", bricksChecksum)
             if let count = space?.children.count, count - 2 <= 0 || bricksChecksum <= 0 {
             
-               var array1 = [SKAction]()
-               var array2 = [SKAction]()
 
-               if let ball = firstBody.node {
-                    ball.removeAllActions()
-                    ball.removeAllChildren()
-                    ball.removeFromParent()
-
+                if let ball = firstBody.node {
+                    var array1 = [SKAction]()
                     array1.append(SKAction.fadeOut(withDuration: 0.125))
-                    
-                    array1.append(SKAction.run {
-                        self.resetGameBoard()
-                    })
-
+                    array1.append(SKAction.removeFromParent())
                     array1.append(SKAction.fadeIn(withDuration: 0.125))
                     ball.run(SKAction.sequence(array1))
-               }
+                }
                 
                 if let brick = secondBody.node {
+                    var array2 = [SKAction]()
                     array2.append(SKAction.fadeOut(withDuration: 0.125))
                     array2.append(SKAction.removeFromParent())
                     array2.append(SKAction.fadeIn(withDuration: 0.125))
                     brick.run(SKAction.sequence(array2))
                 }
+                
+                self.resetGameBoard()
             }
         
         case ballCategory | wallCategory :
