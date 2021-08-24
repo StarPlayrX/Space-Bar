@@ -14,7 +14,7 @@ import AVFoundation
 class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     // Our Game's Actors
     var bricksChecksum = 0
-
+    var bricksChecksumPrev = 1
     var swapper = false
     let paddleNode = SKSpriteNode() //available to the entire class
     let ballNode = SKSpriteNode() //da ball
@@ -81,18 +81,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     var levelart = [ Int : [String] ]()
     
     func drawLevel() {
-        
         let lvlStr = String(gameLevel)
         let filename = "level\(lvlStr)\(iPadString).sks"
-        
-        space?.removeAllChildren()
-        space?.removeFromParent()
-        space = nil
+    
         space = SKReferenceNode(fileNamed: filename)
         space?.name = "Space"
         space?.position = iPadString.isEmpty ? CGPoint(x: 0, y: centerHeight - 240) : CGPoint(x: 0, y: centerHeight - 340)
         
-        bricksTileMap = space?.childNode(withName: "//bricks") as! SKTileMapNode
+        guard let tilemap = space?.childNode(withName: "//bricks") as? SKTileMapNode else { return }
         
         for center in children {
             if (center.name == "Center") {
@@ -103,9 +99,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             }
         }
         
-        bricksTileMap.removeAllChildren()
-        bricksTileMap.removeFromParent()
-        drawBricks(BricksTileMap: bricksTileMap)
+      
+        drawBricks(BricksTileMap: tilemap)
 
     }
     
@@ -590,7 +585,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         // Called before each frame is rendered
     }
     
-    func resetGameBoard(firstBody: SKPhysicsBody) {
+    func resetGameBoard() {
         //clear the board
         let fadeOut = SKAction.fadeAlpha(to: 0.0, duration: 1)
         let wait = SKAction.wait(forDuration: 0.25)
@@ -601,37 +596,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             space?.removeAllActions()
             space = nil
             gameLevel += 1
+            gameLevel %= 15
             gameScore += 10
             levelLabel.text = String(gameLevel)
             scoreLabel.text = String(gameScore)
             drawLevel()
         }
-        
-        let d = SKAction.run {
-            self.drawBricks(BricksTileMap: self.bricksTileMap)
-        }
-        
-        let seq = SKAction.sequence([fadeOut,r,wait,d,fadeIn])
-        space?.run(seq)
-       
-        //Reset the puck
-        if let puck = firstBody.node {
-            let removePuck = SKAction.run {
-                puck.removeFromParent()
-            }
-            
-            let wait = SKAction.wait(forDuration: 1.0)
-            
-            let addPuck = SKAction.run {
-                puck.removeFromParent()
-                self.addPuck()
-            }
-            
-            self.run(SKAction.sequence([removePuck, wait, fadeIn, addPuck]))
-        } else {
-            self.addPuck()
-        }
+    
+        let puck = SKAction.run { self.addPuck() }
+        run(SKAction.sequence([fadeOut, wait, r, wait, fadeIn, wait, puck]))
     }
+    
     //MARK: didBeginContact
     func didBegin(_ contact: SKPhysicsContact) {
 
@@ -689,22 +664,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                     }
                 }
                 bricksChecksum = localCounter
+                
+                if bricksChecksum == 1 {
+                    bricksChecksum = bricksChecksum == bricksChecksumPrev && bricksChecksum == 1 ? 0 : 1
+                } else if space!.children.count - 2 == 1 {
+                    bricksChecksum = space!.children.count - 2 == bricksChecksumPrev && bricksChecksum == 1 ? 0 : 1
+                }
+
+                bricksChecksumPrev = bricksChecksum
             }
            
+          
             // There are two mysterious "bricks" that do not seem to exist
-            // print("space ->", space!.children.count - 2, "checksum ->", bricksChecksum)
+            print("space ->", space!.children.count - 2, "checksum ->", bricksChecksum)
             if let count = space?.children.count, count - 2 <= 0 || bricksChecksum <= 0 {
             
                var array1 = [SKAction]()
                var array2 = [SKAction]()
 
                if let ball = firstBody.node {
+                    ball.removeAllActions()
+                    ball.removeAllChildren()
+                    ball.removeFromParent()
+
                     array1.append(SKAction.fadeOut(withDuration: 0.125))
+                    
                     array1.append(SKAction.run {
-                        self.resetGameBoard(firstBody: firstBody)
+                        self.resetGameBoard()
                     })
 
-                    array1.append(SKAction.removeFromParent())
                     array1.append(SKAction.fadeIn(withDuration: 0.125))
                     ball.run(SKAction.sequence(array1))
                }
@@ -733,11 +721,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             cp.y < 0 ? applyVector(dx: 0, dy: 50, node: firstBody.node, duration: 1.5) : applyVector(dx: 0, dy: -50, node: firstBody.node, duration: 1.5)
 
         case ballCategory | goalCategory :
-            if settings.sound { run(wallSound) }
+            if settings.sound { run(goalSound) }
 
             //remove the puck
             if let puck = firstBody.node {
-                //lives to come
+                puck.removeFromParent()
                 
                 gameLives -= 1
                 livesLabel.text = String(gameLives)
@@ -751,13 +739,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                     self.run(SKAction.sequence([action1, action2, action3]))
                 } else {
                     //game over sequence
-                    resetGameBoard(firstBody: firstBody)
+                    resetGameBoard()
                     
                     //reset labels
                     gameLives = settings.lives
                     livesLabel.text = String(gameLives)
                     
-                    gameLevel = settings.level - 1
+                    gameLevel = settings.level
                     levelLabel.text = String(gameLevel)
                     
                     gameScore = 0

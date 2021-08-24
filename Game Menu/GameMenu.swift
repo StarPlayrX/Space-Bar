@@ -10,14 +10,14 @@ import SpriteKit
 import AudioToolbox
 import AVFoundation
 
-
 /*
-🥋🎽🛹🛷⛸🥌
-🥍🏏🥅🏹🎣🥊
-🥏🎱🏓🏸🏒🏑
-🏀🏈🥎🎾🏐🏉
-😂🤣😊😇🙂🙃
-*/
+ 🥋🎽🛹🛷⛸🥌
+ 🥍🏏🥅🏹🎣🥊
+ 🥏🎱🏓🏸🏒🏑
+ 🏀🏈🥎🎾🏐🏉
+ 😂🤣😊😇🙂🙃
+ */
+
 
 var puckArray: Array = [
     "😂","🤣","😊","😇","🙂","🙃",
@@ -26,6 +26,9 @@ var puckArray: Array = [
     "🥏","🎱","🏓","🏸","🏒","🏑",
     "🏀","🏈","🥎","🎾","🏐","🏉",
 ]
+
+
+var levelArray = ["😀","😂","😉","👹","🥳","😰","😕","😦","😱","😎","😠","🥏","😐","😏","😉"]
 
 var puckTextArray: Array = [
     "dual blue","dual red","dual orange","dual purple","dual green","dual magenta",
@@ -38,13 +41,11 @@ var puckTextArray: Array = [
 var insArray: Array = ["🔇","🔊"]
 var insTextArray: Array = ["no sound fx","sound fx"]
 
-var frtArray: Array = ["🍎","🍎","🍐","🍊","🍋","🍉","🥝","🥑","🍅","🍅"]
-var frtTextArray: Array = ["apple","apple","pear","tangerine","lemon","watermelon","kiwi","avocado", "tomato","tomato"]
-
-
 var speakerBool = true
 
 var puck = 0
+var level = 0
+
 var ins = 0
 var frt = 1
 var food = 1
@@ -61,8 +62,8 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
     var maxins = insArray.count - 1
     var minins = 0
     
-    var maxfrt = 8
-    var minfrt = 1
+    var maxlevel = levelArray.count - 1
+    var minlevel = 0
     
     var emojifontsize = CGFloat(150)
     var puckLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
@@ -109,7 +110,7 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                     puckLeft()
                     puckCommon()
                 }
-    
+                
                 func speaker() {
                     speakerBool.toggle()
                     ins = speakerBool ? 1 : 0
@@ -125,103 +126,78 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                 }
                 
                 (name == "ins-left" || name == "ins-right") ? speaker() : ()
-             
-                            
+                
+                func levelRight() {
+                    level = level > minlevel ? level - 1 : maxlevel
+                }
+                
+                func levelLeft() {
+                    level = level < maxlevel ? level + 1 : minlevel
+                }
+                
+                func levelCommon() {
+                    if levelArray.indices.contains(level) {
+                        frtLabel.text = levelArray[level]
+                        frtTextLabel.text = "level \(level + 1)"
+                    }
+                }
+                
+                
                 //Fruit / frt
                 if name == "frt-left" {
-                    if frt >= minfrt {
-                        frt = frt - 1
-                    }
-                    
-                    if frt >= minfrt  {
-                        frtLabel.text = frtArray[ frt ]
-                    } else {
-                        frt = maxfrt
-                        frtLabel.text = frtArray[ frt ]
-                    }
+                    levelLeft()
+                    levelCommon()
                 }
-                
                 
                 if name == "frt-right" {
-                    if frt <= maxfrt {
-                        frt = frt + 1
-                    }
-                    
-                    if frt  <= maxfrt  {
-                        frtLabel.text = frtArray[ frt ]
-                    } else {
-                        frt  = minfrt
-                        frtLabel.text = frtArray[ frt ]
-                    }
+                    levelRight()
+                    levelCommon()
                 }
                 
+                /*if name == "speaker" {
+                 
+                 let speakText = "Kids, Ask your parents to match the words with e-moe-gees. After completing the puzzle, press Enter."
+                 
+                 let utterance = AVSpeechUtterance(string:speakText)
+                 utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+                 let voice = AVSpeechSynthesizer()
+                 voice.speak(utterance)
+                 }*/
                 
-                if name == "speaker" {
-                    
-                    let speakText = "Kids, Ask your parents to match the words with e-moe-gees. After completing the puzzle, press Enter."
-                    
-                    let utterance = AVSpeechUtterance(string:speakText)
-                    utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-                    let voice = AVSpeechSynthesizer()
-                    voice.speak(utterance)
-                }
-                
-            
                 if name == "enter" {
-            
-                    var shouldContinue = false
                     
-                    //If we have a match
-                    if 1 == 1 {
-                        shouldContinue = true
-                    }
-                    
-                    if shouldContinue {
+                    let runcode = SKAction.run {
                         
-                        let runcode = SKAction.run {
+                        if let scene = GameScene( fileNamed:"GameScene" ) {
                             
-                            if let scene = GameScene( fileNamed:"GameScene" ) {
-                                
-                                scene.run(forever)
-
-                                // Configure the view.
-                                let skView = self.view! as SKView
-                                skView.showsFPS = false
-                                skView.showsNodeCount = false
-                                skView.showsPhysics = false
-                                skView.showsFields = false
-                                skView.preferredFramesPerSecond = 60
-                                skView.clearsContextBeforeDrawing = true
-                                skView.isAsynchronous = true
-                                
-                                /* Sprite Kit applies additional optimizations to improve rendering performance */
-                                skView.ignoresSiblingOrder = true
-                                
-                                skView.clipsToBounds = true
-                                /* Set the scale mode to scale to fit the window */
-                                scene.scaleMode = .aspectFit
-                                scene.backgroundColor = SKColor.black
-                                skView.presentScene(scene, transition: SKTransition.fade(withDuration: 2))
-                            }
+                            scene.run(forever)
+                            
+                            // Configure the view.
+                            let skView = self.view! as SKView
+                            skView.showsFPS = false
+                            skView.showsNodeCount = false
+                            skView.showsPhysics = false
+                            skView.showsFields = false
+                            skView.preferredFramesPerSecond = 60
+                            skView.clearsContextBeforeDrawing = true
+                            skView.isAsynchronous = true
+                            
+                            /* Sprite Kit applies additional optimizations to improve rendering performance */
+                            skView.ignoresSiblingOrder = true
+                            
+                            skView.clipsToBounds = true
+                            /* Set the scale mode to scale to fit the window */
+                            scene.scaleMode = .aspectFit
+                            scene.backgroundColor = SKColor.black
+                            skView.presentScene(scene, transition: SKTransition.fade(withDuration: 2))
                         }
-                        
-                        let fade1 = SKAction.fadeAlpha(to: 0.7, duration:TimeInterval(0.15))
-                        let myDecay = SKAction.wait(forDuration: 0.15)
-                        let fade2 = SKAction.fadeAlpha(to: 1.0, duration:TimeInterval(0.15))
-                        touchedNode.run(SKAction.sequence([fade1,myDecay,fade2,runcode]))
-                        
-                    } else {
-                        
-                        let runcode = SKAction.run {
-                            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
-                        }
-                        
-                        let fade1 = SKAction.fadeAlpha(to: 0.7, duration:TimeInterval(0.15))
-                        let myDecay = SKAction.wait(forDuration: 0.15)
-                        let fade2 = SKAction.fadeAlpha(to: 1.0, duration:TimeInterval(0.15))
-                        touchedNode.run(SKAction.sequence([fade1,myDecay,fade2,runcode]))
-                    
                     }
+                    
+                    let fade1 = SKAction.fadeAlpha(to: 0.7, duration:TimeInterval(0.15))
+                    let myDecay = SKAction.wait(forDuration: 0.15)
+                    let fade2 = SKAction.fadeAlpha(to: 1.0, duration:TimeInterval(0.15))
+                    touchedNode.run(SKAction.sequence([fade1,myDecay,fade2,runcode]))
+                    
                 }
                 
                 /*
@@ -229,11 +205,10 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                  AudioServicesPlaySystemSound(1520) // Actuate `Pop` feedback (strong boom)
                  AudioServicesPlaySystemSound(1521) // Actuate `Nope` feedback (series of three weak booms)
                  */
-      
+                
             }
         }
     }
-    
     
     override func didMove(to view: SKView) {
         //animals Button
@@ -254,8 +229,7 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             speed: 0,
             alphaThreshold: 0,
             fontsize: Float(emojifontsize)
-            ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
-        
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
         
         //animals Button
         //Right
@@ -275,8 +249,7 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             speed: 0,
             alphaThreshold: 0,
             fontsize: Float(emojifontsize)
-            ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
-        
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
         
         defineSprite (
             texture: "switchleft",
@@ -294,7 +267,7 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             speed: 0,
             alphaThreshold: 0,
             fontsize: Float(emojifontsize)
-            ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
         
         //animals Button
         //Right
@@ -314,10 +287,8 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             speed: 0,
             alphaThreshold: 0,
             fontsize: Float(emojifontsize)
-            ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
-        
-        
-        
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
+    
         defineSprite (
             texture: "switchleft",
             scene: self,
@@ -334,8 +305,7 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             speed: 0,
             alphaThreshold: 0,
             fontsize: Float(emojifontsize)
-            ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
-        
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
         
         //animals Button
         //Right
@@ -355,7 +325,7 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             speed: 0,
             alphaThreshold: 0,
             fontsize: Float(emojifontsize)
-            ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2)
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2)
     }
     
     struct defineSprite {
@@ -425,7 +395,6 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                 insLabel.position.y = sprite.position.y + vspc - vshift
                 scene.addChild(insLabel)
                 
-                
                 insTextLabel.fontSize = CGFloat(37)
                 insTextLabel.fontColor = UIColor.white
                 insTextLabel.name = "insTextLabel"
@@ -457,7 +426,6 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                 frtLabel.position.y = sprite.position.y + vspc - vshift
                 scene.addChild(frtLabel)
                 
-                
                 frtTextLabel.fontSize = CGFloat(37)
                 frtTextLabel.fontColor = UIColor.white
                 frtTextLabel.name = "frtTextLabel"
@@ -470,27 +438,10 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             }
             
             if name == "frt-right" {
-                sprite.position =  (scene.childNode(withName: "fruit")?.position)!
+                sprite.position = (scene.childNode(withName: "fruit")?.position)!
                 sprite.position.x = sprite.position.x + spc
             }
             
-            if name == "speaker" {
-             
-            }
-            
-            
-           
-            
-           
-            frtSet = 0
-            var frt2 = 0
-            
-            while frtSet == frt2 {
-                frtSet = Int(arc4random_uniform(2) + 1)
-                frt2 = Int(arc4random_uniform(2) + 1)
-                frt = frt2
-            }
-         
             sprite.alpha = alpha
             sprite.name = name
             
@@ -498,16 +449,12 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             
             puckLabel.text = puckArray[puck]
             puckTextLabel.text = puckTextArray[puck]
+ 
+            insLabel.text = insArray[1]
+            insTextLabel.text = insTextArray[1]
             
-            insSet = 1
-            let ins2 = 1
-            
-            insLabel.text = insArray[ins2]
-            insTextLabel.text = insTextArray[insSet]
-            
-            frtLabel.text = frtArray[frt2]
-            frtTextLabel.text = frtTextArray[frtSet]
-            
+            frtLabel.text = levelArray[0]
+            frtTextLabel.text = "level 1"
         }
     }
 }

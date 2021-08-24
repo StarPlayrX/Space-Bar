@@ -23,6 +23,10 @@
 		5FCEE07F2313415E0002A5CF /* GameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCEE07E2313415E0002A5CF /* GameMenu.swift */; };
 		5FCEE081231341680002A5CF /* GameMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FCEE080231341680002A5CF /* GameMenu.sks */; };
 		6F55698626D1F9300060D0E7 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F55698526D1F9300060D0E7 /* ScreenSize.swift */; };
+		6F55698926D479410060D0E7 /* level12-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F55698726D479410060D0E7 /* level12-ipad.sks */; };
+		6F55698A26D479410060D0E7 /* level12.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F55698826D479410060D0E7 /* level12.sks */; };
+		6FD0575226D47D92005671C4 /* level16-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0575026D47D92005671C4 /* level16-ipad.sks */; };
+		6FD0575326D47D92005671C4 /* level16.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0575126D47D92005671C4 /* level16.sks */; };
 		EA69D557203FC42F008D9359 /* level8-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D556203FC42F008D9359 /* level8-ipad.sks */; };
 		EA69D559203FC43B008D9359 /* level8.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D558203FC43B008D9359 /* level8.sks */; };
 		EA69D55B203FC482008D9359 /* level9-ipad.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D55A203FC481008D9359 /* level9-ipad.sks */; };
@@ -74,7 +78,11 @@
 		5FCEE07E2313415E0002A5CF /* GameMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
 		5FCEE080231341680002A5CF /* GameMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameMenu.sks; sourceTree = "<group>"; };
 		6F55698526D1F9300060D0E7 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
+		6F55698726D479410060D0E7 /* level12-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level12-ipad.sks"; sourceTree = "<group>"; };
+		6F55698826D479410060D0E7 /* level12.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level12.sks; sourceTree = "<group>"; };
 		6FC71CB026D1A709005BA5E8 /* Space-Bar copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Space-Bar copy-Info.plist"; path = "/Users/m1/Documents/GitHub/Space-Bar/Space-Bar copy-Info.plist"; sourceTree = "<absolute>"; };
+		6FD0575026D47D92005671C4 /* level16-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level16-ipad.sks"; sourceTree = "<group>"; };
+		6FD0575126D47D92005671C4 /* level16.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level16.sks; sourceTree = "<group>"; };
 		EA69D556203FC42F008D9359 /* level8-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level8-ipad.sks"; sourceTree = "<group>"; };
 		EA69D558203FC43B008D9359 /* level8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level8.sks; sourceTree = "<group>"; };
 		EA69D55A203FC481008D9359 /* level9-ipad.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = "level9-ipad.sks"; sourceTree = "<group>"; };
@@ -148,7 +156,6 @@
 				5F77D8DC22E3FCE800E8C4F3 /* GameScene.swift */,
 				6F55698526D1F9300060D0E7 /* ScreenSize.swift */,
 				5F77D8F322E3FEBC00E8C4F3 /* GameScene.sks */,
-				5F77D8F722E3FED800E8C4F3 /* hextileset.sks */,
 			);
 			path = GameLogic;
 			sourceTree = "<group>";
@@ -226,6 +233,7 @@
 		EAFBF6DF203663520086084A /* levels */ = {
 			isa = PBXGroup;
 			children = (
+				5F77D8F722E3FED800E8C4F3 /* hextileset.sks */,
 				EAFBF6C0203659E60086084A /* level1-ipad.sks */,
 				EABB3AFA203CFA27000217E1 /* level1.sks */,
 				EABCDA872037E0FB0027FA89 /* level2.sks */,
@@ -248,12 +256,16 @@
 				EA69D55E203FC4CE008D9359 /* level10-ipad.sks */,
 				EA69D562203FCA95008D9359 /* level11.sks */,
 				EA69D564203FCA9E008D9359 /* level11-ipad.sks */,
+				6F55698826D479410060D0E7 /* level12.sks */,
+				6F55698726D479410060D0E7 /* level12-ipad.sks */,
 				EA69D568203FCB2E008D9359 /* level13.sks */,
 				EA69D566203FCB28008D9359 /* level13-ipad.sks */,
 				EA69D56A203FCB98008D9359 /* level14.sks */,
 				EA69D56C203FCBA0008D9359 /* level14-ipad.sks */,
 				EA69D56E203FCC1F008D9359 /* level15.sks */,
 				EA69D570203FCC2D008D9359 /* level15-ipad.sks */,
+				6FD0575126D47D92005671C4 /* level16.sks */,
+				6FD0575026D47D92005671C4 /* level16-ipad.sks */,
 				EABB3B02203CFC38000217E1 /* levelX.sks */,
 				EABB3B04203CFC42000217E1 /* levelX-ipad.sks */,
 			);
@@ -320,6 +332,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FD0575226D47D92005671C4 /* level16-ipad.sks in Resources */,
+				6FD0575326D47D92005671C4 /* level16.sks in Resources */,
 				EA69D571203FCC2D008D9359 /* level15-ipad.sks in Resources */,
 				EABB3AFB203CFA27000217E1 /* level1.sks in Resources */,
 				EA69D565203FCA9E008D9359 /* level11-ipad.sks in Resources */,
@@ -329,6 +343,7 @@
 				EA69D56D203FCBA0008D9359 /* level14-ipad.sks in Resources */,
 				EABB3AFD203CFA49000217E1 /* level2-ipad.sks in Resources */,
 				5F77D8F222E3FE9F00E8C4F3 /* Dat.m4a in Resources */,
+				6F55698A26D479410060D0E7 /* level12.sks in Resources */,
 				EABB3B01203CFC08000217E1 /* level3.sks in Resources */,
 				EA69D56B203FCB98008D9359 /* level14.sks in Resources */,
 				EABB3B0B203D00F6000217E1 /* level5-ipad.sks in Resources */,
@@ -345,6 +360,7 @@
 				5F163D18231C8A2500E341FD /* SpaceBarColors.otf in Resources */,
 				EABB3B03203CFC38000217E1 /* levelX.sks in Resources */,
 				EA69D55B203FC482008D9359 /* level9-ipad.sks in Resources */,
+				6F55698926D479410060D0E7 /* level12-ipad.sks in Resources */,
 				EABB3B0F203D0255000217E1 /* level6.sks in Resources */,
 				EABB3B13203D0737000217E1 /* level7.sks in Resources */,
 				EABB3AFF203CFC00000217E1 /* level3-ipad.sks in Resources */,
