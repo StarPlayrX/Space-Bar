@@ -10,38 +10,10 @@ import SpriteKit
 import AudioToolbox
 import AVFoundation
 
-/*
- 🥋🎽🛹🛷⛸🥌
- 🥍🏏🥅🏹🎣🥊
- 🥏🎱🏓🏸🏒🏑
- 🏀🏈🥎🎾🏐🏉
- 😂🤣😊😇🙂🙃
- */
-
-
-/*
-
-
- 
- 
- */
-var puckArray: Array = [
-    "😂","🤣","😊","😇","🙂","🙃",
-    "🥋","🎽","🛹","🛷","⛸","🥌",
-    "🥍","🏏","🥅","🏹","🎣","🥊",
-    "🥏","🎱","🏓","🏸","🏒","🏑",
-    "🏀","🏈","🥎","🎾","🏐","🏉",
-]
-
-var levelArray = ["😀","🥳","😂","🥴","😉","😕","😙","😬","😲","🤕","🤪","🤬","🤭","🥋","🥺","😨"]
-
-var puckTextArray: Array = [
-    "dual blue","dual red","dual orange","dual purple","dual green","dual magenta",
-    "blue basket","red basket","orange basket","purple basket","green basket","magenta basket",
-    "blue tennis","red tennis","orange tennis","pink tennis","green tennis","magenta tennis",
-    "blue cross","red cross","orange cross","purple cross","green cross","magenta cross",
-    "blue plus","red plus","orange plus","purple plus","green plus","magenta plus",
-]
+var puckArray: Array = ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
+var rotation = [0,90.0,180.0,270.0]
+var levelArray = ["😀","😍","😝","🤩","😃","🥰","😜","🥳","😄","😘","🤪","😏","😁","😗","🤨","😒","😆","😙","🧐","😞","😅","😚","🤓","😔","😂","😋","😎","😟","🤣","😛","🥸","😕"]
+var puckTextArray: Array = ["blue","fuchsia","warm red","orange","magenta","bright green","green","purple rain"]
 
 var insArray: Array = ["🔇","🔊"]
 var insTextArray: Array = ["no sound fx","sound fx"]
@@ -143,6 +115,7 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                 func levelCommon() {
                     if levelArray.indices.contains(level) {
                         frtLabel.text = levelArray[level]
+                        frtLabel.zRotation = CGFloat(Int(rotation[level % 4]).degrees)
                         frtTextLabel.text = "level \(level + 1)"
                     }
                 }
@@ -461,5 +434,11 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
             frtLabel.text = levelArray[0]
             frtTextLabel.text = "level 1"
         }
+    }
+}
+
+extension Int {
+    var degrees: CGFloat {
+        CGFloat(self) * .pi / 180.0
     }
 }

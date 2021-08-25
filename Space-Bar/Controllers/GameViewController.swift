@@ -11,7 +11,7 @@ import SpriteKit
 import GameplayKit
 
 typealias appsettings =  (level: Int, highlevel: Int, emoji: Int, score: Int, highscore: Int, lives: Int, music: Bool, sound: Bool, stick: Bool, mode: Int)
-var settings : appsettings = (level: 15, highlevel: 2, emoji: 1, score: 0, highscore: 0, lives: 9, music: true, sound: true, stick: true, mode: 0)
+var settings : appsettings = (level: 1, highlevel: 2, emoji: 1, score: 0, highscore: 0, lives: 9, music: true, sound: true, stick: true, mode: 0)
 
 let view = SKView()
 var forever = SKAction()

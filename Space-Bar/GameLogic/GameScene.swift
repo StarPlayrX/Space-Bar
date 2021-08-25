@@ -121,7 +121,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     //add Puck
     func addPuck() {
         
-        ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 20)
+        for whatDaPuck in anchorNode.children {
+            if let name = whatDaPuck.name, name.contains("ball") {
+                whatDaPuck.removeFromParent()
+            }
+        }
+        
+        ballEmoji = SKLabelNode(fontNamed:"SpaceBarColors")
+        ballEmoji.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+        ballEmoji.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+        ballEmoji.alpha = 1.0
+        ballEmoji.position = CGPoint(x: 0, y: 0)
+        ballEmoji.zPosition = 50
+        ballEmoji.text = puckArray[puck]
+        ballEmoji.fontSize = 55 //* 2
+        
+        let rnd = arc4random_uniform(UInt32(360))
+        ballEmoji.zRotation = CGFloat(Int(rnd).degrees)
+
+        if let texture = self.view?.texture(from: ballEmoji) {
+            ballNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
+        } else {
+            // This fall back should not happen, but we may use this in the future for iOS' that fail
+            ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 55 / 2)
+        }
+        
         ballNode.physicsBody?.categoryBitMask = ballCategory
         ballNode.physicsBody?.contactTestBitMask =
             paddleCategory + wallCategory + goalCategory + upperLeftCornerCategory +
@@ -136,27 +160,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         ballNode.physicsBody?.isDynamic = true
         ballNode.physicsBody?.allowsRotation = true
         ballNode.physicsBody?.friction = 0
-        ballNode.physicsBody?.linearDamping =  0
-        ballNode.physicsBody?.angularDamping = 0
-        ballNode.physicsBody?.restitution = 1.0
+        ballNode.physicsBody?.linearDamping  = 0
+        ballNode.physicsBody?.angularDamping = 0.001
+        ballNode.physicsBody?.restitution = 0.99
         ballNode.physicsBody?.mass = 1.0
         ballNode.physicsBody?.fieldBitMask = vortexCategory
-    
-        let rnd = String(arc4random_uniform(UInt32(9999)))
-        ballNode.name = "ball_\(gameLevel)_\(gameScore)_\(rnd)" // Ensures we don't add another ball with the same name
+        ballNode.name = "ball"
         ballNode.position = CGPoint(x:0,y:0)
         ballNode.speed = CGFloat(1.0)
-        ballNode.physicsBody?.velocity = CGVector(dx: -250, dy: 750)
+        ballNode.physicsBody?.velocity = CGVector(dx: -300, dy: 850)
         anchorNode.addChild(ballNode)
-        
-        ballEmoji = SKLabelNode(fontNamed:"SpaceBarColors")
-        ballEmoji.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
-        ballEmoji.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-        ballEmoji.alpha = 1.0
-        ballEmoji.position = CGPoint(x: 0, y: 0)
-        ballEmoji.zPosition = 50
-        ballEmoji.text = puckArray[puck]
-        ballEmoji.fontSize = 60 //* 2
         ballNode.addChild(ballEmoji)
     }
     
@@ -175,7 +188,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         spriteLabelNode.alpha = 1.0
         spriteLabelNode.position = CGPoint(x: 0, y: 0)
         spriteLabelNode.fontSize = 50
-        let artwork = levelart[gameLevel]
+        spriteLabelNode.zRotation = CGFloat(Int(rotation[gameLevel - 1 % 4]).degrees)
+
+        let artwork = levelart[(gameLevel % 4) - 1]
         
         if let art = artwork {
             let coinToss = Int(arc4random_uniform(UInt32(art.count)) )
@@ -228,24 +243,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         
         let screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
         
-        levelart[0] =  ["😀","😃","😄","😁","😆","😅"]
-        levelart[1] =  ["😀","😃","😄","😁","😆","😅"]
-        levelart[2] =  ["😂","🤣","😊","😇","🙂","🙃"]
-        levelart[3] =  ["😉","😌","😍","🥰","😘","😗"]
-        levelart[4] =  ["👹","👿","🤑","🤒","🤠","🤢"]
-        levelart[5] =  ["🥳","😟","😞","😔","😒","😏"]
-        levelart[6] =  ["😰","😑","😓","😥","😨","🤫"]
-        levelart[7] =  ["😕","😖","😣","😩","😫","🙁"]
-        levelart[8] =  ["😦","😧","😮","😯","😲","😪"]
-        levelart[9] =  ["😱","😳","🤬","🤯","🥵","🥶"]
-        levelart[10] = ["😎","🤓","🤨","🤩","🤪","🧐"]
-        levelart[11] = ["😠","😡","😢","😤","😭","🥺"]
-        levelart[12] = ["🥏","🥎","🏑","🏐","🎾","🎱"]
-        levelart[13] = ["😐","😑","😓","😨","😶","🤗"]
-        levelart[14] = ["😏","😒","😔","😞","😟","🥳"]
-        levelart[15] = ["😉","😌","😍","🥰","😘","😗"]
-        levelart[16] = ["😉","😌","😍","🥰","😘","😗"]
-        
+        levelart[0] =  ["😀","😃","😄","😁","😆","😅","😂","🤣"]
+        levelart[1] =  ["😍","🥰","😘","😗","😙","😚","😋","😛"]
+        levelart[2] =  ["😝","😜","🤪","🤨","🧐","🤓","😎","🥸"]
+        levelart[3] =  ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
+
         self.view?.isMultipleTouchEnabled = false
         
         width = (self.scene?.size.width)!
@@ -322,8 +324,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         
         //Setup our Vortex
         let field = SKFieldNode.vortexField()
-        field.strength = 1
-        field.falloff = -0.1
+        field.strength = 0.6
+        field.falloff = -0.2
         field.minimumRadius = Float((height / 4))
         field.xScale = 1.0
         field.yScale = -1.0
@@ -333,7 +335,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         field.physicsBody?.isDynamic = false //false
         field.physicsBody?.categoryBitMask = vortexCategory
         field.physicsBody?.fieldBitMask = ballCategory
-        field.physicsBody?.restitution = 0
+        field.physicsBody?.restitution = 1.0
         anchorNode.addChild(field)
         
         //left mid corner piece
@@ -393,7 +395,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         //lower left corner
         let lowerLeftNode = SKSpriteNode()
         let lowerLeftTexture = SKTexture(imageNamed: "ll")
-        let lowerLeftBody =  SKPhysicsBody(texture: lowerLeftTexture, alphaThreshold: 0.1, size: lowerLeftTexture.size())
+        let lowerLeftBody =  SKPhysicsBody(texture: lowerLeftTexture, alphaThreshold: 1.0, size: lowerLeftTexture.size())
         lowerLeftNode.texture = lowerLeftTexture
         lowerLeftNode.physicsBody = lowerLeftBody
         lowerLeftNode.physicsBody?.friction = 0
@@ -412,7 +414,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         //lower right corner
         let lowerRightNode = SKSpriteNode()
         let lowerRightTexture = SKTexture(imageNamed: "lr")
-        let lowerRightBody =  SKPhysicsBody(texture: lowerRightTexture, alphaThreshold: 0.1, size: lowerRightTexture.size())
+        let lowerRightBody =  SKPhysicsBody(texture: lowerRightTexture, alphaThreshold: 1.0, size: lowerRightTexture.size())
         lowerRightNode.texture = lowerRightTexture
         lowerRightNode.physicsBody = lowerRightBody
         lowerRightNode.physicsBody?.friction = 0
@@ -431,7 +433,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         //upper left corner
         let upperLeftNode = SKSpriteNode()
         let upperLeftTexture = SKTexture(imageNamed: "ul")
-        let upperLeftBody =  SKPhysicsBody(texture: upperLeftTexture, alphaThreshold: 0.1, size: upperLeftTexture.size())
+        let upperLeftBody =  SKPhysicsBody(texture: upperLeftTexture, alphaThreshold: 1.0, size: upperLeftTexture.size())
         upperLeftNode.texture = upperLeftTexture
         upperLeftNode.physicsBody = upperLeftBody
         upperLeftNode.physicsBody?.friction = 0
@@ -450,7 +452,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         //Upper Right Corner
         let upperRightNode = SKSpriteNode()
         let upperRightTexture = SKTexture(imageNamed: "ur")
-        let upperRightBody =  SKPhysicsBody(texture: upperRightTexture, alphaThreshold: 0.1, size: upperRightTexture.size())
+        let upperRightBody =  SKPhysicsBody(texture: upperRightTexture, alphaThreshold: 1.0, size: upperRightTexture.size())
         upperRightNode.texture = upperRightTexture
         upperRightNode.physicsBody = upperRightBody
         upperRightNode.physicsBody?.friction = 0
@@ -573,10 +575,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     
     func resetGameBoard() {
         //clear the board
-        let fadeOut = SKAction.fadeAlpha(to: 0.0, duration: 1)
-        let wait = SKAction.wait(forDuration: 0.25)
-        let fadeIn = SKAction.fadeAlpha(to: 1.0, duration: 1)
-        let r = SKAction.run { [self] in
+        let fadeOut = SKAction.fadeAlpha(to: 0.0, duration: 0.5)
+        let wait = SKAction.wait(forDuration: 0.5)
+        let fadeIn = SKAction.fadeAlpha(to: 1.0, duration: 0.125)
+
+        let runner = SKAction.run { [self] in
             space?.removeAllChildren()
             space?.removeFromParent()
             space?.removeAllActions()
@@ -590,10 +593,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         }
     
         let puck = SKAction.run { self.addPuck() }
-        run(SKAction.sequence([fadeOut, wait, r, wait, fadeIn, wait, puck]))
+        space?.run(SKAction.sequence([fadeOut, runner, wait, puck, fadeIn, fadeIn, fadeIn]))
+        run(SKAction.sequence([fadeIn, wait, puck, fadeIn, fadeIn, fadeIn, fadeIn]))
+
     }
     
     //MARK: didBeginContact
+    fileprivate func firstContact(_ contact: SKPhysicsContact, _ firstBody: SKPhysicsBody) {
+        let cp = contact.contactPoint
+        cp.x < 0 ? applyVector(dx: 25, dy: 0, node: firstBody.node, duration: 0.75) : applyVector(dx: -25, dy: 0, node: firstBody.node, duration: 0.75)
+        cp.y < 0 ? applyVector(dx: 0, dy: 75, node: firstBody.node, duration: 1.5) : applyVector(dx: 0, dy: -75, node: firstBody.node, duration: 1.5)
+        
+        swapper.toggle()
+        let toggle = swapper ? 1 : -1
+        
+        let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(toggle), duration: 2)
+        ballNode.run(rotateAction)
+        
+    }
+    
+    fileprivate func secondContact(_ contact: SKPhysicsContact, _ firstBody: SKPhysicsBody) {
+        let cp = contact.contactPoint
+        cp.y < 0 ? applyVector(dx: 0, dy: 75, node: firstBody.node, duration: 1.5) : applyVector(dx: 0, dy: -75, node: firstBody.node, duration: 1.5)
+        
+        swapper.toggle()
+        let toggle = swapper ? 1 : -1
+        
+        let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(toggle) / 180, duration: 2)
+        ballNode.run(rotateAction)
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
 
         guard
@@ -603,12 +632,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             return
         }
         
-        swapper.toggle()
-        let toggle = swapper ? 1 : -1
-        
-        var rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(toggle), duration: 2)
-        ballNode.run(rotateAction)
-        
+
         // Defaults for bodyA and BodyB
         var firstBody = contact.bodyB
         var secondBody = contact.bodyA
@@ -620,9 +644,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         
         let catMask = firstBody.categoryBitMask | secondBody.categoryBitMask
         
-        rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
-        ballNode.run(rotateAction)
-        
+
         switch catMask {
         
         case ballCategory | brickCategory :
@@ -636,10 +658,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                 a.run(action)
             }
             
-            if let b = firstBody.node, gameLevel > 6 {
-                let ballaction = SKAction.applyImpulse( CGVector(dx: 0 , dy: gameLevel * toggle), duration: 1)
-                b.run(ballaction)
-            }
+            //if let b = firstBody.node, gameLevel > 6 {
+            //    let ballaction = SKAction.applyImpulse( CGVector(dx: 0 , dy: gameLevel * toggle), duration: 1)
+             //   b.run(ballaction)
+            //}
             
             // MARK: - Checksum Physical count
             if let spc = space {
@@ -649,27 +671,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                         localCounter += 1
                     }
                 }
-                bricksChecksum = localCounter
                 
-                if bricksChecksum == 1 {
-                    bricksChecksum = bricksChecksum == bricksChecksumPrev && bricksChecksum == 1 ? 0 : 1
-                } else if space!.children.count - 2 == 1 {
-                    bricksChecksum = space!.children.count - 2 == bricksChecksumPrev && bricksChecksum == 1 ? 0 : 1
-                }
-
-                bricksChecksumPrev = bricksChecksum
+                bricksChecksum = localCounter
+                //bricksChecksum == 1 ? (bricksChecksum = bricksChecksum == bricksChecksumPrev ? 0 : 1) : ()
+                //bricksChecksumPrev = bricksChecksum
             }
            
-          
             // There are two mysterious "bricks" that do not seem to exist
-            print("space ->", space!.children.count - 2, "checksum ->", bricksChecksum)
+            //print("space ->", space!.children.count - 2, "checksum ->", bricksChecksum)
             if let count = space?.children.count, count - 2 <= 0 || bricksChecksum <= 0 {
             
-
                 if let ball = firstBody.node {
                     var array1 = [SKAction]()
                     array1.append(SKAction.fadeOut(withDuration: 0.125))
                     array1.append(SKAction.removeFromParent())
+                    array1.append(SKAction.wait(forDuration: 0.125))
                     array1.append(SKAction.fadeIn(withDuration: 0.125))
                     ball.run(SKAction.sequence(array1))
                 }
@@ -678,28 +694,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                     var array2 = [SKAction]()
                     array2.append(SKAction.fadeOut(withDuration: 0.125))
                     array2.append(SKAction.removeFromParent())
+                    array2.append(SKAction.wait(forDuration: 0.125))
                     array2.append(SKAction.fadeIn(withDuration: 0.125))
                     brick.run(SKAction.sequence(array2))
                 }
                 
-                self.resetGameBoard()
+                var array3 = [SKAction]()
+                array3.append(SKAction.fadeIn(withDuration: 0.25))
+                array3.append(SKAction.wait(forDuration: 0.25))
+                array3.append(SKAction.run {self.resetGameBoard()})
+                array3.append(SKAction.fadeIn(withDuration: 0.25))
+                run(SKAction.sequence(array3))
+                
             }
         
         case ballCategory | wallCategory :
-            
             if settings.sound { run(wallSound) }
-            let cp = contact.contactPoint
-            cp.x < 0 ? applyVector(dx: 50, dy: 0, node: firstBody.node, duration: 1.5) : applyVector(dx: -50, dy: 0, node: firstBody.node, duration: 1.5)
+            firstContact(contact, firstBody)
         
         case ballCategory | midCategory :
             
             if settings.sound { run(wallSound) }
             gameScore += 2
             
-            let cp = contact.contactPoint
-            cp.x < 0 ? applyVector(dx: 25, dy: 0, node: firstBody.node, duration: 1.5) : applyVector(dx: 25, dy: 0, node: firstBody.node, duration: 1.5)
-            cp.y < 0 ? applyVector(dx: 0, dy: 50, node: firstBody.node, duration: 1.5) : applyVector(dx: 0, dy: -50, node: firstBody.node, duration: 1.5)
-
+            secondContact(contact, firstBody)
+            
+            if let vdy = firstBody.node?.physicsBody?.velocity.dy, vdy < 400 {
+                ballNode.physicsBody?.velocity.dy += 25
+            }
+            
         case ballCategory | goalCategory :
             if settings.sound { run(goalSound) }
 
@@ -737,8 +760,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             
             if settings.sound { run(paddleSound) }
             gameScore += 1
-            applyVector(dx: 0, dy: 75, node: firstBody.node, duration: 1.0)
+            applyVector(dx: 0, dy: 50, node: firstBody.node, duration: 2.0)
             
+            if let vdy = firstBody.node?.physicsBody?.velocity.dy, vdy < 800 {
+                ballNode.physicsBody?.velocity.dy += 25
+            }
+
         case ballCategory | lowerLeftCornerCategory:
             gameScore += 3
 
@@ -764,7 +791,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             applyVector(dx: -25, dy: 50, node: firstBody.node, duration: 1.5)
             
         default :
-            applyVector(dx: 0, dy: 1, node: firstBody.node, duration: 3)
+            applyVector(dx: 0, dy: 75, node: firstBody.node, duration: 3)
         }
         
         scoreLabel.text = String(gameScore)
