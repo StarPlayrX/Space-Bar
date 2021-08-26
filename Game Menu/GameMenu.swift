@@ -11,7 +11,7 @@ import AudioToolbox
 import AVFoundation
 
 var puckArray: Array = ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
-var rotation = [0,90.0,180.0,270.0]
+var rotation = [0,45,90.0,135.0,180.0,225.0,270.0]
 var levelArray = ["😀","😍","😝","🤩","😃","🥰","😜","🥳","😄","😘","🤪","😏","😁","😗","🤨","😒","😆","😙","🧐","😞","😅","😚","🤓","😔","😂","😋","😎","😟","🤣","😛","🥸","😕"]
 var puckTextArray: Array = ["blue","fuchsia","warm red","orange","magenta","bright green","green","purple rain"]
 
@@ -115,7 +115,7 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                 func levelCommon() {
                     if levelArray.indices.contains(level) {
                         frtLabel.text = levelArray[level]
-                        frtLabel.zRotation = CGFloat(Int(rotation[level % 4]).degrees)
+                        frtLabel.zRotation = CGFloat(Int(rotation[level % rotation.count]).degrees)
                         frtTextLabel.text = "level \(level + 1)"
                     }
                 }
