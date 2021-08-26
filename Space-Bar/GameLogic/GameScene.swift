@@ -322,22 +322,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         self.physicsWorld.gravity = CGVector(dx: 0.00, dy: -1)
         scene?.physicsWorld.contactDelegate = self
         
-        //Setup our Vortex
-        let field = SKFieldNode.vortexField()
-        field.strength = 1
-        field.falloff = 0
-        field.minimumRadius = Float((height / 8))
-        field.xScale = 1.0
-        field.yScale = 1.0
-        field.zPosition = -100
-        field.position = CGPoint(x:0,y:0)
-        field.physicsBody?.affectedByGravity = false
-        field.physicsBody?.isDynamic = false
-        field.physicsBody?.categoryBitMask = vortexCategory
-        field.physicsBody?.fieldBitMask = ballCategory
-        field.physicsBody?.restitution = 1.0
-        //anchorNode.addChild(field)
-        
         //left mid corner piece
         let leftMidNode = SKSpriteNode()
         let leftMidTexture = SKTexture(imageNamed: "leftmid")
@@ -619,12 +603,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             return
         }
         
-        swapper.toggle()
-        let toggle = swapper ? 1 : -1
-        
-        var rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(toggle), duration: 2)
-        ballNode.run(rotateAction)
-        
+    
+    
         // Defaults for bodyA and BodyB
         var firstBody = contact.bodyB
         var secondBody = contact.bodyA
@@ -634,11 +614,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             secondBody = contact.bodyB
         }
         
+        print("firstBody.velocity.dy",firstBody.velocity.dy)
+        print("firstBody.angularVelocity",firstBody.angularVelocity)
+
         let catMask = firstBody.categoryBitMask | secondBody.categoryBitMask
         
-        rotateAction = SKAction.rotate(byAngle: .pi, duration: 2)
+        swapper.toggle()
+        let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(swapper ? 1 : -1), duration: 2)
         ballNode.run(rotateAction)
-        
+        ballNode.run(rotateAction)
+
         switch catMask {
         
         case ballCategory | brickCategory :
@@ -653,7 +638,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             }
             
             if let b = firstBody.node, gameLevel > 6 {
-                let ballaction = SKAction.applyImpulse( CGVector(dx: 0 , dy: gameLevel * toggle), duration: 1)
+                let ballaction = SKAction.applyImpulse( CGVector(dx: 0 , dy: gameLevel * Int(swapper ? 1 : -1)), duration: 1)
                 b.run(ballaction)
             }
             
@@ -670,8 +655,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                 bricksChecksum == 1 ? (bricksChecksum = bricksChecksum == bricksChecksumPrev ? 0 : 1) : ()
                 bricksChecksumPrev = bricksChecksum
                 
-            }
-           
+            }3
             // There are two mysterious "bricks" that do not seem to exist
             // print("space ->", space!.children.count - 2, "checksum ->", bricksChecksum)
             if let count = space?.children.count, count - 2 <= 0 || bricksChecksum <= 0 {
