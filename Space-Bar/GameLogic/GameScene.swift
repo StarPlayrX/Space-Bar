@@ -108,7 +108,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         let resetGroundSprite = SKAction.moveBy(x: 0, y: starryNightTexture.size().height, duration: 0.0)
         let moveGroundSpritesForever = SKAction.repeatForever(SKAction.sequence([moveGroundSprite,resetGroundSprite]))
         
-        for i in -2..<Int(self.frame.size.height / ( starryNightTexture.size().height)) + 2 {
+        for i in -2..<Int(frame.size.height / ( starryNightTexture.size().height)) + 2 {
             let sprite = SKSpriteNode(texture: starryNightTexture)
             sprite.position = CGPoint(x: -centerWidth, y: CGFloat(i) * (sprite.size.height - 0))
             sprite.run(moveGroundSpritesForever)
@@ -139,7 +139,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         let rnd = arc4random_uniform(UInt32(360))
         ballEmoji.zRotation = CGFloat(Int(rnd).degrees)
 
-        if let texture = self.view?.texture(from: ballEmoji) {
+        if let texture = view?.texture(from: ballEmoji) {
             ballNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
             // This fall back should not happen, but we may use this in the future for iOS' that fail
@@ -156,7 +156,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             lowerLeftCornerCategory + upperRightCornerCategory + lowerRightCornerCategory + midCategory
         
         ballNode.zPosition = 50
-        ballNode.physicsBody?.affectedByGravity = true
+        ballNode.physicsBody?.affectedByGravity = false
         ballNode.physicsBody?.isDynamic = true
         ballNode.physicsBody?.allowsRotation = true
         ballNode.physicsBody?.friction = 0
@@ -198,7 +198,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             BricksNode.addChild(spriteLabelNode)
         }
         
-        if let texture = self.view?.texture(from: spriteLabelNode) {
+        if let texture = view?.texture(from: spriteLabelNode) {
             BricksNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
             // This fall back should not happen, but we may use this in the future for iOS' that fail
@@ -226,9 +226,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     func drawBricks(BricksTileMap: SKTileMapNode) {
         for col in (0 ..< BricksTileMap.numberOfColumns) {
             for row in (0 ..< BricksTileMap.numberOfRows) {
-                let tileDefinition = BricksTileMap.tileDefinition(atColumn: col, row: row)
-                
-                if (tileDefinition !== nil) {
+                if let _ = BricksTileMap.tileDefinition(atColumn: col, row: row) {
                     let center = BricksTileMap.centerOfTile(atColumn: col, row: row)
                     tileMapRun(TileMapNode: BricksTileMap, center: center)
                 }
@@ -248,10 +246,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         levelart[2] =  ["😝","😜","🤪","🤨","🧐","🤓","😎","🥸"]
         levelart[3] =  ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
 
-        self.view?.isMultipleTouchEnabled = false
+        view.isMultipleTouchEnabled = false
         
-        width = (self.scene?.size.width)!
-        height = (self.scene?.size.height)!
+        width = (scene?.size.width)!
+        height = (scene?.size.height)!
         
         centerWidth = width / 2
         centerHeight = height / 2
@@ -261,7 +259,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         //for the field node to work properly
         anchor = CGPoint(x: centerWidth, y: centerHeight)
         anchorNode.position = anchor
-        self.addChild(anchorNode)
+        addChild(anchorNode)
         
         if screenType == .iPhone {
             // Dunno yet
@@ -319,7 +317,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         anchorNode.addChild(wallNode)
         
         //setup physicsWorld
-        self.physicsWorld.gravity = CGVector(dx: 0.00, dy: -1)
+        physicsWorld.gravity = CGVector(dx: 0.00, dy: 0.0)
         scene?.physicsWorld.contactDelegate = self
         
         //left mid corner piece
@@ -379,7 +377,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         //lower left corner
         let lowerLeftNode = SKSpriteNode()
         let lowerLeftTexture = SKTexture(imageNamed: "ll")
-        let lowerLeftBody =  SKPhysicsBody(texture: lowerLeftTexture, alphaThreshold: 1.0, size: lowerLeftTexture.size())
+        let lowerLeftBody =  SKPhysicsBody(texture: lowerLeftTexture, alphaThreshold: 0.1, size: lowerLeftTexture.size())
         lowerLeftNode.texture = lowerLeftTexture
         lowerLeftNode.physicsBody = lowerLeftBody
         lowerLeftNode.physicsBody?.friction = 0
@@ -398,7 +396,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         //lower right corner
         let lowerRightNode = SKSpriteNode()
         let lowerRightTexture = SKTexture(imageNamed: "lr")
-        let lowerRightBody =  SKPhysicsBody(texture: lowerRightTexture, alphaThreshold: 1.0, size: lowerRightTexture.size())
+        let lowerRightBody =  SKPhysicsBody(texture: lowerRightTexture, alphaThreshold: 0.1, size: lowerRightTexture.size())
         lowerRightNode.texture = lowerRightTexture
         lowerRightNode.physicsBody = lowerRightBody
         lowerRightNode.physicsBody?.friction = 0
@@ -417,7 +415,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         //upper left corner
         let upperLeftNode = SKSpriteNode()
         let upperLeftTexture = SKTexture(imageNamed: "ul")
-        let upperLeftBody =  SKPhysicsBody(texture: upperLeftTexture, alphaThreshold: 1.0, size: upperLeftTexture.size())
+        let upperLeftBody =  SKPhysicsBody(texture: upperLeftTexture, alphaThreshold: 0.1, size: upperLeftTexture.size())
         upperLeftNode.texture = upperLeftTexture
         upperLeftNode.physicsBody = upperLeftBody
         upperLeftNode.physicsBody?.friction = 0
@@ -436,7 +434,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         //Upper Right Corner
         let upperRightNode = SKSpriteNode()
         let upperRightTexture = SKTexture(imageNamed: "ur")
-        let upperRightBody =  SKPhysicsBody(texture: upperRightTexture, alphaThreshold: 1.0, size: upperRightTexture.size())
+        let upperRightBody =  SKPhysicsBody(texture: upperRightTexture, alphaThreshold: 0.1, size: upperRightTexture.size())
         upperRightNode.texture = upperRightTexture
         upperRightNode.physicsBody = upperRightBody
         upperRightNode.physicsBody?.friction = 0
@@ -472,7 +470,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         paddleNode.physicsBody?.collisionBitMask = ballCategory
         
         //leave as is for now until we decide to use convert point or not
-        paddleNode.position = CGPoint(x:self.frame.width / 2,y:self.frame.height / paddleHeight)
+        paddleNode.position = CGPoint(x:frame.width / 2,y:frame.height / paddleHeight)
         paddleNode.size = CGSize(width: 180.0, height: 40.0) //Needed to size
         paddleNode.physicsBody?.restitution = 0.0
         paddleNode.name = "paddle"
@@ -505,8 +503,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         drawParallax()
         
         ///drawbricks here
-        //drawLevel()
-        resetGameBoard()
+        drawLevel()
+        addPuck()
+        //resetGameBoard()
         /*
          if let soundURL: URL = Bundle.main.url(forResource: "david", withExtension: "mp3") {
          audioPlayer = try! AVAudioPlayer(contentsOf: soundURL)
@@ -518,7 +517,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     
     func touchDown(atPoint pos : CGPoint) {
         let constraint = CGFloat(128)
-        if (pos.x >= constraint && pos.x <= self.frame.width - constraint) {
+        if (pos.x >= constraint && pos.x <= frame.width - constraint) {
             let action = SKAction.moveTo(x: pos.x, duration: 0.002)
             paddleNode.run(action)
         }
@@ -526,7 +525,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     
     func touchMoved(toPoint pos : CGPoint) {
         let constraint = CGFloat(128)
-        if (pos.x >= constraint && pos.x <= self.frame.width - constraint) {
+        if (pos.x >= constraint && pos.x <= frame.width - constraint) {
             let action = SKAction.moveTo(x: pos.x, duration: 0.002)
             paddleNode.run(action)
         }
@@ -536,19 +535,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+        for t in touches { touchDown(atPoint: t.location(in: self)) }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+        for t in touches { touchMoved(toPoint: t.location(in: self)) }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        for t in touches { touchUp(atPoint: t.location(in: self)) }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        for t in touches { touchUp(atPoint: t.location(in: self)) }
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -561,7 +560,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         space?.removeAllActions()
         space = nil
         gameLevel += 1
-        gameLevel %= 15
+        gameLevel %= 32
         gameScore += 10
         levelLabel.text = String(gameLevel)
         scoreLabel.text = String(gameScore)
@@ -594,6 +593,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         ballNode.run(rotateAction)
     }
     
+    fileprivate func checker(_ firstBody: SKPhysicsBody) {
+        // There are two mysterious "bricks" that do not seem to exist
+        // print("space ->", space!.children.count - 2, "checksum ->", bricksChecksum)
+        if let count = space?.children.count, count - 1 <= 0  {
+            let a = SKAction.fadeAlpha(to: 0, duration: 0.5)
+            let b = SKAction.run { [unowned self] in
+                removeFromParent()
+            }
+            let c = SKAction.fadeAlpha(to: 1, duration: 0.5)
+            let d = SKAction.run { [unowned self] in
+                resetGameBoard()
+            }
+            
+            if let ball = firstBody.node {
+                ball.run(SKAction.sequence([a,b,c]))
+            }
+            
+            run(SKAction.sequence([c,d,c]))
+
+            
+        }
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
 
         guard
@@ -603,8 +625,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             return
         }
         
-    
-    
         // Defaults for bodyA and BodyB
         var firstBody = contact.bodyB
         var secondBody = contact.bodyA
@@ -614,8 +634,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             secondBody = contact.bodyB
         }
         
-        print("firstBody.velocity.dy",firstBody.velocity.dy)
-        print("firstBody.angularVelocity",firstBody.angularVelocity)
+        //print("firstBody.velocity.dy",firstBody.velocity.dy)
+        //print("firstBody.angularVelocity",firstBody.angularVelocity)
 
         let catMask = firstBody.categoryBitMask | secondBody.categoryBitMask
         
@@ -627,49 +647,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
         switch catMask {
         
         case ballCategory | brickCategory :
-            
             if settings.sound { run(brickSound) }
-            
             gameScore += 1
 
             if let a = secondBody.node {
-                let action = SKAction.removeFromParent()
-                a.run(action)
+                a.removeFromParent()
+                checker(firstBody)
+                print(space?.children.count)
             }
-            
-            if let b = firstBody.node, gameLevel > 6 {
-                let ballaction = SKAction.applyImpulse( CGVector(dx: 0 , dy: gameLevel * Int(swapper ? 1 : -1)), duration: 1)
-                b.run(ballaction)
-            }
-            
-            // MARK: - Checksum Physical count
-            if let spc = space {
-                var localCounter = -1
-                for i in spc.children {
-                    if i.name == "brick" {
-                        localCounter += 1
-                    }
-                }
-                bricksChecksum = localCounter
-                
-                bricksChecksum == 1 ? (bricksChecksum = bricksChecksum == bricksChecksumPrev ? 0 : 1) : ()
-                bricksChecksumPrev = bricksChecksum
-                
-            }3
-            // There are two mysterious "bricks" that do not seem to exist
-            // print("space ->", space!.children.count - 2, "checksum ->", bricksChecksum)
-            if let count = space?.children.count, count - 2 <= 0 || bricksChecksum <= 0 {
-                firstBody.node?.removeFromParent()
-                secondBody.node?.removeFromParent()
-                resetGameBoard()
-            }
-        
+             
         case ballCategory | wallCategory :
             
             if settings.sound { run(wallSound) }
             let cp = contact.contactPoint
-            cp.x < 0 ? applyVector(dx: 50, dy: 0, node: firstBody.node, duration: 1.5) : applyVector(dx: -50, dy: 0, node: firstBody.node, duration: 1.5)
-        
+            cp.x < 0 ? applyVector(dx: 25, dy: 0, node: firstBody.node, duration: 1.5) : applyVector(dx: 25, dy: 0, node: firstBody.node, duration: 1.5)
+            cp.y < 0 ? applyVector(dx: 0, dy: 50, node: firstBody.node, duration: 1.5) : applyVector(dx: 0, dy: -50, node: firstBody.node, duration: 1.5)
         case ballCategory | midCategory :
             
             if settings.sound { run(wallSound) }
@@ -680,7 +672,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             cp.y < 0 ? applyVector(dx: 0, dy: 50, node: firstBody.node, duration: 1.5) : applyVector(dx: 0, dy: -50, node: firstBody.node, duration: 1.5)
 
         case ballCategory | goalCategory :
-            if settings.sound { run(wallSound) }
+            if settings.sound { run(goalSound) }
 
             //remove the puck
             if let puck = firstBody.node {
@@ -688,14 +680,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
                 
                 gameLives -= 1
                 livesLabel.text = String(gameLives)
-                
-                let action1 = SKAction.run { puck.removeFromParent() }
-                let action2 = SKAction.wait(forDuration: 0.5)
-                let action3 = SKAction.run { self.addPuck() }
-                
+                let a0 = SKAction.fadeOut(withDuration: 0.0625)
+                let a1 = SKAction.run { puck.removeFromParent() }
+                let a2 = SKAction.wait(forDuration: 0.0625)
+                let a3 = SKAction.run { [unowned self] in addPuck() }
+                let a4 = SKAction.fadeIn(withDuration: 0.0625)
+
                 if gameLives > 0 {
                     livesLabel.text = String(gameLives)
-                    self.run(SKAction.sequence([action1, action2, action3]))
+                    puck.run(SKAction.sequence([a0,a4]))
+                    run(SKAction.sequence([a2,a1,a2,a3,a4]))
+
                 } else {
                     //game over sequence
                     resetGameBoard()
@@ -719,35 +714,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVAudioPlayerDelegate {
             applyVector(dx: 0, dy: 75, node: firstBody.node, duration: 1.0)
             
         case ballCategory | lowerLeftCornerCategory:
-            gameScore += 3
+            gameScore += 1
 
             if settings.sound { run(wallSound) }
-            applyVector(dx: 25, dy: 50, node: firstBody.node, duration: 1.5)
 
         case ballCategory | upperLeftCornerCategory:
             gameScore += 1
 
             if settings.sound { run(wallSound) }
-            applyVector(dx: 25, dy: -50, node: firstBody.node, duration: 1.5)
             
         case ballCategory | lowerRightCornerCategory :
-            gameScore += 3
+            gameScore += 1
 
             if settings.sound { run(wallSound) }
-            applyVector(dx: -25, dy: -50, node: firstBody.node, duration: 1.5)
             
         case ballCategory | upperRightCornerCategory :
             gameScore += 1
 
             if settings.sound { run(wallSound) }
-            applyVector(dx: -25, dy: 50, node: firstBody.node, duration: 1.5)
             
         default :
-            applyVector(dx: 0, dy: 1, node: firstBody.node, duration: 3)
+            applyVector(dx: 1, dy: 1, node: firstBody.node, duration: 1)
         }
         
         scoreLabel.text = String(gameScore)
-
     }
     
     func applyVector(dx: CGFloat, dy: CGFloat, node: SKNode?, duration: Double) {
