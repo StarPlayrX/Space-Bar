@@ -273,7 +273,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         } else if screenType == .iPhoneProMax {
             //
         } else if screenType == .iPad {
-            iPadString = "-ipad"
+            //iPadString = "-ipad"
         }
  
         scene?.speed = 1.0
@@ -770,9 +770,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         }
         
         scoreLabel.text = String(gameScore)
-        
+        livesLabel.text = String(gameLives)
+        levelLabel.text = String(gameLevel\)
+        let a = CGFloat(arc4random_uniform(UInt32(6)))
+        let b = CGFloat(arc4random_uniform(UInt32(2)))
+        let c = Double(a / 2)
+        let d = Double(b / 2)
+
         let cp = contact.contactPoint
-        cp.y < 0 ? applyVector(dx: 0, dy: 1, node: firstBody.node, duration: 1) : applyVector(dx: 0, dy: -1, node: firstBody.node, duration: 3)
+        cp.y < 0 ? applyVector(dx: 0, dy: a, node: firstBody.node, duration: c) : applyVector(dx: 0, dy: -a, node: firstBody.node, duration: c)
+        cp.x < 0 ? applyVector(dx: b, dy: 0, node: firstBody.node, duration: d) : applyVector(dx: -b, dy: 0, node: firstBody.node, duration: d)
+
     }
     
     func applyVector(dx: CGFloat, dy: CGFloat, node: SKNode?, duration: Double) {
