@@ -13,20 +13,25 @@ import GameplayKit
 typealias appsettings =  (level: Int, highlevel: Int, emoji: Int, score: Int, highscore: Int, lives: Int, music: Bool, sound: Bool, stick: Bool, mode: Int)
 var settings : appsettings = (level: 1, highlevel: 2, emoji: 1, score: 0, highscore: 0, lives: 9, music: true, sound: true, stick: true, mode: 0)
 
-let view = SKView()
-var forever = SKAction()
+var
+    view: SKView?
 var initialScreenSize = CGSize()
 
 class GameViewController: UIViewController {
-
+    
+    deinit {
+        removeFromParent()
+        view = nil
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let view = self.view as! SKView? {
+        if let view = self.view as? SKView,
+           let scene = SKScene(fileNamed: "GameMenu") {
             
             initialScreenSize = CGSize(width: view.frame.width, height: view.frame.height)
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameMenu") {
 
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFit
@@ -36,13 +41,12 @@ class GameViewController: UIViewController {
                 view.showsFields = false
                 view.showsPhysics = false
                 view.isAsynchronous = true
-                view.preferredFramesPerSecond = 60
+                //view.preferredFramesPerSecond = 60
                 view.isOpaque = true
                 view.allowsTransparency = false
                 view.showsFPS = true
                 view.showsNodeCount = false
                 view.presentScene(scene)
-            }
         }
     }
 

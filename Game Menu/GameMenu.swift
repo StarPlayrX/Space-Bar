@@ -7,8 +7,8 @@
 //
 
 import SpriteKit
-import AudioToolbox
-import AVFoundation
+//import AudioToolbox
+//import AVFoundation
 
 var puckArray: Array = ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
 var rotation = [0,45,90.0,135.0,180.0,225.0,270.0,315.0]
@@ -31,7 +31,14 @@ var insSet = 1
 var frtSet = 1
 var foodSet = 1
 
-class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
+class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
+    
+    deinit {
+        removeAllActions()
+        removeAllChildren()
+        removeFromParent()
+        print("deinit")
+    }
     
     var maxpuck = puckArray.count - 1
     var minpuck = 0
@@ -145,14 +152,13 @@ class ParentalScene: SKScene, AVSpeechSynthesizerDelegate {
                 
                 if name == "enter" {
                     
-                    let runcode = SKAction.run {
+                    let runcode = SKAction.run { [weak self] in
                         
-                        if let scene = GameScene( fileNamed:"GameScene" ) {
-                            
-                            scene.run(forever)
-                            
+                        if let scene = GameScene( fileNamed:"GameScene" ),
+                           let view = self?.view {
+                                                        
                             // Configure the view.
-                            let skView = self.view! as SKView
+                            let skView = view as SKView
                             skView.showsFPS = false
                             skView.showsNodeCount = false
                             skView.showsPhysics = false
