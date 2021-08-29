@@ -64,9 +64,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     let brickSound = SKAction.playSoundFileNamed("Bip.m4a", waitForCompletion: true)
     let paddleSound = SKAction.playSoundFileNamed("Knock.m4a", waitForCompletion: true)
     let wallSound = SKAction.playSoundFileNamed("Dat.m4a", waitForCompletion: true)
-    
-    let backParalax = SKNode() //Center Node
-    
+        
     //corners
     let corneredge = CGFloat(32)
     let cornertopedge = CGFloat(86)
@@ -91,7 +89,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         
         space = SKReferenceNode(fileNamed: filename)
         space?.name = "Space"
-        space?.position = iPadString.isEmpty ? CGPoint(x: 0, y: centerHeight - 240) : CGPoint(x: 0, y: centerHeight - 340)
         
         guard let tilemap = space?.childNode(withName: "//bricks") as? SKTileMapNode else { return }
         
@@ -103,13 +100,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
                 break
             }
         }
-        drawBricks(BricksTileMap: tilemap)
+        let xPosition = drawBricks(BricksTileMap: tilemap)
+        space?.position = iPadString.isEmpty ? CGPoint(x: xPosition, y: centerHeight - 240) : CGPoint(x: xPosition, y: centerHeight - 340)
     }
     
     func drawParallax() {
-        anchorNode.addChild(backParalax)
+        let backParalax = SKNode()
         backParalax.position = CGPoint(x: CGFloat(centerWidth), y: CGFloat(centerHeight))
-        
         let starryNightTexture = SKTexture(imageNamed: "starfield1")
         let moveGroundSprite = SKAction.moveBy(x: 0, y: -starryNightTexture.size().height, duration: TimeInterval(0.012 * starryNightTexture.size().height))
         let resetGroundSprite = SKAction.moveBy(x: 0, y: starryNightTexture.size().height, duration: 0.0)
@@ -123,6 +120,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
             backParalax.zPosition = -10
             backParalax.speed = 1
         }
+        anchorNode.addChild(backParalax)
+
     }
     
     //add Puck
@@ -229,13 +228,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         BricksNode.physicsBody?.mass = 1.0
         BricksNode.name = "brick"
         BricksNode.position = center
+        print(space?.position.x, space?.position.y)
+       
         space?.addChild(BricksNode)
     }
     
-    func drawBricks(BricksTileMap: SKTileMapNode) {
+    func drawBricks(BricksTileMap: SKTileMapNode) -> CGFloat {
+        var lefty: Bool = false
+        var righty: Bool = false
+        var floater: CGFloat = 0
         for col in (0 ..< BricksTileMap.numberOfColumns) {
             for row in (0 ..< BricksTileMap.numberOfRows) {
                 if let _ = BricksTileMap.tileDefinition(atColumn: col, row: row) {
+                    if row == BricksTileMap.numberOfRows - 1 { righty = true}
+                    if row == 0 { lefty = true}
                     let center = BricksTileMap.centerOfTile(atColumn: col, row: row)
                     tileMapRun(TileMapNode: BricksTileMap, center: center)
                 }
@@ -243,6 +249,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         }
         BricksTileMap.removeAllChildren()
         BricksTileMap.removeFromParent()
+        
+        if  righty ==  lefty { floater =   0 }
+        if  righty && !lefty { floater =  25 }
+        if !righty &&  lefty { floater = -25 }
+        print(righty,lefty,floater)
+        return floater
     }
     
     
@@ -595,12 +607,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         // print("space ->", space!.children.count - 2, "checksum ->", bricksChecksum)
         if let count = space?.children.count, count - 1 <= 0  {
             let a = SKAction.fadeAlpha(to: 0, duration: 0.5)
-            let b = SKAction.run { [unowned self] in
-                removeFromParent()
+            let b = SKAction.run { [weak self] in
+                self?.removeFromParent()
             }
             let c = SKAction.fadeAlpha(to: 1, duration: 0.5)
-            let d = SKAction.run { [unowned self] in
-                resetGameBoard(lives: true)
+            let d = SKAction.run { [weak self] in
+                self?.resetGameBoard(lives: true)
             }
             
             if let ball = firstBody.node {
