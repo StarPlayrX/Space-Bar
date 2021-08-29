@@ -20,7 +20,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         print("deinit")
     }
     
-    
     // Our Game's Actors
     var bricksChecksum = 0
     var bricksChecksumPrev = 1
@@ -62,7 +61,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     let scoreLabel = SKLabelNode(fontNamed:"emulogic")
     let levelLabel = SKLabelNode(fontNamed:"emulogic")
     let livesLabel = SKLabelNode(fontNamed:"emulogic")
-
+    
     let goalSound = SKAction.playSoundFileNamed("Dah.m4a", waitForCompletion: true)
     let brickSound = SKAction.playSoundFileNamed("Bip.m4a", waitForCompletion: true)
     let paddleSound = SKAction.playSoundFileNamed("Knock.m4a", waitForCompletion: true)
@@ -87,8 +86,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     
     func drawLevel() {
         let lvlStr = String(gameLevel)
+        print(gameLevel)
+        print("settings.level", settings.level)
+        
         let filename = "level\(lvlStr)\(iPadString).sks"
-    
+        
         space = SKReferenceNode(fileNamed: filename)
         space?.name = "Space"
         space?.position = iPadString.isEmpty ? CGPoint(x: 0, y: centerHeight - 240) : CGPoint(x: 0, y: centerHeight - 340)
@@ -145,7 +147,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         
         let rnd = arc4random_uniform(UInt32(360))
         ballEmoji.zRotation = CGFloat(Int(rnd).degrees)
-
+        
         if let texture = view?.texture(from: ballEmoji) {
             ballNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
@@ -196,7 +198,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         spriteLabelNode.position = CGPoint(x: 0, y: 0)
         spriteLabelNode.fontSize = 50
         spriteLabelNode.zRotation = CGFloat(Int(rotation[(gameLevel - 1) % rotation.count]).degrees)
-
+        
         let artwork = levelart[(gameLevel - 1) % levelart.count]
         
         if let art = artwork {
@@ -229,7 +231,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         BricksNode.position = center
         space?.addChild(BricksNode)
     }
-        
+    
     func drawBricks(BricksTileMap: SKTileMapNode) {
         for col in (0 ..< BricksTileMap.numberOfColumns) {
             for row in (0 ..< BricksTileMap.numberOfRows) {
@@ -243,7 +245,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         BricksTileMap.removeFromParent()
     }
     
-
+    
     override func didMove(to view: SKView) {
         
         let screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
@@ -252,7 +254,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         levelart[1] =  ["😍","🥰","😘","😗","😙","😚","😋","😛"]
         levelart[2] =  ["😝","😜","🤪","🤨","🧐","🤓","😎","🥸"]
         levelart[3] =  ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
-
+        
         view.isMultipleTouchEnabled = false
         
         width = (scene?.size.width)!
@@ -275,7 +277,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         } else if screenType == .iPad {
             //iPadString = "-ipad"
         }
- 
+        
         scene?.speed = 1.0
         
         livesLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
@@ -486,8 +488,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
             paddleNode = paddle
             scene?.addChild(paddle)
         }
-      
-                
+        
+        
         //add our paddle
         
         //let goalPhysicsBody = SKPhysicsBody(rectangleOf: goalTexture.size())
@@ -513,9 +515,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
             goalNode.name = "goal"
             anchorNode.addChild(goalNode)
         }
-
-    
-     
+        
+        
+        
         
         drawParallax()
         
@@ -577,9 +579,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         space?.removeAllActions()
         space = nil
         gameLevel += 1
-        gameLevel %= 32
+        gameLevel %= levelArray.count
+        
+        gameLevel = gameLevel == 0 ? 32 : gameLevel
         gameScore += 10
-        lives ? gameLives += 1 : ()
+        gameLives += 1
+        livesLabel.text = String(gameLives)
         levelLabel.text = String(gameLevel)
         scoreLabel.text = String(gameScore)
         drawLevel()
@@ -597,7 +602,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         
         let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(toggle), duration: 2)
         ballNode.run(rotateAction)
-        
     }
     
     fileprivate func secondContact(_ contact: SKPhysicsContact, _ firstBody: SKPhysicsBody) {
@@ -629,13 +633,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
             }
             
             run(SKAction.sequence([c,d,c]))
-
-            
         }
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-
+        
         guard
             let _ = contact.bodyA.node,
             let _ = contact.bodyB.node
@@ -658,129 +660,109 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(swapper ? 1 : -1), duration: 2)
         ballNode.run(rotateAction)
         ballNode.run(rotateAction)
-
+        
         switch catMask {
         
         case ballCategory | brickCategory :
             if settings.sound { run(brickSound) }
             gameScore += 1
-
+            
+            scoreLabel.text = String(gameScore)
             if let a = secondBody.node {
                 a.removeFromParent()
                 checker(firstBody)
-                print(space?.children.count)
             }
-             
+            
         case ballCategory | wallCategory :
             
             if settings.sound { run(wallSound) }
-           
-
+            
+            let margin = 12
+            let ratio = 2
+            let decay = Double(0.10)
+            let a = CGFloat(arc4random_uniform(UInt32(margin)))
+            let b = CGFloat(arc4random_uniform(UInt32(margin / ratio)))
+            let c = Double(Double(a) * decay)
+            let d = Double(Double(b) * decay)
+            
+            let cp = contact.contactPoint
+            cp.y < 0 ? applyVector(dx: 0, dy: a, node: firstBody.node, duration: c) : applyVector(dx: 0, dy: -a, node: firstBody.node, duration: c)
+            cp.x < 0 ? applyVector(dx: b, dy: 0, node: firstBody.node, duration: d) : applyVector(dx: -b, dy: 0, node: firstBody.node, duration: d)
+            
         case ballCategory | midCategory :
             
             if settings.sound { run(wallSound) }
-            gameScore += 3
-
+            gameScore += 2
+            scoreLabel.text = String(gameScore)
+            
         case ballCategory | goalCategory :
             if settings.sound { run(goalSound) }
-
+            
             //remove the puck
             if let puck = firstBody.node {
                 //lives to come
                 gameLives -= 1
+                livesLabel.text = String(gameLives)
                 puck.removeFromParent()
-
+                
                 if gameLives > 0 {
-                    livesLabel.text = String(gameLives)
                     addPuck()
                 } else {
-                        let runcode = SKAction.run { [weak self] in
+                    let runcode = SKAction.run { [weak self] in
+                        
+                        if let scene = GameScene( fileNamed:"GameMenu" ),
+                           let view = self?.view {
                             
-                            if let scene = GameScene( fileNamed:"GameMenu" ),
-                               let view = self?.view {
-                                                            
-                                // Configure the view.
-                                let skView = view as SKView
-                                skView.showsFPS = false
-                                skView.showsNodeCount = false
-                                skView.showsPhysics = false
-                                skView.showsFields = false
-                                skView.clearsContextBeforeDrawing = true
-                                skView.isAsynchronous = true
-                                
-                                /* Sprite Kit applies additional optimizations to improve rendering performance */
-                                skView.ignoresSiblingOrder = true
-                                skView.clipsToBounds = true
-                                /* Set the scale mode to scale to fit the window */
-                                scene.scaleMode = .aspectFit
-                                scene.backgroundColor = SKColor.black
-                                skView.presentScene(scene, transition: SKTransition.fade(withDuration: 2))
-                            }
+                            // Configure the view.
+                            let skView = view as SKView
+                            skView.showsFPS = false
+                            skView.showsNodeCount = false
+                            skView.showsPhysics = false
+                            skView.showsFields = false
+                            skView.clearsContextBeforeDrawing = true
+                            skView.isAsynchronous = true
+                            
+                            /* Sprite Kit applies additional optimizations to improve rendering performance */
+                            skView.ignoresSiblingOrder = true
+                            skView.clipsToBounds = true
+                            /* Set the scale mode to scale to fit the window */
+                            scene.scaleMode = .aspectFit
+                            scene.backgroundColor = SKColor.black
+                            skView.presentScene(scene, transition: SKTransition.fade(withDuration: 2))
                         }
-                        
-                        let fade1 = SKAction.fadeAlpha(to: 0.0, duration:TimeInterval(0.15))
-                        let myDecay = SKAction.wait(forDuration: 0.15)
-                        run(SKAction.sequence([fade1,myDecay,runcode]))
-                        
+                    }
                     
-                    //game over sequence
-                    /*resetGameBoard()
-                    
-                    //reset labels
-                    gameLives = settings.lives
-                    livesLabel.text = String(gameLives)
-                    
-                    gameLevel = settings.level - 1
-                    levelLabel.text = String(gameLevel)
-                    
-                    gameScore = 0
-                    scoreLabel.text = String(gameScore)*/
+                    let fade1 = SKAction.fadeAlpha(to: 0.0, duration:TimeInterval(0.15))
+                    let myDecay = SKAction.wait(forDuration: 0.15)
+                    run(SKAction.sequence([fade1,myDecay,runcode]))
                 }
             }
-        
+            
         case ballCategory | paddleCategory:
             
             if settings.sound { run(paddleSound) }
             gameScore += 1
-         
+            scoreLabel.text = String(gameScore)
             
         case ballCategory | lowerLeftCornerCategory:
-            gameScore += 1
-
+            
             if settings.sound { run(wallSound) }
-
+            
         case ballCategory | upperLeftCornerCategory:
-            gameScore += 1
-
+            
             if settings.sound { run(wallSound) }
             
         case ballCategory | lowerRightCornerCategory :
-            gameScore += 1
-
+            
             if settings.sound { run(wallSound) }
             
         case ballCategory | upperRightCornerCategory :
-            gameScore += 1
-
+            
             if settings.sound { run(wallSound) }
             
-        default :
+        default:
             break
-            //applyVector(dx: 1, dy: 1, node: firstBody.node, duration: 1)
         }
-        
-        scoreLabel.text = String(gameScore)
-        livesLabel.text = String(gameLives)
-        levelLabel.text = String(gameLevel\)
-        let a = CGFloat(arc4random_uniform(UInt32(6)))
-        let b = CGFloat(arc4random_uniform(UInt32(2)))
-        let c = Double(a / 2)
-        let d = Double(b / 2)
-
-        let cp = contact.contactPoint
-        cp.y < 0 ? applyVector(dx: 0, dy: a, node: firstBody.node, duration: c) : applyVector(dx: 0, dy: -a, node: firstBody.node, duration: c)
-        cp.x < 0 ? applyVector(dx: b, dy: 0, node: firstBody.node, duration: d) : applyVector(dx: -b, dy: 0, node: firstBody.node, duration: d)
-
     }
     
     func applyVector(dx: CGFloat, dy: CGFloat, node: SKNode?, duration: Double) {

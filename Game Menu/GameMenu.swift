@@ -124,7 +124,9 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
                         frtLabel.text = levelArray[level]
                         frtLabel.zRotation = CGFloat(Int(rotation[level % rotation.count]).degrees)
                         frtTextLabel.text = "level \(level + 1)"
-                        settings.level = (level + 1) % 32
+                        settings.level = Int((level + 1) % levelArray.count)
+                        settings.level = settings.level == 0 ? 32 : settings.level
+                        print(settings.level)
                     }
                 }
                 
