@@ -40,10 +40,6 @@ struct ScreenSize {
             scene.size = CGSize(width: 700, height: 1300)
         }
         
-        
-        print(ratio,size)
-        
-        
         return screenType
     }
 }

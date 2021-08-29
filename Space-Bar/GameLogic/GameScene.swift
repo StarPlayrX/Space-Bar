@@ -17,7 +17,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         removeAllActions()
         removeAllChildren()
         removeFromParent()
-        print("deinit")
     }
     
     // Our Game's Actors
@@ -82,8 +81,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     
     func drawLevel() {
         let lvlStr = String(gameLevel)
-        print(gameLevel)
-        print("settings.level", settings.level)
         
         let filename = "level\(lvlStr)\(iPadString).sks"
         
@@ -100,8 +97,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
                 break
             }
         }
-        let xPosition = drawBricks(BricksTileMap: tilemap)
-        space?.position = iPadString.isEmpty ? CGPoint(x: xPosition, y: centerHeight - 240) : CGPoint(x: xPosition, y: centerHeight - 340)
+        drawBricks(BricksTileMap: tilemap)
+        let xPos: [CGFloat] = [
+        //  1   2   3   4   5   6   7   8   9  10
+            1,  1,  1,  1,  1, -1, -1,  1,  1,  1,
+            1,  1,  1,  3,  3,  0,  3,  1,  1, -1,
+            1, -1,  1,  0, -1,  0, -1,  1, -1, -1,
+           -1,  -1,
+        ]
+        
+        var x: CGFloat = 0
+       
+        if xPos.indices.contains(gameLevel - 1) {
+            x = xPos[gameLevel - 1] * 12.5
+        }
+
+        space?.position = iPadString.isEmpty ?
+            CGPoint(x: x, y: centerHeight - 240) :
+            CGPoint(x: x, y: centerHeight - 340)
     }
     
     func drawParallax() {
@@ -127,13 +140,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     //add Puck
     func addPuck() {
         
+        // Ensures no pucks pre-exist
         for whatDaPuck in anchorNode.children {
             if let name = whatDaPuck.name, name.contains("ball") {
                 whatDaPuck.removeFromParent()
             }
         }
         
-
         let ballEmoji = SKLabelNode(fontNamed:"SpaceBarColors")
         ballEmoji.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         ballEmoji.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -141,7 +154,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         ballEmoji.position = CGPoint(x: 0, y: 0)
         ballEmoji.zPosition = 50
         ballEmoji.text = puckArray[puck]
-        ballEmoji.fontSize = 55 //* 2
+        ballEmoji.fontSize = 54 //* 2
         
         let rnd = arc4random_uniform(UInt32(360))
         ballEmoji.zRotation = CGFloat(Int(rnd).degrees)
@@ -151,7 +164,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
             ballNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
             // This fall back should not happen, but we may use this in the future for iOS' that fail
-            ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 55 / 2)
+            ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 27)
         }
         
         ballNode.physicsBody?.categoryBitMask = ballCategory
@@ -228,20 +241,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         BricksNode.physicsBody?.mass = 1.0
         BricksNode.name = "brick"
         BricksNode.position = center
-        print(space?.position.x, space?.position.y)
        
         space?.addChild(BricksNode)
     }
     
-    func drawBricks(BricksTileMap: SKTileMapNode) -> CGFloat {
-        var lefty: Bool = false
-        var righty: Bool = false
-        var floater: CGFloat = 0
+    func drawBricks(BricksTileMap: SKTileMapNode)  {
         for col in (0 ..< BricksTileMap.numberOfColumns) {
             for row in (0 ..< BricksTileMap.numberOfRows) {
                 if let _ = BricksTileMap.tileDefinition(atColumn: col, row: row) {
-                    if row == BricksTileMap.numberOfRows - 1 { righty = true}
-                    if row == 0 { lefty = true}
                     let center = BricksTileMap.centerOfTile(atColumn: col, row: row)
                     tileMapRun(TileMapNode: BricksTileMap, center: center)
                 }
@@ -249,12 +256,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         }
         BricksTileMap.removeAllChildren()
         BricksTileMap.removeFromParent()
-        
-        if  righty ==  lefty { floater =   0 }
-        if  righty && !lefty { floater =  25 }
-        if !righty &&  lefty { floater = -25 }
-        print(righty,lefty,floater)
-        return floater
     }
     
     
@@ -382,17 +383,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         //centercourt circle
         let centerCourtNode = SKSpriteNode()
         let centerCourtTexture = SKTexture(imageNamed: "centercourt")
-        centerCourtNode.texture = centerCourtTexture;
-        centerCourtNode.size = centerCourtTexture.size();
-        centerCourtNode.position = CGPoint(x:0,y:0);
+        centerCourtNode.texture = centerCourtTexture
+        centerCourtNode.size = centerCourtTexture.size()
+        centerCourtNode.position = CGPoint(x:0,y:0)
         anchorNode.addChild(centerCourtNode)
         
         //centercourt line
         let centerCourtLineNode = SKSpriteNode()
         let centerCourtLineTexture = SKTexture(imageNamed: "centerline")
-        centerCourtLineNode.texture = centerCourtLineTexture;
+        centerCourtLineNode.texture = centerCourtLineTexture
         centerCourtLineNode.size = CGSize(width: (-centerWidth * 2) + 64, height: 4)
-        centerCourtLineNode.position = CGPoint(x:0,y:0);
+        centerCourtLineNode.position = CGPoint(x:0,y:0)
         anchorNode.addChild(centerCourtLineNode)
         
         //lower left corner
@@ -604,7 +605,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     
     fileprivate func checker(_ firstBody: SKPhysicsBody) {
         // There are two mysterious "bricks" that do not seem to exist
-        // print("space ->", space!.children.count - 2, "checksum ->", bricksChecksum)
         if let count = space?.children.count, count - 1 <= 0  {
             let a = SKAction.fadeAlpha(to: 0, duration: 0.5)
             let b = SKAction.run { [weak self] in

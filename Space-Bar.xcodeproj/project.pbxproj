@@ -52,10 +52,10 @@
 		EABB3AFB203CFA27000217E1 /* level2.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3AFA203CFA27000217E1 /* level2.sks */; };
 		EABB3B01203CFC08000217E1 /* level3.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B00203CFC08000217E1 /* level3.sks */; };
 		EABB3B03203CFC38000217E1 /* levelX.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B02203CFC38000217E1 /* levelX.sks */; };
-		EABB3B07203CFFCD000217E1 /* level4.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B06203CFFCD000217E1 /* level4.sks */; };
+		EABB3B07203CFFCD000217E1 /* level7.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B06203CFFCD000217E1 /* level7.sks */; };
 		EABB3B0D203D0102000217E1 /* level5.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B0C203D0102000217E1 /* level5.sks */; };
 		EABB3B0F203D0255000217E1 /* level6.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B0E203D0255000217E1 /* level6.sks */; };
-		EABB3B13203D0737000217E1 /* level7.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B12203D0737000217E1 /* level7.sks */; };
+		EABB3B13203D0737000217E1 /* level4.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3B12203D0737000217E1 /* level4.sks */; };
 		EABCDA882037E0FB0027FA89 /* level12.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABCDA872037E0FB0027FA89 /* level12.sks */; };
 /* End PBXBuildFile section */
 
@@ -107,10 +107,10 @@
 		EABB3AFA203CFA27000217E1 /* level2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level2.sks; sourceTree = "<group>"; };
 		EABB3B00203CFC08000217E1 /* level3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level3.sks; sourceTree = "<group>"; };
 		EABB3B02203CFC38000217E1 /* levelX.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = levelX.sks; sourceTree = "<group>"; };
-		EABB3B06203CFFCD000217E1 /* level4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level4.sks; sourceTree = "<group>"; };
+		EABB3B06203CFFCD000217E1 /* level7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level7.sks; sourceTree = "<group>"; };
 		EABB3B0C203D0102000217E1 /* level5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level5.sks; sourceTree = "<group>"; };
 		EABB3B0E203D0255000217E1 /* level6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level6.sks; sourceTree = "<group>"; };
-		EABB3B12203D0737000217E1 /* level7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level7.sks; sourceTree = "<group>"; };
+		EABB3B12203D0737000217E1 /* level4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level4.sks; sourceTree = "<group>"; };
 		EABCDA872037E0FB0027FA89 /* level12.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level12.sks; sourceTree = "<group>"; };
 		EAFBF6A02036591D0086084A /* Space-Bar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space-Bar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAFBF6BD203659E50086084A /* Space-Bar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Space-Bar-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -235,10 +235,10 @@
 				6F55698826D479410060D0E7 /* level1.sks */,
 				EABB3AFA203CFA27000217E1 /* level2.sks */,
 				EABB3B00203CFC08000217E1 /* level3.sks */,
-				EABB3B06203CFFCD000217E1 /* level4.sks */,
+				EABB3B06203CFFCD000217E1 /* level7.sks */,
 				EABB3B0C203D0102000217E1 /* level5.sks */,
 				EABB3B0E203D0255000217E1 /* level6.sks */,
-				EABB3B12203D0737000217E1 /* level7.sks */,
+				EABB3B12203D0737000217E1 /* level4.sks */,
 				EA69D558203FC43B008D9359 /* level8.sks */,
 				EA69D560203FC4D4008D9359 /* level9.sks */,
 				EA69D55C203FC488008D9359 /* level10.sks */,
@@ -334,7 +334,7 @@
 				6F27255D26DAA8D30009B5B5 /* level28.sks in Resources */,
 				EA69D561203FC4D4008D9359 /* level9.sks in Resources */,
 				6F27255E26DAA8D30009B5B5 /* level19.sks in Resources */,
-				EABB3B07203CFFCD000217E1 /* level4.sks in Resources */,
+				EABB3B07203CFFCD000217E1 /* level7.sks in Resources */,
 				5F77D8F222E3FE9F00E8C4F3 /* Dat.m4a in Resources */,
 				6F27256226DAA8D30009B5B5 /* level27.sks in Resources */,
 				6F55698A26D479410060D0E7 /* level1.sks in Resources */,
@@ -356,7 +356,7 @@
 				5F163D18231C8A2500E341FD /* SpaceBarColors.otf in Resources */,
 				EABB3B03203CFC38000217E1 /* levelX.sks in Resources */,
 				EABB3B0F203D0255000217E1 /* level6.sks in Resources */,
-				EABB3B13203D0737000217E1 /* level7.sks in Resources */,
+				EABB3B13203D0737000217E1 /* level4.sks in Resources */,
 				EA69D563203FCA95008D9359 /* level11.sks in Resources */,
 				6F27256126DAA8D30009B5B5 /* level24.sks in Resources */,
 				EA69D55D203FC488008D9359 /* level10.sks in Resources */,
@@ -537,7 +537,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
@@ -564,7 +564,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";

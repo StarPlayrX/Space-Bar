@@ -37,7 +37,6 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
         removeAllActions()
         removeAllChildren()
         removeFromParent()
-        print("deinit")
     }
     
     var maxpuck = puckArray.count - 1
@@ -69,7 +68,6 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             let touchedNode = atPoint(location)
             
             if let name = touchedNode.name {
-                //print(touchedNode as Any)
                 
                 func puckLeft() {
                     puck = puck > minpuck ? puck - 1 : maxpuck
@@ -106,7 +104,6 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
                     
                     settings.sound = speakerBool
                     
-                    print("settings.sound",settings.sound)
                 }
                 
                 (name == "ins-left" || name == "ins-right") ? speaker() : ()
@@ -126,7 +123,6 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
                         frtTextLabel.text = "level \(level + 1)"
                         settings.level = Int((level + 1) % levelArray.count)
                         settings.level = settings.level == 0 ? levelArray.count : settings.level
-                        print(settings.level)
                     }
                 }
                 
