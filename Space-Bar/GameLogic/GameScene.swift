@@ -25,8 +25,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     var bricksChecksumPrev = 1
     var swapper = false
     var paddleNode: SKSpriteNode? //available to the entire class
-    let ballNode = SKSpriteNode() //da ball
-    var ballEmoji = SKLabelNode()
     
     //Music Player
     //var audioPlayer = AVAudioPlayer()
@@ -136,7 +134,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
             }
         }
         
-        ballEmoji = SKLabelNode(fontNamed:"SpaceBarColors")
+
+        let ballEmoji = SKLabelNode(fontNamed:"SpaceBarColors")
         ballEmoji.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         ballEmoji.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         ballEmoji.alpha = 1.0
@@ -148,6 +147,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         let rnd = arc4random_uniform(UInt32(360))
         ballEmoji.zRotation = CGFloat(Int(rnd).degrees)
         
+        let ballNode = SKSpriteNode()
         if let texture = view?.texture(from: ballEmoji) {
             ballNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
@@ -488,12 +488,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
             paddleNode = paddle
             scene?.addChild(paddle)
         }
-        
-        
-        //add our paddle
-        
-        //let goalPhysicsBody = SKPhysicsBody(rectangleOf: goalTexture.size())
-        
+    
         if let goalNode = Optional(SKSpriteNode()) {
             let goalTexture = SKTexture(imageNamed: "goal")
             let goalPhysicsBody = SKPhysicsBody(texture: goalTexture, alphaThreshold: 0.1, size: goalTexture.size())
@@ -516,15 +511,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
             anchorNode.addChild(goalNode)
         }
         
-        
-        
-        
         drawParallax()
-        
-        ///drawbricks here
         drawLevel()
         addPuck()
-        //resetGameBoard()
+        
         /*
          if let soundURL: URL = Bundle.main.url(forResource: "david", withExtension: "mp3") {
          audioPlayer = try! AVAudioPlayer(contentsOf: soundURL)
@@ -550,27 +540,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         }
     }
     
-    func touchUp(atPoint pos : CGPoint) {
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { touchDown(atPoint: t.location(in: self)) }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { touchMoved(toPoint: t.location(in: self)) }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
     }
     
     func resetGameBoard(lives: Bool) {
@@ -581,9 +556,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         gameLevel += 1
         gameLevel %= levelArray.count
         
-        gameLevel = gameLevel == 0 ? 32 : gameLevel
-        gameScore += 10
-        gameLives += 1
+        gameLevel = gameLevel == 0 ? levelArray.count : gameLevel
+        gameScore += 10 //Bonus Points
+        gameLives += 1 // Bonus Life
         livesLabel.text = String(gameLives)
         levelLabel.text = String(gameLevel)
         scoreLabel.text = String(gameScore)
@@ -601,7 +576,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         let toggle = swapper ? 1 : -1
         
         let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(toggle), duration: 2)
-        ballNode.run(rotateAction)
+        firstBody.node?.run(rotateAction)
     }
     
     fileprivate func secondContact(_ contact: SKPhysicsContact, _ firstBody: SKPhysicsBody) {
@@ -612,7 +587,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         let toggle = swapper ? 1 : -1
         
         let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(toggle) / 180, duration: 2)
-        ballNode.run(rotateAction)
+        firstBody.node?.run(rotateAction)
     }
     
     fileprivate func checker(_ firstBody: SKPhysicsBody) {
@@ -658,8 +633,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         
         swapper.toggle()
         let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(swapper ? 1 : -1), duration: 2)
-        ballNode.run(rotateAction)
-        ballNode.run(rotateAction)
+        
+        if firstBody.node?.name == "ball" {
+            firstBody.node?.run(rotateAction)
+            firstBody.node?.run(rotateAction)
+        } else if secondBody.node?.name == "ball" {
+            secondBody.node?.run(rotateAction)
+            secondBody.node?.run(rotateAction)
+        }
         
         switch catMask {
         
@@ -688,6 +669,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
             let cp = contact.contactPoint
             cp.y < 0 ? applyVector(dx: 0, dy: a, node: firstBody.node, duration: c) : applyVector(dx: 0, dy: -a, node: firstBody.node, duration: c)
             cp.x < 0 ? applyVector(dx: b, dy: 0, node: firstBody.node, duration: d) : applyVector(dx: -b, dy: 0, node: firstBody.node, duration: d)
+            
+    
             
         case ballCategory | midCategory :
             
@@ -743,6 +726,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
             if settings.sound { run(paddleSound) }
             gameScore += 1
             scoreLabel.text = String(gameScore)
+            
             
         case ballCategory | lowerLeftCornerCategory:
             
