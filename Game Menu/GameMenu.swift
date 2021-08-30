@@ -194,12 +194,11 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
         settings.level = 1
         settings.lives = 3
         settings.level = settings.highlevel > settings.level ? settings.highlevel : settings.level
-        level = settings.level
-        print(level)
+        level = settings.level - 1
         frtLabel.text = levelArray[level]
         frtLabel.zRotation = CGFloat(Int(rotation[level % rotation.count]).degrees)
         frtTextLabel.text = "level \(level + 1)"
-        print(frtTextLabel.text)
+        
         if let pos = scene?.childNode(withName: "spacebar")?.position {
             let sprite = SKSpriteNode(imageNamed: "spacebarlogo")
             sprite.position = pos
@@ -226,7 +225,7 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             label2.verticalAlignmentMode = .center
             label2.position = pos
             label2.position.y += 86
-            label2.text = "TODD BOSS PRESENTS"
+            label2.text = "GOODTIME PRESENTS"
             scene?.addChild(label2)
         }
  
