@@ -45,7 +45,7 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
     var maxins = insArray.count - 1
     var minins = 0
     
-    var maxlevel = levelArray.count - 1
+    var maxlevel = settings.highlevel - 1
     var minlevel = 0
     
     var emojifontsize = CGFloat(150)
@@ -191,6 +191,8 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
     }
     
     override func didMove(to view: SKView) {
+        settings.level = 1
+        settings.lives = 3
         
         let highScoreText: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
         let highScoreLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")

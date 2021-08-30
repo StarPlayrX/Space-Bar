@@ -10,6 +10,8 @@ import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     
+    let appSettings = AppSettings()
+    
     deinit {
         removeAllActions()
         removeAllChildren()
@@ -18,6 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     
     func setHighScore() {
         settings.highscore = gameScore > settings.highscore ? gameScore : settings.highscore
+        settings.highlevel = gameLevel > settings.highlevel ? gameLevel : settings.highlevel
     }
     
     // Our Game's Actors
@@ -190,7 +193,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         ballNode.name = "ball"
         ballNode.position = CGPoint(x:0,y:0)
         ballNode.speed = CGFloat(1.0)
-        ballNode.physicsBody?.velocity = CGVector(dx: -300, dy: 850)
+        
+        let dx = arc4random_uniform(UInt32(360))
+        swapper.toggle()
+        let negative: CGFloat = swapper ? 1 : 0
+        
+        ballNode.physicsBody?.velocity = CGVector(dx: CGFloat(dx) * negative, dy: 850)
         anchorNode.addChild(ballNode)
         ballNode.addChild(ballEmoji)
     }
@@ -573,12 +581,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         
         gameLevel = gameLevel == 0 ? levelArray.count : gameLevel
         gameScore += 10 //Bonus Points
-        setHighScore()
         
-        gameLives += 1 // Bonus Life
+        gameLives = gameLives < 7 && gameLives % 2 == 0 ? gameLives + 1 : gameLives
         livesLabel.text = String(gameLives)
         levelLabel.text = String(gameLevel)
         scoreLabel.text = String(gameScore)
+        setHighScore()
+        appSettings.saveUserDefaults()
         drawLevel()
         addPuck()
     }
