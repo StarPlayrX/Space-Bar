@@ -7,9 +7,6 @@
 //
 
 import SpriteKit
-//import AVFoundation
-
-//import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     
@@ -17,6 +14,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         removeAllActions()
         removeAllChildren()
         removeFromParent()
+    }
+    
+    func setHighScore() {
+        settings.highscore = gameScore > settings.highscore ? gameScore : settings.highscore
     }
     
     // Our Game's Actors
@@ -561,6 +562,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         for t in touches { touchMoved(toPoint: t.location(in: self)) }
     }
     
+    
     func resetGameBoard(lives: Bool) {
         space?.removeAllChildren()
         space?.removeFromParent()
@@ -571,6 +573,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         
         gameLevel = gameLevel == 0 ? levelArray.count : gameLevel
         gameScore += 10 //Bonus Points
+        setHighScore()
+        
         gameLives += 1 // Bonus Life
         livesLabel.text = String(gameLives)
         levelLabel.text = String(gameLevel)
@@ -759,6 +763,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         default:
             break
         }
+        
+        setHighScore()
     }
     
     func applyVector(dx: CGFloat, dy: CGFloat, node: SKNode?, duration: Double) {

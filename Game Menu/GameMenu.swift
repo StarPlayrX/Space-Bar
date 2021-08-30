@@ -60,6 +60,7 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
     
     var textLabel: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
     var textLabel2: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         super.touchesBegan(touches as Set<UITouch>, with: event)
@@ -152,7 +153,7 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
                     
                     let runcode = SKAction.run { [weak self] in
                         
-                        if let scene = GameScene( fileNamed:"GameScene" ),
+                        if let scene = GameScene( fileNamed:"GameScene"),
                            let view = self?.view {
                                                         
                             // Configure the view.
@@ -164,12 +165,8 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
                             skView.preferredFramesPerSecond = 60
                             skView.clearsContextBeforeDrawing = true
                             skView.isAsynchronous = true
-                            
-                            /* Sprite Kit applies additional optimizations to improve rendering performance */
                             skView.ignoresSiblingOrder = true
-                            
                             skView.clipsToBounds = true
-                            /* Set the scale mode to scale to fit the window */
                             scene.scaleMode = .aspectFit
                             scene.backgroundColor = SKColor.black
                             skView.presentScene(scene, transition: SKTransition.fade(withDuration: 2))
@@ -194,6 +191,33 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
     }
     
     override func didMove(to view: SKView) {
+        
+        let highScoreText: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
+        let highScoreLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
+        if let hiScorePos = scene?.childNode(withName: "highscore")?.position {
+            highScoreLabel.position = hiScorePos
+            highScoreLabel.position.y += 36
+            highScoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+            highScoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+            highScoreLabel.alpha = 1.0
+            highScoreLabel.text = String("HI SCORE")
+            highScoreLabel.fontSize = 36
+            highScoreLabel.fontColor = UIColor.white
+            scene?.addChild(highScoreLabel)
+
+            highScoreText.position = hiScorePos
+            highScoreText.position.y -= 36
+            highScoreText.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+            highScoreText.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+            highScoreText.alpha = 1.0
+            highScoreText.text = String("\(settings.highscore)")
+            highScoreText.fontSize = 36
+            highScoreText.fontColor = UIColor.white
+            scene?.addChild(highScoreText)
+        }
+        
+      
+
         //animals Button
         //Left
         defineSprite (
