@@ -582,7 +582,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         gameLevel = gameLevel == 0 ? levelArray.count : gameLevel
         gameScore += 10 //Bonus Points
         
-        gameLives = gameLives < 7 && gameLives % 2 == 0 ? gameLives + 1 : gameLives
+        gameLives = gameLives < 7 && gameLevel % 2 == 0 ? gameLives + 1 : gameLives
         livesLabel.text = String(gameLives)
         levelLabel.text = String(gameLevel)
         scoreLabel.text = String(gameScore)
@@ -694,9 +694,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
             let cp = contact.contactPoint
             cp.y < 0 ? applyVector(dx: 0, dy: a, node: firstBody.node, duration: c) : applyVector(dx: 0, dy: -a, node: firstBody.node, duration: c)
             cp.x < 0 ? applyVector(dx: b, dy: 0, node: firstBody.node, duration: d) : applyVector(dx: -b, dy: 0, node: firstBody.node, duration: d)
-            
-    
-            
+        
         case ballCategory | midCategory :
             
             if settings.sound { run(wallSound) }

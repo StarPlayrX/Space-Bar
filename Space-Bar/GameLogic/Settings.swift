@@ -10,7 +10,7 @@ import Foundation
 
 struct Settings: Codable {
     var level: Int      =  1
-    var highlevel: Int  =  2
+    var highlevel: Int  =  1
     var score: Int      =  0
     var highscore: Int  =  0
     var lives: Int      =  3

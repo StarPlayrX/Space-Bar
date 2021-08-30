@@ -11,7 +11,6 @@
 		5F77D8DB22E3FCC100E8C4F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F77D8DA22E3FCC100E8C4F3 /* AppDelegate.swift */; };
 		5F77D8DD22E3FCE800E8C4F3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F77D8DC22E3FCE800E8C4F3 /* GameScene.swift */; };
 		5F77D8DF22E3FCF900E8C4F3 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F77D8DE22E3FCF800E8C4F3 /* GameViewController.swift */; };
-		5F77D8E522E3FDF900E8C4F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8E122E3FDF900E8C4F3 /* LaunchScreen.storyboard */; };
 		5F77D8E622E3FDF900E8C4F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8E322E3FDF900E8C4F3 /* Main.storyboard */; };
 		5F77D8EF22E3FE9F00E8C4F3 /* Knock.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8EB22E3FE9F00E8C4F3 /* Knock.m4a */; };
 		5F77D8F022E3FE9F00E8C4F3 /* Dah.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8EC22E3FE9F00E8C4F3 /* Dah.m4a */; };
@@ -42,6 +41,7 @@
 		6F55698626D1F9300060D0E7 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F55698526D1F9300060D0E7 /* ScreenSize.swift */; };
 		6F55698A26D479410060D0E7 /* level1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F55698826D479410060D0E7 /* level1.sks */; };
 		6FD0575326D47D92005671C4 /* level16.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0575126D47D92005671C4 /* level16.sks */; };
+		6FF23C2326DC7AD3006237E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F77D8E222E3FDF900E8C4F3 /* LaunchScreen.storyboard */; };
 		EA69D559203FC43B008D9359 /* level8.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D558203FC43B008D9359 /* level8.sks */; };
 		EA69D55D203FC488008D9359 /* level10.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D55C203FC488008D9359 /* level10.sks */; };
 		EA69D561203FC4D4008D9359 /* level9.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D560203FC4D4008D9359 /* level9.sks */; };
@@ -65,7 +65,7 @@
 		5F77D8DA22E3FCC100E8C4F3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F77D8DC22E3FCE800E8C4F3 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		5F77D8DE22E3FCF800E8C4F3 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		5F77D8E222E3FDF900E8C4F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5F77D8E222E3FDF900E8C4F3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F77D8E422E3FDF900E8C4F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		5F77D8EB22E3FE9F00E8C4F3 /* Knock.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Knock.m4a; sourceTree = "<group>"; };
 		5F77D8EC22E3FE9F00E8C4F3 /* Dah.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dah.m4a; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 				6F27256C26DC41240009B5B5 /* Settings.swift */,
 				6F55698526D1F9300060D0E7 /* ScreenSize.swift */,
 				5F77D8F322E3FEBC00E8C4F3 /* GameScene.sks */,
-				5F77D8E122E3FDF900E8C4F3 /* LaunchScreen.storyboard */,
+				5F77D8E222E3FDF900E8C4F3 /* LaunchScreen.storyboard */,
 			);
 			path = GameLogic;
 			sourceTree = "<group>";
@@ -348,7 +348,7 @@
 				EA69D559203FC43B008D9359 /* level8.sks in Resources */,
 				5F77D8F122E3FE9F00E8C4F3 /* Bip.m4a in Resources */,
 				6F27255C26DAA8D30009B5B5 /* level20.sks in Resources */,
-				5F77D8E522E3FDF900E8C4F3 /* LaunchScreen.storyboard in Resources */,
+				6FF23C2326DC7AD3006237E5 /* LaunchScreen.storyboard in Resources */,
 				6F27256026DAA8D30009B5B5 /* level31.sks in Resources */,
 				6F27256626DAA8D30009B5B5 /* level25.sks in Resources */,
 				6F27256A26DAA8D30009B5B5 /* level18.sks in Resources */,
@@ -399,14 +399,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5F77D8E122E3FDF900E8C4F3 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5F77D8E222E3FDF900E8C4F3 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		5F77D8E322E3FDF900E8C4F3 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -469,7 +461,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -524,7 +516,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -545,8 +537,8 @@
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Bruss.Todd.Space-Bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -572,8 +564,8 @@
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Bruss.Todd.Space-Bar";
 				PRODUCT_NAME = "$(TARGET_NAME)";

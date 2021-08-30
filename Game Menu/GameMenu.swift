@@ -193,7 +193,43 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
     override func didMove(to view: SKView) {
         settings.level = 1
         settings.lives = 3
-        
+        settings.level = settings.highlevel > settings.level ? settings.highlevel : settings.level
+        level = settings.level
+        print(level)
+        frtLabel.text = levelArray[level]
+        frtLabel.zRotation = CGFloat(Int(rotation[level % rotation.count]).degrees)
+        frtTextLabel.text = "level \(level + 1)"
+        print(frtTextLabel.text)
+        if let pos = scene?.childNode(withName: "spacebar")?.position {
+            let sprite = SKSpriteNode(imageNamed: "spacebarlogo")
+            sprite.position = pos
+            sprite.setScale(2.5)
+            sprite.name = "enter"
+            scene?.addChild(sprite)
+            
+            let label = SKLabelNode(fontNamed: "emulogic")
+            label.fontColor = UIColor.white
+            label.name = "copyright"
+            label.fontSize = 24
+            label.horizontalAlignmentMode = .center
+            label.verticalAlignmentMode = .center
+            label.position = pos
+            label.position.y -= 86
+            label.text = "(c) 2021 NICEMAC"
+            scene?.addChild(label)
+            
+            let label2 = SKLabelNode(fontNamed: "emulogic")
+            label2.fontColor = UIColor.white
+            label2.name = "toddboss"
+            label2.fontSize = 24
+            label2.horizontalAlignmentMode = .center
+            label2.verticalAlignmentMode = .center
+            label2.position = pos
+            label2.position.y += 86
+            label2.text = "TODD BOSS PRESENTS"
+            scene?.addChild(label2)
+        }
+ 
         let highScoreText: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
         let highScoreLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
         if let hiScorePos = scene?.childNode(withName: "highscore")?.position {
@@ -462,8 +498,8 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             insLabel.text = insArray[1]
             insTextLabel.text = insTextArray[1]
             
-            frtLabel.text = levelArray[0]
-            frtTextLabel.text = "level 1"
+            //frtLabel.text = levelArray[0]
+            //frtTextLabel.text = "level 1"
         }
     }
 }
