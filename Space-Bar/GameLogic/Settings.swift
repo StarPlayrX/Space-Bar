@@ -9,8 +9,9 @@
 import Foundation
 
 struct Settings: Codable {
-    var level: Int      =  1
-    var highlevel: Int  =  1
+    var puck: Int       =  0
+    var level: Int      =  0
+    var highlevel: Int  =  0
     var score: Int      =  0
     var highscore: Int  =  0
     var lives: Int      =  3
@@ -22,11 +23,11 @@ var settings = Settings()
 
 struct AppSettings {    
     func saveUserDefaults() {
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(settings), forKey:"settings")
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(settings), forKey:"settings2")
     }
 
     func loadUserDefaults() {
-        if let data = UserDefaults.standard.value(forKey:"settings") as? Data,
+        if let data = UserDefaults.standard.value(forKey:"settings2") as? Data,
            let disk = try? PropertyListDecoder().decode(Settings.self, from: data) {
             settings = disk
         }

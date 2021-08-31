@@ -10,29 +10,15 @@ import SpriteKit
 //import AudioToolbox
 //import AVFoundation
 
-var puckArray: Array = ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
-var rotation = [0,45,90.0,135.0,180.0,225.0,270.0,315.0]
-var levelArray = ["😀","😍","😝","🤩","😃","🥰","😜","🥳","😄","😘","🤪","😏","😁","😗","🤨","😒","😆","😙","🧐","😞","😅","😚","🤓","😔","😂","😋","😎","😟","🤣","😛","🥸","😕"]
-var puckTextArray: Array = ["blue","fuchsia","warm red","orange","magenta","bright green","green","purple rain"]
-
-var insArray: Array = ["🔇","🔊"]
-var insTextArray: Array = ["no sound fx","sound fx"]
-
-var speakerBool = true
-
-var puck = 0
-var level = 0
-
-var ins = 0
-var frt = 1
-var food = 1
-
-var insSet = 1
-var frtSet = 1
-var foodSet = 1
+ let puckArray: Array = ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
+ let rotation = [0,45,90.0,135.0,180.0,225.0,270.0,315.0]
+ let levelArray = ["😀","😍","😝","🤩","😃","🥰","😜","🥳","😄","😘","🤪","😏","😁","😗","🤨","😒","😆","😙","🧐","😞","😅","😚","🤓","😔","😂","😋","😎","😟","🤣","😛","🥸","😕"]
+ let puckTextArray: Array = ["blue","fuchsia","warm red","orange","magenta","bright green","green","purple rain"]
+ let insArray: Array = ["🔇","🔊"]
+ let insTextArray: Array = ["no sound fx","sound fx"]
 
 class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
-    
+        
     deinit {
         removeAllActions()
         removeAllChildren()
@@ -44,9 +30,6 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
     
     var maxins = insArray.count - 1
     var minins = 0
-    
-    var maxlevel = settings.highlevel - 1
-    var minlevel = 0
     
     var emojifontsize = CGFloat(150)
     var puckLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
@@ -71,17 +54,17 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             if let name = touchedNode.name {
                 
                 func puckLeft() {
-                    puck = puck > minpuck ? puck - 1 : maxpuck
+                    settings.puck = settings.puck > minpuck ? settings.puck - 1 : maxpuck
                 }
                 
                 func puckRight() {
-                    puck = puck < maxpuck ? puck + 1 : minpuck
+                    settings.puck = settings.puck < maxpuck ? settings.puck + 1 : minpuck
                 }
                 
                 func puckCommon() {
-                    if puckArray.indices.contains(puck) {
-                        puckLabel.text = puckArray[puck]
-                        puckTextLabel.text = puckTextArray[puck]
+                    if puckArray.indices.contains(settings.puck) {
+                        puckLabel.text = puckArray[settings.puck]
+                        puckTextLabel.text = puckTextArray[settings.puck]
                     }
                 }
                 
@@ -95,38 +78,33 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
                 }
                 
                 func speaker() {
-                    speakerBool.toggle()
-                    ins = speakerBool ? 1 : 0
+                    settings.sound.toggle()
+                    let sfx = settings.sound ? 1 : 0
                     
-                    if insArray.indices.contains(ins) {
-                        insLabel.text = insArray[ins]
-                        insTextLabel.text = insTextArray[ins]
+                    if insArray.indices.contains(sfx) {
+                        insLabel.text = insArray[sfx]
+                        insTextLabel.text = insTextArray[sfx]
                     }
-                    
-                    settings.sound = speakerBool
-                    
                 }
                 
-                (name == "ins-left" || name == "ins-right") ? speaker() : ()
+                name == "ins-left" || name == "ins-right" ? speaker() : ()
                 
                 func levelLeft() {
-                    level = level > minlevel ? level - 1 : maxlevel
+                    settings.level = settings.level > 0 ? settings.level - 1 : settings.highlevel
                 }
                 
                 func levelRight() {
-                    level = level < maxlevel ? level + 1 : minlevel
+                    settings.level = settings.level < settings.highlevel ? settings.level + 1 : 0
                 }
                 
                 func levelCommon() {
-                    if levelArray.indices.contains(level) {
-                        frtLabel.text = levelArray[level]
-                        frtLabel.zRotation = CGFloat(Int(rotation[level % rotation.count]).degrees)
-                        frtTextLabel.text = "level \(level + 1)"
-                        settings.level = Int((level + 1) % levelArray.count)
-                        settings.level = settings.level == 0 ? levelArray.count : settings.level
+                    if levelArray.indices.contains(settings.level) {
+                        print(settings.level)
+                        frtLabel.text = levelArray[settings.level]
+                        frtTextLabel.text = "level \(settings.level + 1)"
+                        frtLabel.zRotation = CGFloat(Int(rotation[settings.level % rotation.count]).degrees)
                     }
                 }
-                
                 
                 //Fruit / frt
                 if name == "frt-left" {
@@ -139,23 +117,13 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
                     levelCommon()
                 }
                 
-                /*if name == "speaker" {
-                 
-                 let speakText = "Kids, Ask your parents to match the words with e-moe-gees. After completing the puzzle, press Enter."
-                 
-                 let utterance = AVSpeechUtterance(string:speakText)
-                 utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-                 let voice = AVSpeechSynthesizer()
-                 voice.speak(utterance)
-                 }*/
-                
                 if name == "enter" {
                     
                     let runcode = SKAction.run { [weak self] in
                         
                         if let scene = GameScene( fileNamed:"GameScene"),
                            let view = self?.view {
-                                                        
+                            
                             // Configure the view.
                             let skView = view as SKView
                             skView.showsFPS = false
@@ -191,18 +159,13 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
     }
     
     override func didMove(to view: SKView) {
-        settings.level = 1
-        settings.lives = 3
-        settings.level = settings.highlevel > settings.level ? settings.highlevel : settings.level
-        level = settings.level - 1
-        frtLabel.text = levelArray[level]
-        frtLabel.zRotation = CGFloat(Int(rotation[level % rotation.count]).degrees)
-        frtTextLabel.text = "level \(level + 1)"
+        settings.level = 0
+        print(settings)
         
         if let pos = scene?.childNode(withName: "spacebar")?.position {
             let sprite = SKSpriteNode(imageNamed: "spacebarlogo")
             sprite.position = pos
-            sprite.setScale(2.5)
+            sprite.setScale(3)
             sprite.name = "enter"
             scene?.addChild(sprite)
             
@@ -213,22 +176,12 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             label.horizontalAlignmentMode = .center
             label.verticalAlignmentMode = .center
             label.position = pos
-            label.position.y -= 86
-            label.text = "(c) 2021 NICEMAC"
+            label.position.y -= 90
+            label.alpha = 0.5
+            label.text = "© 2021 TODD BRUSS"
             scene?.addChild(label)
-            
-            let label2 = SKLabelNode(fontNamed: "emulogic")
-            label2.fontColor = UIColor.white
-            label2.name = "toddboss"
-            label2.fontSize = 24
-            label2.horizontalAlignmentMode = .center
-            label2.verticalAlignmentMode = .center
-            label2.position = pos
-            label2.position.y += 86
-            label2.text = "GOODTIME PRESENTS"
-            scene?.addChild(label2)
         }
- 
+        
         let highScoreText: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
         let highScoreLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
         if let hiScorePos = scene?.childNode(withName: "highscore")?.position {
@@ -241,7 +194,7 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             highScoreLabel.fontSize = 36
             highScoreLabel.fontColor = UIColor.white
             scene?.addChild(highScoreLabel)
-
+            
             highScoreText.position = hiScorePos
             highScoreText.position.y -= 36
             highScoreText.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
@@ -253,8 +206,6 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             scene?.addChild(highScoreText)
         }
         
-      
-
         //animals Button
         //Left
         defineSprite (
@@ -332,7 +283,7 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             alphaThreshold: 0,
             fontsize: Float(emojifontsize)
         ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
-    
+        
         defineSprite (
             texture: "switchleft",
             scene: self,
@@ -396,16 +347,16 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             let vshift = CGFloat(20)
             //let lalpha = CGFloat(0.75)
             
-            if name == "puck-left" {
+            if name == "puck-left", let pos = scene.childNode(withName: "pucks")?.position  {
                 
-                sprite.position =  (scene.childNode(withName: "pucks")?.position)!
+                sprite.position = pos
                 sprite.position.x = sprite.position.x - spc
                 
                 puckLabel.fontSize = CGFloat(fontsize)
                 puckLabel.name = "puckLabel"
                 puckLabel.horizontalAlignmentMode = .center
                 puckLabel.verticalAlignmentMode = .center
-                puckLabel.position = (scene.childNode(withName: "pucks")?.position)!
+                puckLabel.position = pos
                 puckLabel.position.y = sprite.position.y + vspc - vshift
                 scene.addChild(puckLabel)
                 
@@ -414,28 +365,28 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
                 puckTextLabel.name = "puckTextLabel"
                 puckTextLabel.horizontalAlignmentMode = .center
                 puckTextLabel.verticalAlignmentMode = .center
-                puckTextLabel.position = (scene.childNode(withName: "pucks")?.position)!
+                puckTextLabel.position = pos
                 puckTextLabel.position.y = sprite.position.y - vspc - vshift
                 
                 scene.addChild(puckTextLabel)
             }
             
-            if name == "puck-right" {
+            if name == "puck-right", let pos = scene.childNode(withName: "pucks")?.position  {
                 
-                sprite.position =  (scene.childNode(withName: "pucks")?.position)!
+                sprite.position = pos
                 sprite.position.x = sprite.position.x + spc
             }
             
-            if name == "ins-left" {
+            if name == "ins-left", let pos = scene.childNode(withName: "ins")?.position  {
                 
-                sprite.position =  (scene.childNode(withName: "ins")?.position)!
+                sprite.position = pos
                 sprite.position.x = sprite.position.x - spc
                 
                 insLabel.fontSize = CGFloat(fontsize)
                 insLabel.name = "insLabel"
                 insLabel.horizontalAlignmentMode = .center
                 insLabel.verticalAlignmentMode = .center
-                insLabel.position = (scene.childNode(withName: "ins")?.position)!
+                insLabel.position = pos
                 insLabel.position.y = sprite.position.y + vspc - vshift
                 scene.addChild(insLabel)
                 
@@ -444,29 +395,28 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
                 insTextLabel.name = "insTextLabel"
                 insTextLabel.horizontalAlignmentMode = .center
                 insTextLabel.verticalAlignmentMode = .center
-                insTextLabel.position = (scene.childNode(withName: "ins")?.position)!
+                insTextLabel.position = pos
                 insTextLabel.position.y = sprite.position.y - vspc - vshift
                 
                 scene.addChild(insTextLabel)
             }
             
-            if name == "ins-right" {
-                
-                sprite.position =  (scene.childNode(withName: "ins")?.position)!
+            if name == "ins-right", let pos = scene.childNode(withName: "ins")?.position {
+                sprite.position = pos
                 sprite.position.x = sprite.position.x + spc
             }
             
             
-            if name == "frt-left" {
+            if name == "frt-left", let pos = scene.childNode(withName: "fruit")?.position {
                 
-                sprite.position =  (scene.childNode(withName: "fruit")?.position)!
+                sprite.position = pos
                 sprite.position.x = sprite.position.x - spc
                 
                 frtLabel.fontSize = CGFloat(fontsize)
                 frtLabel.name = "frtLabel"
                 frtLabel.horizontalAlignmentMode = .center
                 frtLabel.verticalAlignmentMode = .center
-                frtLabel.position = (scene.childNode(withName: "fruit")?.position)!
+                frtLabel.position = pos
                 frtLabel.position.y = sprite.position.y + vspc - vshift
                 scene.addChild(frtLabel)
                 
@@ -475,14 +425,14 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
                 frtTextLabel.name = "frtTextLabel"
                 frtTextLabel.horizontalAlignmentMode = .center
                 frtTextLabel.verticalAlignmentMode = .center
-                frtTextLabel.position = (scene.childNode(withName: "fruit")?.position)!
+                frtTextLabel.position = pos
                 frtTextLabel.position.y = sprite.position.y - vspc - vshift
                 
                 scene.addChild(frtTextLabel)
             }
             
-            if name == "frt-right" {
-                sprite.position = (scene.childNode(withName: "fruit")?.position)!
+            if name == "frt-right", let pos = scene.childNode(withName: "fruit")?.position {
+                sprite.position = pos
                 sprite.position.x = sprite.position.x + spc
             }
             
@@ -491,14 +441,18 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             
             scene.addChild(sprite)
             
-            puckLabel.text = puckArray[puck]
-            puckTextLabel.text = puckTextArray[puck]
- 
-            insLabel.text = insArray[1]
-            insTextLabel.text = insTextArray[1]
+            puckLabel.text = puckArray[settings.puck]
+            puckTextLabel.text = puckTextArray[settings.puck]
             
-            //frtLabel.text = levelArray[0]
-            //frtTextLabel.text = "level 1"
+            let soundfx = settings.sound ? 1 : 0
+            insLabel.text = insArray[soundfx]
+            insTextLabel.text = insTextArray[soundfx]
+            
+            settings.level = settings.highlevel
+            frtLabel.text = levelArray[settings.level]
+            frtTextLabel.text = "level \(settings.level + 1)"
+            frtLabel.zRotation = CGFloat(Int(rotation[settings.level % rotation.count]).degrees)
+
         }
     }
 }

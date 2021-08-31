@@ -84,7 +84,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     var levelart = [ Int : [String] ]()
     
     func drawLevel() {
-        let lvlStr = String(gameLevel)
+        let lvlStr = String(gameLevel + 1)
         
         let filename = "level\(lvlStr)\(iPadString).sks"
         
@@ -112,8 +112,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         
         var x: CGFloat = 0
        
-        if xPos.indices.contains(gameLevel - 1) {
-            x = xPos[gameLevel - 1] * 12.5
+        if xPos.indices.contains(gameLevel) {
+            x = xPos[gameLevel] * 12.5
         }
 
         space?.position = iPadString.isEmpty ?
@@ -157,7 +157,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         ballEmoji.alpha = 1.0
         ballEmoji.position = CGPoint(x: 0, y: 0)
         ballEmoji.zPosition = 50
-        ballEmoji.text = puckArray[puck]
+        ballEmoji.text = puckArray[settings.puck]
         ballEmoji.fontSize = 54 //* 2
         
         let rnd = arc4random_uniform(UInt32(360))
@@ -218,9 +218,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         spriteLabelNode.alpha = 1.0
         spriteLabelNode.position = CGPoint(x: 0, y: 0)
         spriteLabelNode.fontSize = 50
-        spriteLabelNode.zRotation = CGFloat(Int(rotation[(gameLevel - 1) % rotation.count]).degrees)
+        spriteLabelNode.zRotation = CGFloat(Int(rotation[gameLevel % rotation.count]).degrees)
         
-        let artwork = levelart[(gameLevel - 1) % levelart.count]
+        let artwork = levelart[gameLevel % levelart.count]
         
         if let art = artwork {
             let coinToss = Int(arc4random_uniform(UInt32(art.count)) )
@@ -318,7 +318,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         levelLabel.alpha = 1.0
         levelLabel.position = CGPoint(x: (-centerWidth + labeledges), y: centerHeight - labelspace)
         levelLabel.zPosition = 50
-        levelLabel.text = String(gameLevel)
+        levelLabel.text = String(gameLevel + 1)
         levelLabel.fontSize = 36
         levelLabel.fontColor = UIColor.init(red: 16 / 255, green: 125 / 255, blue: 1.0, alpha: 1.0)
         levelLabel.alpha = 1.0
@@ -582,7 +582,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         gameLevel = gameLevel == 0 ? levelArray.count : gameLevel
         gameScore += 10 //Bonus Points
         
-        gameLives = gameLives < 7 && gameLevel % 2 == 0 ? gameLives + 1 : gameLives
+        gameLives = gameLives < 5 ? gameLives + 1 : gameLives
         livesLabel.text = String(gameLives)
         levelLabel.text = String(gameLevel)
         scoreLabel.text = String(gameScore)
