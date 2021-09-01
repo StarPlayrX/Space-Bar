@@ -16,6 +16,8 @@ enum ScreenType : String {
     case iPhoneXMax = "iPhoneXMax"
     case iPhoneProMax = "iPhoneXSMax"
     case iPad = "iPad"
+    case iAny = "iAny"
+
 }
 
 struct ScreenSize {

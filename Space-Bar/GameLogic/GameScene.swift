@@ -20,7 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     
     func setHighScore() {
         settings.highscore = gameScore > settings.highscore ? gameScore : settings.highscore
-        settings.highlevel = gameLevel > settings.highlevel ? gameLevel : settings.highlevel
+        settings.highlevel = settings.currentlevel > settings.highlevel ? settings.currentlevel : settings.highlevel
     }
     
     // Our Game's Actors
@@ -56,7 +56,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     var centerHeight = CGFloat()
     
     //Initial Variables
-    var gameLevel = Int(settings.level)
     var gameScore = Int(0)
     var gameLives = Int(settings.lives)
     let scoreLabel = SKLabelNode(fontNamed:"emulogic")
@@ -80,13 +79,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     var paddleHeight = CGFloat(4)
     
     //ipad Level
-    var iPadString = ""
+    var screenType: ScreenType = .iAny
     var levelart = [ Int : [String] ]()
     
     func drawLevel() {
-        let lvlStr = String(gameLevel + 1)
+        let lvlStr = String(settings.currentlevel + 1)
         
-        let filename = "level\(lvlStr)\(iPadString).sks"
+        let filename = "level\(lvlStr).sks"
         
         space = SKReferenceNode(fileNamed: filename)
         space?.name = "Space"
@@ -112,24 +111,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         
         var x: CGFloat = 0
        
-        if xPos.indices.contains(gameLevel) {
-            x = xPos[gameLevel] * 12.5
+        if xPos.indices.contains(settings.currentlevel) {
+            x = xPos[settings.currentlevel] * 12.5
         }
 
-        space?.position = iPadString.isEmpty ?
-            CGPoint(x: x, y: centerHeight - 240) :
-            CGPoint(x: x, y: centerHeight - 340)
+        space?.position = screenType == .iPad ? CGPoint(x: x, y: centerHeight - 340 / 1.80) : CGPoint(x: x, y: centerHeight - 340)
     }
     
     func drawParallax() {
         let backParalax = SKNode()
         backParalax.position = CGPoint(x: CGFloat(centerWidth), y: CGFloat(centerHeight))
         let starryNightTexture = SKTexture(imageNamed: "starfield1")
-        let moveGroundSprite = SKAction.moveBy(x: 0, y: -starryNightTexture.size().height, duration: TimeInterval(0.012 * starryNightTexture.size().height))
-        let resetGroundSprite = SKAction.moveBy(x: 0, y: starryNightTexture.size().height, duration: 0.0)
+        let height = starryNightTexture.size().height
+        let moveGroundSprite = SKAction.moveBy(x: 0, y: -height, duration: TimeInterval(0.012 * height))
+        let resetGroundSprite = SKAction.moveBy(x: 0, y: height, duration: 0.0)
         let moveGroundSpritesForever = SKAction.repeatForever(SKAction.sequence([moveGroundSprite,resetGroundSprite]))
         
-        for i in -2..<Int(frame.size.height / ( starryNightTexture.size().height)) + 2 {
+        for i in -2..<Int(frame.size.height / height) + 2 {
             let sprite = SKSpriteNode(texture: starryNightTexture)
             sprite.position = CGPoint(x: -centerWidth, y: CGFloat(i) * (sprite.size.height - 0))
             sprite.run(moveGroundSpritesForever)
@@ -218,9 +216,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         spriteLabelNode.alpha = 1.0
         spriteLabelNode.position = CGPoint(x: 0, y: 0)
         spriteLabelNode.fontSize = 50
-        spriteLabelNode.zRotation = CGFloat(Int(rotation[gameLevel % rotation.count]).degrees)
+        spriteLabelNode.zRotation = CGFloat(Int(rotation[settings.currentlevel % rotation.count]).degrees)
         
-        let artwork = levelart[gameLevel % levelart.count]
+        let artwork = levelart[settings.currentlevel % levelart.count]
         
         if let art = artwork {
             let coinToss = Int(arc4random_uniform(UInt32(art.count)) )
@@ -270,7 +268,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     
     override func didMove(to view: SKView) {
         
-        let screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
+        screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
         
         levelart[0] =  ["😀","😃","😄","😁","😆","😅","😂","🤣"]
         levelart[1] =  ["😍","🥰","😘","😗","😙","😚","😋","😛"]
@@ -292,13 +290,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         anchorNode.position = anchor
         addChild(anchorNode)
         
-        if screenType == .iPhone {
+        /*if screenType == .iPhone {
             // Dunno yet
         } else if screenType == .iPhoneProMax {
             //
         } else if screenType == .iPad {
-            //iPadString = "-ipad"
-        }
+            print("iPad")
+        }*/
         
         scene?.speed = 1.0
         
@@ -318,7 +316,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         levelLabel.alpha = 1.0
         levelLabel.position = CGPoint(x: (-centerWidth + labeledges), y: centerHeight - labelspace)
         levelLabel.zPosition = 50
-        levelLabel.text = String(gameLevel + 1)
+        levelLabel.text = String(settings.currentlevel + 1)
         levelLabel.fontSize = 36
         levelLabel.fontColor = UIColor.init(red: 16 / 255, green: 125 / 255, blue: 1.0, alpha: 1.0)
         levelLabel.alpha = 1.0
@@ -576,20 +574,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         space?.removeFromParent()
         space?.removeAllActions()
         space = nil
-        gameLevel += 1
-        gameLevel %= levelArray.count
-        
-        gameLevel = gameLevel == 0 ? levelArray.count : gameLevel
-        gameScore += 10 //Bonus Points
+        settings.currentlevel += 1
+        settings.currentlevel %= levelArray.count
+        gameScore += 10
         
         gameLives = gameLives < 5 ? gameLives + 1 : gameLives
         livesLabel.text = String(gameLives)
-        levelLabel.text = String(gameLevel)
+        levelLabel.text = String(settings.currentlevel + 1)
         scoreLabel.text = String(gameScore)
         setHighScore()
         appSettings.saveUserDefaults()
         drawLevel()
         addPuck()
+        
     }
     
     //MARK: didBeginContact
@@ -683,7 +680,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
             
             if settings.sound { run(wallSound) }
             
-            let margin = 12
+            let margin = 18
             let ratio = 2
             let decay = Double(0.10)
             let a = CGFloat(arc4random_uniform(UInt32(margin)))

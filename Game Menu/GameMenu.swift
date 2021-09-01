@@ -90,19 +90,18 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
                 name == "ins-left" || name == "ins-right" ? speaker() : ()
                 
                 func levelLeft() {
-                    settings.level = settings.level > 0 ? settings.level - 1 : settings.highlevel
+                    settings.currentlevel = settings.currentlevel > 0 ? settings.currentlevel - 1 : settings.highlevel
                 }
                 
                 func levelRight() {
-                    settings.level = settings.level < settings.highlevel ? settings.level + 1 : 0
+                    settings.currentlevel = settings.currentlevel < settings.highlevel ? settings.currentlevel + 1 : 0
                 }
                 
                 func levelCommon() {
-                    if levelArray.indices.contains(settings.level) {
-                        print(settings.level)
-                        frtLabel.text = levelArray[settings.level]
-                        frtTextLabel.text = "level \(settings.level + 1)"
-                        frtLabel.zRotation = CGFloat(Int(rotation[settings.level % rotation.count]).degrees)
+                    if levelArray.indices.contains(settings.currentlevel) {
+                        frtLabel.text = levelArray[settings.currentlevel]
+                        frtTextLabel.text = "level \(settings.currentlevel + 1)"
+                        frtLabel.zRotation = CGFloat(Int(rotation[settings.currentlevel % rotation.count]).degrees)
                     }
                 }
                 
@@ -160,7 +159,6 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
     
     override func didMove(to view: SKView) {
         settings.level = 0
-        print(settings)
         
         if let pos = scene?.childNode(withName: "spacebar")?.position {
             let sprite = SKSpriteNode(imageNamed: "spacebarlogo")
@@ -448,10 +446,12 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             insLabel.text = insArray[soundfx]
             insTextLabel.text = insTextArray[soundfx]
             
-            settings.level = settings.highlevel
-            frtLabel.text = levelArray[settings.level]
-            frtTextLabel.text = "level \(settings.level + 1)"
-            frtLabel.zRotation = CGFloat(Int(rotation[settings.level % rotation.count]).degrees)
+            settings.highlevel = settings.highlevel > levelArray.count - 1 ? levelArray.count - 1 : settings.highlevel
+            settings.currentlevel = settings.currentlevel > levelArray.count - 1 ? levelArray.count - 1 : settings.currentlevel
+
+            frtLabel.text = levelArray[settings.currentlevel]
+            frtTextLabel.text = "level \(settings.currentlevel + 1)"
+            frtLabel.zRotation = CGFloat(Int(rotation[settings.currentlevel % rotation.count]).degrees)
 
         }
     }
