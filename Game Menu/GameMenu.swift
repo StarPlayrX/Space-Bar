@@ -163,7 +163,7 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
         if let pos = scene?.childNode(withName: "spacebar")?.position {
             let sprite = SKSpriteNode(imageNamed: "spacebarlogo")
             sprite.position = pos
-            sprite.setScale(3)
+            sprite.setScale(1.25)
             sprite.name = "enter"
             scene?.addChild(sprite)
             

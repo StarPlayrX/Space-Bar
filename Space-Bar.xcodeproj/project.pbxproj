@@ -144,6 +144,7 @@
 		5F77D8E022E3FDF900E8C4F3 /* Base.lproj */ = {
 			isa = PBXGroup;
 			children = (
+				5F77D8E222E3FDF900E8C4F3 /* LaunchScreen.storyboard */,
 				5F77D8E322E3FDF900E8C4F3 /* Main.storyboard */,
 			);
 			path = Base.lproj;
@@ -156,7 +157,6 @@
 				6F27256C26DC41240009B5B5 /* Settings.swift */,
 				6F55698526D1F9300060D0E7 /* ScreenSize.swift */,
 				5F77D8F322E3FEBC00E8C4F3 /* GameScene.sks */,
-				5F77D8E222E3FDF900E8C4F3 /* LaunchScreen.storyboard */,
 			);
 			path = GameLogic;
 			sourceTree = "<group>";
