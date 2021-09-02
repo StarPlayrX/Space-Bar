@@ -33,13 +33,13 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
     
     var emojifontsize = CGFloat(150)
     var puckLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
-    var puckTextLabel: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
+    var puckTextLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
     
     var insLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
-    var insTextLabel: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
+    var insTextLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
     
     var frtLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
-    var frtTextLabel: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
+    var frtTextLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
     
     var textLabel: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
     var textLabel2: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
@@ -167,16 +167,16 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             sprite.name = "enter"
             scene?.addChild(sprite)
             
-            let label = SKLabelNode(fontNamed: "emulogic")
+            let label = SKLabelNode(fontNamed: "HelveticaNeue")
             label.fontColor = UIColor.white
             label.name = "copyright"
-            label.fontSize = 24
+            label.fontSize = 30
             label.horizontalAlignmentMode = .center
             label.verticalAlignmentMode = .center
             label.position = pos
             label.position.y -= 90
             label.alpha = 0.5
-            label.text = "© 2021 TODD BRUSS"
+            label.text = "© 2020-2021 Todd Bruss"
             scene?.addChild(label)
         }
         
@@ -189,7 +189,7 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             highScoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
             highScoreLabel.alpha = 1.0
             highScoreLabel.text = String("HI SCORE")
-            highScoreLabel.fontSize = 36
+            highScoreLabel.fontSize = 30
             highScoreLabel.fontColor = UIColor.white
             scene?.addChild(highScoreLabel)
             
@@ -199,7 +199,7 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             highScoreText.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
             highScoreText.alpha = 1.0
             highScoreText.text = String("\(settings.highscore)")
-            highScoreText.fontSize = 36
+            highScoreText.fontSize = 30
             highScoreText.fontColor = UIColor.white
             scene?.addChild(highScoreText)
         }
@@ -222,7 +222,7 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             speed: 0,
             alphaThreshold: 0,
             fontsize: Float(emojifontsize)
-        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel, insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
         
         //animals Button
         //Right
@@ -358,7 +358,7 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
                 puckLabel.position.y = sprite.position.y + vspc - vshift
                 scene.addChild(puckLabel)
                 
-                puckTextLabel.fontSize = CGFloat(37)
+                puckTextLabel.fontSize = CGFloat(30)
                 puckTextLabel.fontColor = UIColor.white
                 puckTextLabel.name = "puckTextLabel"
                 puckTextLabel.horizontalAlignmentMode = .center
@@ -388,7 +388,7 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
                 insLabel.position.y = sprite.position.y + vspc - vshift
                 scene.addChild(insLabel)
                 
-                insTextLabel.fontSize = CGFloat(37)
+                insTextLabel.fontSize = CGFloat(30)
                 insTextLabel.fontColor = UIColor.white
                 insTextLabel.name = "insTextLabel"
                 insTextLabel.horizontalAlignmentMode = .center
@@ -418,7 +418,7 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
                 frtLabel.position.y = sprite.position.y + vspc - vshift
                 scene.addChild(frtLabel)
                 
-                frtTextLabel.fontSize = CGFloat(37)
+                frtTextLabel.fontSize = CGFloat(30)
                 frtTextLabel.fontColor = UIColor.white
                 frtTextLabel.name = "frtTextLabel"
                 frtTextLabel.horizontalAlignmentMode = .center
