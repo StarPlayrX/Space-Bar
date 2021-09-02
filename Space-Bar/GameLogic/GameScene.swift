@@ -16,6 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         removeAllActions()
         removeAllChildren()
         removeFromParent()
+        print("Game Scene deinit")
     }
     
     func setHighScore() {
@@ -267,7 +268,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     
     
     override func didMove(to view: SKView) {
-        
+        scene?.alpha = 0
         screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
         
         levelart[0] =  ["😀","😃","😄","😁","😆","😅","😂","🤣"]
@@ -533,14 +534,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         
         drawParallax()
         drawLevel()
-        addPuck()
         
+
+        let fadein = SKAction.fadeAlpha(to: 1.0, duration: 1.0)
+        let wait = SKAction.wait(forDuration: 0.5)
+        let wait2 = SKAction.wait(forDuration: 0.5)
+
+        let runcode = SKAction.run { [weak self] in
+            self?.addPuck()
+        }
+
+        
+        scene?.run(SKAction.sequence([fadein,wait,runcode,wait2]))
+
         /*
          if let soundURL: URL = Bundle.main.url(forResource: "david", withExtension: "mp3") {
          audioPlayer = try! AVAudioPlayer(contentsOf: soundURL)
          audioPlayer.play()
          }
          */
+        
+      
     }
     
     
@@ -712,31 +726,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
                     addPuck()
                 } else {
                     let runcode = SKAction.run { [weak self] in
-                        
-                        if let scene = GameScene( fileNamed:"GameMenu" ),
-                           let view = self?.view {
-                            
-                            // Configure the view.
-                            let skView = view as SKView
-                            skView.showsFPS = false
-                            skView.showsNodeCount = false
-                            skView.showsPhysics = false
-                            skView.showsFields = false
-                            skView.clearsContextBeforeDrawing = true
-                            skView.isAsynchronous = true
-                            
-                            /* Sprite Kit applies additional optimizations to improve rendering performance */
-                            skView.ignoresSiblingOrder = true
-                            skView.clipsToBounds = true
-                            /* Set the scale mode to scale to fit the window */
-                            scene.scaleMode = .aspectFit
-                            scene.backgroundColor = SKColor.black
-                            skView.presentScene(scene, transition: SKTransition.fade(withDuration: 2))
-                        }
+                        self?.space?.removeAllChildren()
+                        self?.space?.removeFromParent()
+                        self?.anchorNode.removeAllChildren()
+                        self?.anchorNode.removeFromParent()
+                        NotificationCenter.default.post(name: Notification.Name("loadGameView"), object: nil)
                     }
                     
-                    let fade1 = SKAction.fadeAlpha(to: 0.0, duration:TimeInterval(0.15))
-                    let myDecay = SKAction.wait(forDuration: 0.15)
+                    let fade1 = SKAction.fadeAlpha(to: 0.0, duration:TimeInterval(0.75))
+                    let myDecay = SKAction.wait(forDuration: 0.75)
                     run(SKAction.sequence([fade1,myDecay,runcode]))
                 }
             }

@@ -17,12 +17,14 @@ import SpriteKit
  let insArray: Array = ["🔇","🔊"]
  let insTextArray: Array = ["no sound fx","sound fx"]
 
-class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
+class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
         
     deinit {
         removeAllActions()
         removeAllChildren()
         removeFromParent()
+        print("Game Menu deinit")
+
     }
     
     var maxpuck = puckArray.count - 1
@@ -159,6 +161,7 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
     
     override func didMove(to view: SKView) {
         settings.level = 0
+        scene?.alpha = 0.0
         
         if let pos = scene?.childNode(withName: "spacebar")?.position {
             let sprite = SKSpriteNode(imageNamed: "spacebarlogo")
@@ -452,7 +455,9 @@ class ParentalScene: SKScene { //AVSpeechSynthesizerDelegate
             frtLabel.text = levelArray[settings.currentlevel]
             frtTextLabel.text = "level \(settings.currentlevel + 1)"
             frtLabel.zRotation = CGFloat(Int(rotation[settings.currentlevel % rotation.count]).degrees)
-
+            
+            let fadein = SKAction.fadeAlpha(to: 1.0, duration: 0.5)
+            scene.run(fadein)
         }
     }
 }

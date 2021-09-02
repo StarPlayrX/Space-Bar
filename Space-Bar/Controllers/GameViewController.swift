@@ -15,35 +15,37 @@ var initialScreenSize = CGSize()
 
 class GameViewController: UIViewController {
     
-    deinit {
-        removeFromParent()
-        view = nil
+    let ncDef = NotificationCenter.default
+
+    @objc func loadGameView() {
+        if let view = self.view as? SKView,
+           let scene = SKScene(fileNamed: "GameMenu") {
+            
+            initialScreenSize = CGSize(width: view.frame.width, height: view.frame.height)
+            scene.scaleMode = .aspectFit
+            
+            view.ignoresSiblingOrder = true
+            view.showsFields = false
+            view.showsPhysics = false
+            view.isAsynchronous = true
+            view.isOpaque = true
+            view.allowsTransparency = false
+            view.showsFPS = true
+            view.showsNodeCount = false
+            view.presentScene(scene)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let view = self.view as? SKView,
-           let scene = SKScene(fileNamed: "GameMenu") {
-            
-            initialScreenSize = CGSize(width: view.frame.width, height: view.frame.height)
-            // Load the SKScene from 'GameScene.sks'
+      
+        
+        ncDef.addObserver(self,selector: #selector(self.loadGameView), name: NSNotification.Name.init(rawValue: "loadGameView"),object: nil)
+        
+        ncDef.post(name: Notification.Name("loadGameView"), object: nil)
 
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFit
-
-                // Present the scene
-                view.ignoresSiblingOrder = true
-                view.showsFields = false
-                view.showsPhysics = false
-                view.isAsynchronous = true
-                //view.preferredFramesPerSecond = 60
-                view.isOpaque = true
-                view.allowsTransparency = false
-                view.showsFPS = true
-                view.showsNodeCount = false
-                view.presentScene(scene)
-        }
+        
     }
 
     override var shouldAutorotate: Bool {
