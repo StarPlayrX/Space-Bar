@@ -8,44 +8,35 @@
 
 import UIKit
 import SpriteKit
-import GameplayKit
 
-var view: SKView?
-var initialScreenSize = CGSize()
 
 class GameViewController: UIViewController {
     
     let ncDef = NotificationCenter.default
 
-    @objc func loadGameView() {
+    @objc func loadGameMenu() {
+
         if let view = self.view as? SKView,
            let scene = SKScene(fileNamed: "GameMenu") {
             
-            initialScreenSize = CGSize(width: view.frame.width, height: view.frame.height)
+            settings.initialScreenSize = CGSize(width: view.frame.width, height: view.frame.height)
             scene.scaleMode = .aspectFit
-            
             view.ignoresSiblingOrder = true
             view.showsFields = false
             view.showsPhysics = false
             view.isAsynchronous = true
             view.isOpaque = true
             view.allowsTransparency = false
-            view.showsFPS = true
+            view.showsFPS = false
             view.showsNodeCount = false
-            view.presentScene(scene)
+            view.presentScene(scene, transition: SKTransition.fade(withDuration: 2))
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-      
-        
-        ncDef.addObserver(self,selector: #selector(self.loadGameView), name: NSNotification.Name.init(rawValue: "loadGameView"),object: nil)
-        
-        ncDef.post(name: Notification.Name("loadGameView"), object: nil)
-
-        
+        ncDef.addObserver(self,selector: #selector(self.loadGameMenu), name: NSNotification.Name.init(rawValue: "loadGameMenu"),object: nil)
+        ncDef.post(name: Notification.Name("loadGameMenu"), object: nil)
     }
 
     override var shouldAutorotate: Bool {

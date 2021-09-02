@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Settings: Codable {
     var puck: Int          =  0
@@ -18,17 +19,19 @@ struct Settings: Codable {
     var lives: Int         =  3
     var music: Bool        =  false
     var sound: Bool        =  true
+    var initialScreenSize: CGSize?
 }
 
 var settings = Settings()
 
-struct AppSettings {    
+struct AppSettings {
+    let settingsKey = "settingsKey"
     func saveUserDefaults() {
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(settings), forKey:"settings")
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(settings), forKey: settingsKey)
     }
 
     func loadUserDefaults() {
-        if let data = UserDefaults.standard.value(forKey:"settings") as? Data,
+        if let data = UserDefaults.standard.value(forKey: settingsKey) as? Data,
            let disk = try? PropertyListDecoder().decode(Settings.self, from: data) {
             settings = disk
         }

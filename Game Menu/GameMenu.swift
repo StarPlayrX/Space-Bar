@@ -145,6 +145,7 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
                     let fade1 = SKAction.fadeAlpha(to: 0.7, duration:TimeInterval(0.15))
                     let myDecay = SKAction.wait(forDuration: 0.15)
                     let fade2 = SKAction.fadeAlpha(to: 1.0, duration:TimeInterval(0.15))
+
                     touchedNode.run(SKAction.sequence([fade1,myDecay,fade2,runcode]))
                     
                 }
@@ -161,7 +162,6 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
     
     override func didMove(to view: SKView) {
         settings.level = 0
-        scene?.alpha = 0.0
         
         if let pos = scene?.childNode(withName: "spacebar")?.position {
             let sprite = SKSpriteNode(imageNamed: "spacebarlogo")
@@ -455,9 +455,6 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             frtLabel.text = levelArray[settings.currentlevel]
             frtTextLabel.text = "level \(settings.currentlevel + 1)"
             frtLabel.zRotation = CGFloat(Int(rotation[settings.currentlevel % rotation.count]).degrees)
-            
-            let fadein = SKAction.fadeAlpha(to: 1.0, duration: 0.5)
-            scene.run(fadein)
         }
     }
 }
