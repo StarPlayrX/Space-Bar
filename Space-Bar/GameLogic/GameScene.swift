@@ -267,8 +267,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
     }
     
     
-    fileprivate func drawGamePieces() {
- 
+    override func didMove(to view: SKView) {
+        scene?.alpha = 0
+        screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
+        
+        levelart[0] =  ["😀","😃","😄","😁","😆","😅","😂","🤣"]
+        levelart[1] =  ["😍","🥰","😘","😗","😙","😚","😋","😛"]
+        levelart[2] =  ["😝","😜","🤪","🤨","🧐","🤓","😎","🥸"]
+        levelart[3] =  ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
+        
+        view.isMultipleTouchEnabled = false
+        
+        width = (scene?.size.width)!
+        height = (scene?.size.height)!
+        
+        centerWidth = width / 2
+        centerHeight = height / 2
+        
+        //stand in for our anchorPoint
+        //this is used because our scene's anchor is 0,0
+        //for the field node to work properly
+        anchor = CGPoint(x: centerWidth, y: centerHeight)
+        anchorNode.position = anchor
+        addChild(anchorNode)
+        
+        /*if screenType == .iPhone {
+            // Dunno yet
+        } else if screenType == .iPhoneProMax {
+            //
+        } else if screenType == .iPad {
+            print("iPad")
+        }*/
+        
+        scene?.speed = 1.0
+        
         livesLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         livesLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         livesLabel.alpha = 1.0
@@ -477,7 +509,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
             paddleNode = paddle
             scene?.addChild(paddle)
         }
-        
+    
         if let goalNode = Optional(SKSpriteNode()) {
             let goalTexture = SKTexture(imageNamed: "goal")
             let goalPhysicsBody = SKPhysicsBody(texture: goalTexture, alphaThreshold: 0.1, size: goalTexture.size())
@@ -499,47 +531,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
             goalNode.name = "goal"
             anchorNode.addChild(goalNode)
         }
-    }
-    
-    override func didMove(to view: SKView) {
-        scene?.speed = 1.0
         
-        guard let initialScreenSize = settings.initialScreenSize else { return }
-        screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
-        
-        levelart[0] =  ["😀","😃","😄","😁","😆","😅","😂","🤣"]
-        levelart[1] =  ["😍","🥰","😘","😗","😙","😚","😋","😛"]
-        levelart[2] =  ["😝","😜","🤪","🤨","🧐","🤓","😎","🥸"]
-        levelart[3] =  ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
-        
-        view.isMultipleTouchEnabled = false
-        
-        width = (scene?.size.width)!
-        height = (scene?.size.height)!
-        
-        centerWidth = width / 2
-        centerHeight = height / 2
-        
-        //stand in for our anchorPoint
-        //this is used because our scene's anchor is 0,0
-        //for the field node to work properly
-        anchor = CGPoint(x: centerWidth, y: centerHeight)
-        anchorNode.position = anchor
-        addChild(anchorNode)
-
         drawParallax()
-        drawGamePieces()
         drawLevel()
-        addPuck()
-       
+        
+
+        let fadein = SKAction.fadeAlpha(to: 1.0, duration: 1.0)
+        let wait = SKAction.wait(forDuration: 0.5)
+        let wait2 = SKAction.wait(forDuration: 0.5)
+
+        let runcode = SKAction.run { [weak self] in
+            self?.addPuck()
+        }
+
+        
+        scene?.run(SKAction.sequence([fadein,wait,runcode,wait2]))
+
         /*
          if let soundURL: URL = Bundle.main.url(forResource: "david", withExtension: "mp3") {
          audioPlayer = try! AVAudioPlayer(contentsOf: soundURL)
          audioPlayer.play()
          }
          */
+        
+      
     }
-
+    
+    
     func touchDown(atPoint pos : CGPoint) {
         let constraint = CGFloat(128)
         if (pos.x >= constraint && pos.x <= frame.width - constraint) {
@@ -707,8 +725,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
                 if gameLives > 0 {
                     addPuck()
                 } else {
-                    //Game Over
-                    NotificationCenter.default.post(name: Notification.Name("loadGameMenu"), object: nil)
+                    let runcode = SKAction.run { [weak self] in
+                        self?.space?.removeAllChildren()
+                        self?.space?.removeFromParent()
+                        self?.anchorNode.removeAllChildren()
+                        self?.anchorNode.removeFromParent()
+                        NotificationCenter.default.post(name: Notification.Name("loadGameView"), object: nil)
+                    }
+                    
+                    let fade1 = SKAction.fadeAlpha(to: 0.0, duration:TimeInterval(0.75))
+                    let myDecay = SKAction.wait(forDuration: 0.75)
+                    run(SKAction.sequence([fade1,myDecay,runcode]))
                 }
             }
             
@@ -717,7 +744,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
             if settings.sound { run(paddleSound) }
             gameScore += 1
             scoreLabel.text = String(gameScore)
-        
+            
+            
         case ballCategory | lowerLeftCornerCategory:
             
             if settings.sound { run(wallSound) }
