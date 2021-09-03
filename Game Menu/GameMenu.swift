@@ -17,14 +17,13 @@ import SpriteKit
  let insArray: Array = ["🔇","🔊"]
  let insTextArray: Array = ["no sound fx","sound fx"]
 
-class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
+class GameMenu: SKScene { //
         
     deinit {
         removeAllActions()
         removeAllChildren()
         removeFromParent()
         print("Game Menu deinit")
-
     }
     
     var maxpuck = puckArray.count - 1
@@ -45,6 +44,23 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
     
     var textLabel: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
     var textLabel2: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
+    
+    fileprivate func startGame() {
+        if let scene = GameScene( fileNamed:"GameScene"), let view = view {
+            view.showsFPS = false
+            view.showsNodeCount = false
+            view.showsPhysics = false
+            view.showsFields = false
+            view.preferredFramesPerSecond = 60
+            view.clearsContextBeforeDrawing = true
+            view.isAsynchronous = true
+            view.ignoresSiblingOrder = true
+            view.clipsToBounds = true
+            scene.scaleMode = .aspectFit
+            scene.backgroundColor = SKColor.black
+            view.presentScene(scene, transition: SKTransition.fade(withDuration: 3))
+        }
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -119,35 +135,17 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
                 }
                 
                 if name == "enter" {
-                    
-                    let runcode = SKAction.run { [weak self] in
-                        
-                        if let scene = GameScene( fileNamed:"GameScene"),
-                           let view = self?.view {
-                            
-                            // Configure the view.
-                            let skView = view as SKView
-                            skView.showsFPS = false
-                            skView.showsNodeCount = false
-                            skView.showsPhysics = false
-                            skView.showsFields = false
-                            skView.preferredFramesPerSecond = 60
-                            skView.clearsContextBeforeDrawing = true
-                            skView.isAsynchronous = true
-                            skView.ignoresSiblingOrder = true
-                            skView.clipsToBounds = true
-                            scene.scaleMode = .aspectFit
-                            scene.backgroundColor = SKColor.black
-                            skView.presentScene(scene, transition: SKTransition.fade(withDuration: 2))
-                        }
+                   
+                    let startAction = SKAction.run { [weak self] in
+                        self?.startGame()
                     }
-                    
                     let fade1 = SKAction.fadeAlpha(to: 0.7, duration:TimeInterval(0.15))
                     let myDecay = SKAction.wait(forDuration: 0.15)
+                    let myDecay2 = SKAction.wait(forDuration: 0.15 * 3)
                     let fade2 = SKAction.fadeAlpha(to: 1.0, duration:TimeInterval(0.15))
+                    touchedNode.run(SKAction.sequence([fade1,myDecay,fade2]))
+                    run(SKAction.sequence([myDecay2,startAction]))
 
-                    touchedNode.run(SKAction.sequence([fade1,myDecay,fade2,runcode]))
-                    
                 }
                 
                 /*
@@ -161,6 +159,7 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
     }
     
     override func didMove(to view: SKView) {
+        scene?.speed = 1.0
         settings.level = 0
         
         if let pos = scene?.childNode(withName: "spacebar")?.position {
@@ -225,7 +224,7 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             speed: 0,
             alphaThreshold: 0,
             fontsize: Float(emojifontsize)
-        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel, insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
+        ).drawHud(puckLabel: puckLabel, puckTextLabel: puckTextLabel, insLabel: insLabel, insTextLabel: insTextLabel, frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2)
         
         //animals Button
         //Right
@@ -245,7 +244,7 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             speed: 0,
             alphaThreshold: 0,
             fontsize: Float(emojifontsize)
-        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel, frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
         
         defineSprite (
             texture: "switchleft",
@@ -263,7 +262,7 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             speed: 0,
             alphaThreshold: 0,
             fontsize: Float(emojifontsize)
-        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel, frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
         
         //animals Button
         //Right
@@ -283,7 +282,7 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             speed: 0,
             alphaThreshold: 0,
             fontsize: Float(emojifontsize)
-        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel, frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
         
         defineSprite (
             texture: "switchleft",
@@ -301,7 +300,7 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             speed: 0,
             alphaThreshold: 0,
             fontsize: Float(emojifontsize)
-        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel, frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
         
         //animals Button
         //Right
@@ -321,7 +320,7 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             speed: 0,
             alphaThreshold: 0,
             fontsize: Float(emojifontsize)
-        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2)
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel, frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2)
     }
     
     struct defineSprite {
@@ -346,7 +345,6 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             let spc = CGFloat(220)
             let vspc = CGFloat(55)
             let vshift = CGFloat(20)
-            //let lalpha = CGFloat(0.75)
             
             if name == "puck-left", let pos = scene.childNode(withName: "pucks")?.position  {
                 
@@ -373,7 +371,6 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             }
             
             if name == "puck-right", let pos = scene.childNode(withName: "pucks")?.position  {
-                
                 sprite.position = pos
                 sprite.position.x = sprite.position.x + spc
             }
@@ -455,6 +452,7 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             frtLabel.text = levelArray[settings.currentlevel]
             frtTextLabel.text = "level \(settings.currentlevel + 1)"
             frtLabel.zRotation = CGFloat(Int(rotation[settings.currentlevel % rotation.count]).degrees)
+            
         }
     }
 }
