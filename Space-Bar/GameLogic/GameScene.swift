@@ -7,8 +7,10 @@
 //
 
 import SpriteKit
+import AVFoundation
 
-class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
+
+class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate { // AVAudioPlayerDelegate
     
     let appSettings = AppSettings()
     
@@ -322,7 +324,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
         levelLabel.fontColor = UIColor.init(red: 16 / 255, green: 125 / 255, blue: 1.0, alpha: 1.0)
         levelLabel.alpha = 1.0
         anchorNode.addChild(levelLabel)
-        
+
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         scoreLabel.alpha = 1.0
@@ -725,17 +727,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate
                 if gameLives > 0 {
                     addPuck()
                 } else {
-                    let runcode = SKAction.run { [weak self] in
-                        self?.space?.removeAllChildren()
-                        self?.space?.removeFromParent()
-                        self?.anchorNode.removeAllChildren()
-                        self?.anchorNode.removeFromParent()
+                    
+                    let decay1 = SKAction.wait(forDuration: 1.0)
+                    let decay2 = SKAction.wait(forDuration: 3.5)
+                    let gameOverCode = SKAction.run { [unowned self] in
+                        
+                        let gameOverLabel = SKLabelNode(fontNamed:"emulogic")
+                        let gameOverText = "GAME OVER"
+                        gameOverLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+                        gameOverLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+                        gameOverLabel.alpha = 1.0
+                        gameOverLabel.position = CGPoint(x: 0, y: 0)
+                        gameOverLabel.zPosition = 50
+                        gameOverLabel.text = gameOverText
+                        gameOverLabel.fontSize = 46
+                        gameOverLabel.alpha = 1.0
+                        anchorNode.addChild(gameOverLabel)
+                        
+                        if let speechText = scoreLabel.text {
+                            let utterance = AVSpeechUtterance(string: "Game Over. You scored \(speechText) points!")
+                            utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+                            utterance.rate = 0.5
+
+                            let synthesizer = AVSpeechSynthesizer()
+                            synthesizer.speak(utterance)
+                        }
+                    }
+                    
+                    let runcode = SKAction.run {
                         NotificationCenter.default.post(name: Notification.Name("loadGameView"), object: nil)
                     }
                     
-                    let fade1 = SKAction.fadeAlpha(to: 0.0, duration:TimeInterval(0.75))
-                    let myDecay = SKAction.wait(forDuration: 0.75)
-                    run(SKAction.sequence([fade1,myDecay,runcode]))
+                    run(SKAction.sequence([decay1,gameOverCode,decay2,runcode]))
                 }
             }
             

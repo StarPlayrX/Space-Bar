@@ -9,6 +9,7 @@
 import SpriteKit
 //import AudioToolbox
 //import AVFoundation
+//AVSpeechSynthesizerDelegate
 
  let puckArray: Array = ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
  let rotation = [0,45,90.0,135.0,180.0,225.0,270.0,315.0]
