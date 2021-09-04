@@ -161,6 +161,8 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
     }
     
     override func didMove(to view: SKView) {
+        
+       
         settings.level = 0
         scene?.alpha = 0.0
         

@@ -9,7 +9,6 @@
 import SpriteKit
 import AVFoundation
 
-
 class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate { // AVAudioPlayerDelegate
     
     let appSettings = AppSettings()
@@ -130,9 +129,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         let resetGroundSprite = SKAction.moveBy(x: 0, y: height, duration: 0.0)
         let moveGroundSpritesForever = SKAction.repeatForever(SKAction.sequence([moveGroundSprite,resetGroundSprite]))
         
-        for i in -2..<Int(frame.size.height / height) + 2 {
+        for i in 0...1 {
             let sprite = SKSpriteNode(texture: starryNightTexture)
-            sprite.position = CGPoint(x: -centerWidth, y: CGFloat(i) * (sprite.size.height - 0))
+            sprite.position = CGPoint(x: -centerWidth, y: CGFloat(i) * sprite.size.height)
             sprite.run(moveGroundSpritesForever)
             backParalax.addChild(sprite)
             backParalax.zPosition = -10
@@ -270,7 +269,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     
     
     override func didMove(to view: SKView) {
-        scene?.alpha = 0
+        
+        
+        
+        
+        
+        scene?.speed = 1.0
+        drawParallax()
+
         screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
         
         levelart[0] =  ["😀","😃","😄","😁","😆","😅","😂","🤣"]
@@ -293,15 +299,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         anchorNode.position = anchor
         addChild(anchorNode)
         
-        /*if screenType == .iPhone {
-            // Dunno yet
-        } else if screenType == .iPhoneProMax {
-            //
-        } else if screenType == .iPad {
-            print("iPad")
-        }*/
-        
-        scene?.speed = 1.0
         
         livesLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         livesLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -534,29 +531,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             anchorNode.addChild(goalNode)
         }
         
-        drawParallax()
         drawLevel()
+        let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
         
-
-        let fadein = SKAction.fadeAlpha(to: 1.0, duration: 1.0)
-        let wait = SKAction.wait(forDuration: 0.5)
-        let wait2 = SKAction.wait(forDuration: 0.5)
-
-        let runcode = SKAction.run { [weak self] in
-            self?.addPuck()
+        let decay1 = SKAction.wait(forDuration: 1.0)
+        let decay2 = SKAction.wait(forDuration: 1.0)
+        let levelUpCode = SKAction.run { [unowned self] in
+            
+            let gameOverText = "GET READY"
+            getReadyLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+            getReadyLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+            getReadyLabel.alpha = 1.0
+            getReadyLabel.position = CGPoint(x: 0, y: 0)
+            getReadyLabel.zPosition = 50
+            getReadyLabel.text = gameOverText
+            getReadyLabel.fontSize = 46
+            getReadyLabel.alpha = 1.0
+            anchorNode.addChild(getReadyLabel)
+           
+            if let lvl = levelLabel.text, let score = scoreLabel.text  {
+                speech("Level \(lvl). Get Ready!")
+            }
         }
-
         
-        scene?.run(SKAction.sequence([fadein,wait,runcode,wait2]))
-
-        /*
-         if let soundURL: URL = Bundle.main.url(forResource: "david", withExtension: "mp3") {
-         audioPlayer = try! AVAudioPlayer(contentsOf: soundURL)
-         audioPlayer.play()
-         }
-         */
+        let fadeAlpha = SKAction.fadeOut(withDuration: 0.5)
+        let runcode1 = SKAction.run { [unowned self] in
+            getReadyLabel.run(fadeAlpha)
+        }
         
-      
+        let runcode2 = SKAction.run { [unowned self] in
+            addPuck()
+        }
+        
+        run(SKAction.sequence([levelUpCode,decay1,runcode1,decay2,runcode2]))
     }
     
     
@@ -601,8 +608,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         setHighScore()
         appSettings.saveUserDefaults()
         drawLevel()
-        addPuck()
         
+        let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
+        
+        let decay1 = SKAction.wait(forDuration: 3.0)
+        let decay2 = SKAction.wait(forDuration: 1.5)
+        let levelUpCode = SKAction.run { [unowned self] in
+            
+            let gameOverText = "GET READY"
+            getReadyLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+            getReadyLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+            getReadyLabel.alpha = 1.0
+            getReadyLabel.position = CGPoint(x: 0, y: 0)
+            getReadyLabel.zPosition = 50
+            getReadyLabel.text = gameOverText
+            getReadyLabel.fontSize = 46
+            getReadyLabel.alpha = 1.0
+            anchorNode.addChild(getReadyLabel)
+           
+            if let lvl = levelLabel.text, let score = scoreLabel.text  {
+                speech("Level \(lvl). Score \(score). Get Ready!")
+            }
+        }
+        
+        
+        let fadeAlpha = SKAction.fadeOut(withDuration: 0.5)
+        let runcode1 = SKAction.run {
+            getReadyLabel.run(fadeAlpha)
+        }
+        
+        let runcode2 = SKAction.run { [unowned self] in
+            addPuck()
+        }
+        
+        run(SKAction.sequence([levelUpCode,decay1,runcode1,decay2,runcode2]))
     }
     
     //MARK: didBeginContact
@@ -632,22 +671,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     fileprivate func checker(_ firstBody: SKPhysicsBody) {
         // There are two mysterious "bricks" that do not seem to exist
         if let count = space?.children.count, count - 1 <= 0  {
-            let a = SKAction.fadeAlpha(to: 0, duration: 0.5)
-            let b = SKAction.run { [weak self] in
-                self?.removeFromParent()
-            }
-            let c = SKAction.fadeAlpha(to: 1, duration: 0.5)
-            let d = SKAction.run { [weak self] in
-                self?.resetGameBoard(lives: true)
+           
+            let a = SKAction.fadeAlpha(to: 0, duration: 0.25)
+          
+            let b = SKAction.removeFromParent()
+            
+            let c = SKAction.wait(forDuration: 0.5)
+            
+            let d = SKAction.run { [unowned self] in
+                resetGameBoard(lives: true)
             }
             
             if let ball = firstBody.node {
-                ball.run(SKAction.sequence([a,b,c]))
+                ball.run(SKAction.sequence([a,b]))
             }
-            
-            run(SKAction.sequence([c,d,c]))
+        
+            run(SKAction.sequence([c,d]))
         }
     }
+    
+    func speech(_ text: String) {
+        DispatchQueue.global(qos: .background).async {
+            let utterance = AVSpeechUtterance(string: text)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+            utterance.rate = 0.5
+            utterance.volume = 2.0
+            let synthesizer = AVSpeechSynthesizer()
+            synthesizer.speak(utterance)
+        }
+    }
+  
     
     func didBegin(_ contact: SKPhysicsContact) {
         
@@ -743,14 +796,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
                         gameOverLabel.fontSize = 46
                         gameOverLabel.alpha = 1.0
                         anchorNode.addChild(gameOverLabel)
-                        
-                        if let speechText = scoreLabel.text {
-                            let utterance = AVSpeechUtterance(string: "Game Over. You scored \(speechText) points!")
-                            utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-                            utterance.rate = 0.5
-
-                            let synthesizer = AVSpeechSynthesizer()
-                            synthesizer.speak(utterance)
+                       
+                        if let text = scoreLabel.text {
+                            speech("Game Over. You scored \(text) points!")
                         }
                     }
                     
@@ -758,7 +806,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
                         NotificationCenter.default.post(name: Notification.Name("loadGameView"), object: nil)
                     }
                     
-                    run(SKAction.sequence([decay1,gameOverCode,decay2,runcode]))
+                    anchorNode.run(SKAction.sequence([decay1,gameOverCode,decay2,runcode]))
                 }
             }
             

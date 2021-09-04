@@ -8,22 +8,21 @@
 
 import UIKit
 import SpriteKit
-import GameplayKit
+import AVFoundation
 
-var view: SKView?
 var initialScreenSize = CGSize()
 
 class GameViewController: UIViewController {
-    
+    var view: SKView?
+
     let ncDef = NotificationCenter.default
 
     @objc func loadGameView() {
-        if let view = self.view as? SKView,
+        if let view = view,
            let scene = SKScene(fileNamed: "GameMenu") {
             
             initialScreenSize = CGSize(width: view.frame.width, height: view.frame.height)
             scene.scaleMode = .aspectFit
-            
             view.ignoresSiblingOrder = true
             view.showsFields = false
             view.showsPhysics = false
@@ -38,14 +37,13 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-      
-        
         ncDef.addObserver(self,selector: #selector(self.loadGameView), name: NSNotification.Name.init(rawValue: "loadGameView"),object: nil)
-        
         ncDef.post(name: Notification.Name("loadGameView"), object: nil)
-
         
+        let audioSession = AVAudioSession.sharedInstance()
+        try? audioSession.setCategory(.playback, options: [.duckOthers])
+        try? audioSession.setActive(true)
+
     }
 
     override var shouldAutorotate: Bool {
