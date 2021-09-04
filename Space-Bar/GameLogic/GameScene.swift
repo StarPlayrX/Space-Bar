@@ -31,9 +31,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     var swapper = false
     var paddleNode: SKSpriteNode? //available to the entire class
     
-    //Music Player
-    //var audioPlayer = AVAudioPlayer()
-    
     //Categories
     let paddleCategory = UInt32(1)
     let ballCategory = UInt32(2)
@@ -64,10 +61,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     let levelLabel = SKLabelNode(fontNamed:"emulogic")
     let livesLabel = SKLabelNode(fontNamed:"emulogic")
     
-    let goalSound = SKAction.playSoundFileNamed("Dah.m4a", waitForCompletion: true)
-    let brickSound = SKAction.playSoundFileNamed("Bip.m4a", waitForCompletion: true)
-    let paddleSound = SKAction.playSoundFileNamed("Knock.m4a", waitForCompletion: true)
-    let wallSound = SKAction.playSoundFileNamed("Dat.m4a", waitForCompletion: true)
+    let goalSound = SKAction.playSoundFileNamed("Dah.mp3", waitForCompletion: false)
+    let brickSound = SKAction.playSoundFileNamed("Bip.mp3", waitForCompletion: false)
+    let paddleSound = SKAction.playSoundFileNamed("Knock.mp3", waitForCompletion: false)
+    let wallSound = SKAction.playSoundFileNamed("Dat.mp3", waitForCompletion: false)
         
     //corners
     let corneredge = CGFloat(32)
@@ -129,7 +126,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         let resetGroundSprite = SKAction.moveBy(x: 0, y: height, duration: 0.0)
         let moveGroundSpritesForever = SKAction.repeatForever(SKAction.sequence([moveGroundSprite,resetGroundSprite]))
         
-        for i in 0...1 {
+        for i in -1...1 {
             let sprite = SKSpriteNode(texture: starryNightTexture)
             sprite.position = CGPoint(x: -centerWidth, y: CGFloat(i) * sprite.size.height)
             sprite.run(moveGroundSpritesForever)
@@ -138,7 +135,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             backParalax.speed = 1
         }
         anchorNode.addChild(backParalax)
-
     }
     
     //add Puck
@@ -157,7 +153,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         ballEmoji.alpha = 1.0
         ballEmoji.position = CGPoint(x: 0, y: 0)
         ballEmoji.zPosition = 50
-        ballEmoji.text = puckArray[settings.puck]
+        
+        ballEmoji.text = Global.shared.gameBall[settings.puck]
         ballEmoji.fontSize = 54 //* 2
         
         let rnd = arc4random_uniform(UInt32(360))
@@ -211,7 +208,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     
     //Draws our Bricks for us
     func Drawbricks(BricksNode: SKSpriteNode, TileMapNode:SKTileMapNode, center: CGPoint) {
-        
+        let rotation = Global.shared.rotation
         let spriteLabelNode = SKLabelNode(fontNamed:"SpaceBarColors")
         spriteLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         spriteLabelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -269,22 +266,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     
     
     override func didMove(to view: SKView) {
-        
-        
-        
-        
-        
-        scene?.speed = 1.0
+
+        speed = 1.0
         drawParallax()
 
+        //setup physicsWorld
+        physicsWorld.gravity = CGVector(dx: 0.00, dy: 0.0)
+        physicsWorld.contactDelegate = self
+        
         screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
         
         levelart[0] =  ["😀","😃","😄","😁","😆","😅","😂","🤣"]
         levelart[1] =  ["😍","🥰","😘","😗","😙","😚","😋","😛"]
         levelart[2] =  ["😝","😜","🤪","🤨","🧐","🤓","😎","🥸"]
         levelart[3] =  ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
-        
-        view.isMultipleTouchEnabled = false
         
         width = (scene?.size.width)!
         height = (scene?.size.height)!
@@ -344,10 +339,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         wallNode.physicsBody?.allowsRotation = false
         wallNode.physicsBody?.categoryBitMask = wallCategory
         anchorNode.addChild(wallNode)
-        
-        //setup physicsWorld
-        physicsWorld.gravity = CGVector(dx: 0.00, dy: 0.0)
-        scene?.physicsWorld.contactDelegate = self
         
         //left mid corner piece
         let leftMidNode = SKSpriteNode()
@@ -502,7 +493,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             
             //leave as is for now until we decide to use convert point or not
             paddle.position = CGPoint(x:frame.width / 2,y:frame.height / paddleHeight)
-            paddle.size = CGSize(width: 180.0, height: 40.0) //Needed to size
+            paddle.size = CGSize(width: 130.0, height: 40.0) //Needed to size
             paddle.physicsBody?.restitution = 1.0
             paddle.name = "paddle"
             paddleNode = paddle
@@ -532,10 +523,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         }
         
         drawLevel()
+
         let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
         
-        let decay1 = SKAction.wait(forDuration: 1.0)
-        let decay2 = SKAction.wait(forDuration: 1.0)
+        let decay = SKAction.wait(forDuration: 1.0)
         let levelUpCode = SKAction.run { [unowned self] in
             
             let gameOverText = "GET READY"
@@ -549,13 +540,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             getReadyLabel.alpha = 1.0
             anchorNode.addChild(getReadyLabel)
            
-            if let lvl = levelLabel.text, let score = scoreLabel.text  {
+            if let lvl = levelLabel.text {
                 speech("Level \(lvl). Get Ready!")
             }
         }
         
         let fadeAlpha = SKAction.fadeOut(withDuration: 0.5)
-        let runcode1 = SKAction.run { [unowned self] in
+        let runcode1 = SKAction.run {
             getReadyLabel.run(fadeAlpha)
         }
         
@@ -563,7 +554,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             addPuck()
         }
         
-        run(SKAction.sequence([levelUpCode,decay1,runcode1,decay2,runcode2]))
+        run(SKAction.sequence([levelUpCode,decay,runcode1,decay,runcode2]))
     }
     
     
@@ -598,9 +589,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         space?.removeAllActions()
         space = nil
         settings.currentlevel += 1
-        settings.currentlevel %= levelArray.count
-        gameScore += 10
-        
+        settings.currentlevel %= Global.shared.levels.count        
         gameLives = gameLives < 5 ? gameLives + 1 : gameLives
         livesLabel.text = String(gameLives)
         levelLabel.text = String(settings.currentlevel + 1)
@@ -764,10 +753,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         case ballCategory | midCategory :
             
             if settings.sound { run(wallSound) }
-            gameScore += 2
             scoreLabel.text = String(gameScore)
             
-        case ballCategory | goalCategory :
+        case ballCategory | goalCategory:
             if settings.sound { run(goalSound) }
             
             //remove the puck
@@ -811,28 +799,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             }
             
         case ballCategory | paddleCategory:
-            
             if settings.sound { run(paddleSound) }
-            gameScore += 1
             scoreLabel.text = String(gameScore)
-            
-            
         case ballCategory | lowerLeftCornerCategory:
-            
             if settings.sound { run(wallSound) }
-            
         case ballCategory | upperLeftCornerCategory:
-            
             if settings.sound { run(wallSound) }
-            
         case ballCategory | lowerRightCornerCategory :
-            
             if settings.sound { run(wallSound) }
-            
         case ballCategory | upperRightCornerCategory :
-            
             if settings.sound { run(wallSound) }
-            
         default:
             break
         }

@@ -7,18 +7,9 @@
 //
 
 import SpriteKit
-//import AudioToolbox
-//import AVFoundation
-//AVSpeechSynthesizerDelegate
 
- let puckArray: Array = ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
- let rotation = [0,45,90.0,135.0,180.0,225.0,270.0,315.0]
- let levelArray = ["😀","😍","😝","🤩","😃","🥰","😜","🥳","😄","😘","🤪","😏","😁","😗","🤨","😒","😆","😙","🧐","😞","😅","😚","🤓","😔","😂","😋","😎","😟","🤣","😛","🥸","😕"]
- let puckTextArray: Array = ["blue","fuchsia","warm red","orange","magenta","bright green","green","purple rain"]
- let insArray: Array = ["🔇","🔊"]
- let insTextArray: Array = ["no sound fx","sound fx"]
 
-class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
+class GameMenu: SKScene {
         
     deinit {
         removeAllActions()
@@ -28,21 +19,14 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
 
     }
     
-    var maxpuck = puckArray.count - 1
-    var minpuck = 0
-    
-    var maxins = insArray.count - 1
-    var minins = 0
-    
-    var emojifontsize = CGFloat(150)
     var puckLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
     var puckTextLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
     
-    var insLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
-    var insTextLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
+    var soundfxLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
+    var soundfxTextLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
     
-    var frtLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
-    var frtTextLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
+    var lvlLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
+    var lvlTextLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
     
     var textLabel: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
     var textLabel2: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
@@ -57,17 +41,20 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             if let name = touchedNode.name {
                 
                 func puckLeft() {
-                    settings.puck = settings.puck > minpuck ? settings.puck - 1 : maxpuck
+                    settings.puck = settings.puck > 0 ? settings.puck - 1 : Global.shared.gameBall.count - 1
                 }
                 
                 func puckRight() {
-                    settings.puck = settings.puck < maxpuck ? settings.puck + 1 : minpuck
+                    settings.puck = settings.puck < Global.shared.gameBall.count - 1 ? settings.puck + 1 : 0
                 }
                 
                 func puckCommon() {
-                    if puckArray.indices.contains(settings.puck) {
-                        puckLabel.text = puckArray[settings.puck]
-                        puckTextLabel.text = puckTextArray[settings.puck]
+                    let ball = Global.shared.gameBall
+                    let text = Global.shared.gameBallText
+                    
+                    if ball.indices.contains(settings.puck) {
+                        puckLabel.text = ball[settings.puck]
+                        puckTextLabel.text = text[settings.puck]
                     }
                 }
                 
@@ -81,16 +68,17 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
                 }
                 
                 func speaker() {
+                    
                     settings.sound.toggle()
                     let sfx = settings.sound ? 1 : 0
                     
-                    if insArray.indices.contains(sfx) {
-                        insLabel.text = insArray[sfx]
-                        insTextLabel.text = insTextArray[sfx]
+                    if Global.shared.soundFx.indices.contains(sfx) {
+                        soundfxLabel.text = Global.shared.soundFx[sfx]
+                        soundfxTextLabel.text = Global.shared.soundFxText[sfx]
                     }
                 }
                 
-                name == "ins-left" || name == "ins-right" ? speaker() : ()
+                name == "soundfx-left" || name == "soundfx-right" ? speaker() : ()
                 
                 func levelLeft() {
                     settings.currentlevel = settings.currentlevel > 0 ? settings.currentlevel - 1 : settings.highlevel
@@ -101,20 +89,22 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
                 }
                 
                 func levelCommon() {
-                    if levelArray.indices.contains(settings.currentlevel) {
-                        frtLabel.text = levelArray[settings.currentlevel]
-                        frtTextLabel.text = "level \(settings.currentlevel + 1)"
-                        frtLabel.zRotation = CGFloat(Int(rotation[settings.currentlevel % rotation.count]).degrees)
+                    let rotation = Global.shared.rotation
+                    let levels = Global.shared.levels
+                    if levels.indices.contains(settings.currentlevel) {
+                        lvlLabel.text = levels[settings.currentlevel]
+                        lvlTextLabel.text = "level \(settings.currentlevel + 1)"
+                        lvlLabel.zRotation = CGFloat(Int(rotation[settings.currentlevel % rotation.count]).degrees)
                     }
                 }
                 
-                //Fruit / frt
-                if name == "frt-left" {
+                //MARK: - Levels
+                if name == "lvl-left" {
                     levelLeft()
                     levelCommon()
                 }
                 
-                if name == "frt-right" {
+                if name == "lvl-right" {
                     levelRight()
                     levelCommon()
                 }
@@ -125,21 +115,21 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
                         
                         if let scene = GameScene( fileNamed:"GameScene"),
                            let view = self?.view {
-                            
-                            // Configure the view.
-                            let skView = view as SKView
-                            skView.showsFPS = false
-                            skView.showsNodeCount = false
-                            skView.showsPhysics = false
-                            skView.showsFields = false
-                            skView.preferredFramesPerSecond = 60
-                            skView.clearsContextBeforeDrawing = true
-                            skView.isAsynchronous = true
-                            skView.ignoresSiblingOrder = true
-                            skView.clipsToBounds = true
                             scene.scaleMode = .aspectFit
-                            scene.backgroundColor = SKColor.black
-                            skView.presentScene(scene, transition: SKTransition.fade(withDuration: 2))
+
+                            // Configure the view.
+                            view.showsFPS = false
+                            view.showsNodeCount = false
+                            view.showsPhysics = false
+                            view.showsFields = false
+                            view.preferredFramesPerSecond = 60
+                            view.clearsContextBeforeDrawing = true
+                            view.isAsynchronous = true
+                            view.ignoresSiblingOrder = true
+                            view.clipsToBounds = true
+                            view.backgroundColor = SKColor.black
+                            view.isMultipleTouchEnabled = false
+                            view.presentScene(scene, transition: SKTransition.fade(withDuration: 2.0))
                         }
                     }
                     
@@ -227,8 +217,8 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             alpha: 0.75,
             speed: 0,
             alphaThreshold: 0,
-            fontsize: Float(emojifontsize)
-        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel, insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
+            fontsize: Float(150)
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel, soundfxLabel: soundfxLabel, soundfxTextLabel: soundfxTextLabel, lvlLabel: lvlLabel, lvlTextLabel: lvlTextLabel)
         
         //animals Button
         //Right
@@ -247,13 +237,13 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             alpha: 0.75,
             speed: 0,
             alphaThreshold: 0,
-            fontsize: Float(emojifontsize)
-        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
+            fontsize: Float(150)
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel, soundfxLabel: soundfxLabel, soundfxTextLabel: soundfxTextLabel, lvlLabel: lvlLabel, lvlTextLabel: lvlTextLabel)
         
         defineSprite (
             texture: "switchleft",
             scene: self,
-            name: "ins-left",
+            name: "soundfx-left",
             category: 0,
             collision: 0,
             contact: 0,
@@ -265,15 +255,15 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             alpha: 0.75,
             speed: 0,
             alphaThreshold: 0,
-            fontsize: Float(emojifontsize)
-        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
+            fontsize: Float(150)
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel, soundfxLabel: soundfxLabel, soundfxTextLabel: soundfxTextLabel, lvlLabel: lvlLabel, lvlTextLabel: lvlTextLabel)
         
         //animals Button
         //Right
         defineSprite (
             texture: "switchright",
             scene: self,
-            name: "ins-right",
+            name: "soundfx-right",
             category: 0,
             collision: 0,
             contact: 0,
@@ -285,13 +275,13 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             alpha: 0.75,
             speed: 0,
             alphaThreshold: 0,
-            fontsize: Float(emojifontsize)
-        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
+            fontsize: Float(150)
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel, soundfxLabel: soundfxLabel, soundfxTextLabel: soundfxTextLabel, lvlLabel: lvlLabel, lvlTextLabel: lvlTextLabel)
         
         defineSprite (
             texture: "switchleft",
             scene: self,
-            name: "frt-left",
+            name: "lvl-left",
             category: 0,
             collision: 0,
             contact: 0,
@@ -303,15 +293,15 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             alpha: 0.75,
             speed: 0,
             alphaThreshold: 0,
-            fontsize: Float(emojifontsize)
-        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2   )
+            fontsize: Float(150)
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel, soundfxLabel: soundfxLabel, soundfxTextLabel: soundfxTextLabel, lvlLabel: lvlLabel, lvlTextLabel: lvlTextLabel)
         
         //animals Button
         //Right
         defineSprite (
             texture: "switchright",
             scene: self,
-            name: "frt-right",
+            name: "lvl-right",
             category: 0,
             collision: 0,
             contact: 0,
@@ -323,8 +313,8 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             alpha: 0.75,
             speed: 0,
             alphaThreshold: 0,
-            fontsize: Float(emojifontsize)
-        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel,  insLabel: insLabel, insTextLabel: insTextLabel,  frtLabel: frtLabel, frtTextLabel: frtTextLabel, textLabel: textLabel, textLabel2: textLabel2)
+            fontsize: Float(150)
+        ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel, soundfxLabel: soundfxLabel, soundfxTextLabel: soundfxTextLabel, lvlLabel: lvlLabel, lvlTextLabel: lvlTextLabel)
     }
     
     struct defineSprite {
@@ -344,24 +334,34 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
         let alphaThreshold: Float
         let fontsize: Float
         
-        func drawHud( puckLabel: SKLabelNode, puckTextLabel: SKLabelNode, insLabel: SKLabelNode, insTextLabel: SKLabelNode, frtLabel: SKLabelNode, frtTextLabel: SKLabelNode, textLabel: SKLabelNode, textLabel2: SKLabelNode )  {
+        func drawHud(
+            puckLabel: SKLabelNode,
+            puckTextLabel: SKLabelNode,
+            soundfxLabel: SKLabelNode,
+            soundfxTextLabel: SKLabelNode,
+            lvlLabel: SKLabelNode,
+            lvlTextLabel: SKLabelNode)
+        {
+            
+            let rotation = Global.shared.rotation
+            let levels   = Global.shared.levels
+
             let sprite = SKSpriteNode(imageNamed: texture)
             let spc = CGFloat(220)
             let vspc = CGFloat(55)
             let vshift = CGFloat(20)
-            //let lalpha = CGFloat(0.75)
             
-            if name == "puck-left", let pos = scene.childNode(withName: "pucks")?.position  {
+            if name == "puck-left", let pos = scene.childNode(withName: "pucks")?.position {
                 
                 sprite.position = pos
-                sprite.position.x = sprite.position.x - spc
+                sprite.position.x -= spc
                 
                 puckLabel.fontSize = CGFloat(fontsize)
                 puckLabel.name = "puckLabel"
                 puckLabel.horizontalAlignmentMode = .center
                 puckLabel.verticalAlignmentMode = .center
                 puckLabel.position = pos
-                puckLabel.position.y = sprite.position.y + vspc - vshift
+                puckLabel.position.y += vspc - vshift
                 scene.addChild(puckLabel)
                 
                 puckTextLabel.fontSize = CGFloat(30)
@@ -370,74 +370,73 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
                 puckTextLabel.horizontalAlignmentMode = .center
                 puckTextLabel.verticalAlignmentMode = .center
                 puckTextLabel.position = pos
-                puckTextLabel.position.y = sprite.position.y - vspc - vshift
+                puckTextLabel.position.y += -vspc - vshift
                 
                 scene.addChild(puckTextLabel)
             }
             
-            if name == "puck-right", let pos = scene.childNode(withName: "pucks")?.position  {
+            if name == "puck-right", let pos = scene.childNode(withName: "pucks")?.position {
                 
                 sprite.position = pos
-                sprite.position.x = sprite.position.x + spc
+                sprite.position.x += spc
             }
             
-            if name == "ins-left", let pos = scene.childNode(withName: "ins")?.position  {
+            if name == "soundfx-left", let pos = scene.childNode(withName: "soundfx")?.position  {
                 
                 sprite.position = pos
-                sprite.position.x = sprite.position.x - spc
+                sprite.position.x -= spc
                 
-                insLabel.fontSize = CGFloat(fontsize)
-                insLabel.name = "insLabel"
-                insLabel.horizontalAlignmentMode = .center
-                insLabel.verticalAlignmentMode = .center
-                insLabel.position = pos
-                insLabel.position.y = sprite.position.y + vspc - vshift
-                scene.addChild(insLabel)
+                soundfxLabel.fontSize = CGFloat(fontsize)
+                soundfxLabel.name = "soundfxLabel"
+                soundfxLabel.horizontalAlignmentMode = .center
+                soundfxLabel.verticalAlignmentMode = .center
+                soundfxLabel.position = pos
+                soundfxLabel.position.y += vspc - vshift
+                scene.addChild(soundfxLabel)
                 
-                insTextLabel.fontSize = CGFloat(30)
-                insTextLabel.fontColor = UIColor.white
-                insTextLabel.name = "insTextLabel"
-                insTextLabel.horizontalAlignmentMode = .center
-                insTextLabel.verticalAlignmentMode = .center
-                insTextLabel.position = pos
-                insTextLabel.position.y = sprite.position.y - vspc - vshift
+                soundfxTextLabel.fontSize = CGFloat(30)
+                soundfxTextLabel.fontColor = UIColor.white
+                soundfxTextLabel.name = "soundfxTextLabel"
+                soundfxTextLabel.horizontalAlignmentMode = .center
+                soundfxTextLabel.verticalAlignmentMode = .center
+                soundfxTextLabel.position = pos
+                soundfxTextLabel.position.y += -vspc - vshift
                 
-                scene.addChild(insTextLabel)
+                scene.addChild(soundfxTextLabel)
             }
             
-            if name == "ins-right", let pos = scene.childNode(withName: "ins")?.position {
+            if name == "soundfx-right", let pos = scene.childNode(withName: "soundfx")?.position {
                 sprite.position = pos
-                sprite.position.x = sprite.position.x + spc
+                sprite.position.x += spc
             }
             
-            
-            if name == "frt-left", let pos = scene.childNode(withName: "fruit")?.position {
+            if name == "lvl-left", let pos = scene.childNode(withName: "level")?.position {
                 
                 sprite.position = pos
-                sprite.position.x = sprite.position.x - spc
+                sprite.position.x -= spc
                 
-                frtLabel.fontSize = CGFloat(fontsize)
-                frtLabel.name = "frtLabel"
-                frtLabel.horizontalAlignmentMode = .center
-                frtLabel.verticalAlignmentMode = .center
-                frtLabel.position = pos
-                frtLabel.position.y = sprite.position.y + vspc - vshift
-                scene.addChild(frtLabel)
+                lvlLabel.fontSize = CGFloat(fontsize)
+                lvlLabel.name = "lvlLabel"
+                lvlLabel.horizontalAlignmentMode = .center
+                lvlLabel.verticalAlignmentMode = .center
+                lvlLabel.position = pos
+                lvlLabel.position.y += vspc - vshift
+                scene.addChild(lvlLabel)
                 
-                frtTextLabel.fontSize = CGFloat(30)
-                frtTextLabel.fontColor = UIColor.white
-                frtTextLabel.name = "frtTextLabel"
-                frtTextLabel.horizontalAlignmentMode = .center
-                frtTextLabel.verticalAlignmentMode = .center
-                frtTextLabel.position = pos
-                frtTextLabel.position.y = sprite.position.y - vspc - vshift
+                lvlTextLabel.fontSize = CGFloat(30)
+                lvlTextLabel.fontColor = UIColor.white
+                lvlTextLabel.name = "lvlTextLabel"
+                lvlTextLabel.horizontalAlignmentMode = .center
+                lvlTextLabel.verticalAlignmentMode = .center
+                lvlTextLabel.position = pos
+                lvlTextLabel.position.y += -vspc - vshift
                 
-                scene.addChild(frtTextLabel)
+                scene.addChild(lvlTextLabel)
             }
             
-            if name == "frt-right", let pos = scene.childNode(withName: "fruit")?.position {
+            if name == "lvl-right", let pos = scene.childNode(withName: "level")?.position {
                 sprite.position = pos
-                sprite.position.x = sprite.position.x + spc
+                sprite.position.x += spc
             }
             
             sprite.alpha = alpha
@@ -445,19 +444,19 @@ class GameMenu: SKScene { //AVSpeechSynthesizerDelegate
             
             scene.addChild(sprite)
             
-            puckLabel.text = puckArray[settings.puck]
-            puckTextLabel.text = puckTextArray[settings.puck]
+            puckLabel.text = Global.shared.gameBall[settings.puck]
+            puckTextLabel.text = Global.shared.gameBallText[settings.puck]
             
             let soundfx = settings.sound ? 1 : 0
-            insLabel.text = insArray[soundfx]
-            insTextLabel.text = insTextArray[soundfx]
+            soundfxLabel.text = Global.shared.soundFx[soundfx]
+            soundfxTextLabel.text = Global.shared.soundFxText[soundfx]
             
-            settings.highlevel = settings.highlevel > levelArray.count - 1 ? levelArray.count - 1 : settings.highlevel
-            settings.currentlevel = settings.currentlevel > levelArray.count - 1 ? levelArray.count - 1 : settings.currentlevel
-
-            frtLabel.text = levelArray[settings.currentlevel]
-            frtTextLabel.text = "level \(settings.currentlevel + 1)"
-            frtLabel.zRotation = CGFloat(Int(rotation[settings.currentlevel % rotation.count]).degrees)
+            settings.highlevel = settings.highlevel > levels.count - 1 ? levels.count - 1 : settings.highlevel
+            settings.currentlevel = settings.currentlevel > levels.count - 1 ? levels.count - 1 : settings.currentlevel
+            
+            lvlLabel.text = levels[settings.currentlevel]
+            lvlTextLabel.text = "level \(settings.currentlevel + 1)"
+            lvlLabel.zRotation = CGFloat(Int(rotation[settings.currentlevel % rotation.count]).degrees)
             
             let fadein = SKAction.fadeAlpha(to: 1.0, duration: 0.5)
             scene.run(fadein)
