@@ -31,6 +31,8 @@ class GameViewController: UIViewController {
             view.allowsTransparency = false
             view.showsFPS = false
             view.showsNodeCount = false
+            view.preferredFramesPerSecond = 30
+
             view.presentScene(scene, transition: SKTransition.fade(withDuration: 2.0))
         }
     }

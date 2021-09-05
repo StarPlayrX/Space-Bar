@@ -10,7 +10,9 @@ import SpriteKit
 
 
 class GameMenu: SKScene {
-        
+      
+    var keyPressed = false
+    
     deinit {
         removeAllActions()
         removeAllChildren()
@@ -109,7 +111,11 @@ class GameMenu: SKScene {
                     levelCommon()
                 }
                 
-                if name == "enter" {
+                if name == "enter" && !keyPressed {
+                    
+                    if keyPressed { return }
+                    
+                    keyPressed = true
                     
                     let runcode = SKAction.run { [weak self] in
                         

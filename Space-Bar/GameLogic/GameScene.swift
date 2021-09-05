@@ -10,7 +10,7 @@ import SpriteKit
 import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate { // AVAudioPlayerDelegate
-   
+    
     
     var ballNode: SKSpriteNode? = nil
     let appSettings = AppSettings()
@@ -68,7 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     let brickSound = SKAction.playSoundFileNamed("Bip.mp3", waitForCompletion: false)
     let paddleSound = SKAction.playSoundFileNamed("Knock.mp3", waitForCompletion: false)
     let wallSound = SKAction.playSoundFileNamed("Dat.mp3", waitForCompletion: false)
-        
+    
     //corners
     let corneredge = CGFloat(32)
     let cornertopedge = CGFloat(86)
@@ -105,18 +105,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         drawBricks(BricksTileMap: tilemap)
         let xPos: [CGFloat] = [
         //  1   2   3   4   5   6   7   8   9  10
-            1,  1,  1,  1,  1, -1, -1,  1,  1,  1,
+            1,  1,  1,  1,  1, -1, -1,  0,  1,  1,
             1,  1,  1,  3,  3,  0,  3,  1,  1, -1,
             1, -1,  1,  0, -1,  0, -1,  1, -1, -1,
-           -1,  -1,
+            -1,  -1,
         ]
         
         var x: CGFloat = 0
-       
+        
         if xPos.indices.contains(settings.currentlevel) {
             x = xPos[settings.currentlevel] * 12.5
         }
-
+        
         space?.position = screenType == .iPad ? CGPoint(x: x, y: centerHeight - 340 / 1.80) : CGPoint(x: x, y: centerHeight - 240)
     }
     
@@ -198,7 +198,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         
         swapper.toggle()
         let negative: CGFloat = swapper ? 1 : 0
-    
+        
         ballNode?.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
         anchorNode.addChild(ballNode!)
         ballNode?.addChild(ballEmoji)
@@ -251,7 +251,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         BricksNode.physicsBody?.mass = 1.0
         BricksNode.name = "brick"
         BricksNode.position = center
-       
+        
         space?.addChild(BricksNode)
     }
     
@@ -270,10 +270,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     
     
     override func didMove(to view: SKView) {
-
+        
         speed = 1.0
         drawParallax()
-
+        
         //setup physicsWorld
         physicsWorld.gravity.dx = 0
         physicsWorld.gravity.dy = 0
@@ -321,7 +321,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         levelLabel.fontColor = UIColor.init(red: 16 / 255, green: 125 / 255, blue: 1.0, alpha: 1.0)
         levelLabel.alpha = 1.0
         anchorNode.addChild(levelLabel)
-
+        
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         scoreLabel.alpha = 1.0
@@ -504,7 +504,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             paddleNode = paddle
             scene?.addChild(paddle)
         }
-    
+        
         if let goalNode = Optional(SKSpriteNode()) {
             let goalTexture = SKTexture(imageNamed: "goal")
             let goalPhysicsBody = SKPhysicsBody(texture: goalTexture, alphaThreshold: 0.1, size: goalTexture.size())
@@ -528,23 +528,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         }
         
         drawLevel()
-
+        
         let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
         
         let decay = SKAction.wait(forDuration: 1.0)
         let levelUpCode = SKAction.run { [unowned self] in
             
-            let gameOverText = "GET READY"
+            let getReady = "GET READY"
             getReadyLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
             getReadyLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
             getReadyLabel.alpha = 1.0
             getReadyLabel.position = CGPoint(x: 0, y: 0)
             getReadyLabel.zPosition = 50
-            getReadyLabel.text = gameOverText
+            getReadyLabel.text = getReady
             getReadyLabel.fontSize = 46
             getReadyLabel.alpha = 1.0
             anchorNode.addChild(getReadyLabel)
-           
+            
             if let lvl = levelLabel.text {
                 speech("Level \(lvl). Get Ready!")
             }
@@ -564,7 +564,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     
     
     func touchDown(atPoint pos : CGPoint) {
-        let constraint = CGFloat(128)
+        let constraint = CGFloat(64)
         if (pos.x >= constraint && pos.x <= frame.width - constraint) {
             let action = SKAction.moveTo(x: pos.x, duration: 0.002)
             paddleNode?.run(action)
@@ -572,7 +572,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-        let constraint = CGFloat(128)
+        let constraint = CGFloat(64)
         if (pos.x >= constraint && pos.x <= frame.width - constraint) {
             let action = SKAction.moveTo(x: pos.x, duration: 0.002)
             paddleNode?.run(action)
@@ -609,17 +609,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         let decay2 = SKAction.wait(forDuration: 1.5)
         let levelUpCode = SKAction.run { [unowned self] in
             
-            let gameOverText = "GET READY"
+            let getReadyText = "GET READY"
             getReadyLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
             getReadyLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
             getReadyLabel.alpha = 1.0
             getReadyLabel.position = CGPoint(x: 0, y: 0)
             getReadyLabel.zPosition = 50
-            getReadyLabel.text = gameOverText
+            getReadyLabel.text = getReadyText
             getReadyLabel.fontSize = 46
             getReadyLabel.alpha = 1.0
             anchorNode.addChild(getReadyLabel)
-           
+            
             if let lvl = levelLabel.text, let score = scoreLabel.text  {
                 speech("Level \(lvl). Score \(score). Get Ready!")
             }
@@ -665,9 +665,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     fileprivate func checker(_ firstBody: SKPhysicsBody) {
         // There are two mysterious "bricks" that do not seem to exist
         if let count = space?.children.count, count - 1 <= 0  {
-           
+            
             let a = SKAction.fadeAlpha(to: 0, duration: 0.25)
-          
+            
             let b = SKAction.removeFromParent()
             
             let c = SKAction.wait(forDuration: 0.5)
@@ -679,7 +679,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             if let ball = firstBody.node {
                 ball.run(SKAction.sequence([a,b]))
             }
-        
+            
             run(SKAction.sequence([c,d]))
         }
     }
@@ -694,9 +694,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             synthesizer.speak(utterance)
         }
     }
-  
     
-   
+    
+    
     
     func didBegin(_ contact: SKPhysicsContact) {
         
@@ -751,46 +751,47 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             scoreLabel.text = String(gameScore)
             
         case ballCategory | goalCategory:
+            firstBody.node?.removeFromParent()
             if settings.sound { run(goalSound) }
             
-            //remove the puck
-            if let puck = firstBody.node {
-                //lives to come
+            //lives to come
+            if gameLives > 0 {
                 gameLives -= 1
-                livesLabel.text = String(gameLives)
-                puck.removeFromParent()
+            }
+            
+            livesLabel.text = String(gameLives)
+            
+            if gameLives > 0 {
+                addPuck()
+            } else if gameLives == 0 {
+
+                let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
                 
-                if gameLives > 0 {
-                    addPuck()
-                } else {
+                let decay1 = SKAction.wait(forDuration: 1.0)
+                let decay2 = SKAction.wait(forDuration: 2.0)
+                let gameOverCode = SKAction.run { [unowned self] in
                     
-                    let decay1 = SKAction.wait(forDuration: 1.0)
-                    let decay2 = SKAction.wait(forDuration: 3.5)
-                    let gameOverCode = SKAction.run { [unowned self] in
-                        
-                        let gameOverLabel = SKLabelNode(fontNamed:"emulogic")
-                        let gameOverText = "GAME OVER"
-                        gameOverLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
-                        gameOverLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-                        gameOverLabel.alpha = 1.0
-                        gameOverLabel.position = CGPoint(x: 0, y: 0)
-                        gameOverLabel.zPosition = 50
-                        gameOverLabel.text = gameOverText
-                        gameOverLabel.fontSize = 46
-                        gameOverLabel.alpha = 1.0
-                        anchorNode.addChild(gameOverLabel)
-                       
-                        if let text = scoreLabel.text {
-                            speech("Game Over. You scored \(text) points!")
-                        }
+                    let getReadyText = "GET READY"
+                    getReadyLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+                    getReadyLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+                    getReadyLabel.alpha = 1.0
+                    getReadyLabel.position = CGPoint(x: 0, y: 0)
+                    getReadyLabel.zPosition = 50
+                    getReadyLabel.text = getReadyText
+                    getReadyLabel.fontSize = 46
+                    getReadyLabel.alpha = 1.0
+                    anchorNode.addChild(getReadyLabel)
+                    
+                    if let score = scoreLabel.text {
+                        speech("Game Over. You scored \(score) points!")
                     }
-                    
-                    let runcode = SKAction.run {
-                        NotificationCenter.default.post(name: Notification.Name("loadGameView"), object: nil)
-                    }
-                    
-                    anchorNode.run(SKAction.sequence([decay1,gameOverCode,decay2,runcode]))
                 }
+            
+                let runcode = SKAction.run {
+                    NotificationCenter.default.post(name: Notification.Name("loadGameView"), object: nil)
+                }
+                
+                anchorNode.run(SKAction.sequence([decay1,gameOverCode,decay2,runcode]))
             }
             
         case ballCategory | paddleCategory:
@@ -818,12 +819,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         }
     }
     
-    
+    // Called before each frame is rendered
     override func update(_ currentTime: TimeInterval) {
+        guard
+            let ballNode = ballNode,
+            let x = ballNode.physicsBody?.velocity.dx,
+            let y = ballNode.physicsBody?.velocity.dy,
+            let body = ballNode.physicsBody
+        else {
+            return
+        }
         
         func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat) {
             guard let ballBody = ballBody else { return }
-            // When bouncing off a wall, speed decreases... this corrects that to _increase speed_ off bounces.
+            
             if abs(ballBody.velocity.dx) < abs(initialVelocity / 2) {
                 ballBody.velocity.dx <= 0 ? (ballBody.velocity.dx -= boost) : (ballBody.velocity.dx += boost)
             }
@@ -833,17 +842,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             }
         }
         
-        // Called before each frame is rendered
-        if let x = ballNode?.physicsBody?.velocity.dx,
-        let y = ballNode?.physicsBody?.velocity.dy {
-            let a1 = abs(x)
-            let b2 = abs(y)
-
-            if a1 + b2 < initialVelocity * 1.5 {
-                if let body = ballNode?.physicsBody {
-                    booster(body, 20)
-                }
-            }
+        if abs(x) + abs(y) < initialVelocity * 1.5 {
+            booster(body, 20)
         }
     }
 }
