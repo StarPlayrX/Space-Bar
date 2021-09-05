@@ -10,7 +10,9 @@ import SpriteKit
 import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate { // AVAudioPlayerDelegate
+   
     
+    var ballNode: SKSpriteNode? = nil
     let appSettings = AppSettings()
     var initialVelocity = CGFloat(800)
     
@@ -148,6 +150,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             }
         }
         
+        ballNode = nil
+        ballNode = SKSpriteNode()
+        
         let ballEmoji = SKLabelNode(fontNamed:"SpaceBarColors")
         ballEmoji.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         ballEmoji.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -161,43 +166,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         let rnd = arc4random_uniform(UInt32(360))
         ballEmoji.zRotation = CGFloat(Int(rnd).degrees)
         
-        let ballNode = SKSpriteNode()
         if let texture = view?.texture(from: ballEmoji) {
-            ballNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
+            ballNode?.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
             // This fall back should not happen, but we may use this in the future for iOS' that fail
-            ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 27)
+            ballNode?.physicsBody = SKPhysicsBody(circleOfRadius: 27)
         }
         
-        ballNode.physicsBody?.categoryBitMask = ballCategory
-        ballNode.physicsBody?.contactTestBitMask =
+        ballNode?.physicsBody?.categoryBitMask = ballCategory
+        ballNode?.physicsBody?.contactTestBitMask =
             paddleCategory + wallCategory + goalCategory + upperLeftCornerCategory +
             lowerLeftCornerCategory + upperRightCornerCategory + lowerRightCornerCategory
         
-        ballNode.physicsBody?.collisionBitMask =
+        ballNode?.physicsBody?.collisionBitMask =
             paddleCategory + brickCategory + wallCategory + upperLeftCornerCategory +
             lowerLeftCornerCategory + upperRightCornerCategory + lowerRightCornerCategory + midCategory
         
-        ballNode.zPosition = 50
-        ballNode.physicsBody?.affectedByGravity = false
-        ballNode.physicsBody?.isDynamic = true
-        ballNode.physicsBody?.allowsRotation = true
-        ballNode.physicsBody?.friction = 0
-        ballNode.physicsBody?.linearDamping = 0
-        ballNode.physicsBody?.angularDamping = 0
-        ballNode.physicsBody?.restitution = 1.0
-        ballNode.physicsBody?.mass = 1.0
-        ballNode.physicsBody?.fieldBitMask = vortexCategory
-        ballNode.name = "ball"
-        ballNode.position = CGPoint(x:0,y:0)
-        ballNode.speed = CGFloat(1.0)
+        ballNode?.zPosition = 50
+        ballNode?.physicsBody?.affectedByGravity = false
+        ballNode?.physicsBody?.isDynamic = true
+        ballNode?.physicsBody?.allowsRotation = true
+        ballNode?.physicsBody?.friction = 0
+        ballNode?.physicsBody?.linearDamping = 0
+        ballNode?.physicsBody?.angularDamping = 0
+        ballNode?.physicsBody?.restitution = 1.0
+        ballNode?.physicsBody?.mass = 1.0
+        ballNode?.physicsBody?.fieldBitMask = vortexCategory
+        ballNode?.name = "ball"
+        ballNode?.position = CGPoint(x:0,y:0)
+        ballNode?.speed = CGFloat(1.0)
         
         swapper.toggle()
         let negative: CGFloat = swapper ? 1 : 0
     
-        ballNode.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
-        anchorNode.addChild(ballNode)
-        ballNode.addChild(ballEmoji)
+        ballNode?.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
+        anchorNode.addChild(ballNode!)
+        ballNode?.addChild(ballEmoji)
     }
     
     //Starts up the reading the tilemap
@@ -692,6 +696,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     }
   
     
+   
+    
     func didBegin(_ contact: SKPhysicsContact) {
         
         guard
@@ -738,17 +744,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         case ballCategory | wallCategory :
             
             if settings.sound { run(wallSound) }
-            
-            let boost = CGFloat(10)
-            
-            // When bouncing off a wall, speed decreases... this corrects that to _increase speed_ off bounces.
-            if abs(firstBody.velocity.dx) < abs(initialVelocity / 2) {
-                firstBody.velocity.dx <= 0 ? (firstBody.velocity.dx -= boost) : (firstBody.velocity.dx += boost)
-            }
-            
-            if abs(firstBody.velocity.dy) < abs(initialVelocity) {
-                firstBody.velocity.dy <= 0 ? (firstBody.velocity.dy -= boost * 2) : (firstBody.velocity.dy += boost * 2)
-            }
             
         case ballCategory | midCategory :
             
@@ -820,6 +815,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         if let node = node {
             let action = SKAction.applyImpulse( CGVector(dx: dx , dy: dy), duration: duration)
             node.run(action)
+        }
+    }
+    
+    
+    override func update(_ currentTime: TimeInterval) {
+        
+        func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat) {
+            guard let ballBody = ballBody else { return }
+            // When bouncing off a wall, speed decreases... this corrects that to _increase speed_ off bounces.
+            if abs(ballBody.velocity.dx) < abs(initialVelocity / 2) {
+                ballBody.velocity.dx <= 0 ? (ballBody.velocity.dx -= boost) : (ballBody.velocity.dx += boost)
+            }
+            
+            if abs(ballBody.velocity.dy) < abs(initialVelocity) {
+                ballBody.velocity.dy <= 0 ? (ballBody.velocity.dy -= boost * 2) : (ballBody.velocity.dy += boost * 2)
+            }
+        }
+        
+        // Called before each frame is rendered
+        if let x = ballNode?.physicsBody?.velocity.dx,
+        let y = ballNode?.physicsBody?.velocity.dy {
+            let a1 = abs(x)
+            let b2 = abs(y)
+
+            if a1 + b2 < initialVelocity * 1.5 {
+                if let body = ballNode?.physicsBody {
+                    booster(body, 20)
+                }
+            }
         }
     }
 }
