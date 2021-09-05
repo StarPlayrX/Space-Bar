@@ -12,6 +12,7 @@ import AVFoundation
 class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate { // AVAudioPlayerDelegate
     
     let appSettings = AppSettings()
+    var initialVelocity = CGFloat(800)
     
     deinit {
         removeAllActions()
@@ -191,11 +192,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         ballNode.position = CGPoint(x:0,y:0)
         ballNode.speed = CGFloat(1.0)
         
-        let dx = arc4random_uniform(UInt32(360))
         swapper.toggle()
         let negative: CGFloat = swapper ? 1 : 0
-        
-        ballNode.physicsBody?.velocity = CGVector(dx: CGFloat(dx) * negative, dy: 850)
+    
+        ballNode.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
         anchorNode.addChild(ballNode)
         ballNode.addChild(ballEmoji)
     }
@@ -271,7 +271,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         drawParallax()
 
         //setup physicsWorld
-        physicsWorld.gravity = CGVector(dx: 0.00, dy: 0.0)
+        physicsWorld.gravity.dx = 0
+        physicsWorld.gravity.dy = 0
         physicsWorld.contactDelegate = self
         
         screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
@@ -589,7 +590,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         space?.removeAllActions()
         space = nil
         settings.currentlevel += 1
-        settings.currentlevel %= Global.shared.levels.count        
+        settings.currentlevel %= Global.shared.levels.count
         gameLives = gameLives < 5 ? gameLives + 1 : gameLives
         livesLabel.text = String(gameLives)
         levelLabel.text = String(settings.currentlevel + 1)
@@ -738,18 +739,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             
             if settings.sound { run(wallSound) }
             
-            let margin = 18
-            let ratio = 2
-            let decay = Double(0.10)
-            let a = CGFloat(arc4random_uniform(UInt32(margin)))
-            let b = CGFloat(arc4random_uniform(UInt32(margin / ratio)))
-            let c = Double(Double(a) * decay)
-            let d = Double(Double(b) * decay)
+            let boost = CGFloat(10)
             
-            let cp = contact.contactPoint
-            cp.y < 0 ? applyVector(dx: 0, dy: a, node: firstBody.node, duration: c) : applyVector(dx: 0, dy: -a, node: firstBody.node, duration: c)
-            cp.x < 0 ? applyVector(dx: b, dy: 0, node: firstBody.node, duration: d) : applyVector(dx: -b, dy: 0, node: firstBody.node, duration: d)
-        
+            // When bouncing off a wall, speed decreases... this corrects that to _increase speed_ off bounces.
+            if abs(firstBody.velocity.dx) < abs(initialVelocity / 2) {
+                firstBody.velocity.dx <= 0 ? (firstBody.velocity.dx -= boost) : (firstBody.velocity.dx += boost)
+            }
+            
+            if abs(firstBody.velocity.dy) < abs(initialVelocity) {
+                firstBody.velocity.dy <= 0 ? (firstBody.velocity.dy -= boost * 2) : (firstBody.velocity.dy += boost * 2)
+            }
+            
         case ballCategory | midCategory :
             
             if settings.sound { run(wallSound) }

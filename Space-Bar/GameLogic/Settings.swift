@@ -24,11 +24,11 @@ var settings = Settings()
 
 struct AppSettings {    
     func saveUserDefaults() {
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(settings), forKey:"settings")
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(settings), forKey:"gameSettings")
     }
 
     func loadUserDefaults() {
-        if let data = UserDefaults.standard.value(forKey:"settings") as? Data,
+        if let data = UserDefaults.standard.value(forKey:"gameSettings") as? Data,
            let disk = try? PropertyListDecoder().decode(Settings.self, from: data) {
             settings = disk
         }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Global {
     static let shared = Global()
@@ -16,4 +17,6 @@ struct Global {
     let soundFx: Array = ["🔇","🔊"]
     let soundFxText: Array = ["no sound fx","sound fx"]
     let levels = ["😀","😍","😝","🤩","😃","🥰","😜","🥳","😄","😘","🤪","😏","😁","😗","🤨","😒","😆","😙","🧐","😞","😅","😚","🤓","😔","😂","😋","😎","😟","🤣","😛","🥸","😕"]
+    var initialScreenSize: CGSize?
+
 }

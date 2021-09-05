@@ -26,9 +26,10 @@ class GameViewController: UIViewController {
             view.showsFields = false
             view.showsPhysics = false
             view.isAsynchronous = true
+            view.isMultipleTouchEnabled = false
             view.isOpaque = true
             view.allowsTransparency = false
-            view.showsFPS = true
+            view.showsFPS = false
             view.showsNodeCount = false
             view.presentScene(scene, transition: SKTransition.fade(withDuration: 2.0))
         }
