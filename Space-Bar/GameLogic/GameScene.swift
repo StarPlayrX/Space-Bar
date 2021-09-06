@@ -205,12 +205,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         
         swapper.toggle()
         let negative: CGFloat = swapper ? 1 : 0
-        
+        ballNode?.addChild(ballEmoji)
         ballNode?.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
         anchorNode.addChild(ballNode!)
-        ballNode?.addChild(ballEmoji)
+       
     }
-    
+
     //Starts up the reading the tilemap
     func tileMapRun(TileMapNode: SKTileMapNode, center: CGPoint) {
         let SpriteNode = SKSpriteNode()
@@ -844,6 +844,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             return
         }
     
+        if ballNode.name != "ball" {return}
+        
         func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat, _ initialVelocity: CGFloat ) {
             guard let ballBody = ballBody else { return }
             
