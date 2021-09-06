@@ -19,7 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     let zero = CGFloat(0)
     var initialVelocity = CGFloat(800)
     let differentiator = CGFloat(250)
-
+    
     var ballNode: SKSpriteNode? = nil
     let appSettings = AppSettings()
     
@@ -105,7 +105,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         }
         drawBricks(BricksTileMap: tilemap)
         let xPos: [CGFloat] = [
-        //  1   2   3   4   5   6   7   8   9  10
+            //  1   2   3   4   5   6   7   8   9  10
             1,  1,  1,  1,  1, -1,  0,  0, -1,  1,
             1,  1,  1,  3, -1,  0,  3,  1,  1, -1,
             1, -1,  1,  0, -1,  0, -1,  1, -1, -1,
@@ -146,13 +146,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         
         // Ensures no pucks pre-exist
         for whatDaPuck in anchorNode.children {
-            if let name = whatDaPuck.name, name.contains("ball") {
+            if let name = whatDaPuck.name, name == "ball" {
                 whatDaPuck.removeFromParent()
-            }
-            
-            if settings.currentlevel % 7 != 0, let name = whatDaPuck.name, name.contains("powerball") {
-                whatDaPuck.removeFromParent()
-                print("HELLO")
             }
         }
         
@@ -205,7 +200,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         ballNode?.addChild(ballEmoji)
         ballNode?.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
         anchorNode.addChild(ballNode!)
-       
+        
     }
     
     //addPower
@@ -227,7 +222,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         powerTexture.position = CGPoint(x: 0, y: 0)
         powerTexture.zPosition = 50
         
-        var ball = (settings.puck + 4) % 8
+        var ball = (settings.puck + 3) % 8
         
         if ball > Global.shared.gameBall.count - 1 {
             ball = Global.shared.gameBall.count - 1
@@ -249,10 +244,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         powerNode.physicsBody?.categoryBitMask = powerCategory
         powerNode.physicsBody?.contactTestBitMask =
             paddleCategory + wallCategory
-
+        
         powerNode.physicsBody?.collisionBitMask =
             paddleCategory + brickCategory + wallCategory
-
+        
         powerNode.zPosition = 50
         powerNode.physicsBody?.affectedByGravity = false
         powerNode.physicsBody?.isDynamic = true
@@ -272,9 +267,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         powerNode.addChild(powerTexture)
         powerNode.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
         anchorNode.addChild(powerNode)
-       
+        
     }
-
+    
     //Starts up the reading the tilemap
     func tileMapRun(TileMapNode: SKTileMapNode, center: CGPoint) {
         let SpriteNode = SKSpriteNode()
@@ -310,9 +305,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         BricksNode.zPosition = 50
         BricksNode.physicsBody?.restitution = 1.0
         BricksNode.physicsBody?.categoryBitMask = brickCategory
-        BricksNode.physicsBody?.collisionBitMask = ballCategory
-        BricksNode.physicsBody?.fieldBitMask = ballCategory
-        BricksNode.physicsBody?.contactTestBitMask = ballCategory
+        BricksNode.physicsBody?.collisionBitMask = ballCategory + powerCategory
+        BricksNode.physicsBody?.fieldBitMask = ballCategory + powerCategory
+        BricksNode.physicsBody?.contactTestBitMask = ballCategory + powerCategory
         BricksNode.physicsBody?.allowsRotation = false
         BricksNode.physicsBody?.affectedByGravity = false
         BricksNode.physicsBody?.isDynamic = false
@@ -632,7 +627,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             if settings.currentlevel % 7 == 0 {
                 addPowerBall()
             }
-
+            
         }
         
         run(SKAction.sequence([levelUpCode,decay,runcode1,decay,runcode2]))
@@ -665,6 +660,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     
     
     func resetGameBoard(lives: Bool) {
+        
+        for removePowerball in anchorNode.children {
+            if let name = removePowerball.name, name.contains("ball") {
+                removePowerball.removeFromParent()
+            }
+        }
+        
         space?.removeAllChildren()
         space?.removeFromParent()
         space?.removeAllActions()
@@ -709,6 +711,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         
         let runcode2 = SKAction.run { [unowned self] in
             addPuck()
+            
+            for whatDaPuck in anchorNode.children {
+                if let name = whatDaPuck.name, name == "powerball" {
+                    whatDaPuck.removeFromParent()
+                }
+            }
+            
+            if settings.currentlevel % 7 == 0 {
+                addPowerBall()
+            }
         }
         
         run(SKAction.sequence([levelUpCode,decay1,runcode1,decay2,runcode2]))
@@ -792,56 +804,54 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             if settings.sound { run(wallSound) }
             
         case ballCategory | goalCategory:
-            if firstBody.node?.name == "ball" {
-                firstBody.node?.removeFromParent()
-                if settings.sound { run(goalSound) }
-                
-                gameLives -= 1
-                
-                //lives to come
-                if gameLives > 0 {
-                    addPuck()
-                }
-                
-                if gameLives < 0 {
-                    gameLives = 0
-                }
-                
-                if gameLives == 0 && gameOver == nil {
-                    gameOver = true
-                    
-                    let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
-                    
-                    let decay1 = SKAction.wait(forDuration: 1.0)
-                    let decay2 = SKAction.wait(forDuration: 2.0)
-                    let gameOverCode = SKAction.run { [unowned self] in
-                        
-                        let getReadyText = "GET READY"
-                        getReadyLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
-                        getReadyLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-                        getReadyLabel.alpha = 1.0
-                        getReadyLabel.position = CGPoint(x: 0, y: 0)
-                        getReadyLabel.zPosition = 50
-                        getReadyLabel.text = getReadyText
-                        getReadyLabel.fontSize = 46
-                        getReadyLabel.alpha = 1.0
-                        anchorNode.addChild(getReadyLabel)
-                        
-                        if let score = scoreLabel.text {
-                            speech("Game Over. You scored \(score) points!")
-                        }
-                    }
-                    
-                    let runcode = SKAction.run {
-                        NotificationCenter.default.post(name: Notification.Name("loadGameView"), object: nil)
-                    }
-                    
-                    anchorNode.run(SKAction.sequence([decay1,gameOverCode,decay2,runcode]))
-                }
-                
-                livesLabel.text = String(gameLives)
+            firstBody.node?.removeFromParent()
+            if settings.sound { run(goalSound) }
+            
+            gameLives -= 1
+            
+            //lives to come
+            if gameLives > 0 {
+                addPuck()
             }
-           
+            
+            if gameLives < 0 {
+                gameLives = 0
+            }
+            
+            if gameLives == 0 && gameOver == nil {
+                gameOver = true
+                
+                let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
+                
+                let decay1 = SKAction.wait(forDuration: 1.0)
+                let decay2 = SKAction.wait(forDuration: 2.0)
+                let gameOverCode = SKAction.run { [unowned self] in
+                    
+                    let getReadyText = "GET READY"
+                    getReadyLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+                    getReadyLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+                    getReadyLabel.alpha = 1.0
+                    getReadyLabel.position = CGPoint(x: 0, y: 0)
+                    getReadyLabel.zPosition = 50
+                    getReadyLabel.text = getReadyText
+                    getReadyLabel.fontSize = 46
+                    getReadyLabel.alpha = 1.0
+                    anchorNode.addChild(getReadyLabel)
+                    
+                    if let score = scoreLabel.text {
+                        speech("Game Over. You scored \(score) points!")
+                    }
+                }
+                
+                let runcode = SKAction.run {
+                    NotificationCenter.default.post(name: Notification.Name("loadGameView"), object: nil)
+                }
+                
+                anchorNode.run(SKAction.sequence([decay1,gameOverCode,decay2,runcode]))
+            }
+            
+            livesLabel.text = String(gameLives)
+            
         case ballCategory | paddleCategory, powerCategory | paddleCategory:
             if settings.sound { run(paddleSound) }
             scoreLabel.text = String(gameScore)
@@ -862,7 +872,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         else {
             return
         }
-    
+        
         if ballNode.name != "ball" {return}
         
         func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat, _ initialVelocity: CGFloat ) {
