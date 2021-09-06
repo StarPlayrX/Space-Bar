@@ -11,10 +11,17 @@ import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate { // AVAudioPlayerDelegate
     
+    var gameOver: Bool?
     
+    let boost = CGFloat(15)
+    let ratio = CGFloat(1.5)
+    let halfLife = CGFloat(2)
+    let zero = CGFloat(0)
+    var initialVelocity = CGFloat(800)
+    let differentiator = CGFloat(250)
+
     var ballNode: SKSpriteNode? = nil
     let appSettings = AppSettings()
-    var initialVelocity = CGFloat(800)
     
     deinit {
         removeAllActions()
@@ -42,7 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     let wallCategory = UInt32(16)
     let goalCategory = UInt32(32)
     let midCategory = UInt32(64)
-    let vortexCategory = UInt32(128)
+    //let vortexCategory = UInt32(128)
     let lowerLeftCornerCategory = UInt32(256)
     let lowerRightCornerCategory = UInt32(512)
     let upperLeftCornerCategory = UInt32(1024)
@@ -105,7 +112,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         drawBricks(BricksTileMap: tilemap)
         let xPos: [CGFloat] = [
         //  1   2   3   4   5   6   7   8   9  10
-            1,  1,  1,  1,  1, -1, -1,  0,  1,  1,
+            1,  1,  1,  1,  1, -1,  0,  0, -1,  1,
             1,  1,  1,  3,  3,  0,  3,  1,  1, -1,
             1, -1,  1,  0, -1,  0, -1,  1, -1, -1,
             -1,  -1,
@@ -191,7 +198,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         ballNode?.physicsBody?.angularDamping = 0
         ballNode?.physicsBody?.restitution = 1.0
         ballNode?.physicsBody?.mass = 1.0
-        ballNode?.physicsBody?.fieldBitMask = vortexCategory
+        ballNode?.physicsBody?.fieldBitMask = 0
         ballNode?.name = "ball"
         ballNode?.position = CGPoint(x:0,y:0)
         ballNode?.speed = CGFloat(1.0)
@@ -754,17 +761,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             firstBody.node?.removeFromParent()
             if settings.sound { run(goalSound) }
             
+            gameLives -= 1
+            
             //lives to come
             if gameLives > 0 {
-                gameLives -= 1
+                addPuck()
             }
             
-            livesLabel.text = String(gameLives)
+            if gameLives < 0 {
+                gameLives = 0
+            }
             
-            if gameLives > 0 {
-                addPuck()
-            } else if gameLives == 0 {
-
+            if gameLives == 0 && gameOver == nil {
+                gameOver = true
+                
                 let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
                 
                 let decay1 = SKAction.wait(forDuration: 1.0)
@@ -786,13 +796,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
                         speech("Game Over. You scored \(score) points!")
                     }
                 }
-            
+                
                 let runcode = SKAction.run {
                     NotificationCenter.default.post(name: Notification.Name("loadGameView"), object: nil)
                 }
                 
                 anchorNode.run(SKAction.sequence([decay1,gameOverCode,decay2,runcode]))
             }
+            
+            livesLabel.text = String(gameLives)
+            
+            
             
         case ballCategory | paddleCategory:
             if settings.sound { run(paddleSound) }
@@ -829,21 +843,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         else {
             return
         }
-        
-        func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat) {
+    
+        func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat, _ initialVelocity: CGFloat ) {
             guard let ballBody = ballBody else { return }
             
-            if abs(ballBody.velocity.dx) < abs(initialVelocity / 2) {
-                ballBody.velocity.dx <= 0 ? (ballBody.velocity.dx -= boost) : (ballBody.velocity.dx += boost)
+            if abs(ballBody.velocity.dx) < abs(initialVelocity / halfLife) {
+                ballBody.velocity.dx <= zero ? (ballBody.velocity.dx -= boost) : (ballBody.velocity.dx += boost)
             }
             
             if abs(ballBody.velocity.dy) < abs(initialVelocity) {
-                ballBody.velocity.dy <= 0 ? (ballBody.velocity.dy -= boost * 2) : (ballBody.velocity.dy += boost * 2)
+                ballBody.velocity.dy <= zero ? (ballBody.velocity.dy -= boost * halfLife) : (ballBody.velocity.dy += boost * halfLife)
             }
         }
         
-        if abs(x) + abs(y) < initialVelocity * 1.5 {
-            booster(body, 20)
+        let absTotal = abs(x) + abs(y)
+        
+        if absTotal <= initialVelocity * ratio {
+            booster(body, boost, initialVelocity)
+        } else if absTotal > initialVelocity * ratio + differentiator {
+            booster(body, -boost / halfLife, initialVelocity + differentiator)
         }
     }
 }

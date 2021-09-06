@@ -8,7 +8,6 @@
 
 import SpriteKit
 
-
 class GameMenu: SKScene {
       
     var keyPressed = false
@@ -18,7 +17,6 @@ class GameMenu: SKScene {
         removeAllChildren()
         removeFromParent()
         print("Game Menu deinit")
-
     }
     
     var puckLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
@@ -143,15 +141,7 @@ class GameMenu: SKScene {
                     let myDecay = SKAction.wait(forDuration: 0.15)
                     let fade2 = SKAction.fadeAlpha(to: 1.0, duration:TimeInterval(0.15))
                     touchedNode.run(SKAction.sequence([fade1,myDecay,fade2,runcode]))
-                    
                 }
-                
-                /*
-                 AudioServicesPlaySystemSound(1519) // Actuate `Peek` feedback (weak boom)
-                 AudioServicesPlaySystemSound(1520) // Actuate `Pop` feedback (strong boom)
-                 AudioServicesPlaySystemSound(1521) // Actuate `Nope` feedback (series of three weak booms)
-                 */
-                
             }
         }
     }
@@ -436,7 +426,6 @@ class GameMenu: SKScene {
                 lvlTextLabel.verticalAlignmentMode = .center
                 lvlTextLabel.position = pos
                 lvlTextLabel.position.y += -vspc - vshift
-                
                 scene.addChild(lvlTextLabel)
             }
             

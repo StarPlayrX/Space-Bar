@@ -12,7 +12,7 @@ struct Settings: Codable {
     var puck: Int          =  0
     var level: Int         =  0
     var currentlevel: Int  =  0
-    var highlevel: Int     =  0
+    var highlevel: Int     =  31
     var score: Int         =  0
     var highscore: Int     =  0
     var lives: Int         =  3
@@ -24,11 +24,11 @@ var settings = Settings()
 
 struct AppSettings {    
     func saveUserDefaults() {
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(settings), forKey:"gameSettings")
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(settings), forKey:"gameSettingsII")
     }
 
     func loadUserDefaults() {
-        if let data = UserDefaults.standard.value(forKey:"gameSettings") as? Data,
+        if let data = UserDefaults.standard.value(forKey:"gameSettingsII") as? Data,
            let disk = try? PropertyListDecoder().decode(Settings.self, from: data) {
             settings = disk
         }
