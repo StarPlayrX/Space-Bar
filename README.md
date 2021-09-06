@@ -1,5 +1,5 @@
 # Space-Bar
-2D brick breaker game inspired by Air Hockey and BreakOut. This game is dedicated designers to Nolan Bushnell, Steve Jobs, Steve Wozniak (arcade version) and programmer Brad Stewart (2600 version) who created the classic game, Breakout, at Atari. 
+2D brick breaker game inspired by Air Hockey and Breakout. This game is dedicated designers to Nolan Bushnell, Steve Jobs, Steve Wozniak (arcade version) and programmer Brad Stewart (2600 version) who created the classic game, Breakout, at Atari. 
 
 Space-Bar created in 100% Swift and SpriteKit is an original work created by Todd Bruss (c) 2020-2021 and is made designed for iOS touch devices. Space-Bar is not affiliated with any break out style video game.
 
