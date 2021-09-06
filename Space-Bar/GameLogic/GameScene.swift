@@ -43,17 +43,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     
     //Categories
     let paddleCategory = UInt32(1)
-    let ballCategory = UInt32(2)
-    let brickCategory = UInt32(4)
-    let unusedCategory = UInt32(8)
+    let powerCategory = UInt32(2)
+    let ballCategory = UInt32(4)
+    let brickCategory = UInt32(8)
     let wallCategory = UInt32(16)
     let goalCategory = UInt32(32)
-    let midCategory = UInt32(64)
-    //let vortexCategory = UInt32(128)
-    let lowerLeftCornerCategory = UInt32(256)
-    let lowerRightCornerCategory = UInt32(512)
-    let upperLeftCornerCategory = UInt32(1024)
-    let upperRightCornerCategory = UInt32(2048)
     var space : SKReferenceNode? = nil
     
     //Positioning variables
@@ -155,6 +149,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             if let name = whatDaPuck.name, name.contains("ball") {
                 whatDaPuck.removeFromParent()
             }
+            
+            if settings.currentlevel % 7 != 0, let name = whatDaPuck.name, name.contains("powerball") {
+                whatDaPuck.removeFromParent()
+                print("HELLO")
+            }
         }
         
         ballNode = nil
@@ -182,12 +181,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         
         ballNode?.physicsBody?.categoryBitMask = ballCategory
         ballNode?.physicsBody?.contactTestBitMask =
-            paddleCategory + wallCategory + goalCategory + upperLeftCornerCategory +
-            lowerLeftCornerCategory + upperRightCornerCategory + lowerRightCornerCategory
+            paddleCategory + wallCategory + goalCategory
         
         ballNode?.physicsBody?.collisionBitMask =
-            paddleCategory + brickCategory + wallCategory + upperLeftCornerCategory +
-            lowerLeftCornerCategory + upperRightCornerCategory + lowerRightCornerCategory + midCategory
+            paddleCategory + brickCategory + wallCategory
         
         ballNode?.zPosition = 50
         ballNode?.physicsBody?.affectedByGravity = false
@@ -208,6 +205,73 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         ballNode?.addChild(ballEmoji)
         ballNode?.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
         anchorNode.addChild(ballNode!)
+       
+    }
+    
+    //addPower
+    func addPowerBall() {
+        
+        // Ensures no pucks pre-exist
+        for whatDaPuck in anchorNode.children {
+            if let name = whatDaPuck.name, name.contains("powerball") {
+                whatDaPuck.removeFromParent()
+            }
+        }
+        
+        let powerNode = SKSpriteNode()
+        
+        let powerTexture = SKLabelNode(fontNamed:"SpaceBarColors")
+        powerTexture.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+        powerTexture.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+        powerTexture.alpha = 1.0
+        powerTexture.position = CGPoint(x: 0, y: 0)
+        powerTexture.zPosition = 50
+        
+        var ball = (settings.puck + 4) % 8
+        
+        if ball > Global.shared.gameBall.count - 1 {
+            ball = Global.shared.gameBall.count - 1
+        }
+        
+        powerTexture.text = Global.shared.gameBall[ball]
+        powerTexture.fontSize = 54 //* 2
+        
+        let rnd = arc4random_uniform(UInt32(360))
+        powerTexture.zRotation = CGFloat(Int(rnd).degrees)
+        
+        if let texture = view?.texture(from: powerTexture) {
+            powerNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
+        } else {
+            // This fall back should not happen, but we may use this in the future for iOS' that fail
+            powerNode.physicsBody = SKPhysicsBody(circleOfRadius: 27)
+        }
+        
+        powerNode.physicsBody?.categoryBitMask = powerCategory
+        powerNode.physicsBody?.contactTestBitMask =
+            paddleCategory + wallCategory
+
+        powerNode.physicsBody?.collisionBitMask =
+            paddleCategory + brickCategory + wallCategory
+
+        powerNode.zPosition = 50
+        powerNode.physicsBody?.affectedByGravity = false
+        powerNode.physicsBody?.isDynamic = true
+        powerNode.physicsBody?.allowsRotation = true
+        powerNode.physicsBody?.friction = 0
+        powerNode.physicsBody?.linearDamping = 0
+        powerNode.physicsBody?.angularDamping = 0
+        powerNode.physicsBody?.restitution = 1.0
+        powerNode.physicsBody?.mass = 1.0
+        powerNode.physicsBody?.fieldBitMask = 0
+        powerNode.name = "powerball"
+        powerNode.position = CGPoint(x: -100,y: -100)
+        powerNode.speed = CGFloat(1.0)
+        
+        swapper.toggle()
+        let negative: CGFloat = swapper ? 1 : 0
+        powerNode.addChild(powerTexture)
+        powerNode.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
+        anchorNode.addChild(powerNode)
        
     }
 
@@ -361,8 +425,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         leftMidNode.physicsBody?.friction = 0
         leftMidNode.physicsBody?.fieldBitMask = 0
         leftMidNode.physicsBody?.contactTestBitMask = ballCategory
-        leftMidNode.physicsBody?.categoryBitMask = midCategory
-        leftMidNode.physicsBody?.collisionBitMask = midCategory + ballCategory
+        leftMidNode.physicsBody?.categoryBitMask = wallCategory
+        leftMidNode.physicsBody?.collisionBitMask = wallCategory + ballCategory
         leftMidNode.physicsBody?.restitution = 1.0
         leftMidNode.physicsBody?.mass = 1
         leftMidNode.physicsBody?.isDynamic = false
@@ -380,8 +444,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         rightMidNode.physicsBody?.friction = 0
         rightMidNode.physicsBody?.fieldBitMask = 0
         rightMidNode.physicsBody?.contactTestBitMask = ballCategory
-        rightMidNode.physicsBody?.categoryBitMask = midCategory
-        rightMidNode.physicsBody?.collisionBitMask = midCategory + ballCategory
+        rightMidNode.physicsBody?.categoryBitMask = wallCategory
+        rightMidNode.physicsBody?.collisionBitMask = wallCategory + ballCategory
         rightMidNode.physicsBody?.restitution = 1.0
         rightMidNode.physicsBody?.mass = 1
         rightMidNode.physicsBody?.isDynamic = false
@@ -415,8 +479,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         lowerLeftNode.physicsBody?.friction = 0
         lowerLeftNode.physicsBody?.fieldBitMask = 0
         lowerLeftNode.physicsBody?.contactTestBitMask = ballCategory
-        lowerLeftNode.physicsBody?.categoryBitMask = lowerLeftCornerCategory
-        lowerLeftNode.physicsBody?.collisionBitMask = lowerLeftCornerCategory + ballCategory
+        lowerLeftNode.physicsBody?.categoryBitMask = wallCategory
+        lowerLeftNode.physicsBody?.collisionBitMask = wallCategory + ballCategory
         lowerLeftNode.physicsBody?.restitution = 1.0
         lowerLeftNode.physicsBody?.mass = 1
         lowerLeftNode.physicsBody?.isDynamic = false
@@ -434,8 +498,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         lowerRightNode.physicsBody?.friction = 0
         lowerRightNode.physicsBody?.fieldBitMask = 0
         lowerRightNode.physicsBody?.contactTestBitMask = ballCategory
-        lowerRightNode.physicsBody?.categoryBitMask = lowerRightCornerCategory
-        lowerRightNode.physicsBody?.collisionBitMask = lowerRightCornerCategory + ballCategory
+        lowerRightNode.physicsBody?.categoryBitMask = wallCategory
+        lowerRightNode.physicsBody?.collisionBitMask = wallCategory + ballCategory
         lowerRightNode.physicsBody?.restitution = 1.0
         lowerRightNode.physicsBody?.mass = 1
         lowerRightNode.physicsBody?.isDynamic = false
@@ -453,8 +517,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         upperLeftNode.physicsBody?.friction = 0
         upperLeftNode.physicsBody?.fieldBitMask = 0
         upperLeftNode.physicsBody?.contactTestBitMask = ballCategory
-        upperLeftNode.physicsBody?.categoryBitMask = upperLeftCornerCategory
-        upperLeftNode.physicsBody?.collisionBitMask = upperLeftCornerCategory + ballCategory
+        upperLeftNode.physicsBody?.categoryBitMask = wallCategory
+        upperLeftNode.physicsBody?.collisionBitMask = wallCategory + ballCategory
         upperLeftNode.physicsBody?.restitution = 1.0
         upperLeftNode.physicsBody?.mass = 1
         upperLeftNode.physicsBody?.isDynamic = false
@@ -472,8 +536,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         upperRightNode.physicsBody?.friction = 0
         upperRightNode.physicsBody?.fieldBitMask = 0
         upperRightNode.physicsBody?.contactTestBitMask = ballCategory
-        upperRightNode.physicsBody?.categoryBitMask = upperRightCornerCategory
-        upperRightNode.physicsBody?.collisionBitMask = upperRightCornerCategory + ballCategory
+        upperRightNode.physicsBody?.categoryBitMask = wallCategory
+        upperRightNode.physicsBody?.collisionBitMask = wallCategory + ballCategory
         upperRightNode.physicsBody?.restitution = 1.0
         upperRightNode.physicsBody?.mass = 1
         upperRightNode.physicsBody?.isDynamic = false
@@ -564,6 +628,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         
         let runcode2 = SKAction.run { [unowned self] in
             addPuck()
+            
+            if settings.currentlevel % 7 == 0 {
+                addPowerBall()
+            }
+
         }
         
         run(SKAction.sequence([levelUpCode,decay,runcode1,decay,runcode2]))
@@ -708,7 +777,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         
         switch catMask {
         
-        case ballCategory | brickCategory :
+        case ballCategory | brickCategory, powerCategory | brickCategory :
             if settings.sound { run(brickSound) }
             gameScore += 1
             
@@ -722,71 +791,60 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             
             if settings.sound { run(wallSound) }
             
-        case ballCategory | midCategory :
-            
-            if settings.sound { run(wallSound) }
-            scoreLabel.text = String(gameScore)
-            
         case ballCategory | goalCategory:
-            firstBody.node?.removeFromParent()
-            if settings.sound { run(goalSound) }
-            
-            gameLives -= 1
-            
-            //lives to come
-            if gameLives > 0 {
-                addPuck()
-            }
-            
-            if gameLives < 0 {
-                gameLives = 0
-            }
-            
-            if gameLives == 0 && gameOver == nil {
-                gameOver = true
+            if firstBody.node?.name == "ball" {
+                firstBody.node?.removeFromParent()
+                if settings.sound { run(goalSound) }
                 
-                let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
+                gameLives -= 1
                 
-                let decay1 = SKAction.wait(forDuration: 1.0)
-                let decay2 = SKAction.wait(forDuration: 2.0)
-                let gameOverCode = SKAction.run { [unowned self] in
+                //lives to come
+                if gameLives > 0 {
+                    addPuck()
+                }
+                
+                if gameLives < 0 {
+                    gameLives = 0
+                }
+                
+                if gameLives == 0 && gameOver == nil {
+                    gameOver = true
                     
-                    let getReadyText = "GET READY"
-                    getReadyLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
-                    getReadyLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-                    getReadyLabel.alpha = 1.0
-                    getReadyLabel.position = CGPoint(x: 0, y: 0)
-                    getReadyLabel.zPosition = 50
-                    getReadyLabel.text = getReadyText
-                    getReadyLabel.fontSize = 46
-                    getReadyLabel.alpha = 1.0
-                    anchorNode.addChild(getReadyLabel)
+                    let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
                     
-                    if let score = scoreLabel.text {
-                        speech("Game Over. You scored \(score) points!")
+                    let decay1 = SKAction.wait(forDuration: 1.0)
+                    let decay2 = SKAction.wait(forDuration: 2.0)
+                    let gameOverCode = SKAction.run { [unowned self] in
+                        
+                        let getReadyText = "GET READY"
+                        getReadyLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+                        getReadyLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+                        getReadyLabel.alpha = 1.0
+                        getReadyLabel.position = CGPoint(x: 0, y: 0)
+                        getReadyLabel.zPosition = 50
+                        getReadyLabel.text = getReadyText
+                        getReadyLabel.fontSize = 46
+                        getReadyLabel.alpha = 1.0
+                        anchorNode.addChild(getReadyLabel)
+                        
+                        if let score = scoreLabel.text {
+                            speech("Game Over. You scored \(score) points!")
+                        }
                     }
+                    
+                    let runcode = SKAction.run {
+                        NotificationCenter.default.post(name: Notification.Name("loadGameView"), object: nil)
+                    }
+                    
+                    anchorNode.run(SKAction.sequence([decay1,gameOverCode,decay2,runcode]))
                 }
                 
-                let runcode = SKAction.run {
-                    NotificationCenter.default.post(name: Notification.Name("loadGameView"), object: nil)
-                }
-                
-                anchorNode.run(SKAction.sequence([decay1,gameOverCode,decay2,runcode]))
+                livesLabel.text = String(gameLives)
             }
-            
-            livesLabel.text = String(gameLives)
-        
-        case ballCategory | paddleCategory:
+           
+        case ballCategory | paddleCategory, powerCategory | paddleCategory:
             if settings.sound { run(paddleSound) }
             scoreLabel.text = String(gameScore)
-        case ballCategory | lowerLeftCornerCategory:
-            if settings.sound { run(wallSound) }
-        case ballCategory | upperLeftCornerCategory:
-            if settings.sound { run(wallSound) }
-        case ballCategory | lowerRightCornerCategory :
-            if settings.sound { run(wallSound) }
-        case ballCategory | upperRightCornerCategory :
-            if settings.sound { run(wallSound) }
         default:
             break
         }
