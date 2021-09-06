@@ -645,40 +645,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         run(SKAction.sequence([levelUpCode,decay1,runcode1,decay2,runcode2]))
     }
     
-    //MARK: didBeginContact
-    fileprivate func firstContact(_ contact: SKPhysicsContact, _ firstBody: SKPhysicsBody) {
-        let cp = contact.contactPoint
-        cp.x < 0 ? applyVector(dx: 25, dy: 0, node: firstBody.node, duration: 0.75) : applyVector(dx: -25, dy: 0, node: firstBody.node, duration: 0.75)
-        cp.y < 0 ? applyVector(dx: 0, dy: 75, node: firstBody.node, duration: 1.5) : applyVector(dx: 0, dy: -75, node: firstBody.node, duration: 1.5)
-        
-        swapper.toggle()
-        let toggle = swapper ? 1 : -1
-        
-        let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(toggle), duration: 2)
-        firstBody.node?.run(rotateAction)
-    }
-    
-    fileprivate func secondContact(_ contact: SKPhysicsContact, _ firstBody: SKPhysicsBody) {
-        let cp = contact.contactPoint
-        cp.y < 0 ? applyVector(dx: 0, dy: 75, node: firstBody.node, duration: 1.5) : applyVector(dx: 0, dy: -75, node: firstBody.node, duration: 1.5)
-        
-        swapper.toggle()
-        let toggle = swapper ? 1 : -1
-        
-        let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(toggle) / 180, duration: 2)
-        firstBody.node?.run(rotateAction)
-    }
-    
     fileprivate func checker(_ firstBody: SKPhysicsBody) {
         // There are two mysterious "bricks" that do not seem to exist
         if let count = space?.children.count, count - 1 <= 0  {
             
             let a = SKAction.fadeAlpha(to: 0, duration: 0.25)
-            
             let b = SKAction.removeFromParent()
-            
             let c = SKAction.wait(forDuration: 0.5)
-            
             let d = SKAction.run { [unowned self] in
                 resetGameBoard(lives: true)
             }
@@ -701,9 +674,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             synthesizer.speak(utterance)
         }
     }
-    
-    
-    
     
     func didBegin(_ contact: SKPhysicsContact) {
         
@@ -805,9 +775,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             }
             
             livesLabel.text = String(gameLives)
-            
-            
-            
+        
         case ballCategory | paddleCategory:
             if settings.sound { run(paddleSound) }
             scoreLabel.text = String(gameScore)
@@ -824,13 +792,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         }
         
         setHighScore()
-    }
-    
-    func applyVector(dx: CGFloat, dy: CGFloat, node: SKNode?, duration: Double) {
-        if let node = node {
-            let action = SKAction.applyImpulse( CGVector(dx: dx , dy: dy), duration: duration)
-            node.run(action)
-        }
     }
     
     // Called before each frame is rendered
