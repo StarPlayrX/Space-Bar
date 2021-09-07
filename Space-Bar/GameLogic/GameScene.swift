@@ -798,7 +798,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
                 a.removeFromParent()
                 checker(firstBody)
             }
+         
+        case powerCategory | wallCategory:
+            guard
+                let ballNode = firstBody.node,
+                let x = ballNode.physicsBody?.velocity.dx,
+                let y = ballNode.physicsBody?.velocity.dy,
+                let body = ballNode.physicsBody
+            else {
+                return
+            }
             
+            if ballNode.name != "powerball" {return}
+            
+            func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat, _ initialVelocity: CGFloat ) {
+                guard let ballBody = ballBody else { return }
+                
+                if abs(ballBody.velocity.dx) < abs(initialVelocity / halfLife) {
+                    ballBody.velocity.dx <= zero ? (ballBody.velocity.dx -= boost) : (ballBody.velocity.dx += boost)
+                }
+                
+                if abs(ballBody.velocity.dy) < abs(initialVelocity) {
+                    ballBody.velocity.dy <= zero ? (ballBody.velocity.dy -= boost * halfLife) : (ballBody.velocity.dy += boost * halfLife)
+                }
+            }
+            
+            let absTotal = abs(x) + abs(y)
+            
+            if absTotal <= initialVelocity * ratio {
+                booster(body, boost, initialVelocity)
+            } else if absTotal > initialVelocity * ratio + differentiator {
+                booster(body, -boost / halfLife, initialVelocity + differentiator)
+            }
         case ballCategory | wallCategory :
             
             if settings.sound { run(wallSound) }
