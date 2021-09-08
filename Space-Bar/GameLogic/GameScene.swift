@@ -105,8 +105,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         }
         drawBricks(BricksTileMap: tilemap)
         let xPos: [CGFloat] = [
-            //  1   2   3   4   5   6   7   8   9  10
-            1,  1,  1,  1,  1, -1,  0,  0, -1,  1,
+        //  1   2   3   4   5   6   7   8   9  10
+            1,  1,  1, -1,  1,  1, -1,  0, -1,  0,
             1,  1,  1,  3, -1,  0,  3,  1,  1, -1,
             1, -1,  1,  0, -1,  0, -1,  1, -1, -1,
             -1,  -1,
@@ -351,10 +351,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         
         screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
         
-        levelart[0] =  ["😀","😃","😄","😁","😆","😅","😂","🤣"]
-        levelart[1] =  ["😍","🥰","😘","😗","😙","😚","😋","😛"]
-        levelart[2] =  ["😝","😜","🤪","🤨","🧐","🤓","😎","🥸"]
-        levelart[3] =  ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
+        levelart[3] =  ["😀","😃","😄","😁","😆","😅","😂","🤣"]
+        levelart[2] =  ["😍","🥰","😘","😗","😙","😚","😋","😛"]
+        levelart[1] =  ["😝","😜","🤪","🤨","🧐","🤓","😎","🥸"]
+        levelart[0] =  ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
         
         width = (scene?.size.width)!
         height = (scene?.size.height)!
@@ -465,8 +465,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         let centerCourtLineNode = SKSpriteNode()
         let centerCourtLineTexture = SKTexture(imageNamed: "centerline")
         centerCourtLineNode.texture = centerCourtLineTexture
-        centerCourtLineNode.size = CGSize(width: (-centerWidth * 2) + 64, height: 4)
+        centerCourtLineNode.size = CGSize(width: (-centerWidth * 4) + 64, height: 4)
         centerCourtLineNode.position = CGPoint(x:0,y:0)
+        centerCourtLineNode.zRotation = 90.degrees
         anchorNode.addChild(centerCourtLineNode)
         
         //lower left corner
