@@ -203,15 +203,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         
     }
     
-    //addPower
-    func addPowerBall() {
-        
+    func removePowerBall() {
         // Ensures no pucks pre-exist
         for whatDaPuck in anchorNode.children {
             if let name = whatDaPuck.name, name.contains("powerball") {
                 whatDaPuck.removeFromParent()
             }
         }
+    }
+    
+    //addPower
+    func addPowerBall() {
+        
+        removePowerBall()
         
         let powerNode = SKSpriteNode()
         
@@ -624,7 +628,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         let runcode2 = SKAction.run { [unowned self] in
             addPuck()
             
-            if settings.currentlevel % 7 == 0 {
+            if (settings.currentlevel + 1) % 10 == 0 {
                 addPowerBall()
             }
             
@@ -851,6 +855,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             
             if gameLives == 0 && gameOver == nil {
                 gameOver = true
+                
+                removePowerBall()
                 
                 let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
                 

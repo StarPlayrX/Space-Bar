@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         Thread.sleep(forTimeInterval: 1.5)
+        Global.shared.levels = Global.shared.levels.reversed()
+        Global.shared.rotation = Global.shared.rotation.reversed()
 
        /* #if targetEnvironment(macCatalyst)
         /* some margin */
