@@ -103,15 +103,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
                 break
             }
         }
+       
         drawBricks(BricksTileMap: tilemap)
-        let xPos: [CGFloat] = [
-        //  1   2   3   4   5   6   7   8   9  10
-            1,  1,  1, -1,  1,  1, -1,  0, -1,  0,
-            1,  1,  1,  3, -1,  0,  3,  1,  1, -1,
-            1, -1,  1,  0, -1,  0, -1,  1, -1, -1,
-            -1,  -1,
-        ]
-        
+       
         var x: CGFloat = 0
         
         if xPos.indices.contains(settings.currentlevel) {
@@ -119,6 +113,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         }
         
         space?.position = screenType == .iPad ? CGPoint(x: x, y: centerHeight - 340 / 1.80) : CGPoint(x: x, y: centerHeight - 240)
+        
+        //MARK: - To do: redo this as switch case.
+        if settings.currentlevel >= 13 {
+            space?.position = screenType == .iPad ? CGPoint(x: x, y: centerHeight - 400 / 1.80) : CGPoint(x: x, y: centerHeight - 300)
+        }
+        
     }
     
     func drawParallax() {
