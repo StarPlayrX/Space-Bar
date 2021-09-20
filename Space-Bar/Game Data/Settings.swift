@@ -22,13 +22,15 @@ struct Settings: Codable {
 
 var settings = Settings()
 
-struct AppSettings {    
+struct AppSettings {
+    
+    let spaceBarGameSettings = "SBGameSettings"
     func saveUserDefaults() {
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(settings), forKey:"SBGameSettings")
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(settings), forKey:spaceBarGameSettings)
     }
 
     func loadUserDefaults() {
-        if let data = UserDefaults.standard.value(forKey:"SBGameSettings") as? Data,
+        if let data = UserDefaults.standard.value(forKey:spaceBarGameSettings) as? Data,
            let disk = try? PropertyListDecoder().decode(Settings.self, from: data) {
             settings = disk
         }
