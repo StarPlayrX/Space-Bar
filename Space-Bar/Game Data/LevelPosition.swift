@@ -8,11 +8,14 @@
 
 import UIKit
 
+// Adjust the positioning of the pattern
+// Square Patterns are always 0 (Centered)
+// Hex patterns are always 1 or -1 (Bump Left, Bump Right)
 let xPos: [CGFloat] = [
 //  1   2   3   4   5   6   7   8   9  10
     0,  0,  0,  0,  0,  0,  0,  0,  0,  0, // 10
    -1,  1,  1,  1,  1, -1, -1,  1,  1,  0, // 20
-   -1, -1, -1,  1,  1,  1,  0, -1,  0,  0, // 30
+   -1, -1, -1,  1, -1,  1,  0, -1,  0,  0, // 30
     0,  0,
 ]
 

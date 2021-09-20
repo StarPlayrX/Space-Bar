@@ -112,10 +112,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             x = xPos[settings.currentlevel] * 12.5
         }
         
-        //space?.position = screenType == .iPad ? CGPoint(x: x, y: centerHeight - 340 / 1.80) : CGPoint(x: x, y: centerHeight - 240)
-        
         space?.position = screenType == .iPad ? CGPoint(x: x, y: centerHeight - 400 / 1.80) : CGPoint(x: x, y: centerHeight - 300)
-        
     }
     
     func drawParallax() {
@@ -464,7 +461,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         centerCourtLineNode.texture = centerCourtLineTexture
         centerCourtLineNode.size = CGSize(width: (-centerWidth * 4) + 64, height: 4)
         centerCourtLineNode.position = CGPoint(x:0,y:0)
-        centerCourtLineNode.zRotation = 90.degrees
+        //MARK: - For testing if pattern is centered left to right
+        //centerCourtLineNode.zRotation = 90.degrees
         anchorNode.addChild(centerCourtLineNode)
         
         //lower left corner
