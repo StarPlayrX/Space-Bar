@@ -459,9 +459,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         let centerCourtLineNode = SKSpriteNode()
         let centerCourtLineTexture = SKTexture(imageNamed: "centerline")
         centerCourtLineNode.texture = centerCourtLineTexture
-        centerCourtLineNode.size = CGSize(width: (-centerWidth * 4) + 64, height: 4)
+        centerCourtLineNode.size = CGSize(width:centerWidth * 2 - 64, height: 4)
         centerCourtLineNode.position = CGPoint(x:0,y:0)
-        //MARK: - For testing if pattern is centered left to right
         //centerCourtLineNode.zRotation = 90.degrees
         anchorNode.addChild(centerCourtLineNode)
         
