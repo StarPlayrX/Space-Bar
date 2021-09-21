@@ -113,6 +113,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         }
         
         space?.position = screenType == .iPad ? CGPoint(x: x, y: centerHeight - 400 / 1.80) : CGPoint(x: x, y: centerHeight - 300)
+        
+        print("SPACE COUNT:", space?.children.count)
     }
     
     func drawParallax() {
