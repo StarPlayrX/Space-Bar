@@ -9,7 +9,7 @@ Space-Bar features original vector graphics and original classic arcade sound ef
 
 https://testflight.apple.com/join/VirI3q1c
 
-Have a power up that you'd like to see in Space-Bar? Post an issue and we'll see when we can fit it in?
+Do you have a power up that you'd like to see in Space-Bar? Post an issue and we'll see when we can fit it in.
 
 Interested in contributing? Space-Bar is open source and we always keep the very latest build in Master.
 
