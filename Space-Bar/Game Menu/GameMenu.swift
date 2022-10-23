@@ -168,7 +168,7 @@ class GameMenu: SKScene {
             label.position = pos
             label.position.y -= 90
             label.alpha = 0.5
-            label.text = "© 2020-2021 Todd Bruss"
+            label.text = "© 2020-2022 Todd Bruss"
             scene?.addChild(label)
         }
         

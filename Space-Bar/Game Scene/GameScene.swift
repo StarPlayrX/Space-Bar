@@ -9,6 +9,7 @@
 import SpriteKit
 import AVFoundation
 
+
 class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate { // AVAudioPlayerDelegate
     
     var gameOver: Bool?
@@ -95,17 +96,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         
         guard let tilemap = space?.childNode(withName: "//bricks") as? SKTileMapNode else { return }
         
-        for center in children {
-            if (center.name == "Center") {
-                guard let space = space else { return }
-                center.position = CGPoint(x: centerWidth, y: centerHeight)
-                center.addChild(space)
-                break
+        autoreleasepool {
+            for center in children {
+                if center.name == "Center" {
+                    guard let space = space else { return }
+                    center.position = CGPoint(x: centerWidth, y: centerHeight)
+                    center.addChild(space)
+                    break
+                }
             }
         }
-       
+        
         drawBricks(BricksTileMap: tilemap)
-       
+        
         var x: CGFloat = 0
         
         if xPos.indices.contains(settings.currentlevel) {
@@ -114,7 +117,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         
         space?.position = screenType == .iPad ? CGPoint(x: x, y: centerHeight - 400 / 1.80) : CGPoint(x: x, y: centerHeight - 300)
         
-        print("SPACE COUNT:", space?.children.count)
+        //print("SPACE COUNT:", space?.children.count)
     }
     
     func drawParallax() {
@@ -127,12 +130,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         let moveGroundSpritesForever = SKAction.repeatForever(SKAction.sequence([moveGroundSprite,resetGroundSprite]))
         
         for i in -1...1 {
-            let sprite = SKSpriteNode(texture: starryNightTexture)
-            sprite.position = CGPoint(x: -centerWidth, y: CGFloat(i) * sprite.size.height)
-            sprite.run(moveGroundSpritesForever)
-            backParalax.addChild(sprite)
-            backParalax.zPosition = -10
-            backParalax.speed = 1
+            autoreleasepool {
+                let sprite = SKSpriteNode(texture: starryNightTexture)
+                sprite.position = CGPoint(x: -centerWidth, y: CGFloat(i) * sprite.size.height)
+                sprite.run(moveGroundSpritesForever)
+                backParalax.addChild(sprite)
+                backParalax.zPosition = -10
+                backParalax.speed = 1
+            }
         }
         anchorNode.addChild(backParalax)
     }
@@ -142,8 +147,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         
         // Ensures no pucks pre-exist
         for whatDaPuck in anchorNode.children {
-            if let name = whatDaPuck.name, name == "ball" {
-                whatDaPuck.removeFromParent()
+            autoreleasepool {
+                if let name = whatDaPuck.name, name == "ball" {
+                    whatDaPuck.removeFromParent()
+                }
             }
         }
         
@@ -172,10 +179,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         
         ballNode?.physicsBody?.categoryBitMask = ballCategory
         ballNode?.physicsBody?.contactTestBitMask =
-            paddleCategory + wallCategory + goalCategory
+        paddleCategory + wallCategory + goalCategory
         
         ballNode?.physicsBody?.collisionBitMask =
-            paddleCategory + brickCategory + wallCategory
+        paddleCategory + brickCategory + wallCategory
         
         ballNode?.zPosition = 50
         ballNode?.physicsBody?.affectedByGravity = false
@@ -202,8 +209,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     func removePowerBall() {
         // Ensures no pucks pre-exist
         for whatDaPuck in anchorNode.children {
-            if let name = whatDaPuck.name, name.contains("powerball") {
-                whatDaPuck.removeFromParent()
+            autoreleasepool {
+                if let name = whatDaPuck.name, name.contains("powerball") {
+                    whatDaPuck.removeFromParent()
+                }
             }
         }
     }
@@ -243,10 +252,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         
         powerNode.physicsBody?.categoryBitMask = powerCategory
         powerNode.physicsBody?.contactTestBitMask =
-            paddleCategory + wallCategory
+        paddleCategory + wallCategory
         
         powerNode.physicsBody?.collisionBitMask =
-            paddleCategory + brickCategory + wallCategory
+        paddleCategory + brickCategory + wallCategory
         
         powerNode.zPosition = 50
         powerNode.physicsBody?.affectedByGravity = false
@@ -323,15 +332,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     
     func drawBricks(BricksTileMap: SKTileMapNode)  {
         for col in (0 ..< BricksTileMap.numberOfColumns) {
-            for row in (0 ..< BricksTileMap.numberOfRows) {
-                if let _ = BricksTileMap.tileDefinition(atColumn: col, row: row) {
-                    let center = BricksTileMap.centerOfTile(atColumn: col, row: row)
-                    tileMapRun(TileMapNode: BricksTileMap, center: center)
+            autoreleasepool {
+                for row in (0 ..< BricksTileMap.numberOfRows) {
+                    autoreleasepool {
+                        if let _ = BricksTileMap.tileDefinition(atColumn: col, row: row) {
+                            let center = BricksTileMap.centerOfTile(atColumn: col, row: row)
+                            tileMapRun(TileMapNode: BricksTileMap, center: center)
+                        }
+                    }
                 }
             }
         }
-        BricksTileMap.removeAllChildren()
-        BricksTileMap.removeFromParent()
+        
+        autoreleasepool {
+            BricksTileMap.removeAllChildren()
+        }
+        
+        autoreleasepool {
+            BricksTileMap.removeFromParent()
+        }
     }
     
     
@@ -652,19 +671,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { touchDown(atPoint: t.location(in: self)) }
+        autoreleasepool {
+            for t in touches { touchDown(atPoint: t.location(in: self)) }
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { touchMoved(toPoint: t.location(in: self)) }
+        autoreleasepool {
+            for t in touches { touchMoved(toPoint: t.location(in: self)) }
+        }
     }
     
     
     func resetGameBoard(lives: Bool) {
         
         for removePowerball in anchorNode.children {
-            if let name = removePowerball.name, name.contains("ball") {
-                removePowerball.removeFromParent()
+            autoreleasepool {
+                if let name = removePowerball.name, name.contains("ball") {
+                    removePowerball.removeFromParent()
+                }
             }
         }
         
@@ -714,9 +739,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             addPuck()
             
             for whatDaPuck in anchorNode.children {
-                if let name = whatDaPuck.name, name == "powerball" {
-                    whatDaPuck.removeFromParent()
+                autoreleasepool {
+                    if let name = whatDaPuck.name, name == "powerball" {
+                        whatDaPuck.removeFromParent()
+                    }
                 }
+                
             }
             
             if settings.currentlevel % 7 == 0 {
@@ -746,14 +774,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         }
     }
     
+ 
+    let synthesizer = AVSpeechSynthesizer()
+
     func speech(_ text: String) {
         DispatchQueue.global(qos: .background).async {
             let utterance = AVSpeechUtterance(string: text)
             utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
             utterance.rate = 0.5
             utterance.volume = 2.0
-            let synthesizer = AVSpeechSynthesizer()
-            synthesizer.speak(utterance)
+            self.synthesizer.speak(utterance)
         }
     }
     
@@ -789,7 +819,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
         }
         
         switch catMask {
-        
+            
         case ballCategory | brickCategory, powerCategory | brickCategory :
             if settings.sound { run(brickSound) }
             gameScore += 1
@@ -799,7 +829,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
                 a.removeFromParent()
                 checker(firstBody)
             }
-         
+            
         case powerCategory | wallCategory:
             guard
                 let ballNode = firstBody.node,
@@ -872,8 +902,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
                     getReadyLabel.alpha = 1.0
                     anchorNode.addChild(getReadyLabel)
                     
-                    if let score = scoreLabel.text {
-                        speech("Game Over. You scored \(score) points!")
+                    if let score = scoreLabel.text, Int(score) ?? 0 > 1 {
+                        speech("Game Over. You scored \(score) points.")
+                    } else if let score = scoreLabel.text, Int(score) ?? 0 == 1 {
+                        speech("Game Over. You scored one point.")
+                    } else {
+                        speech("Game Over. You scored zero points. Try watching Ted Lasso.")
                     }
                 }
                 

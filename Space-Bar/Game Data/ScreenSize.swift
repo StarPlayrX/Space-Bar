@@ -2,7 +2,7 @@
 //  ScreenSize.swift
 //  Space-Bar
 //
-//  Created by M1 on 8/21/21.
+//  Created by Todd Bruss on 8/21/21.
 //  Copyright © 2021 Todd Bruss. All rights reserved.
 //
 
