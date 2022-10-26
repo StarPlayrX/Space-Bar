@@ -1,6 +1,6 @@
 # Space-Bar
 
-### A colorful brick breaker game by Todd Bruss
+#### A colorful brick breaker game by Todd Bruss
 
 2D brick breaker game inspired by Air Hockey and Breakout. This game is dedicated designers to Nolan Bushnell, Steve Jobs, Steve Wozniak (arcade version) and programmer Brad Stewart (2600 version) who created the classic game, Breakout, at Atari in 1976-1978. 
 
