@@ -5,9 +5,7 @@
 iOS TestFlight build
 https://testflight.apple.com/join/VirI3q1c
 
-<img width="400" alt="Screen Shot 2022-10-23 at 8 32 47 PM" src="https://user-images.githubusercontent.com/52664524/198066544-53b56b6a-47a4-4cb9-bfb3-e21642559c63.png">
-
-<img width="400" alt="Screen Shot 2022-10-23 at 8 32 54 PM" src="https://user-images.githubusercontent.com/52664524/198065663-607e6a80-0c39-4ac0-b420-42e00c22daad.png">
+<img width="400" alt="Screen Shot 2022-10-23 at 8 32 47 PM" src="https://user-images.githubusercontent.com/52664524/198066544-53b56b6a-47a4-4cb9-bfb3-e21642559c63.png"><img width="400" alt="Screen Shot 2022-10-23 at 8 32 54 PM" src="https://user-images.githubusercontent.com/52664524/198065663-607e6a80-0c39-4ac0-b420-42e00c22daad.png">
 
 
 2D brick breaker game inspired by Air Hockey and Breakout. This game is dedicated designers to Nolan Bushnell, Steve Jobs, Steve Wozniak (arcade version) and programmer Brad Stewart (2600 version) who created the classic game, Breakout, at Atari in 1976-1978. 
