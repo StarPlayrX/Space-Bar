@@ -13,4 +13,4 @@ Do you have a power up that you'd like to see in Space-Bar? Post an issue and we
 
 Interested in contributing? Space-Bar is open source and we always keep the very latest build in Master. Feel free to join in the fun!
 
-Space-Bar is developed for iOS/iPadOS. A macOS release is planned at a later date.
+Space-Bar is developed for iOS/iPadOS. The game's official AppStore released will be between Nov 21st and Dec 21st, 2022. A macOS release is planned at a later date.
