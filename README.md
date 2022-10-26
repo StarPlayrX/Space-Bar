@@ -1,4 +1,7 @@
 # Space-Bar
+
+### A colorful brick breaker game by Todd Bruss
+
 2D brick breaker game inspired by Air Hockey and Breakout. This game is dedicated designers to Nolan Bushnell, Steve Jobs, Steve Wozniak (arcade version) and programmer Brad Stewart (2600 version) who created the classic game, Breakout, at Atari in 1976-1978. 
 
 Air Hockey was invented between 1962 and 1972 by a group of Brunswick Billiards employees. The name Air Hockey is used quite often by all manufacturers, but it is trademarked by Brunswick Billiards. 
