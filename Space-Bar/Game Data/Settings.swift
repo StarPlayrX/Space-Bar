@@ -12,11 +12,11 @@ struct Settings: Codable {
     var puck: Int          =  0
     var level: Int         =  0
     var currentlevel: Int  =  0
-    var maxlevel: Int      =  41
-    var highlevel: Int     =  41
+    var maxlevel: Int      =  69
+    var highlevel: Int     =  69
     var score: Int         =  0
     var highscore: Int     =  0
-    var lives: Int         =  1
+    var lives: Int         =  3
     var music: Bool        =  false
     var sound: Bool        =  true
 }
@@ -25,7 +25,7 @@ var settings = Settings()
 
 struct AppSettings {
     
-    let spaceBarGameSettings = "SBGameSettingsIII"
+    let spaceBarGameSettings = "SpaceBarTestFlightV001GameSettings"
     func saveUserDefaults() {
       UserDefaults.standard.set(try? PropertyListEncoder().encode(settings), forKey:spaceBarGameSettings)
     }

@@ -7,10 +7,8 @@
 //
 
 import SpriteKit
-import AVFoundation
 
-
-class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate { // AVAudioPlayerDelegate
+class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //AVSpeechSynthesizerDelegate
     
     var gameOver: Bool?
     
@@ -632,7 +630,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             anchorNode.addChild(getReadyLabel)
             
             if let lvl = levelLabel.text {
-                speech("Level \(lvl). Get Ready!")
+                try? speech("Level \(lvl). Get Ready!")
             }
         }
         
@@ -725,7 +723,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             anchorNode.addChild(getReadyLabel)
             
             if let lvl = levelLabel.text, let score = scoreLabel.text  {
-                speech("Level \(lvl). Score \(score). Get Ready!")
+                try? speech("Level \(lvl). Score \(score). Get Ready!")
             }
         }
         
@@ -771,19 +769,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
             }
             
             run(SKAction.sequence([c,d]))
-        }
-    }
-    
- 
-    let synthesizer = AVSpeechSynthesizer()
-
-    func speech(_ text: String) {
-        DispatchQueue.global(qos: .background).async {
-            let utterance = AVSpeechUtterance(string: text)
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-            utterance.rate = 0.5
-            utterance.volume = 2.0
-            self.synthesizer.speak(utterance)
         }
     }
     
@@ -903,11 +888,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, AVSpeechSynthesizerDelegate 
                     anchorNode.addChild(getReadyLabel)
                     
                     if let score = scoreLabel.text, Int(score) ?? 0 > 1 {
-                        speech("Game Over. You scored \(score) points.")
+                        try? speech("Game Over. You scored \(score) points.")
                     } else if let score = scoreLabel.text, Int(score) ?? 0 == 1 {
-                        speech("Game Over. You scored one point.")
+                        try? speech("Game Over. You scored one point.")
                     } else {
-                        speech("Game Over. You scored zero points. Try watching Ted Lasso.")
+                        try? speech("Game Over. You scored zero points. Try watching Ted Lasso.")
                     }
                 }
                 
