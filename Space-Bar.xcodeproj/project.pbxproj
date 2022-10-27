@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5F163D18231C8A2500E341FD /* SpaceBarColors.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5F163D17231C8A2500E341FD /* SpaceBarColors.otf */; };
 		5F4288C92906F86E00C38D01 /* level15.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F4288C82906F86E00C38D01 /* level15.sks */; };
-		5F4288CB2906F8CD00C38D01 /* level17.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F4288CA2906F8CD00C38D01 /* level17.sks */; };
+		5F4288CB2906F8CD00C38D01 /* level19.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F4288CA2906F8CD00C38D01 /* level19.sks */; };
 		5F4288CD2906F9A400C38D01 /* level46.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F4288CC2906F9A400C38D01 /* level46.sks */; };
 		5F4288CF2906FBA300C38D01 /* level20.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F4288CE2906FBA300C38D01 /* level20.sks */; };
 		5F4288D1290700AD00C38D01 /* level48.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F4288D0290700AD00C38D01 /* level48.sks */; };
@@ -56,6 +56,8 @@
 		5FB5698A2908AAEB0056FCD0 /* level70.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FB569872908AAEB0056FCD0 /* level70.sks */; };
 		5FCEE07F2313415E0002A5CF /* GameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCEE07E2313415E0002A5CF /* GameMenu.swift */; };
 		5FCEE081231341680002A5CF /* GameMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FCEE080231341680002A5CF /* GameMenu.sks */; };
+		5FE5CD6D290A1EDA00BD4B68 /* level71.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FE5CD6C290A1EDA00BD4B68 /* level71.sks */; };
+		5FE5CD6F290A1EE700BD4B68 /* level72.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FE5CD6E290A1EE700BD4B68 /* level72.sks */; };
 		6F27255C26DAA8D30009B5B5 /* level36.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27254C26DAA8D30009B5B5 /* level36.sks */; };
 		6F27255D26DAA8D30009B5B5 /* level33.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27254D26DAA8D30009B5B5 /* level33.sks */; };
 		6F27255E26DAA8D30009B5B5 /* level24.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27254E26DAA8D30009B5B5 /* level24.sks */; };
@@ -90,7 +92,7 @@
 		EA69D561203FC4D4008D9359 /* level28.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D560203FC4D4008D9359 /* level28.sks */; };
 		EA69D563203FCA95008D9359 /* level31.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D562203FCA95008D9359 /* level31.sks */; };
 		EA69D569203FCB2E008D9359 /* level23.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D568203FCB2E008D9359 /* level23.sks */; };
-		EA69D56B203FCB98008D9359 /* level19.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D56A203FCB98008D9359 /* level19.sks */; };
+		EA69D56B203FCB98008D9359 /* level17.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D56A203FCB98008D9359 /* level17.sks */; };
 		EA69D56F203FCC1F008D9359 /* level1.sks in Resources */ = {isa = PBXBuildFile; fileRef = EA69D56E203FCC1F008D9359 /* level1.sks */; };
 		EABB3AF9203B64C6000217E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EABB3AF8203B64C6000217E1 /* Assets.xcassets */; };
 		EABB3AFB203CFA27000217E1 /* level13.sks in Resources */ = {isa = PBXBuildFile; fileRef = EABB3AFA203CFA27000217E1 /* level13.sks */; };
@@ -104,7 +106,7 @@
 /* Begin PBXFileReference section */
 		5F163D17231C8A2500E341FD /* SpaceBarColors.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpaceBarColors.otf; sourceTree = "<group>"; };
 		5F4288C82906F86E00C38D01 /* level15.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level15.sks; sourceTree = "<group>"; };
-		5F4288CA2906F8CD00C38D01 /* level17.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level17.sks; sourceTree = "<group>"; };
+		5F4288CA2906F8CD00C38D01 /* level19.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level19.sks; sourceTree = "<group>"; };
 		5F4288CC2906F9A400C38D01 /* level46.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level46.sks; sourceTree = "<group>"; };
 		5F4288CE2906FBA300C38D01 /* level20.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level20.sks; sourceTree = "<group>"; };
 		5F4288D0290700AD00C38D01 /* level48.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level48.sks; sourceTree = "<group>"; };
@@ -153,6 +155,8 @@
 		5FC5E32722E40F1F00E1159A /* Space-Bar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Space-Bar.entitlements"; sourceTree = "<group>"; };
 		5FCEE07E2313415E0002A5CF /* GameMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
 		5FCEE080231341680002A5CF /* GameMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameMenu.sks; sourceTree = "<group>"; };
+		5FE5CD6C290A1EDA00BD4B68 /* level71.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level71.sks; sourceTree = "<group>"; };
+		5FE5CD6E290A1EE700BD4B68 /* level72.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level72.sks; sourceTree = "<group>"; };
 		6F27254C26DAA8D30009B5B5 /* level36.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level36.sks; sourceTree = "<group>"; };
 		6F27254D26DAA8D30009B5B5 /* level33.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level33.sks; sourceTree = "<group>"; };
 		6F27254E26DAA8D30009B5B5 /* level24.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level24.sks; sourceTree = "<group>"; };
@@ -186,7 +190,7 @@
 		EA69D560203FC4D4008D9359 /* level28.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level28.sks; sourceTree = "<group>"; };
 		EA69D562203FCA95008D9359 /* level31.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level31.sks; sourceTree = "<group>"; };
 		EA69D568203FCB2E008D9359 /* level23.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level23.sks; sourceTree = "<group>"; };
-		EA69D56A203FCB98008D9359 /* level19.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level19.sks; sourceTree = "<group>"; };
+		EA69D56A203FCB98008D9359 /* level17.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level17.sks; sourceTree = "<group>"; };
 		EA69D56E203FCC1F008D9359 /* level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level1.sks; sourceTree = "<group>"; };
 		EABB3AF8203B64C6000217E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EABB3AFA203CFA27000217E1 /* level13.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level13.sks; sourceTree = "<group>"; };
@@ -343,9 +347,9 @@
 				6F27255726DAA8D30009B5B5 /* level14.sks */,
 				5F4288C82906F86E00C38D01 /* level15.sks */,
 				EA69D55C203FC488008D9359 /* level16.sks */,
-				5F4288CA2906F8CD00C38D01 /* level17.sks */,
+				EA69D56A203FCB98008D9359 /* level17.sks */,
 				6F27255526DAA8D30009B5B5 /* level18.sks */,
-				EA69D56A203FCB98008D9359 /* level19.sks */,
+				5F4288CA2906F8CD00C38D01 /* level19.sks */,
 				5F4288CE2906FBA300C38D01 /* level20.sks */,
 				6F27255426DAA8D30009B5B5 /* level21.sks */,
 				6F27255626DAA8D30009B5B5 /* level22.sks */,
@@ -397,6 +401,8 @@
 				5FB569852908AAEB0056FCD0 /* level68.sks */,
 				5FB569862908AAEB0056FCD0 /* level69.sks */,
 				5FB569872908AAEB0056FCD0 /* level70.sks */,
+				5FE5CD6C290A1EDA00BD4B68 /* level71.sks */,
+				5FE5CD6E290A1EE700BD4B68 /* level72.sks */,
 			);
 			name = "Game Levels";
 			sourceTree = "<group>";
@@ -477,7 +483,7 @@
 				6F27256826DAA8D30009B5B5 /* level47.sks in Resources */,
 				EABB3B01203CFC08000217E1 /* level35.sks in Resources */,
 				5F4288C92906F86E00C38D01 /* level15.sks in Resources */,
-				EA69D56B203FCB98008D9359 /* level19.sks in Resources */,
+				EA69D56B203FCB98008D9359 /* level17.sks in Resources */,
 				EA69D559203FC43B008D9359 /* level45.sks in Resources */,
 				6FE658D926F6826800B28192 /* gridTileSet.sks in Resources */,
 				5FABED9C2905D72D002EADA3 /* level42.sks in Resources */,
@@ -492,10 +498,11 @@
 				6FF23C2326DC7AD3006237E5 /* LaunchScreen.storyboard in Resources */,
 				6F27256026DAA8D30009B5B5 /* level43.sks in Resources */,
 				5F4288D929072C8F00C38D01 /* level57.sks in Resources */,
-				5F4288CB2906F8CD00C38D01 /* level17.sks in Resources */,
+				5F4288CB2906F8CD00C38D01 /* level19.sks in Resources */,
 				6F27256626DAA8D30009B5B5 /* level22.sks in Resources */,
 				5F4288E729072D2300C38D01 /* level39.sks in Resources */,
 				6F4BBA0226E83C0100BABA11 /* level11.sks in Resources */,
+				5FE5CD6F290A1EE700BD4B68 /* level72.sks in Resources */,
 				5F77D8E622E3FDF900E8C4F3 /* Main.storyboard in Resources */,
 				5F4288D52907017400C38D01 /* level50.sks in Resources */,
 				EA69D56F203FCC1F008D9359 /* level1.sks in Resources */,
@@ -543,6 +550,7 @@
 				6F27256526DAA8D30009B5B5 /* level18.sks in Resources */,
 				EA69D569203FCB2E008D9359 /* level23.sks in Resources */,
 				5FB569822908A4C60056FCD0 /* level66.sks in Resources */,
+				5FE5CD6D290A1EDA00BD4B68 /* level71.sks in Resources */,
 				6F4BBA0026E83B0300BABA11 /* level9.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

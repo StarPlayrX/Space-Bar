@@ -629,7 +629,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
             getReadyLabel.alpha = 1.0
             anchorNode.addChild(getReadyLabel)
             
-            if let lvl = levelLabel.text {
+            if let lvl = levelLabel.text, let score = scoreLabel.text, score == "0" {
                 try? speech("Level \(lvl). Get Ready!")
             }
         }
