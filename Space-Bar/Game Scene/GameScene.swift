@@ -19,7 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     var initialVelocity = CGFloat(800)
     let differentiator = CGFloat(250)
     
-    var ballNode: SKSpriteNode? = nil
+    var ballNode =  SKSpriteNode()
     let appSettings = AppSettings()
     
     deinit {
@@ -94,14 +94,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         
         guard let tilemap = space?.childNode(withName: "//bricks") as? SKTileMapNode else { return }
         
-        autoreleasepool {
-            for center in children {
-                if center.name == "Center" {
-                    guard let space = space else { return }
-                    center.position = CGPoint(x: centerWidth, y: centerHeight)
-                    center.addChild(space)
-                    break
-                }
+        for center in children {
+            if center.name == "Center" {
+                guard let space = space else { return }
+                center.position = CGPoint(x: centerWidth, y: centerHeight)
+                center.addChild(space)
             }
         }
         
@@ -145,14 +142,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         
         // Ensures no pucks pre-exist
         for whatDaPuck in anchorNode.children {
-            autoreleasepool {
-                if let name = whatDaPuck.name, name == "ball" {
-                    whatDaPuck.removeFromParent()
-                }
+            if let name = whatDaPuck.name, name == "ball" {
+                whatDaPuck.removeFromParent()
             }
         }
         
-        ballNode = nil
+        //ballNode = nil
         ballNode = SKSpriteNode()
         
         let ballEmoji = SKLabelNode(fontNamed:"SpaceBarColors")
@@ -169,48 +164,47 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         ballEmoji.zRotation = CGFloat(Int(rnd).degrees)
         
         if let texture = view?.texture(from: ballEmoji) {
-            ballNode?.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
+            ballNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
             // This fall back should not happen, but we may use this in the future for iOS' that fail
-            ballNode?.physicsBody = SKPhysicsBody(circleOfRadius: 27)
+            ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 27)
         }
         
-        ballNode?.physicsBody?.categoryBitMask = ballCategory
-        ballNode?.physicsBody?.contactTestBitMask =
+        ballNode.physicsBody?.categoryBitMask = ballCategory
+        ballNode.physicsBody?.contactTestBitMask =
         paddleCategory + wallCategory + goalCategory
         
-        ballNode?.physicsBody?.collisionBitMask =
+        ballNode.physicsBody?.collisionBitMask =
         paddleCategory + brickCategory + wallCategory
         
-        ballNode?.zPosition = 50
-        ballNode?.physicsBody?.affectedByGravity = false
-        ballNode?.physicsBody?.isDynamic = true
-        ballNode?.physicsBody?.allowsRotation = true
-        ballNode?.physicsBody?.friction = 0
-        ballNode?.physicsBody?.linearDamping = 0
-        ballNode?.physicsBody?.angularDamping = 0
-        ballNode?.physicsBody?.restitution = 1.0
-        ballNode?.physicsBody?.mass = 1.0
-        ballNode?.physicsBody?.fieldBitMask = 0
-        ballNode?.name = "ball"
-        ballNode?.position = CGPoint(x:0,y:0)
-        ballNode?.speed = CGFloat(1.0)
-        
+        ballNode.zPosition = 50
+        ballNode.physicsBody?.affectedByGravity = true
+        ballNode.physicsBody?.isDynamic = true
+        ballNode.physicsBody?.allowsRotation = true
+        ballNode.physicsBody?.friction = 0
+        ballNode.physicsBody?.linearDamping = 0
+        ballNode.physicsBody?.angularDamping = 0
+        ballNode.physicsBody?.restitution = 1.0
+        ballNode.physicsBody?.mass = 1.0
+        ballNode.physicsBody?.fieldBitMask = 0
+        ballNode.name = "ball"
+        ballNode.position = CGPoint(x:0,y:0)
+        ballNode.speed = CGFloat(1.0)
+    
         swapper.toggle()
         let negative: CGFloat = swapper ? 1 : 0
-        ballNode?.addChild(ballEmoji)
-        ballNode?.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
-        anchorNode.addChild(ballNode!)
+        ballNode.addChild(ballEmoji)
+        ballNode.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
+        
+        anchorNode.addChild(ballNode)
         
     }
     
     func removePowerBall() {
         // Ensures no pucks pre-exist
         for whatDaPuck in anchorNode.children {
-            autoreleasepool {
-                if let name = whatDaPuck.name, name.contains("powerball") {
-                    whatDaPuck.removeFromParent()
-                }
+            if let name = whatDaPuck.name, name.contains("powerball") {
+                whatDaPuck.removeFromParent()
             }
         }
     }
@@ -342,13 +336,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
             }
         }
         
-        autoreleasepool {
-            BricksTileMap.removeAllChildren()
-        }
-        
-        autoreleasepool {
-            BricksTileMap.removeFromParent()
-        }
+        BricksTileMap.removeAllChildren()
+        BricksTileMap.removeFromParent()
     }
     
     
@@ -358,19 +347,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         drawParallax()
         
         //setup physicsWorld
-        physicsWorld.gravity.dx = 0
-        physicsWorld.gravity.dy = 0
+        physicsWorld.gravity.dx = -0.01
+        physicsWorld.gravity.dy = -1
         physicsWorld.contactDelegate = self
         
         screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
         
-        levelart[3] =  ["😀","😃","😄","😁","😆","😅","😂","🤣"]
-        levelart[2] =  ["😍","🥰","😘","😗","😙","😚","😋","😛"]
-        levelart[1] =  ["😝","😜","🤪","🤨","🧐","🤓","😎","🥸"]
-        levelart[0] =  ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
+        levelart[0] = ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
+        levelart[1] = ["😝","😜","🤪","🤨","🧐","🤓","😎","🥸"]
+        levelart[2] = ["😍","🥰","😘","😗","😙","😚","😋","😛"]
+        levelart[3] = ["😀","😃","😄","😁","😆","😅","😂","🤣"]
+
+        guard
+            let w = scene?.size.width,
+            let h = scene?.size.height
+        else {
+            return
+        }
         
-        width = (scene?.size.width)!
-        height = (scene?.size.height)!
+        width  = w
+        height = h
         
         centerWidth = width / 2
         centerHeight = height / 2
@@ -629,7 +625,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
             getReadyLabel.alpha = 1.0
             anchorNode.addChild(getReadyLabel)
             
-            if let lvl = levelLabel.text, let score = scoreLabel.text, score == "0" {
+            if let lvl = levelLabel.text, let score = scoreLabel.text, score == "0", settings.sound {
                 try? speech("Level \(lvl). Get Ready!")
             }
         }
@@ -669,25 +665,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        autoreleasepool {
-            for t in touches { touchDown(atPoint: t.location(in: self)) }
-        }
+        for t in touches { touchDown(atPoint: t.location(in: self)) }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        autoreleasepool {
-            for t in touches { touchMoved(toPoint: t.location(in: self)) }
-        }
+        for t in touches { touchMoved(toPoint: t.location(in: self)) }
     }
     
     
     func resetGameBoard(lives: Bool) {
         
         for removePowerball in anchorNode.children {
-            autoreleasepool {
-                if let name = removePowerball.name, name.contains("ball") {
-                    removePowerball.removeFromParent()
-                }
+            if let name = removePowerball.name, name.contains("ball") {
+                removePowerball.removeFromParent()
             }
         }
         
@@ -695,9 +685,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         space?.removeFromParent()
         space?.removeAllActions()
         space = nil
+        
         settings.currentlevel += 1
         settings.currentlevel %= Global.shared.levels.count
-        gameLives = gameLives < 5 ? gameLives + 1 : gameLives
+        
+        print("settings.currentlevel", settings.currentlevel)
+        if gameLives < 6 {
+            gameLives += 1
+        }
+        
         livesLabel.text = String(gameLives)
         levelLabel.text = String(settings.currentlevel + 1)
         scoreLabel.text = String(gameScore)
@@ -722,11 +718,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
             getReadyLabel.alpha = 1.0
             anchorNode.addChild(getReadyLabel)
             
-            if let lvl = levelLabel.text, let score = scoreLabel.text  {
+            if let lvl = levelLabel.text, let score = scoreLabel.text, settings.sound {
                 try? speech("Level \(lvl). Score \(score). Get Ready!")
             }
         }
-        
         
         let fadeAlpha = SKAction.fadeOut(withDuration: 0.5)
         let runcode1 = SKAction.run {
@@ -737,15 +732,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
             addPuck()
             
             for whatDaPuck in anchorNode.children {
-                autoreleasepool {
-                    if let name = whatDaPuck.name, name == "powerball" {
-                        whatDaPuck.removeFromParent()
-                    }
+                if let name = whatDaPuck.name, name == "powerball" {
+                    whatDaPuck.removeFromParent()
                 }
-                
             }
             
-            if settings.currentlevel % 7 == 0 {
+            if (settings.currentlevel + 1) % 10 == 0 {
                 addPowerBall()
             }
         }
@@ -773,7 +765,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        
         guard
             let _ = contact.bodyA.node,
             let _ = contact.bodyB.node
@@ -825,7 +816,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
                 return
             }
             
-            if ballNode.name != "powerball" {return}
+            if ballNode.name != "powerball" { return }
             
             func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat, _ initialVelocity: CGFloat ) {
                 guard let ballBody = ballBody else { return }
@@ -854,15 +845,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
             firstBody.node?.removeFromParent()
             if settings.sound { run(goalSound) }
             
-            gameLives -= 1
+            if gameLives > 0 {
+                gameLives -= 1
+                livesLabel.text = String(gameLives)
+            }
             
             //lives to come
             if gameLives > 0 {
                 addPuck()
+            } else {
+                // Ensures no pucks pre-exist
+                for whatDaPuck in anchorNode.children {
+                    if let name = whatDaPuck.name, name == "ball" {
+                        whatDaPuck.removeFromParent()
+                    }
+                }
             }
             
             if gameLives < 0 {
                 gameLives = 0
+                livesLabel.text = String(gameLives)
             }
             
             if gameLives == 0 && gameOver == nil {
@@ -887,12 +889,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
                     getReadyLabel.alpha = 1.0
                     anchorNode.addChild(getReadyLabel)
                     
-                    if let score = scoreLabel.text, Int(score) ?? 0 > 1 {
+                    if let score = scoreLabel.text, Int(score) ?? 0 > 1, settings.sound {
                         try? speech("Game Over. You scored \(score) points.")
-                    } else if let score = scoreLabel.text, Int(score) ?? 0 == 1 {
+                    } else if let score = scoreLabel.text, Int(score) ?? 0 == 1, settings.sound {
                         try? speech("Game Over. You scored one point.")
-                    } else {
-                        try? speech("Game Over. You scored zero points. Try watching Ted Lasso.")
+                    } else if settings.sound {
+                        try? speech("Game Over. You scored zero points. Try watching Ted Lassoe.")
                     }
                 }
                 
@@ -902,8 +904,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
                 
                 anchorNode.run(SKAction.sequence([decay1,gameOverCode,decay2,runcode]))
             }
-            
-            livesLabel.text = String(gameLives)
             
         case ballCategory | paddleCategory, powerCategory | paddleCategory:
             if settings.sound { run(paddleSound) }
@@ -918,7 +918,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     // Called before each frame is rendered
     override func update(_ currentTime: TimeInterval) {
         guard
-            let ballNode = ballNode,
             let x = ballNode.physicsBody?.velocity.dx,
             let y = ballNode.physicsBody?.velocity.dy,
             let body = ballNode.physicsBody
@@ -926,7 +925,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
             return
         }
         
-        if ballNode.name != "ball" {return}
+        if ballNode.name != "ball" { return }
         
         func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat, _ initialVelocity: CGFloat ) {
             guard let ballBody = ballBody else { return }

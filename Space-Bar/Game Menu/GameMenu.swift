@@ -126,7 +126,7 @@ class GameMenu: SKScene {
                             view.showsNodeCount = false
                             view.showsPhysics = false
                             view.showsFields = false
-                            view.preferredFramesPerSecond = 60
+                            //view.preferredFramesPerSecond = 60
                             view.clearsContextBeforeDrawing = true
                             view.isAsynchronous = true
                             view.ignoresSiblingOrder = true

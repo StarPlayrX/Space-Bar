@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5F163D18231C8A2500E341FD /* SpaceBarColors.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5F163D17231C8A2500E341FD /* SpaceBarColors.otf */; };
+		5F420399291368F600F7FF16 /* level71.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F420398291368F600F7FF16 /* level71.sks */; };
 		5F4288C92906F86E00C38D01 /* level15.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F4288C82906F86E00C38D01 /* level15.sks */; };
 		5F4288CB2906F8CD00C38D01 /* level19.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F4288CA2906F8CD00C38D01 /* level19.sks */; };
 		5F4288CD2906F9A400C38D01 /* level46.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F4288CC2906F9A400C38D01 /* level46.sks */; };
@@ -25,8 +26,8 @@
 		5F4288E529072D0800C38D01 /* level59.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F4288E429072D0800C38D01 /* level59.sks */; };
 		5F4288E729072D2300C38D01 /* level39.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F4288E629072D2200C38D01 /* level39.sks */; };
 		5F4288E929072D3200C38D01 /* level58.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F4288E829072D3200C38D01 /* level58.sks */; };
-		5F62F0CC29088B5900672C78 /* level61.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F62F0CB29088B5900672C78 /* level61.sks */; };
-		5F62F0CE29088FD300672C78 /* level63.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F62F0CD29088FD300672C78 /* level63.sks */; };
+		5F62F0CC29088B5900672C78 /* level72.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F62F0CB29088B5900672C78 /* level72.sks */; };
+		5F62F0CE29088FD300672C78 /* level73.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F62F0CD29088FD300672C78 /* level73.sks */; };
 		5F62F0D02908A01000672C78 /* level62.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F62F0CF2908A01000672C78 /* level62.sks */; };
 		5F77D8DB22E3FCC100E8C4F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F77D8DA22E3FCC100E8C4F3 /* AppDelegate.swift */; };
 		5F77D8DD22E3FCE800E8C4F3 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F77D8DC22E3FCE800E8C4F3 /* GameScene.swift */; };
@@ -39,11 +40,11 @@
 		5F9AFCD02905D7DA001C79E5 /* level40.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F9AFCCF2905D7DA001C79E5 /* level40.sks */; };
 		5FAA25F62906F6E700DDD813 /* level10.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FAA25F52906F6E700DDD813 /* level10.sks */; };
 		5FABED8F2905CBAF002EADA3 /* level6.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED8B2905CBAF002EADA3 /* level6.sks */; };
-		5FABED902905CBAF002EADA3 /* level8.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED8C2905CBAF002EADA3 /* level8.sks */; };
+		5FABED902905CBAF002EADA3 /* level7.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED8C2905CBAF002EADA3 /* level7.sks */; };
 		5FABED912905CBAF002EADA3 /* level3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED8D2905CBAF002EADA3 /* level3.sks */; };
-		5FABED922905CBAF002EADA3 /* level4.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED8E2905CBAF002EADA3 /* level4.sks */; };
-		5FABED942905D1EA002EADA3 /* level37.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED932905D1EA002EADA3 /* level37.sks */; };
-		5FABED962905D5CF002EADA3 /* level38.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED952905D5CF002EADA3 /* level38.sks */; };
+		5FABED922905CBAF002EADA3 /* level5.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED8E2905CBAF002EADA3 /* level5.sks */; };
+		5FABED942905D1EA002EADA3 /* level38.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED932905D1EA002EADA3 /* level38.sks */; };
+		5FABED962905D5CF002EADA3 /* level37.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED952905D5CF002EADA3 /* level37.sks */; };
 		5FABED9A2905D5E1002EADA3 /* level41.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED992905D5E1002EADA3 /* level41.sks */; };
 		5FABED9C2905D72D002EADA3 /* level42.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED9B2905D72D002EADA3 /* level42.sks */; };
 		5FABED9E2905D758002EADA3 /* level51.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED9D2905D758002EADA3 /* level51.sks */; };
@@ -56,12 +57,12 @@
 		5FB5698A2908AAEB0056FCD0 /* level70.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FB569872908AAEB0056FCD0 /* level70.sks */; };
 		5FCEE07F2313415E0002A5CF /* GameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCEE07E2313415E0002A5CF /* GameMenu.swift */; };
 		5FCEE081231341680002A5CF /* GameMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FCEE080231341680002A5CF /* GameMenu.sks */; };
-		5FE5CD6D290A1EDA00BD4B68 /* level71.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FE5CD6C290A1EDA00BD4B68 /* level71.sks */; };
-		5FE5CD6F290A1EE700BD4B68 /* level72.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FE5CD6E290A1EE700BD4B68 /* level72.sks */; };
+		5FE5CD6D290A1EDA00BD4B68 /* level63.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FE5CD6C290A1EDA00BD4B68 /* level63.sks */; };
+		5FE5CD6F290A1EE700BD4B68 /* level61.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FE5CD6E290A1EE700BD4B68 /* level61.sks */; };
 		6F27255C26DAA8D30009B5B5 /* level36.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27254C26DAA8D30009B5B5 /* level36.sks */; };
 		6F27255D26DAA8D30009B5B5 /* level33.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27254D26DAA8D30009B5B5 /* level33.sks */; };
 		6F27255E26DAA8D30009B5B5 /* level24.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27254E26DAA8D30009B5B5 /* level24.sks */; };
-		6F27255F26DAA8D30009B5B5 /* level5.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27254F26DAA8D30009B5B5 /* level5.sks */; };
+		6F27255F26DAA8D30009B5B5 /* level4.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27254F26DAA8D30009B5B5 /* level4.sks */; };
 		6F27256026DAA8D30009B5B5 /* level43.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27255026DAA8D30009B5B5 /* level43.sks */; };
 		6F27256126DAA8D30009B5B5 /* level34.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27255126DAA8D30009B5B5 /* level34.sks */; };
 		6F27256226DAA8D30009B5B5 /* level30.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27255226DAA8D30009B5B5 /* level30.sks */; };
@@ -82,7 +83,7 @@
 		6F4BBA0226E83C0100BABA11 /* level11.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F4BBA0126E83C0100BABA11 /* level11.sks */; };
 		6F4BBA0426E83C3900BABA11 /* level12.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F4BBA0326E83C3900BABA11 /* level12.sks */; };
 		6F55698626D1F9300060D0E7 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F55698526D1F9300060D0E7 /* ScreenSize.swift */; };
-		6F55698A26D479410060D0E7 /* level7.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F55698826D479410060D0E7 /* level7.sks */; };
+		6F55698A26D479410060D0E7 /* level8.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F55698826D479410060D0E7 /* level8.sks */; };
 		6FA1ABBD26E99AE5003CBD2D /* LevelPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA1ABBC26E99AE5003CBD2D /* LevelPosition.swift */; };
 		6FD0575326D47D92005671C4 /* level26.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0575126D47D92005671C4 /* level26.sks */; };
 		6FE658D926F6826800B28192 /* gridTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6FE658D826F6826800B28192 /* gridTileSet.sks */; };
@@ -105,6 +106,7 @@
 
 /* Begin PBXFileReference section */
 		5F163D17231C8A2500E341FD /* SpaceBarColors.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpaceBarColors.otf; sourceTree = "<group>"; };
+		5F420398291368F600F7FF16 /* level71.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level71.sks; sourceTree = "<group>"; };
 		5F4288C82906F86E00C38D01 /* level15.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level15.sks; sourceTree = "<group>"; };
 		5F4288CA2906F8CD00C38D01 /* level19.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level19.sks; sourceTree = "<group>"; };
 		5F4288CC2906F9A400C38D01 /* level46.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level46.sks; sourceTree = "<group>"; };
@@ -122,8 +124,8 @@
 		5F4288E429072D0800C38D01 /* level59.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level59.sks; sourceTree = "<group>"; };
 		5F4288E629072D2200C38D01 /* level39.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level39.sks; sourceTree = "<group>"; };
 		5F4288E829072D3200C38D01 /* level58.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level58.sks; sourceTree = "<group>"; };
-		5F62F0CB29088B5900672C78 /* level61.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level61.sks; sourceTree = "<group>"; };
-		5F62F0CD29088FD300672C78 /* level63.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level63.sks; sourceTree = "<group>"; };
+		5F62F0CB29088B5900672C78 /* level72.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level72.sks; sourceTree = "<group>"; };
+		5F62F0CD29088FD300672C78 /* level73.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level73.sks; sourceTree = "<group>"; };
 		5F62F0CF2908A01000672C78 /* level62.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level62.sks; sourceTree = "<group>"; };
 		5F77D8DA22E3FCC100E8C4F3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F77D8DC22E3FCE800E8C4F3 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -137,11 +139,11 @@
 		5F9AFCCF2905D7DA001C79E5 /* level40.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level40.sks; sourceTree = "<group>"; };
 		5FAA25F52906F6E700DDD813 /* level10.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level10.sks; sourceTree = "<group>"; };
 		5FABED8B2905CBAF002EADA3 /* level6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level6.sks; sourceTree = "<group>"; };
-		5FABED8C2905CBAF002EADA3 /* level8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level8.sks; sourceTree = "<group>"; };
+		5FABED8C2905CBAF002EADA3 /* level7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level7.sks; sourceTree = "<group>"; };
 		5FABED8D2905CBAF002EADA3 /* level3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level3.sks; sourceTree = "<group>"; };
-		5FABED8E2905CBAF002EADA3 /* level4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level4.sks; sourceTree = "<group>"; };
-		5FABED932905D1EA002EADA3 /* level37.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level37.sks; sourceTree = "<group>"; };
-		5FABED952905D5CF002EADA3 /* level38.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level38.sks; sourceTree = "<group>"; };
+		5FABED8E2905CBAF002EADA3 /* level5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level5.sks; sourceTree = "<group>"; };
+		5FABED932905D1EA002EADA3 /* level38.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level38.sks; sourceTree = "<group>"; };
+		5FABED952905D5CF002EADA3 /* level37.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level37.sks; sourceTree = "<group>"; };
 		5FABED992905D5E1002EADA3 /* level41.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level41.sks; sourceTree = "<group>"; };
 		5FABED9B2905D72D002EADA3 /* level42.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level42.sks; sourceTree = "<group>"; };
 		5FABED9D2905D758002EADA3 /* level51.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level51.sks; sourceTree = "<group>"; };
@@ -155,12 +157,12 @@
 		5FC5E32722E40F1F00E1159A /* Space-Bar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Space-Bar.entitlements"; sourceTree = "<group>"; };
 		5FCEE07E2313415E0002A5CF /* GameMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
 		5FCEE080231341680002A5CF /* GameMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameMenu.sks; sourceTree = "<group>"; };
-		5FE5CD6C290A1EDA00BD4B68 /* level71.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level71.sks; sourceTree = "<group>"; };
-		5FE5CD6E290A1EE700BD4B68 /* level72.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level72.sks; sourceTree = "<group>"; };
+		5FE5CD6C290A1EDA00BD4B68 /* level63.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level63.sks; sourceTree = "<group>"; };
+		5FE5CD6E290A1EE700BD4B68 /* level61.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level61.sks; sourceTree = "<group>"; };
 		6F27254C26DAA8D30009B5B5 /* level36.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level36.sks; sourceTree = "<group>"; };
 		6F27254D26DAA8D30009B5B5 /* level33.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level33.sks; sourceTree = "<group>"; };
 		6F27254E26DAA8D30009B5B5 /* level24.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level24.sks; sourceTree = "<group>"; };
-		6F27254F26DAA8D30009B5B5 /* level5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level5.sks; sourceTree = "<group>"; };
+		6F27254F26DAA8D30009B5B5 /* level4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level4.sks; sourceTree = "<group>"; };
 		6F27255026DAA8D30009B5B5 /* level43.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level43.sks; sourceTree = "<group>"; };
 		6F27255126DAA8D30009B5B5 /* level34.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level34.sks; sourceTree = "<group>"; };
 		6F27255226DAA8D30009B5B5 /* level30.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level30.sks; sourceTree = "<group>"; };
@@ -181,7 +183,7 @@
 		6F4BBA0126E83C0100BABA11 /* level11.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level11.sks; sourceTree = "<group>"; };
 		6F4BBA0326E83C3900BABA11 /* level12.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level12.sks; sourceTree = "<group>"; };
 		6F55698526D1F9300060D0E7 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
-		6F55698826D479410060D0E7 /* level7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level7.sks; sourceTree = "<group>"; };
+		6F55698826D479410060D0E7 /* level8.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level8.sks; sourceTree = "<group>"; };
 		6FA1ABBC26E99AE5003CBD2D /* LevelPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelPosition.swift; sourceTree = "<group>"; };
 		6FD0575126D47D92005671C4 /* level26.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level26.sks; sourceTree = "<group>"; };
 		6FE658D826F6826800B28192 /* gridTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = gridTileSet.sks; sourceTree = "<group>"; };
@@ -334,11 +336,11 @@
 				EA69D56E203FCC1F008D9359 /* level1.sks */,
 				EABB3B0C203D0102000217E1 /* level2.sks */,
 				5FABED8D2905CBAF002EADA3 /* level3.sks */,
-				5FABED8E2905CBAF002EADA3 /* level4.sks */,
-				6F27254F26DAA8D30009B5B5 /* level5.sks */,
+				6F27254F26DAA8D30009B5B5 /* level4.sks */,
+				5FABED8E2905CBAF002EADA3 /* level5.sks */,
 				5FABED8B2905CBAF002EADA3 /* level6.sks */,
-				6F55698826D479410060D0E7 /* level7.sks */,
-				5FABED8C2905CBAF002EADA3 /* level8.sks */,
+				5FABED8C2905CBAF002EADA3 /* level7.sks */,
+				6F55698826D479410060D0E7 /* level8.sks */,
 				6F4BB9FF26E83B0300BABA11 /* level9.sks */,
 				5FAA25F52906F6E700DDD813 /* level10.sks */,
 				6F4BBA0126E83C0100BABA11 /* level11.sks */,
@@ -367,8 +369,8 @@
 				6F27255126DAA8D30009B5B5 /* level34.sks */,
 				EABB3B00203CFC08000217E1 /* level35.sks */,
 				6F27254C26DAA8D30009B5B5 /* level36.sks */,
-				5FABED932905D1EA002EADA3 /* level37.sks */,
-				5FABED952905D5CF002EADA3 /* level38.sks */,
+				5FABED932905D1EA002EADA3 /* level38.sks */,
+				5FABED952905D5CF002EADA3 /* level37.sks */,
 				5F4288E629072D2200C38D01 /* level39.sks */,
 				5F9AFCCF2905D7DA001C79E5 /* level40.sks */,
 				5FABED992905D5E1002EADA3 /* level41.sks */,
@@ -391,9 +393,9 @@
 				5F4288E829072D3200C38D01 /* level58.sks */,
 				5F4288E429072D0800C38D01 /* level59.sks */,
 				5F4288D62907018F00C38D01 /* level60.sks */,
-				5F62F0CB29088B5900672C78 /* level61.sks */,
+				5FE5CD6E290A1EE700BD4B68 /* level61.sks */,
 				5F62F0CF2908A01000672C78 /* level62.sks */,
-				5F62F0CD29088FD300672C78 /* level63.sks */,
+				5FE5CD6C290A1EDA00BD4B68 /* level63.sks */,
 				5FB5697B2908A0A50056FCD0 /* level64.sks */,
 				5FB5697D2908A36B0056FCD0 /* level65.sks */,
 				5FB569812908A4C60056FCD0 /* level66.sks */,
@@ -401,8 +403,9 @@
 				5FB569852908AAEB0056FCD0 /* level68.sks */,
 				5FB569862908AAEB0056FCD0 /* level69.sks */,
 				5FB569872908AAEB0056FCD0 /* level70.sks */,
-				5FE5CD6C290A1EDA00BD4B68 /* level71.sks */,
-				5FE5CD6E290A1EE700BD4B68 /* level72.sks */,
+				5F420398291368F600F7FF16 /* level71.sks */,
+				5F62F0CB29088B5900672C78 /* level72.sks */,
+				5F62F0CD29088FD300672C78 /* level73.sks */,
 			);
 			name = "Game Levels";
 			sourceTree = "<group>";
@@ -478,7 +481,7 @@
 				EABB3B07203CFFCD000217E1 /* level27.sks in Resources */,
 				5F4288D72907018F00C38D01 /* level60.sks in Resources */,
 				6F27256226DAA8D30009B5B5 /* level30.sks in Resources */,
-				6F55698A26D479410060D0E7 /* level7.sks in Resources */,
+				6F55698A26D479410060D0E7 /* level8.sks in Resources */,
 				6F27256326DAA8D30009B5B5 /* level25.sks in Resources */,
 				6F27256826DAA8D30009B5B5 /* level47.sks in Resources */,
 				EABB3B01203CFC08000217E1 /* level35.sks in Resources */,
@@ -502,17 +505,18 @@
 				6F27256626DAA8D30009B5B5 /* level22.sks in Resources */,
 				5F4288E729072D2300C38D01 /* level39.sks in Resources */,
 				6F4BBA0226E83C0100BABA11 /* level11.sks in Resources */,
-				5FE5CD6F290A1EE700BD4B68 /* level72.sks in Resources */,
+				5FE5CD6F290A1EE700BD4B68 /* level61.sks in Resources */,
 				5F77D8E622E3FDF900E8C4F3 /* Main.storyboard in Resources */,
 				5F4288D52907017400C38D01 /* level50.sks in Resources */,
 				EA69D56F203FCC1F008D9359 /* level1.sks in Resources */,
 				6F27256426DAA8D30009B5B5 /* level21.sks in Resources */,
-				5FABED962905D5CF002EADA3 /* level38.sks in Resources */,
+				5FABED962905D5CF002EADA3 /* level37.sks in Resources */,
 				5FB569892908AAEB0056FCD0 /* level69.sks in Resources */,
 				5F163D18231C8A2500E341FD /* SpaceBarColors.otf in Resources */,
-				5FABED922905CBAF002EADA3 /* level4.sks in Resources */,
+				5FABED922905CBAF002EADA3 /* level5.sks in Resources */,
 				6F4BB9D926E3F3A900BABA11 /* Dat.mp3 in Resources */,
-				5FABED942905D1EA002EADA3 /* level37.sks in Resources */,
+				5F420399291368F600F7FF16 /* level71.sks in Resources */,
+				5FABED942905D1EA002EADA3 /* level38.sks in Resources */,
 				EABB3B0F203D0255000217E1 /* level44.sks in Resources */,
 				EABB3B13203D0737000217E1 /* level32.sks in Resources */,
 				5FABED8F2905CBAF002EADA3 /* level6.sks in Resources */,
@@ -525,12 +529,12 @@
 				EA69D55D203FC488008D9359 /* level16.sks in Resources */,
 				EABB3B0D203D0102000217E1 /* level2.sks in Resources */,
 				6F4BB9D626E3F3A900BABA11 /* Bip.mp3 in Resources */,
-				5FABED902905CBAF002EADA3 /* level8.sks in Resources */,
+				5FABED902905CBAF002EADA3 /* level7.sks in Resources */,
 				5FABED9E2905D758002EADA3 /* level51.sks in Resources */,
-				6F27255F26DAA8D30009B5B5 /* level5.sks in Resources */,
+				6F27255F26DAA8D30009B5B5 /* level4.sks in Resources */,
 				6F4BB9D826E3F3A900BABA11 /* Knock.mp3 in Resources */,
 				5F77D8F822E3FED800E8C4F3 /* hexTileSet.sks in Resources */,
-				5F62F0CC29088B5900672C78 /* level61.sks in Resources */,
+				5F62F0CC29088B5900672C78 /* level72.sks in Resources */,
 				5F62F0D02908A01000672C78 /* level62.sks in Resources */,
 				5FCEE081231341680002A5CF /* GameMenu.sks in Resources */,
 				5F4288E529072D0800C38D01 /* level59.sks in Resources */,
@@ -542,7 +546,7 @@
 				6F27256B26DAA8D30009B5B5 /* level29.sks in Resources */,
 				5FB569882908AAEB0056FCD0 /* level68.sks in Resources */,
 				5FAA25F62906F6E700DDD813 /* level10.sks in Resources */,
-				5F62F0CE29088FD300672C78 /* level63.sks in Resources */,
+				5F62F0CE29088FD300672C78 /* level73.sks in Resources */,
 				EABB3AF9203B64C6000217E1 /* Assets.xcassets in Resources */,
 				5F4288D32907015B00C38D01 /* level49.sks in Resources */,
 				5F4288DD29072CBA00C38D01 /* level53.sks in Resources */,
@@ -550,7 +554,7 @@
 				6F27256526DAA8D30009B5B5 /* level18.sks in Resources */,
 				EA69D569203FCB2E008D9359 /* level23.sks in Resources */,
 				5FB569822908A4C60056FCD0 /* level66.sks in Resources */,
-				5FE5CD6D290A1EDA00BD4B68 /* level71.sks in Resources */,
+				5FE5CD6D290A1EDA00BD4B68 /* level63.sks in Resources */,
 				6F4BBA0026E83B0300BABA11 /* level9.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -639,7 +643,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -694,7 +698,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -712,12 +716,12 @@
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 24;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.action-games";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ufoemoji.spacebar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -739,12 +743,12 @@
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 24;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.action-games";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ufoemoji.spacebar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
