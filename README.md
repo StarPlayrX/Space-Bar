@@ -1,7 +1,8 @@
 # Space-Bar
 
-#### A colorful brick breaker game by Todd Bruss
-iOS TestFlight build
+#### A colorful tribute to BreakOut. Game designed by Todd Bruss
+
+iOS/iPadOS 1.0 build 25 available in TestFlight
 https://testflight.apple.com/join/VirI3q1c
 
 <img width="400" alt="Screen Shot 2022-10-23 at 8 32 47 PM" src="https://user-images.githubusercontent.com/52664524/198066544-53b56b6a-47a4-4cb9-bfb3-e21642559c63.png"><img width="400" alt="Screen Shot 2022-10-23 at 8 32 54 PM" src="https://user-images.githubusercontent.com/52664524/198065663-607e6a80-0c39-4ac0-b420-42e00c22daad.png">
