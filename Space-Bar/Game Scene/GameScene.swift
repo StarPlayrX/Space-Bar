@@ -842,9 +842,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
             if settings.sound { run(wallSound) }
             
         case ballCategory | goalCategory:
-            firstBody.node?.removeFromParent()
-            if settings.sound { run(goalSound) }
             
+            let a = SKAction.fadeAlpha(to: 0, duration: 0.125)
+            let b = SKAction.wait(forDuration: 0.125)
+            let c = SKAction.removeFromParent()
+            
+            if let ball = firstBody.node {
+                ball.run(SKAction.sequence([a,b,c]))
+            }
+            
+            if settings.sound { run(goalSound) }
+
             if gameLives > 0 {
                 gameLives -= 1
                 livesLabel.text = String(gameLives)
@@ -853,14 +861,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
             //lives to come
             if gameLives > 0 {
                 addPuck()
-            } else {
-                // Ensures no pucks pre-exist
-                for whatDaPuck in anchorNode.children {
-                    if let name = whatDaPuck.name, name == "ball" {
-                        whatDaPuck.removeFromParent()
-                    }
-                }
             }
+            
             
             if gameLives < 0 {
                 gameLives = 0
