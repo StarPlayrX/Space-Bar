@@ -2,8 +2,8 @@
 //  Global.swift
 //  Space-Bar
 //
-//  Created by Todd Bruss on 9/4/21.
-//  Copyright © 2021 Todd Bruss. All rights reserved.
+//  Created by Todd Bruss on 10/5/22.
+//  Copyright © 2022 Todd Bruss. All rights reserved.
 //
 
 import Foundation

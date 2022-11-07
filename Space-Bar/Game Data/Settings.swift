@@ -2,29 +2,29 @@
 //  Settings.swift
 //  Space-Bar
 //
-//  Created by Todd Bruss on 8/29/21.
-//  Copyright © 2021 Todd Bruss. All rights reserved.
+//  Created by Todd Bruss on 11/5/22.
+//  Copyright © 2022 Todd Bruss. All rights reserved.
 //
 
 import Foundation
 
 struct Settings: Codable {
-    var puck: Int          =  0
-    var level: Int         =  0
+    var puck        : Int  =  0
+    var level       : Int  =  0
     var currentlevel: Int  =  0
-    var maxlevel: Int      =  71
-    var highlevel: Int     =  71
-    var score: Int         =  0
-    var highscore: Int     =  0
-    var lives: Int         =  3
-    var music: Bool        =  false
-    var sound: Bool        =  true
+    var maxlevel    : Int  =  71 // Not currently in use
+    var highlevel   : Int  =  0
+    var score       : Int  =  0
+    var highscore   : Int  =  0
+    var lives       : Int  =  3
+    var music       : Bool =  false // Not currently in use
+    var sound       : Bool =  true
 }
 
 var settings = Settings()
 
 struct AppSettings {
-    let spaceBarGameSettings = "SpaceBarTestFlightV002GameSettings"
+    let spaceBarGameSettings = "SpaceBarGameSettingsV1RC1"
     func saveUserDefaults() {
       UserDefaults.standard.set(try? PropertyListEncoder().encode(settings), forKey:spaceBarGameSettings)
     }

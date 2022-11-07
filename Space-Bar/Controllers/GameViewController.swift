@@ -2,8 +2,8 @@
 //  GameViewController.swift
 //  Space Bar
 //
-//  Created by Todd Bruss on 2/5/18.
-//  Copyright © 2018 Todd Bruss. All rights reserved.
+//  Created by Todd Bruss on 10/5/22.
+//  Copyright © 2022 Todd Bruss. All rights reserved.
 //
 
 import UIKit
@@ -16,6 +16,14 @@ class GameViewController: UIViewController {
 
     let ncDef = NotificationCenter.default
 
+    override var prefersHomeIndicatorAutoHidden: Bool {
+       return true
+    }
+   
+    override var preferredScreenEdgesDeferringSystemGestures: UIRectEdge {
+        return UIRectEdge.bottom
+    }
+    
     @objc func loadGameView() {
         if let view = view as? SKView,
            let scene = SKScene(fileNamed: "GameMenu") {

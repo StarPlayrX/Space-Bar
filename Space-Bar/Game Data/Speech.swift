@@ -16,7 +16,4 @@ func speech(_ text: String) throws {
         utterance.rate = 0.5
         utterance.volume = 2.0
         synthesizer.speak(utterance)
-        //clear the utterance
-        let clearText = AVSpeechUtterance(string: "")
-        synthesizer.speak(clearText)
 }

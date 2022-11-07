@@ -2,21 +2,24 @@
 //  ParentalScene.swift
 //  Fidget
 //
-//  Created by StarPlayr on 5/28/17.
-//  Copyright © 2019 Todd Bruss. All rights reserved.
+//  Created by Todd Bruss on 10/5/22.
+//  Copyright © 2022 Todd Bruss. All rights reserved.
 //
 
 import SpriteKit
 
 class GameMenu: SKScene {
       
+     var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
+    
     var keyPressed = false
     
     deinit {
         removeAllActions()
         removeAllChildren()
         removeFromParent()
-        print("Game Menu deinit")
     }
     
     var puckLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
@@ -110,9 +113,7 @@ class GameMenu: SKScene {
                 }
                 
                 if name == "enter" && !keyPressed {
-                    
                     if keyPressed { return }
-                    
                     keyPressed = true
                     
                     let runcode = SKAction.run { [weak self] in
