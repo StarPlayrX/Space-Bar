@@ -31,8 +31,8 @@ class GameMenu: SKScene {
     var lvlLabel: SKLabelNode = SKLabelNode(fontNamed: "SpaceBarColors")
     var lvlTextLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
     
-    var textLabel: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
-    var textLabel2: SKLabelNode = SKLabelNode(fontNamed: "HelveticaNeue")
+    var textLabel: SKLabelNode = SKLabelNode(fontNamed: "CourierNeue")
+    var textLabel2: SKLabelNode = SKLabelNode(fontNamed: "CourierNeue")
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -163,15 +163,16 @@ class GameMenu: SKScene {
             let label = SKLabelNode(fontNamed: "HelveticaNeue")
             label.fontColor = UIColor.white
             label.name = "copyright"
-            label.fontSize = 30
+            label.fontSize = 24
             label.horizontalAlignmentMode = .center
             label.verticalAlignmentMode = .center
             label.position = pos
             label.position.y -= 90
             label.alpha = 0.5
-            label.text = "© 2020-2022 Todd Bruss"
+            label.text = "© 2020-2022 StarPlayrX, Created by Todd Bruss"
             scene?.addChild(label)
         }
+       
         
         let highScoreText: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
         let highScoreLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")

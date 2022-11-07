@@ -9,8 +9,8 @@
 import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //AVSpeechSynthesizerDelegate
-        
-     var prefersHomeIndicatorAutoHidden: Bool {
+    
+    var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
     
@@ -54,7 +54,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     let wallCategory     : UInt32 = 16
     let goalCategory     : UInt32 = 32
     let midFieldCategory : UInt32 = 64
-
+    
     var space : SKReferenceNode? = nil
     
     //Positioning variables
@@ -161,7 +161,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         ballEmoji.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         ballEmoji.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         ballEmoji.alpha = 1.0
-            ballEmoji.position = CGPoint(x: 0, y: 0)
+        ballEmoji.position = CGPoint(x: 0, y: 0)
         ballEmoji.zPosition = 50
         
         ballEmoji.text = Global.shared.gameBall[settings.puck]
@@ -344,7 +344,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     
     
     override func didMove(to view: SKView) {
-    
+        
         speed = 1.0
         drawParallax()
         
@@ -372,6 +372,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         
         centerWidth = width / 2
         centerHeight = height / 2
+        
+        var recessedWallWidth = centerWidth
+        print(centerWidth)
         
         //stand in for our anchorPoint
         //this is used because our scene's anchor is 0,0
@@ -506,11 +509,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         lowerLeftNode.physicsBody?.isDynamic = false
         lowerLeftNode.physicsBody?.affectedByGravity = false
         lowerLeftNode.size = CGSize(width: 64, height: 64)
-        lowerLeftNode.position = CGPoint(x: -centerWidth + corneredge,y: -centerHeight + 90)
+        lowerLeftNode.position = CGPoint(x: -centerWidth + corneredge,y: -centerHeight + 98)
         anchorNode.addChild(lowerLeftNode)
         
         print("LL width:", lowerLeftNode.size.width)
-
+        
+        recessedWallWidth -= lowerLeftNode.size.width
+        
         //lower right corner
         let lowerRightNode = SKSpriteNode()
         let lowerRightTexture = SKTexture(imageNamed: "lr")
@@ -527,11 +532,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         lowerRightNode.physicsBody?.isDynamic = false
         lowerRightNode.physicsBody?.affectedByGravity = false
         lowerRightNode.size = CGSize(width: 64, height: 64)
-        lowerRightNode.position = CGPoint(x:centerWidth - corneredge,y: -centerHeight + 90)
+        lowerRightNode.position = CGPoint(x:centerWidth - corneredge,y: -centerHeight + 98)
         anchorNode.addChild(lowerRightNode)
-        
-        print("LR width:", lowerRightNode.size.width)
-        
+                
         //upper left corner
         let upperLeftNode = SKSpriteNode()
         let upperLeftTexture = SKTexture(imageNamed: "ul")
@@ -618,7 +621,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         goalWallRightNode.physicsBody?.collisionBitMask = wallCategory + ballCategory
         goalWallRightNode.position = CGPoint(x: 130, y: -centerHeight + 30)
         goalWallRightNode.size = CGSize(width: goalWallTexture.size().width, height: goalWallTexture.size().height)
-        goalWallRightNode.physicsBody?.restitution = 0
+        goalWallRightNode.physicsBody?.restitution = 0.25
         goalWallRightNode.name = "wall"
         anchorNode.addChild(goalWallRightNode)
         
@@ -643,10 +646,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         goalWallLeftNode.physicsBody?.collisionBitMask = wallCategory + ballCategory
         goalWallLeftNode.position = CGPoint(x: -130, y: -centerHeight + 30)
         goalWallLeftNode.size = CGSize(width: goalWallLeftTexture.size().width, height: goalWallLeftTexture.size().height) //Needed to size
-        goalWallLeftNode.physicsBody?.restitution = 0
+        goalWallLeftNode.physicsBody?.restitution = 0.25
         goalWallLeftNode.name = "wall"
         anchorNode.addChild(goalWallLeftNode)
         
+        print("goalWallLeftNode:", goalWallLeftNode.size.width)
+        
+        recessedWallWidth -= goalWallLeftNode.size.width
+
         let goalNode = SKSpriteNode()
         let goalTexture = SKTexture(imageNamed: "goal")
         let goalPhysicsBody = SKPhysicsBody(texture: goalTexture, alphaThreshold: 0.1, size: goalTexture.size())
@@ -659,7 +666,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         goalNode.physicsBody?.angularDamping = 0
         goalNode.zPosition = 50
         goalNode.physicsBody?.isDynamic = false
-        goalNode.physicsBody?.mass = 0.0
+        goalNode.physicsBody?.mass = 1.0
         goalNode.physicsBody?.contactTestBitMask = ballCategory
         goalNode.physicsBody?.categoryBitMask = goalCategory
         goalNode.position = CGPoint(x:0,y:-centerHeight)
@@ -667,6 +674,58 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         goalNode.physicsBody?.restitution = 0
         goalNode.name = "goal"
         anchorNode.addChild(goalNode)
+        
+        print("goalWallRightNode:", goalNode.size.width)
+        
+        recessedWallWidth -= goalNode.size.width / 2
+
+        let recessWallNodeR = SKSpriteNode()
+        let recessWallTextureR = SKTexture(imageNamed: "recessedWall")
+        let recessWallPhysicsBodyR = SKPhysicsBody(texture: recessWallTextureR, alphaThreshold: 0.1, size: recessWallTextureR.size())
+        recessWallNodeR.texture = recessWallTextureR
+        recessWallNodeR.physicsBody = recessWallPhysicsBodyR
+        recessWallNodeR.physicsBody?.affectedByGravity = false
+        recessWallNodeR.physicsBody?.friction = 0
+        recessWallNodeR.physicsBody?.allowsRotation = false
+        recessWallNodeR.physicsBody?.linearDamping = 0
+        recessWallNodeR.physicsBody?.angularDamping = 0
+        recessWallNodeR.zPosition = 50
+        recessWallNodeR.physicsBody?.isDynamic = false
+        recessWallNodeR.physicsBody?.mass = 1.0
+        recessWallNodeR.physicsBody?.contactTestBitMask = ballCategory
+        recessWallNodeR.physicsBody?.categoryBitMask = wallCategory
+        recessWallNodeR.physicsBody?.collisionBitMask = wallCategory + ballCategory
+        recessWallNodeR.position = CGPoint(x: (-recessedWallWidth - 130 + 70) * -1, y: -centerHeight + 30)
+        recessWallNodeR.size = CGSize(width: recessedWallWidth + 20, height: recessWallTextureR.size().height)
+        recessWallNodeR.physicsBody?.restitution = 0.25
+        recessWallNodeR.name = "wall"
+        anchorNode.addChild(recessWallNodeR)
+        
+        
+        let recessWallNodeL = SKSpriteNode()
+        let recessWallTextureL = SKTexture(imageNamed: "recessedWall")
+        let recessWallPhysicsBodyL = SKPhysicsBody(texture: recessWallTextureL, alphaThreshold: 0.1, size: recessWallTextureL.size())
+        recessWallNodeL.texture = recessWallTextureL
+        recessWallNodeL.physicsBody = recessWallPhysicsBodyL
+        recessWallNodeL.physicsBody?.affectedByGravity = false
+        recessWallNodeL.physicsBody?.friction = 0
+        recessWallNodeL.physicsBody?.allowsRotation = false
+        recessWallNodeL.physicsBody?.linearDamping = 0
+        recessWallNodeL.physicsBody?.angularDamping = 0
+        recessWallNodeL.zPosition = 50
+        recessWallNodeL.physicsBody?.isDynamic = false
+        recessWallNodeL.physicsBody?.mass = 1.0
+        recessWallNodeL.physicsBody?.contactTestBitMask = ballCategory
+        recessWallNodeL.physicsBody?.categoryBitMask = wallCategory
+        recessWallNodeL.physicsBody?.collisionBitMask = wallCategory + ballCategory
+        recessWallNodeL.position = CGPoint(x: (-recessedWallWidth - 130 + 70) * 1, y: -centerHeight + 30)
+        recessWallNodeL.size = CGSize(width: recessedWallWidth + 16, height: recessWallTextureL.size().height)
+        recessWallNodeL.physicsBody?.restitution = 0.25
+        recessWallNodeL.name = "wall"
+        anchorNode.addChild(recessWallNodeL)
+ 
+        
+        
         
         drawLevel()
         
@@ -869,7 +928,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         }
         
         switch catMask {
-         
+            
         case ballCategory | brickCategory :
             ballCounter = ballTimeOut
             if settings.sound { run(brickSound) }
@@ -901,7 +960,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
             else {
                 return
             }
-    
+            
             if settings.sound && ballNode.name == "ball" { run(wallSound) }
             
             if ballNode.name != "powerball" || ballNode.name != "ball" { return }
@@ -909,12 +968,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
             func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat, _ initialVelocity: CGFloat ) {
                 guard let ballBody = ballBody else { return }
                 
-                if abs(ballBody.velocity.dx) < abs(initialVelocity) {
-                    ballBody.velocity.dx <= zero ? (ballBody.velocity.dx -= boost) : (ballBody.velocity.dx += boost)
+                if abs(ballBody.velocity.dx) < abs(initialVelocity / halfLife) {
+                    ballBody.velocity.dx <= zero ? (ballBody.velocity.dx -= boost * halfLife) : (ballBody.velocity.dx += boost * halfLife)
                 }
                 
-                if abs(ballBody.velocity.dy) < abs(initialVelocity) {
-                    ballBody.velocity.dy <= zero ? (ballBody.velocity.dy -= boost) : (ballBody.velocity.dy += boost)
+                if abs(ballBody.velocity.dy) < abs(initialVelocity / halfLife) {
+                    ballBody.velocity.dy <= zero ? (ballBody.velocity.dy -= boost * halfLife) : (ballBody.velocity.dy += boost * halfLife)
                 }
             }
             
@@ -931,7 +990,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
             
         case ballCategory | goalCategory:
             ballCounter = ballTimeOut
-
+            
             let a = SKAction.fadeAlpha(to: 0, duration: 0.125)
             let b = SKAction.wait(forDuration: 0.125)
             let c = SKAction.removeFromParent()
@@ -964,7 +1023,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
             if gameLives == 0 && gameOver == nil {
                 gameOver = true
                 timer.invalidate()
-
+                
                 removePowerBall()
                 
                 let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
@@ -999,7 +1058,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
                 
                 anchorNode.run(SKAction.sequence([decay1,gameOverCode,decay2,runcode]))
             }
-         
+            
         case powerCategory | paddleCategory:
             if settings.sound { run(paddleSound) }
             scoreLabel.text = String(gameScore)
@@ -1017,34 +1076,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     
     // Called before each frame is rendered
     override func update(_ currentTime: TimeInterval) {
-//        guard
-//            let x = ballNode.physicsBody?.velocity.dx,
-//            let y = ballNode.physicsBody?.velocity.dy,
-//            let body = ballNode.physicsBody
-//        else {
-//            return
-//        }
-//
-//        if ballNode.name != "ball" { return }
-//
-//        func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat, _ initialVelocity: CGFloat ) {
-//            guard let ballBody = ballBody else { return }
-//
-//            if abs(ballBody.velocity.dx) < abs(initialVelocity / halfLife) {
-//                ballBody.velocity.dx <= zero ? (ballBody.velocity.dx -= boost * halfLife) : (ballBody.velocity.dx += boost * halfLife)
-//            }
-//
-//            if abs(ballBody.velocity.dy) < abs(initialVelocity / halfLife) {
-//                ballBody.velocity.dy <= zero ? (ballBody.velocity.dy -= boost * halfLife) : (ballBody.velocity.dy += boost * halfLife)
-//            }
-//        }
-//
-//        let absTotal = abs(x) + abs(y)
-//
-//        if absTotal <= initialVelocity * ratio {
-//            booster(body, boost, initialVelocity)
-//        } else if absTotal > initialVelocity * ratio + differentiator {
-//            booster(body, -boost, initialVelocity + differentiator)
-//        }
+        //        guard
+        //            let x = ballNode.physicsBody?.velocity.dx,
+        //            let y = ballNode.physicsBody?.velocity.dy,
+        //            let body = ballNode.physicsBody
+        //        else {
+        //            return
+        //        }
+        //
+        //        if ballNode.name != "ball" { return }
+        //
+        //        func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat, _ initialVelocity: CGFloat ) {
+        //            guard let ballBody = ballBody else { return }
+        //
+        //            if abs(ballBody.velocity.dx) < abs(initialVelocity / halfLife) {
+        //                ballBody.velocity.dx <= zero ? (ballBody.velocity.dx -= boost * halfLife) : (ballBody.velocity.dx += boost * halfLife)
+        //            }
+        //
+        //            if abs(ballBody.velocity.dy) < abs(initialVelocity / halfLife) {
+        //                ballBody.velocity.dy <= zero ? (ballBody.velocity.dy -= boost * halfLife) : (ballBody.velocity.dy += boost * halfLife)
+        //            }
+        //        }
+        //
+        //        let absTotal = abs(x) + abs(y)
+        //
+        //        if absTotal <= initialVelocity * ratio {
+        //            booster(body, boost, initialVelocity)
+        //        } else if absTotal > initialVelocity * ratio + differentiator {
+        //            booster(body, -boost, initialVelocity + differentiator)
+        //        }
     }
 }
