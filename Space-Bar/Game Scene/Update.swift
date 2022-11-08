@@ -30,16 +30,16 @@ extension GameScene {
             }
             
             if abs(ballBody.velocity.dy) < abs(initialVelocity) {
-                ballBody.velocity.dy <= zero ? (ballBody.velocity.dy -= boost) : (ballBody.velocity.dy += boost)
+                ballBody.velocity.dy <= zero ? (ballBody.velocity.dy -= boost * 2) : (ballBody.velocity.dy += boost * 2)
             }
         }
         
         let absTotal = abs(x) + abs(y)
         
         if absTotal <= initialVelocity * ratio {
-            booster(body, boost, initialVelocity * ratio)
-        } else if absTotal > initialVelocity * ratio + differentiator {
-            booster(body, -boost, initialVelocity * ratio + differentiator)
+            booster(body, boost, initialVelocity)
+        } else if absTotal > initialVelocity + differentiator {
+            booster(body, -boost, initialVelocity + differentiator)
         }
     }
 }

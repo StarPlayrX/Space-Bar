@@ -37,6 +37,6 @@ extension GameScene {
             x = xPos[settings.currentlevel] * 12.5
         }
         
-        space?.position = screenType == .iPad ? CGPoint(x: x, y: centerHeight - 500 / 1.80) : CGPoint(x: x, y: centerHeight - 300)
+        space?.position = screenType == .iPad ? CGPoint(x: x, y: centerHeight - 200) : CGPoint(x: x, y: centerHeight - 255)
     }
 }
