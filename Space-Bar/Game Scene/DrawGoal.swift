@@ -32,7 +32,7 @@ extension GameScene {
         goalWallRightNode.size = goalWallRightNodeSize
         goalWallRightNode.physicsBody?.restitution = 0.25
         goalWallRightNode.name = "wall"
-        goalWallRightNode.alpha = 1.0
+        goalWallRightNode.alpha = 0.667 
         anchorNode.addChild(goalWallRightNode)
         
         let goalWallLeftNode = SKSpriteNode()
@@ -56,7 +56,7 @@ extension GameScene {
         goalWallLeftNode.size = goalWallLeftNodeSize
         goalWallLeftNode.physicsBody?.restitution = 0.25
         goalWallLeftNode.name = "wall"
-        goalWallLeftNode.alpha = 1.0
+        goalWallLeftNode.alpha = 0.667
         anchorNode.addChild(goalWallLeftNode)
         
         let goalNode = SKSpriteNode()
@@ -78,7 +78,7 @@ extension GameScene {
         goalNode.size = goalNodeSize
         goalNode.physicsBody?.restitution = 0
         goalNode.name = "goal"
-        goalNode.alpha = 1.0
+        goalNode.alpha = 0.667
         anchorNode.addChild(goalNode)
     }
 }

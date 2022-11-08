@@ -12,19 +12,23 @@ import SpriteKit
 extension GameScene {
     func drawCenterCourt() {
         //centercourt circle
-        let centerCourtNode = SKSpriteNode()
-        let centerCourtTexture = SKTexture(imageNamed: "centercourt")
-        centerCourtNode.texture = centerCourtTexture
-        centerCourtNode.size = centerCourtTexture.size()
+        
+        var centerCourtNode = SKShapeNode(circleOfRadius: centerWidth / 3 + 4) // Size of Circle
+        centerCourtNode.strokeColor = .systemRed
+        centerCourtNode.lineWidth = 3.0
+        centerCourtNode.glowWidth = 1.0
+        centerCourtNode.alpha = 0.5
+        centerCourtNode.fillColor = SKColor.clear
+        //centerCourtNode.size = CGSize(width: 50, height: 50)
         centerCourtNode.position = CGPoint(x:0,y:0)
         anchorNode.addChild(centerCourtNode)
         
         //centercourt line
         let centerCourtLineNode = SKSpriteNode()
         let centerCourtLineSize = CGSize(width:centerWidth * 2 - 64, height: 4)
-        let centerCourtLineTexture = SKTexture(imageNamed: "centerline")
-        centerCourtLineNode.texture = centerCourtLineTexture
         let centerLineBody = SKPhysicsBody(rectangleOf: centerCourtLineSize)
+        centerCourtLineNode.color = .systemRed
+        centerCourtLineNode.alpha = 0.5
         centerCourtLineNode.physicsBody = centerLineBody
         centerCourtLineNode.physicsBody?.contactTestBitMask = ballCategory
         centerCourtLineNode.physicsBody?.categoryBitMask = midFieldCategory

@@ -30,6 +30,7 @@ extension GameScene {
         topWall.size = topWallSize
         topWall.physicsBody?.restitution = 0.25
         topWall.name = "wall"
+        topWall.alpha = 0.667
         anchorNode.addChild(topWall)
         
         let upperLeftWall = SKSpriteNode()
@@ -51,6 +52,7 @@ extension GameScene {
         upperLeftWall.size = upperLeftWallSize
         upperLeftWall.physicsBody?.restitution = 0.25
         upperLeftWall.name = "wall"
+        upperLeftWall.alpha = 0.667
         anchorNode.addChild(upperLeftWall)
         
         let upperRightWall = SKSpriteNode()
@@ -72,6 +74,7 @@ extension GameScene {
         upperRightWall.size = upperRightWallSize
         upperRightWall.physicsBody?.restitution = 0.25
         upperRightWall.name = "wall"
+        upperRightWall.alpha = 0.667
         anchorNode.addChild(upperRightWall)
         
         let lowerLeftWall = SKSpriteNode()
@@ -93,6 +96,7 @@ extension GameScene {
         lowerLeftWall.size = lowerLeftWallSize
         lowerLeftWall.physicsBody?.restitution = 0.25
         lowerLeftWall.name = "wall"
+        lowerLeftWall.alpha = 0.667
         anchorNode.addChild(lowerLeftWall)
         
         let lowerRightWall = SKSpriteNode()
@@ -114,6 +118,7 @@ extension GameScene {
         lowerRightWall.size = lowerRightWallSize
         lowerRightWall.physicsBody?.restitution = 0.25
         lowerRightWall.name = "wall"
+        lowerRightWall.alpha = 0.667
         anchorNode.addChild(lowerRightWall)
         
         let recessWallNodeR = SKSpriteNode()
@@ -134,6 +139,7 @@ extension GameScene {
         recessWallNodeR.size = CGSize(width: (width + 2) / 3, height: 4)
         recessWallNodeR.physicsBody?.restitution = 0.25
         recessWallNodeR.name = "wall"
+        recessWallNodeR.alpha = 0.667
         anchorNode.addChild(recessWallNodeR)
         
         let recessWallNodeL = SKSpriteNode()
@@ -154,6 +160,7 @@ extension GameScene {
         recessWallNodeL.size = CGSize(width: (width + 2) / 3, height: 4)
         recessWallNodeL.physicsBody?.restitution = 0.25
         recessWallNodeL.name = "wall"
+        recessWallNodeL.alpha = 0.667
         anchorNode.addChild(recessWallNodeL)
     }
 }

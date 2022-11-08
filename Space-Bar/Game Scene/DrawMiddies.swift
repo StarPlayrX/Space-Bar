@@ -28,6 +28,7 @@ extension GameScene {
         leftMidNode.physicsBody?.affectedByGravity = false
         leftMidNode.size = CGSize(width: 32, height: 64)
         leftMidNode.position = CGPoint(x: -centerWidth + (corneredge / 2) + 2, y: 0)
+        leftMidNode.alpha = 0.667
         anchorNode.addChild(leftMidNode)
         
         //right mid corner piece
@@ -47,6 +48,7 @@ extension GameScene {
         rightMidNode.physicsBody?.affectedByGravity = false
         rightMidNode.size = CGSize(width: 32, height: 64)
         rightMidNode.position = CGPoint(x: centerWidth - (corneredge / 2) - 2, y: 0)
+        rightMidNode.alpha = 0.667
         anchorNode.addChild(rightMidNode)
     }
 }
