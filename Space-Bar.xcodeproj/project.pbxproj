@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5F163D18231C8A2500E341FD /* SpaceBarColors.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5F163D17231C8A2500E341FD /* SpaceBarColors.otf */; };
 		5F420399291368F600F7FF16 /* level71.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F420398291368F600F7FF16 /* level71.sks */; };
-		5F42039B291983EB00F7FF16 /* ViewDidMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F42039A291983EB00F7FF16 /* ViewDidMove.swift */; };
+		5F42039B291983EB00F7FF16 /* SetUpGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F42039A291983EB00F7FF16 /* SetUpGameScene.swift */; };
 		5F42039D291984B900F7FF16 /* DrawLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F42039C291984B900F7FF16 /* DrawLevel.swift */; };
 		5F42039F2919857000F7FF16 /* DrawParallax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F42039E2919857000F7FF16 /* DrawParallax.swift */; };
 		5F4203A1291985B200F7FF16 /* AddPuck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203A0291985B200F7FF16 /* AddPuck.swift */; };
@@ -17,7 +17,7 @@
 		5F4203A52919868700F7FF16 /* DrawBricks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203A42919868700F7FF16 /* DrawBricks.swift */; };
 		5F4203A7291986C900F7FF16 /* CocoaTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203A6291986C900F7FF16 /* CocoaTouch.swift */; };
 		5F4203A92919870500F7FF16 /* ResetGameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203A82919870500F7FF16 /* ResetGameBoard.swift */; };
-		5F4203AB2919877800F7FF16 /* DidBegin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203AA2919877800F7FF16 /* DidBegin.swift */; };
+		5F4203AB2919877800F7FF16 /* DidBeginContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203AA2919877800F7FF16 /* DidBeginContact.swift */; };
 		5F4203AD291987C400F7FF16 /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203AC291987C400F7FF16 /* Update.swift */; };
 		5F4203AF2919881300F7FF16 /* BrickChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203AE2919881300F7FF16 /* BrickChecker.swift */; };
 		5F4203B12919885A00F7FF16 /* RemovePowerBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203B02919885A00F7FF16 /* RemovePowerBall.swift */; };
@@ -121,7 +121,7 @@
 /* Begin PBXFileReference section */
 		5F163D17231C8A2500E341FD /* SpaceBarColors.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpaceBarColors.otf; sourceTree = "<group>"; };
 		5F420398291368F600F7FF16 /* level71.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level71.sks; sourceTree = "<group>"; };
-		5F42039A291983EB00F7FF16 /* ViewDidMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDidMove.swift; sourceTree = "<group>"; };
+		5F42039A291983EB00F7FF16 /* SetUpGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpGameScene.swift; sourceTree = "<group>"; };
 		5F42039C291984B900F7FF16 /* DrawLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLevel.swift; sourceTree = "<group>"; };
 		5F42039E2919857000F7FF16 /* DrawParallax.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawParallax.swift; sourceTree = "<group>"; };
 		5F4203A0291985B200F7FF16 /* AddPuck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPuck.swift; sourceTree = "<group>"; };
@@ -129,7 +129,7 @@
 		5F4203A42919868700F7FF16 /* DrawBricks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawBricks.swift; sourceTree = "<group>"; };
 		5F4203A6291986C900F7FF16 /* CocoaTouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaTouch.swift; sourceTree = "<group>"; };
 		5F4203A82919870500F7FF16 /* ResetGameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetGameBoard.swift; sourceTree = "<group>"; };
-		5F4203AA2919877800F7FF16 /* DidBegin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidBegin.swift; sourceTree = "<group>"; };
+		5F4203AA2919877800F7FF16 /* DidBeginContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidBeginContact.swift; sourceTree = "<group>"; };
 		5F4203AC291987C400F7FF16 /* Update.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
 		5F4203AE2919881300F7FF16 /* BrickChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickChecker.swift; sourceTree = "<group>"; };
 		5F4203B02919885A00F7FF16 /* RemovePowerBall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovePowerBall.swift; sourceTree = "<group>"; };
@@ -275,14 +275,14 @@
 				5F4203A0291985B200F7FF16 /* AddPuck.swift */,
 				5F4203A2291985EA00F7FF16 /* AddPowerBall.swift */,
 				5F4203A6291986C900F7FF16 /* CocoaTouch.swift */,
-				5F4203AA2919877800F7FF16 /* DidBegin.swift */,
+				5F4203AA2919877800F7FF16 /* DidBeginContact.swift */,
 				5F42039C291984B900F7FF16 /* DrawLevel.swift */,
 				5F4203A42919868700F7FF16 /* DrawBricks.swift */,
 				5F42039E2919857000F7FF16 /* DrawParallax.swift */,
 				5F4203A82919870500F7FF16 /* ResetGameBoard.swift */,
 				5F4203B4291988A600F7FF16 /* SetHighScore.swift */,
+				5F42039A291983EB00F7FF16 /* SetUpGameScene.swift */,
 				5F4203B22919887500F7FF16 /* TileMapRun.swift */,
-				5F42039A291983EB00F7FF16 /* ViewDidMove.swift */,
 				5F77D8F322E3FEBC00E8C4F3 /* GameScene.sks */,
 			);
 			path = "Game Scene";
@@ -615,14 +615,14 @@
 				5F4203A7291986C900F7FF16 /* CocoaTouch.swift in Sources */,
 				5F4203AF2919881300F7FF16 /* BrickChecker.swift in Sources */,
 				6F55698626D1F9300060D0E7 /* ScreenSize.swift in Sources */,
-				5F42039B291983EB00F7FF16 /* ViewDidMove.swift in Sources */,
+				5F42039B291983EB00F7FF16 /* SetUpGameScene.swift in Sources */,
 				5F77D8DF22E3FCF900E8C4F3 /* GameViewController.swift in Sources */,
 				5F4203B32919887500F7FF16 /* TileMapRun.swift in Sources */,
 				6FA1ABBD26E99AE5003CBD2D /* LevelPosition.swift in Sources */,
 				5FCEE07F2313415E0002A5CF /* GameMenu.swift in Sources */,
 				5F4203B5291988A600F7FF16 /* SetHighScore.swift in Sources */,
 				5F4203B12919885A00F7FF16 /* RemovePowerBall.swift in Sources */,
-				5F4203AB2919877800F7FF16 /* DidBegin.swift in Sources */,
+				5F4203AB2919877800F7FF16 /* DidBeginContact.swift in Sources */,
 				5F4203A1291985B200F7FF16 /* AddPuck.swift in Sources */,
 				5F77D8DB22E3FCC100E8C4F3 /* AppDelegate.swift in Sources */,
 				5F4203A92919870500F7FF16 /* ResetGameBoard.swift in Sources */,

@@ -42,11 +42,8 @@ extension GameScene {
         }
         
         powerNode.physicsBody?.categoryBitMask = powerCategory
-        powerNode.physicsBody?.contactTestBitMask =
-        paddleCategory + wallCategory
-        
-        powerNode.physicsBody?.collisionBitMask =
-        paddleCategory + brickCategory + wallCategory
+        powerNode.physicsBody?.contactTestBitMask = paddleCategory + wallCategory
+        powerNode.physicsBody?.collisionBitMask = paddleCategory + brickCategory + wallCategory
         
         powerNode.zPosition = 50
         powerNode.physicsBody?.affectedByGravity = false

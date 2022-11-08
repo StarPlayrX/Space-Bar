@@ -1,5 +1,5 @@
 //
-//  ViewDidMove.swift
+//  SetUpGameScene.swift
 //  Space-Bar
 //
 //  Created by Todd Bruss on 11/7/22.
@@ -21,6 +21,7 @@ extension GameScene {
         
         screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
         
+        //Our custom font maps emoji's to vector graphics - Kind of old school to classic 8 bit games
         levelart[0] = ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
         levelart[1] = ["😝","😜","🤪","🤨","🧐","🤓","😎","🥸"]
         levelart[2] = ["😍","🥰","😘","😗","😙","😚","😋","😛"]
@@ -155,7 +156,6 @@ extension GameScene {
         anchorNode.addChild(centerCourtLineNode)
     
         let goalWallRightNode = SKSpriteNode()
-        //let goalWalRightTexture = SKTexture(imageNamed: "goalwallLeft")
         let goalWallRightPhysicsBody =  SKPhysicsBody(rectangleOf: CGSize(width: 4, height: 64))
         goalWallRightNode.color = .systemRed
         goalWallRightNode.physicsBody = goalWallRightPhysicsBody
@@ -178,8 +178,7 @@ extension GameScene {
         anchorNode.addChild(goalWallRightNode)
                 
         let goalWallLeftNode = SKSpriteNode()
-        //let goalWallLeftTexture = SKTexture(imageNamed: "goalwallLeft")
-        let goalWallLeftPhysicsBody =  SKPhysicsBody(rectangleOf: CGSize(width: 4, height: 64))
+        let goalWallLeftPhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 4, height: 64))
         goalWallLeftNode.color = .systemRed
         goalWallLeftNode.physicsBody = goalWallLeftPhysicsBody
         goalWallLeftNode.physicsBody?.affectedByGravity = false
@@ -220,6 +219,27 @@ extension GameScene {
         goalNode.physicsBody?.restitution = 0
         goalNode.name = "goal"
         anchorNode.addChild(goalNode)
+        
+        let lowerLeftWall = SKSpriteNode()
+        let lowerLeftWallSize = CGSize(width: 4, height: centerHeight - 92)
+        lowerLeftWall.physicsBody = SKPhysicsBody(rectangleOf: lowerLeftWallSize)
+        lowerLeftWall.color = .systemBlue
+        lowerLeftWall.physicsBody?.affectedByGravity = false
+        lowerLeftWall.physicsBody?.friction = 0
+        lowerLeftWall.physicsBody?.allowsRotation = false
+        lowerLeftWall.physicsBody?.linearDamping = 0
+        lowerLeftWall.physicsBody?.angularDamping = 0
+        lowerLeftWall.zPosition = 50
+        lowerLeftWall.physicsBody?.isDynamic = false
+        lowerLeftWall.physicsBody?.mass = 1.0
+        lowerLeftWall.physicsBody?.contactTestBitMask = ballCategory
+        lowerLeftWall.physicsBody?.categoryBitMask = wallCategory
+        lowerLeftWall.physicsBody?.collisionBitMask = wallCategory + ballCategory
+        lowerLeftWall.position = CGPoint(x: -centerWidth + 2, y: -centerHeight / 2 + 18)
+        lowerLeftWall.size = lowerLeftWallSize
+        lowerLeftWall.physicsBody?.restitution = 0.25
+        lowerLeftWall.name = "wall"
+        anchorNode.addChild(lowerLeftWall)
         
         let recessWallNodeR = SKSpriteNode()
         recessWallNodeR.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width / 3, height: 4))

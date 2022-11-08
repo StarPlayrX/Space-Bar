@@ -22,24 +22,24 @@ extension GameScene {
         
         if ballNode.name != "ball" { return }
         
-        func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat, _ initialVelocity: CGFloat ) {
-            guard let ballBody = ballBody else { return }
-            
-            if abs(ballBody.velocity.dx) < abs(initialVelocity) {
-                ballBody.velocity.dx <= zero ? (ballBody.velocity.dx -= boost) : (ballBody.velocity.dx += boost)
-            }
-            
-            if abs(ballBody.velocity.dy) < abs(initialVelocity) {
-                ballBody.velocity.dy <= zero ? (ballBody.velocity.dy -= boost * 2) : (ballBody.velocity.dy += boost * 2)
-            }
-        }
-        
         let absTotal = abs(x) + abs(y)
         
         if absTotal <= initialVelocity * ratio {
             booster(body, boost, initialVelocity)
         } else if absTotal > initialVelocity + differentiator {
             booster(body, -boost, initialVelocity + differentiator)
+        }
+    }
+
+    func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat, _ initialVelocity: CGFloat ) {
+        guard let ballBody = ballBody else { return }
+        
+        if abs(ballBody.velocity.dx) < abs(initialVelocity) {
+            ballBody.velocity.dx <= zero ? (ballBody.velocity.dx -= boost) : (ballBody.velocity.dx += boost)
+        }
+        
+        if abs(ballBody.velocity.dy) < abs(initialVelocity) {
+            ballBody.velocity.dy <= zero ? (ballBody.velocity.dy -= boost * 2) : (ballBody.velocity.dy += boost * 2)
         }
     }
 }

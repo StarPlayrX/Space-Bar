@@ -1,5 +1,5 @@
 //
-//  DidBegin.swift
+//  DidBeginContact.swift
 //  Space-Bar
 //
 //  Created by Todd Bruss on 11/7/22.
@@ -77,25 +77,13 @@ extension GameScene {
             if settings.sound && ballNode.name == "ball" { run(wallSound) }
             
             if ballNode.name != "powerball" || ballNode.name != "ball" { return }
-            
-            func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat, _ initialVelocity: CGFloat ) {
-                guard let ballBody = ballBody else { return }
-                
-                if abs(ballBody.velocity.dx) < abs(initialVelocity) {
-                    ballBody.velocity.dx <= zero ? (ballBody.velocity.dx -= boost) : (ballBody.velocity.dx += boost)
-                }
-                
-                if abs(ballBody.velocity.dy) < abs(initialVelocity) {
-                    ballBody.velocity.dy <= zero ? (ballBody.velocity.dy -= boost) : (ballBody.velocity.dy += boost)
-                }
-            }
-            
+                        
             let absTotal = abs(x) + abs(y)
             
             if absTotal <= initialVelocity * ratio {
-                booster(body, boost, initialVelocity * ratio)
-            } else if absTotal > initialVelocity * ratio + differentiator {
-                booster(body, -boost, initialVelocity * ratio + differentiator)
+                booster(body, boost, initialVelocity)
+            } else if absTotal > initialVelocity + differentiator {
+                booster(body, -boost, initialVelocity + differentiator)
             }
             
         case ballCategory | midFieldCategory :

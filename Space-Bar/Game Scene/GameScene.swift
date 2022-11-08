@@ -25,7 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     var initialVelocity = CGFloat(800)
     let differentiator = CGFloat(250)
     
-    var ballNode =  SKSpriteNode()
+    var ballNode    = SKSpriteNode()
     let appSettings = AppSettings()
     
     deinit {
@@ -85,4 +85,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     //ipad Level
     var screenType: ScreenType = .iAny
     var levelart = [ Int : [String] ]()
+    
+    //MARK: - Cocoa Touch
+    let constraint = CGFloat(64)
 }

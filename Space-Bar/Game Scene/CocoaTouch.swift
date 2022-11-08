@@ -11,7 +11,6 @@ import SpriteKit
 
 extension GameScene {
     func touchDown(atPoint pos : CGPoint) {
-        let constraint = CGFloat(64)
         if (pos.x >= constraint && pos.x <= frame.width - constraint) {
             let action = SKAction.moveTo(x: pos.x, duration: 0.002)
             paddleNode?.run(action)
@@ -19,7 +18,6 @@ extension GameScene {
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-        let constraint = CGFloat(64)
         if (pos.x >= constraint && pos.x <= frame.width - constraint) {
             let action = SKAction.moveTo(x: pos.x, duration: 0.002)
             paddleNode?.run(action)
