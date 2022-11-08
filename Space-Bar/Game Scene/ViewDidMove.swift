@@ -15,8 +15,8 @@ extension GameScene {
         drawParallax()
         
         //setup physicsWorld
-        physicsWorld.gravity.dx =  -0.334
-        physicsWorld.gravity.dy =  -0.667
+        physicsWorld.gravity.dx =  0
+        physicsWorld.gravity.dy =  -0.15
         physicsWorld.contactDelegate = self
         
         screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
@@ -37,7 +37,7 @@ extension GameScene {
         width  = w
         height = h
         
-        centerWidth = width / 2
+        centerWidth  = width / 2
         centerHeight = height / 2
         
         //stand in for our anchorPoint

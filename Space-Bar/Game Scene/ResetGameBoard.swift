@@ -31,7 +31,7 @@ extension GameScene {
         
         //livesLabel.text = String(gameLives)
         let puck = Global.shared.gameBall[settings.puck]
-        livesLabel.text = String(repeating: puck, count: gameLives)
+        livesLabel.text = String(repeating: puck + "\u{2009}\u{2009}\u{2009}", count: gameLives > 0 ? gameLives  : 0)
         levelLabel.text = String(settings.currentlevel + 1)
         scoreLabel.text = String(gameScore)
         setHighScore()
@@ -40,10 +40,8 @@ extension GameScene {
         
         let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
         
-        let decay1 = SKAction.wait(forDuration: 3.0)
-        let decay2 = SKAction.wait(forDuration: 1.5)
-        let levelUpCode = SKAction.run { [unowned self] in
-            
+        let delay = SKAction.wait(forDuration: 2.5)
+        let levelUp = SKAction.run { [unowned self] in
             let getReadyText = "GET READY"
             getReadyLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
             getReadyLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -69,9 +67,10 @@ extension GameScene {
             getReadyLabel.run(fadeAlpha)
         }
         
-        let runcode2 = SKAction.run { [unowned self] in
+        let startLevel = SKAction.run { [unowned self] in
             addPuck()
-            
+            livesLabel.text = String(repeating: puck + "\u{2009}\u{2009}\u{2009}", count: gameLives > 0 ? gameLives - 1 : 0)
+
             for whatDaPuck in anchorNode.children {
                 if let name = whatDaPuck.name, name == "powerball" {
                     whatDaPuck.removeFromParent()
@@ -83,6 +82,6 @@ extension GameScene {
             }
         }
         
-        run(SKAction.sequence([levelUpCode,decay1,runcode1,decay2,runcode2]))
+        run(SKAction.sequence([levelUp,runcode1,delay,startLevel]))
     }
 }

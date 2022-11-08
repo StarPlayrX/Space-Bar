@@ -12,7 +12,7 @@ import SpriteKit
 extension GameScene {
     func drawGoal() {
         let goalWallRightNode = SKSpriteNode()
-        let goalWallRightNodeSize = CGSize(width: 4, height: 64)
+        let goalWallRightNodeSize = CGSize(width: 4, height: 66)
         let goalWallRightPhysicsBody = SKPhysicsBody(rectangleOf: goalWallRightNodeSize)
         goalWallRightNode.color = .systemRed
         goalWallRightNode.physicsBody = goalWallRightPhysicsBody
@@ -28,7 +28,7 @@ extension GameScene {
         goalWallRightNode.physicsBody?.contactTestBitMask = ballCategory
         goalWallRightNode.physicsBody?.categoryBitMask = wallCategory
         goalWallRightNode.physicsBody?.collisionBitMask = wallCategory + ballCategory
-        goalWallRightNode.position = CGPoint(x: centerWidth / 3 + 2, y: -centerHeight + 32)
+        goalWallRightNode.position = CGPoint(x: centerWidth / 3 + 3, y: -centerHeight + 32)
         goalWallRightNode.size = goalWallRightNodeSize
         goalWallRightNode.physicsBody?.restitution = 0.25
         goalWallRightNode.name = "wall"
@@ -36,7 +36,7 @@ extension GameScene {
         anchorNode.addChild(goalWallRightNode)
         
         let goalWallLeftNode = SKSpriteNode()
-        let goalWallLeftNodeSize = CGSize(width: 4, height: 64)
+        let goalWallLeftNodeSize = CGSize(width: 4, height: 66)
         let goalWallLeftPhysicsBody = SKPhysicsBody(rectangleOf: goalWallLeftNodeSize)
         goalWallLeftNode.color = .systemRed
         goalWallLeftNode.physicsBody = goalWallLeftPhysicsBody

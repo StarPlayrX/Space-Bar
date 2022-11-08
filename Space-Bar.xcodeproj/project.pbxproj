@@ -285,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				5F77D8DC22E3FCE800E8C4F3 /* GameScene.swift */,
+				5F42039A291983EB00F7FF16 /* ViewDidMove.swift */,
 				5F4203B02919885A00F7FF16 /* RemovePowerBall.swift */,
 				5F4203AE2919881300F7FF16 /* BrickChecker.swift */,
 				5F4203AC291987C400F7FF16 /* Update.swift */,
@@ -297,7 +298,6 @@
 				5F42039E2919857000F7FF16 /* DrawParallax.swift */,
 				5F4203A82919870500F7FF16 /* ResetGameBoard.swift */,
 				5F4203B4291988A600F7FF16 /* SetHighScore.swift */,
-				5F42039A291983EB00F7FF16 /* ViewDidMove.swift */,
 				5F4203B6291A90D800F7FF16 /* DrawHUD.swift */,
 				5F4203C4291A9ADE00F7FF16 /* GetReady.swift */,
 				5F4203BE291A96AF00F7FF16 /* DrawCenterCourt.swift */,

@@ -14,7 +14,7 @@ extension GameScene {
         //left mid corner piece
         let leftMidNode = SKSpriteNode()
         let leftMidTexture = SKTexture(imageNamed: "leftmid")
-        let leftMidBody =  SKPhysicsBody(texture: leftMidTexture, alphaThreshold: 0.1, size: leftMidTexture.size())
+        let leftMidBody = SKPhysicsBody(texture: leftMidTexture, alphaThreshold: 0.1, size: leftMidTexture.size())
         leftMidNode.texture = leftMidTexture
         leftMidNode.physicsBody = leftMidBody
         leftMidNode.physicsBody?.friction = 0
@@ -27,13 +27,13 @@ extension GameScene {
         leftMidNode.physicsBody?.isDynamic = false
         leftMidNode.physicsBody?.affectedByGravity = false
         leftMidNode.size = CGSize(width: 32, height: 64)
-        leftMidNode.position = CGPoint(x: -centerWidth + (corneredge / 2),y: 0)
+        leftMidNode.position = CGPoint(x: -centerWidth + (corneredge / 2) + 2, y: 0)
         anchorNode.addChild(leftMidNode)
         
         //right mid corner piece
         let rightMidNode = SKSpriteNode()
         let rightMidTexture = SKTexture(imageNamed: "rightmid")
-        let rightMidBody =  SKPhysicsBody(texture: rightMidTexture, alphaThreshold: 0.1, size: rightMidTexture.size())
+        let rightMidBody = SKPhysicsBody(texture: rightMidTexture, alphaThreshold: 0.1, size: rightMidTexture.size())
         rightMidNode.texture = rightMidTexture
         rightMidNode.physicsBody = rightMidBody
         rightMidNode.physicsBody?.friction = 0
@@ -46,7 +46,7 @@ extension GameScene {
         rightMidNode.physicsBody?.isDynamic = false
         rightMidNode.physicsBody?.affectedByGravity = false
         rightMidNode.size = CGSize(width: 32, height: 64)
-        rightMidNode.position = CGPoint(x: centerWidth - (corneredge / 2) ,y: 0)
+        rightMidNode.position = CGPoint(x: centerWidth - (corneredge / 2) - 2, y: 0)
         anchorNode.addChild(rightMidNode)
     }
 }

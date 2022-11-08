@@ -33,7 +33,7 @@ extension GameScene {
         anchorNode.addChild(topWall)
         
         let upperLeftWall = SKSpriteNode()
-        let upperLeftWallSize = CGSize(width: 4, height: centerHeight - 84)
+        let upperLeftWallSize = CGSize(width: 4, height: centerHeight - 90)
         upperLeftWall.physicsBody = SKPhysicsBody(rectangleOf: upperLeftWallSize)
         upperLeftWall.color = .systemBlue
         upperLeftWall.physicsBody?.affectedByGravity = false
@@ -54,7 +54,7 @@ extension GameScene {
         anchorNode.addChild(upperLeftWall)
         
         let upperRightWall = SKSpriteNode()
-        let upperRightWallSize = CGSize(width: 4, height: centerHeight - 84)
+        let upperRightWallSize = CGSize(width: 4, height: centerHeight - 90)
         upperRightWall.physicsBody = SKPhysicsBody(rectangleOf: upperRightWallSize)
         upperRightWall.color = .systemBlue
         upperRightWall.physicsBody?.affectedByGravity = false

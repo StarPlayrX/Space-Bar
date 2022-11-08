@@ -106,7 +106,7 @@ extension GameScene {
                 gameLives -= 1
                 //livesLabel.text = String(gameLives)
                 let puck = Global.shared.gameBall[settings.puck]
-                livesLabel.text = String(repeating: puck, count: gameLives)
+                livesLabel.text = String(repeating: puck + "\u{2009}\u{2009}\u{2009}", count: gameLives > 0 ? gameLives - 1 : 0)
             }
             
             //lives to come

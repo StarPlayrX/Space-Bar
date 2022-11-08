@@ -11,6 +11,8 @@ import SpriteKit
 
 extension GameScene {
     func getReady() {
+        let puck = Global.shared.gameBall[settings.puck]
+        livesLabel.text = String(repeating: puck + "\u{2009}\u{2009}\u{2009}", count: gameLives > 0 ? gameLives : 0)
         let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
         let delay = SKAction.wait(forDuration: 1.5)
         let levelUp = SKAction.run { [unowned self] in
@@ -37,7 +39,8 @@ extension GameScene {
         
         let startGame = SKAction.run { [unowned self] in
             addPuck()
-            
+            livesLabel.text = String(repeating: puck + "\u{2009}\u{2009}\u{2009}", count: gameLives > 0 ? gameLives - 1 : 0)
+
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 self.ballCounter -= 1
                 
