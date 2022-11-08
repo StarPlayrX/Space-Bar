@@ -54,28 +54,29 @@ extension GameScene {
         livesLabel.zPosition = 50
         let puck = Global.shared.gameBall[settings.puck]
         livesLabel.text = String(repeating: puck, count: gameLives)
-        livesLabel.fontSize = 36
-        livesLabel.alpha = 0.5
+        livesLabel.fontSize = 40
+        livesLabel.alpha = 0.8
         anchorNode.addChild(livesLabel)
         
         levelLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
         levelLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-        levelLabel.alpha = 0.5
         levelLabel.position = CGPoint(x: -centerWidth + 20, y: centerHeight - labelspace)
         levelLabel.zPosition = 50
         levelLabel.text = String(settings.currentlevel + 1)
         levelLabel.fontSize = 36
         levelLabel.fontColor = .systemRed
+        levelLabel.alpha = 0.8
         anchorNode.addChild(levelLabel)
         
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-        scoreLabel.alpha = 0.5
-        scoreLabel.fontColor = .systemBlue
+        scoreLabel.alpha = 1.0
+        scoreLabel.fontColor = .white
         scoreLabel.position = CGPoint(x: 0, y: centerHeight - labelspace)
         scoreLabel.zPosition = 50
         scoreLabel.text = String(gameScore)
         scoreLabel.fontSize = 36
+        scoreLabel.alpha = 0.8
         anchorNode.addChild(scoreLabel)
         
         //MARK: - Game Frame
@@ -175,6 +176,7 @@ extension GameScene {
         goalWallRightNode.size = CGSize(width: 4, height: 64) //Needed to size
         goalWallRightNode.physicsBody?.restitution = 0.25
         goalWallRightNode.name = "wall"
+        goalWallRightNode.alpha = 1.0
         anchorNode.addChild(goalWallRightNode)
                 
         let goalWallLeftNode = SKSpriteNode()
@@ -197,6 +199,8 @@ extension GameScene {
         goalWallLeftNode.size = CGSize(width: 4, height: 64) //Needed to size
         goalWallLeftNode.physicsBody?.restitution = 0.25
         goalWallLeftNode.name = "wall"
+        goalWallLeftNode.alpha = 1.0
+
         anchorNode.addChild(goalWallLeftNode)
             
         
@@ -218,7 +222,72 @@ extension GameScene {
         goalNode.size = CGSize(width: width / 3, height: 4) //Needed to size
         goalNode.physicsBody?.restitution = 0
         goalNode.name = "goal"
+        goalNode.alpha = 1.0
+
         anchorNode.addChild(goalNode)
+        
+        let topWall = SKSpriteNode()
+        let topWallSize = CGSize(width: width + 2, height: 4)
+        topWall.physicsBody = SKPhysicsBody(rectangleOf: topWallSize)
+        topWall.color = .systemBlue
+        topWall.physicsBody?.affectedByGravity = false
+        topWall.physicsBody?.friction = 0
+        topWall.physicsBody?.allowsRotation = false
+        topWall.physicsBody?.linearDamping = 0
+        topWall.physicsBody?.angularDamping = 0
+        topWall.zPosition = 50
+        topWall.physicsBody?.isDynamic = false
+        topWall.physicsBody?.mass = 1.0
+        topWall.physicsBody?.contactTestBitMask = ballCategory
+        topWall.physicsBody?.categoryBitMask = wallCategory
+        topWall.physicsBody?.collisionBitMask = wallCategory + ballCategory
+        topWall.position = CGPoint(x: 0, y: height / 2 - 60)
+        topWall.size = topWallSize
+        topWall.physicsBody?.restitution = 0.25
+        topWall.name = "wall"
+        anchorNode.addChild(topWall)
+        
+        let upperLeftWall = SKSpriteNode()
+        let upperLeftWallSize = CGSize(width: 4, height: centerHeight - 84)
+        upperLeftWall.physicsBody = SKPhysicsBody(rectangleOf: upperLeftWallSize)
+        upperLeftWall.color = .systemBlue
+        upperLeftWall.physicsBody?.affectedByGravity = false
+        upperLeftWall.physicsBody?.friction = 0
+        upperLeftWall.physicsBody?.allowsRotation = false
+        upperLeftWall.physicsBody?.linearDamping = 0
+        upperLeftWall.physicsBody?.angularDamping = 0
+        upperLeftWall.zPosition = 50
+        upperLeftWall.physicsBody?.isDynamic = false
+        upperLeftWall.physicsBody?.mass = 1.0
+        upperLeftWall.physicsBody?.contactTestBitMask = ballCategory
+        upperLeftWall.physicsBody?.categoryBitMask = wallCategory
+        upperLeftWall.physicsBody?.collisionBitMask = wallCategory + ballCategory
+        upperLeftWall.position = CGPoint(x: -centerWidth + 2, y: centerHeight / 2 - 16)
+        upperLeftWall.size = upperLeftWallSize
+        upperLeftWall.physicsBody?.restitution = 0.25
+        upperLeftWall.name = "wall"
+        anchorNode.addChild(upperLeftWall)
+        
+        let upperRightWall = SKSpriteNode()
+        let upperRightWallSize = CGSize(width: 4, height: centerHeight - 84)
+        upperRightWall.physicsBody = SKPhysicsBody(rectangleOf: upperRightWallSize)
+        upperRightWall.color = .systemBlue
+        upperRightWall.physicsBody?.affectedByGravity = false
+        upperRightWall.physicsBody?.friction = 0
+        upperRightWall.physicsBody?.allowsRotation = false
+        upperRightWall.physicsBody?.linearDamping = 0
+        upperRightWall.physicsBody?.angularDamping = 0
+        upperRightWall.zPosition = 50
+        upperRightWall.physicsBody?.isDynamic = false
+        upperRightWall.physicsBody?.mass = 1.0
+        upperRightWall.physicsBody?.contactTestBitMask = ballCategory
+        upperRightWall.physicsBody?.categoryBitMask = wallCategory
+        upperRightWall.physicsBody?.collisionBitMask = wallCategory + ballCategory
+        upperRightWall.position = CGPoint(x: centerWidth - 2, y: centerHeight / 2 - 16)
+        upperRightWall.size = upperRightWallSize
+        upperRightWall.physicsBody?.restitution = 0.25
+        upperRightWall.name = "wall"
+        anchorNode.addChild(upperRightWall)
         
         let lowerLeftWall = SKSpriteNode()
         let lowerLeftWallSize = CGSize(width: 4, height: centerHeight - 92)
@@ -240,6 +309,27 @@ extension GameScene {
         lowerLeftWall.physicsBody?.restitution = 0.25
         lowerLeftWall.name = "wall"
         anchorNode.addChild(lowerLeftWall)
+        
+        let lowerRightWall = SKSpriteNode()
+        let lowerRightWallSize = CGSize(width: 4, height: centerHeight - 92)
+        lowerRightWall.physicsBody = SKPhysicsBody(rectangleOf: lowerRightWallSize)
+        lowerRightWall.color = .systemBlue
+        lowerRightWall.physicsBody?.affectedByGravity = false
+        lowerRightWall.physicsBody?.friction = 0
+        lowerRightWall.physicsBody?.allowsRotation = false
+        lowerRightWall.physicsBody?.linearDamping = 0
+        lowerRightWall.physicsBody?.angularDamping = 0
+        lowerRightWall.zPosition = 50
+        lowerRightWall.physicsBody?.isDynamic = false
+        lowerRightWall.physicsBody?.mass = 1.0
+        lowerRightWall.physicsBody?.contactTestBitMask = ballCategory
+        lowerRightWall.physicsBody?.categoryBitMask = wallCategory
+        lowerRightWall.physicsBody?.collisionBitMask = wallCategory + ballCategory
+        lowerRightWall.position = CGPoint(x: centerWidth - 2, y: -centerHeight / 2 + 18)
+        lowerRightWall.size = lowerRightWallSize
+        lowerRightWall.physicsBody?.restitution = 0.25
+        lowerRightWall.name = "wall"
+        anchorNode.addChild(lowerRightWall)
         
         let recessWallNodeR = SKSpriteNode()
         recessWallNodeR.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width / 3, height: 4))

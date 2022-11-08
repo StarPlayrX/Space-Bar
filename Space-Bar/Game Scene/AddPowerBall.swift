@@ -59,6 +59,9 @@ extension GameScene {
         powerNode.position = CGPoint(x: -100,y: -100)
         powerNode.speed = CGFloat(1.0)
         
+        powerNode.xScale = 0.9
+        powerNode.yScale = 0.9
+        
         swapper.toggle()
         let negative: CGFloat = swapper ? 1 : 0
         powerNode.addChild(powerTexture)
