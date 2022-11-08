@@ -261,6 +261,72 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F4203C6291B12A300F7FF16 /* Draw */ = {
+			isa = PBXGroup;
+			children = (
+				5F42039E2919857000F7FF16 /* DrawParallax.swift */,
+				5F4203B6291A90D800F7FF16 /* DrawHUD.swift */,
+				5F42039C291984B900F7FF16 /* DrawLevel.swift */,
+				5F4203A42919868700F7FF16 /* DrawBricks.swift */,
+				5F4203BE291A96AF00F7FF16 /* DrawCenterCourt.swift */,
+				5F4203BC291A95D000F7FF16 /* DrawMiddies.swift */,
+				5F4203BA291A951500F7FF16 /* DrawEdgeLoop.swift */,
+				5F4203C0291A97AA00F7FF16 /* DrawGoal.swift */,
+				5F4203B8291A919600F7FF16 /* DrawWalls.swift */,
+				5F4203C2291A996900F7FF16 /* DrawPaddle.swift */,
+			);
+			path = Draw;
+			sourceTree = "<group>";
+		};
+		5F4203C7291B12C900F7FF16 /* Balls */ = {
+			isa = PBXGroup;
+			children = (
+				5F4203B02919885A00F7FF16 /* RemovePowerBall.swift */,
+				5F4203A0291985B200F7FF16 /* AddPuck.swift */,
+				5F4203A2291985EA00F7FF16 /* AddPowerBall.swift */,
+			);
+			path = Balls;
+			sourceTree = "<group>";
+		};
+		5F4203C8291B12EB00F7FF16 /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				5F4203AC291987C400F7FF16 /* Update.swift */,
+				5F4203AA2919877800F7FF16 /* DidBeginContact.swift */,
+			);
+			path = Physics;
+			sourceTree = "<group>";
+		};
+		5F4203C9291B131200F7FF16 /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				5F4203C4291A9ADE00F7FF16 /* GetReady.swift */,
+				5F4203AE2919881300F7FF16 /* BrickChecker.swift */,
+				5F4203A82919870500F7FF16 /* ResetGameBoard.swift */,
+				5F4203B22919887500F7FF16 /* TileMapRun.swift */,
+			);
+			path = Levels;
+			sourceTree = "<group>";
+		};
+		5F4203CA291B134E00F7FF16 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				5F77D8DC22E3FCE800E8C4F3 /* GameScene.swift */,
+				5F77D8F322E3FEBC00E8C4F3 /* GameScene.sks */,
+				5F42039A291983EB00F7FF16 /* ViewDidMove.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		5F4203CB291B135C00F7FF16 /* IO */ = {
+			isa = PBXGroup;
+			children = (
+				5F4203A6291986C900F7FF16 /* CocoaTouch.swift */,
+				5F4203B4291988A600F7FF16 /* SetHighScore.swift */,
+			);
+			path = IO;
+			sourceTree = "<group>";
+		};
 		5F61921522E404BB00ED685B /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,30 +350,12 @@
 		5F77D8F922E3FFC500E8C4F3 /* Game Scene */ = {
 			isa = PBXGroup;
 			children = (
-				5F77D8DC22E3FCE800E8C4F3 /* GameScene.swift */,
-				5F42039A291983EB00F7FF16 /* ViewDidMove.swift */,
-				5F4203B02919885A00F7FF16 /* RemovePowerBall.swift */,
-				5F4203AE2919881300F7FF16 /* BrickChecker.swift */,
-				5F4203AC291987C400F7FF16 /* Update.swift */,
-				5F4203A0291985B200F7FF16 /* AddPuck.swift */,
-				5F4203A2291985EA00F7FF16 /* AddPowerBall.swift */,
-				5F4203A6291986C900F7FF16 /* CocoaTouch.swift */,
-				5F4203AA2919877800F7FF16 /* DidBeginContact.swift */,
-				5F42039C291984B900F7FF16 /* DrawLevel.swift */,
-				5F4203A42919868700F7FF16 /* DrawBricks.swift */,
-				5F42039E2919857000F7FF16 /* DrawParallax.swift */,
-				5F4203A82919870500F7FF16 /* ResetGameBoard.swift */,
-				5F4203B4291988A600F7FF16 /* SetHighScore.swift */,
-				5F4203B6291A90D800F7FF16 /* DrawHUD.swift */,
-				5F4203C4291A9ADE00F7FF16 /* GetReady.swift */,
-				5F4203BE291A96AF00F7FF16 /* DrawCenterCourt.swift */,
-				5F4203BC291A95D000F7FF16 /* DrawMiddies.swift */,
-				5F4203BA291A951500F7FF16 /* DrawEdgeLoop.swift */,
-				5F4203C0291A97AA00F7FF16 /* DrawGoal.swift */,
-				5F4203B8291A919600F7FF16 /* DrawWalls.swift */,
-				5F4203C2291A996900F7FF16 /* DrawPaddle.swift */,
-				5F4203B22919887500F7FF16 /* TileMapRun.swift */,
-				5F77D8F322E3FEBC00E8C4F3 /* GameScene.sks */,
+				5F4203C6291B12A300F7FF16 /* Draw */,
+				5F4203C7291B12C900F7FF16 /* Balls */,
+				5F4203CA291B134E00F7FF16 /* Game */,
+				5F4203CB291B135C00F7FF16 /* IO */,
+				5F4203C9291B131200F7FF16 /* Levels */,
+				5F4203C8291B12EB00F7FF16 /* Physics */,
 			);
 			path = "Game Scene";
 			sourceTree = "<group>";
