@@ -63,7 +63,7 @@ extension GameScene {
         }
         
         let fadeAlpha = SKAction.fadeOut(withDuration: 0.5)
-        let runcode1 = SKAction.run {
+        let getReadyFade = SKAction.run {
             getReadyLabel.run(fadeAlpha)
         }
         
@@ -82,6 +82,6 @@ extension GameScene {
             }
         }
         
-        run(SKAction.sequence([levelUp,runcode1,delay,startLevel]))
+        run(SKAction.sequence([levelUp,delay,getReadyFade,delay,startLevel]))
     }
 }

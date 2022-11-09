@@ -33,7 +33,7 @@ extension GameScene {
             BricksNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
             // This fall back should not happen, but we may use this in the future for iOS' that fail
-            BricksNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 50))
+            BricksNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 48, height: 48))
         }
         
         BricksNode.zPosition = 50

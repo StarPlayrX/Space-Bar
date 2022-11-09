@@ -28,7 +28,7 @@ extension GameScene {
         topWall.physicsBody?.collisionBitMask = wallCategory + ballCategory
         topWall.position = CGPoint(x: 0, y: height / 2 - 60)
         topWall.size = topWallSize
-        topWall.physicsBody?.restitution = 0.5
+        topWall.physicsBody?.restitution = 1.0
         topWall.name = "wall"
         topWall.alpha = 0.667
         anchorNode.addChild(topWall)
@@ -50,7 +50,7 @@ extension GameScene {
         upperLeftWall.physicsBody?.collisionBitMask = wallCategory + ballCategory
         upperLeftWall.position = CGPoint(x: -centerWidth + 2, y: centerHeight / 2 - 16)
         upperLeftWall.size = upperLeftWallSize
-        upperLeftWall.physicsBody?.restitution = 0.5
+        upperLeftWall.physicsBody?.restitution = 1.0
         upperLeftWall.name = "wall"
         upperLeftWall.alpha = 0.667
         anchorNode.addChild(upperLeftWall)
@@ -72,7 +72,7 @@ extension GameScene {
         upperRightWall.physicsBody?.collisionBitMask = wallCategory + ballCategory
         upperRightWall.position = CGPoint(x: centerWidth - 2, y: centerHeight / 2 - 16)
         upperRightWall.size = upperRightWallSize
-        upperRightWall.physicsBody?.restitution = 0.5
+        upperRightWall.physicsBody?.restitution = 1.0
         upperRightWall.name = "wall"
         upperRightWall.alpha = 0.667
         anchorNode.addChild(upperRightWall)
@@ -94,7 +94,7 @@ extension GameScene {
         lowerLeftWall.physicsBody?.collisionBitMask = wallCategory + ballCategory
         lowerLeftWall.position = CGPoint(x: -centerWidth + 2, y: -centerHeight / 2 + 18)
         lowerLeftWall.size = lowerLeftWallSize
-        lowerLeftWall.physicsBody?.restitution = 0.5
+        lowerLeftWall.physicsBody?.restitution = 1.0
         lowerLeftWall.name = "wall"
         lowerLeftWall.alpha = 0.667
         anchorNode.addChild(lowerLeftWall)
@@ -116,7 +116,7 @@ extension GameScene {
         lowerRightWall.physicsBody?.collisionBitMask = wallCategory + ballCategory
         lowerRightWall.position = CGPoint(x: centerWidth - 2, y: -centerHeight / 2 + 18)
         lowerRightWall.size = lowerRightWallSize
-        lowerRightWall.physicsBody?.restitution = 0.5
+        lowerRightWall.physicsBody?.restitution = 1.0
         lowerRightWall.name = "wall"
         lowerRightWall.alpha = 0.667
         anchorNode.addChild(lowerRightWall)
@@ -137,7 +137,7 @@ extension GameScene {
         recessWallNodeR.physicsBody?.collisionBitMask = wallCategory + ballCategory
         recessWallNodeR.position = CGPoint(x: (width + 2) / -3, y: -centerHeight + 64)
         recessWallNodeR.size = CGSize(width: (width + 2) / 3, height: 4)
-        recessWallNodeR.physicsBody?.restitution = 0.5
+        recessWallNodeR.physicsBody?.restitution = 1.0
         recessWallNodeR.name = "wall"
         recessWallNodeR.alpha = 0.667
         anchorNode.addChild(recessWallNodeR)
@@ -158,7 +158,7 @@ extension GameScene {
         recessWallNodeL.physicsBody?.collisionBitMask = wallCategory + ballCategory
         recessWallNodeL.position = CGPoint(x: (width + 2) / 3, y: -centerHeight + 64)
         recessWallNodeL.size = CGSize(width: (width + 2) / 3, height: 4)
-        recessWallNodeL.physicsBody?.restitution = 0.5
+        recessWallNodeL.physicsBody?.restitution = 1.0
         recessWallNodeL.name = "wall"
         recessWallNodeL.alpha = 0.667
         anchorNode.addChild(recessWallNodeL)

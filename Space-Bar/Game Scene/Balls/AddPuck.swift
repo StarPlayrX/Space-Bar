@@ -30,10 +30,7 @@ extension GameScene {
         ballEmoji.position = CGPoint(x: 0, y: 0)
         ballEmoji.zPosition = 50
         ballEmoji.text = Global.shared.gameBall[settings.puck]
-        ballEmoji.fontSize = 54 //* 2
-        
-        ballEmoji.xScale = 0.9
-        ballEmoji.yScale = 0.9
+        ballEmoji.fontSize = 50 //* 2
         
         let rnd = arc4random_uniform(UInt32(360))
         ballEmoji.zRotation = CGFloat(Int(rnd).degrees)

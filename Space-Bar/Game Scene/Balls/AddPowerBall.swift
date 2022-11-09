@@ -29,7 +29,7 @@ extension GameScene {
         }
         
         powerTexture.text = Global.shared.gameBall[ball]
-        powerTexture.fontSize = 54 //* 2
+        powerTexture.fontSize = 50
         
         let rnd = arc4random_uniform(UInt32(360))
         powerTexture.zRotation = CGFloat(Int(rnd).degrees)
@@ -58,10 +58,6 @@ extension GameScene {
         powerNode.name = "powerball"
         powerNode.position = CGPoint(x: -100,y: -100)
         powerNode.speed = CGFloat(1.0)
-        
-        powerNode.xScale = 0.9
-        powerNode.yScale = 0.9
-        
         swapper.toggle()
         let negative: CGFloat = swapper ? 1 : 0
         powerNode.addChild(powerTexture)

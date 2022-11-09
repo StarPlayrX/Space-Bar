@@ -16,7 +16,7 @@ extension GameScene {
         
         //setup physicsWorld
         physicsWorld.gravity.dx =  0
-        physicsWorld.gravity.dy =  -0.15
+        physicsWorld.gravity.dy =  0
         physicsWorld.contactDelegate = self
         
         screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
