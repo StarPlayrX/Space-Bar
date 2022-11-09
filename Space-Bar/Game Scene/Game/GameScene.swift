@@ -19,7 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     let ballTimeOut = 10
     var timer = Timer()
     
-    let boost = CGFloat(15)
+    let boost = CGFloat(50)
     let ratio = CGFloat(1.5)
     let zero = CGFloat(0)
     var initialVelocity = CGFloat(800)
