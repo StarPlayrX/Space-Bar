@@ -21,12 +21,6 @@ extension GameScene {
         
         screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
         
-        //Our custom font maps emoji's to vector graphics - Kind of old school to classic 8 bit games
-        levelart[0] = ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
-        levelart[1] = ["😝","😜","🤪","🤨","🧐","🤓","😎","🥸"]
-        levelart[2] = ["😍","🥰","😘","😗","😙","😚","😋","😛"]
-        levelart[3] = ["😀","😃","😄","😁","😆","😅","😂","🤣"]
-        
         guard
             let w = scene?.size.width,
             let h = scene?.size.height

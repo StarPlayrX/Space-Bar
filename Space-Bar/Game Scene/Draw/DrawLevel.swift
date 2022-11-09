@@ -38,7 +38,7 @@ extension GameScene {
         }
         
         space?.position = screenType == .iPad ? CGPoint(x: x, y: centerHeight - 215) : CGPoint(x: x, y: centerHeight - 295)
-        space?.xScale = screenType == .iPad ? 0.8 : 0.875
-        space?.yScale = screenType == .iPad ? 0.8 : 0.875
+        space?.xScale = screenType == .iPad ? 0.8 : 0.97
+        space?.yScale = screenType == .iPad ? 0.8 : 0.97
     }
 }

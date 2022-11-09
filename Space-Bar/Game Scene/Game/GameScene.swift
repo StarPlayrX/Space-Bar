@@ -84,8 +84,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     
     //ipad Level
     var screenType: ScreenType = .iAny
-    var levelart = [ Int : [String] ]()
+    
+    //Our custom font maps emoji's to vector graphics - same technique is done on old school to classic 8 bit games
+    var levelart : [ Int : [String] ] =
+    [
+        0: ["🤩", "🥳", "😏", "😒", "😞", "😔", "😟", "😕"],
+        1: ["😝", "😜", "🤪", "🤨", "🧐", "🤓", "😎", "🥸"],
+        2: ["😍", "🥰", "😘", "😗", "😙", "😚", "😋", "😛"],
+        3: ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣"],
+    ]
     
     //MARK: - Cocoa Touch
     let constraint = CGFloat(64)
+    
 }
