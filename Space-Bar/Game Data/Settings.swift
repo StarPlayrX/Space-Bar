@@ -13,7 +13,7 @@ struct Settings: Codable {
     var level       : Int  =  0
     var currentlevel: Int  =  0
     var maxlevel    : Int  =  71 // Not currently in use
-    var highlevel   : Int  =  80
+    var highlevel   : Int  =  0
     var score       : Int  =  0
     var highscore   : Int  =  0
     var lives       : Int  =  3
