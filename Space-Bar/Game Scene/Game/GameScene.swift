@@ -18,14 +18,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     var ballCounter = 10
     let ballTimeOut = 10
     var timer = Timer()
-    
-    let boost = CGFloat(50)
+    let boost = CGFloat(30)
     let ratio = CGFloat(1.5)
     let zero = CGFloat(0)
-    var initialVelocity = CGFloat(800)
+    var initialVelocity = CGFloat(750)
     let differentiator = CGFloat(250)
     
     var ballNode    = SKSpriteNode()
+    var fireNode    = SKSpriteNode()
+    
     let appSettings = AppSettings()
     
     deinit {
@@ -38,17 +39,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     var bricksChecksum = 0
     var bricksChecksumPrev = 1
     var swapper = false
-    var paddleNode: SKSpriteNode? //available to the entire class
+    var paddleNode =  SKSpriteNode() //available to the entire class
     
     //Categories
-    let paddleCategory   : UInt32 = 1
-    let powerCategory    : UInt32 = 2
-    let ballCategory     : UInt32 = 4
-    let brickCategory    : UInt32 = 8
-    let wallCategory     : UInt32 = 16
-    let goalCategory     : UInt32 = 32
-    let midFieldCategory : UInt32 = 64
-    
+    let paddleCategory   : UInt32 = 2
+    let fireBallCategory : UInt32 = 4
+    let powerCategory    : UInt32 = 8
+    let ballCategory     : UInt32 = 16
+    let brickCategory    : UInt32 = 32
+    let wallCategory     : UInt32 = 64
+    let goalCategory     : UInt32 = 128
+    let midFieldCategory : UInt32 = 256
+
     var space : SKReferenceNode? = nil
     
     //Positioning variables

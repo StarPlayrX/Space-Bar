@@ -27,8 +27,17 @@ extension GameScene {
             getReadyLabel.alpha = 1.0
             anchorNode.addChild(getReadyLabel)
             
+            var bonus = "Level"
+            
+            if (settings.currentlevel + 1) % 5 == 0 {
+                if gameLives < 5 {
+                    gameLives += 1
+                }
+                bonus = "Bonus Round"
+            }
+            
             if let lvl = levelLabel.text, let score = scoreLabel.text, score == "0", settings.sound {
-                try? speech("Level \(lvl). You have \(gameLives) lives. Get Ready!")
+                try? speech("\(bonus) \(lvl). You have \(gameLives) lives. Get Ready!")
             }
         }
         
@@ -38,7 +47,7 @@ extension GameScene {
         }
         
         let startGame = SKAction.run { [unowned self] in
-            addPuck()
+            addPuck(removePreviousPuck: true)
             livesLabel.text = String(repeating: puck + "\u{2009}\u{2009}\u{2009}", count: gameLives > 0 ? gameLives - 1 : 0)
 
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
@@ -46,12 +55,26 @@ extension GameScene {
                 
                 if self.ballCounter < 0 {
                     self.ballCounter = self.ballTimeOut
-                    self.addPuck()
+                    self.addPuck(removePreviousPuck: true)
+                    
+                    if (settings.currentlevel + 1) % 5 == 0  {
+                        self.addPuck(removePreviousPuck: false)
+                    }
                 }
             }
             
-            if (settings.currentlevel + 1) % 10 == 0 {
+            if (settings.currentlevel + 1) % 5 == 0 {
+                addPuck(removePreviousPuck: false)
+            }
+            
+            if (settings.currentlevel + 1) % 8 == 0 {
                 addPowerBall()
+            }
+            
+            if (settings.currentlevel + 1) % 10 == 0 {
+                createFireBall()
+            } else {
+                removeFireBall(willFade: false)
             }
         }
         run(SKAction.sequence([levelUp,delay,showGetReady,delay,startGame]))

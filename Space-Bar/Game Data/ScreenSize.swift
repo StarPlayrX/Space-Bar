@@ -26,7 +26,6 @@ struct ScreenSize {
     func setSceneSizeForGame(scene:SKScene, size: CGSize) -> ScreenType {
         var screenType = ScreenType.iPhone
         let ratio = round((size.width / size.height ) * 10)
-        print("ratio:", ratio)
         
         if ratio == 8.0 {
             screenType = .iPad

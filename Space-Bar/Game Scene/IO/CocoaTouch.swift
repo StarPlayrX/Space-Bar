@@ -10,17 +10,17 @@ import Foundation
 import SpriteKit
 
 extension GameScene {
-    func touchDown(atPoint pos : CGPoint) {
+    func touchDown(atPoint pos: CGPoint) {
         if (pos.x >= constraint && pos.x <= frame.width - constraint) {
-            let action = SKAction.moveTo(x: pos.x, duration: 0.002)
-            paddleNode?.run(action)
+            let action = SKAction.moveTo(x: pos.x, duration: 0.25)
+            paddleNode.run(action)
         }
     }
     
-    func touchMoved(toPoint pos : CGPoint) {
+    func touchMoved(toPoint pos: CGPoint) {
         if (pos.x >= constraint && pos.x <= frame.width - constraint) {
-            let action = SKAction.moveTo(x: pos.x, duration: 0.002)
-            paddleNode?.run(action)
+            let action = SKAction.moveTo(x: pos.x, duration: 0.025)
+            paddleNode.run(action)
         }
     }
     

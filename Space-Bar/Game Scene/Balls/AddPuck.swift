@@ -11,15 +11,18 @@ import SpriteKit
 
 extension GameScene {
     //add Puck
-    func addPuck() {
+    func addPuck(removePreviousPuck: Bool) {
         ballCounter = ballTimeOut
-        // Ensures no pucks pre-exist
-        for whatDaPuck in anchorNode.children {
-            if let name = whatDaPuck.name, name == "ball" {
-                whatDaPuck.removeFromParent()
-            }
-        }
         
+        if removePreviousPuck {
+            for whatDaPuck in anchorNode.children {
+                if let name = whatDaPuck.name, name == "ball" {
+                    whatDaPuck.removeFromParent()
+                }
+            }
+            
+        }
+       
         //ballNode = nil
         ballNode = SKSpriteNode()
         
@@ -27,7 +30,7 @@ extension GameScene {
         ballEmoji.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
         ballEmoji.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         ballEmoji.alpha = 1.0
-        ballEmoji.position = CGPoint(x: 0, y: 0)
+        ballEmoji.position = CGPoint.zero
         ballEmoji.zPosition = 50
         ballEmoji.text = Global.shared.gameBall[settings.puck]
         ballEmoji.fontSize = 50 //* 2
@@ -66,7 +69,7 @@ extension GameScene {
         swapper.toggle()
         let negative: CGFloat = swapper ? 1 : 0
         ballNode.addChild(ballEmoji)
-        ballNode.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
+        ballNode.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity + CGFloat(settings.level * 2))
         anchorNode.addChild(ballNode)
     }
 }

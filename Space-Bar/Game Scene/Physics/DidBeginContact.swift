@@ -18,6 +18,7 @@ extension GameScene {
             return
         }
         
+        
         // Defaults for bodyA and BodyB
         var firstBody = contact.bodyB
         var secondBody = contact.bodyA
@@ -28,7 +29,6 @@ extension GameScene {
         }
         
         let catMask = firstBody.categoryBitMask | secondBody.categoryBitMask
-        
         swapper.toggle()
         let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(swapper ? 1 : -1), duration: 2)
         
@@ -40,7 +40,22 @@ extension GameScene {
             secondBody.node?.run(rotateAction)
         }
         
+        
+     
         switch catMask {
+            
+        case fireBallCategory | brickCategory :
+            if settings.sound { run(brickSound) }
+            gameScore += 1
+            
+            scoreLabel.text = String(gameScore)
+           
+            if let a = secondBody.node {
+                a.removeFromParent()
+                checker(firstBody)
+            }
+    
+            
             
         case ballCategory | brickCategory :
             ballCounter = ballTimeOut
@@ -88,7 +103,6 @@ extension GameScene {
             
         case ballCategory | midFieldCategory :
             ballCounter = ballTimeOut
-            
         case ballCategory | goalCategory:
             ballCounter = ballTimeOut
             
@@ -111,7 +125,7 @@ extension GameScene {
             
             //lives to come
             if gameLives > 0 {
-                addPuck()
+                addPuck(removePreviousPuck: true)
             }
             
             
@@ -125,39 +139,54 @@ extension GameScene {
                 gameOver = true
                 timer.invalidate()
                 
-                removePowerBall()
+               
                 
-                let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
+                let action1 = SKAction.wait(forDuration: 2.0)
                 
-                let decay1 = SKAction.wait(forDuration: 1.0)
-                let decay2 = SKAction.wait(forDuration: 2.0)
-                let gameOverCode = SKAction.run { [unowned self] in
+                let action2 = SKAction.run { [self] in
+                    removeFireBall(willFade: true)
+                    removePowerBall()
+                    removeBall()
+                }
+                
+                let action3 = SKAction.run { [self] in
+                    removeFireBall(willFade: false)
+
+                    let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
                     
-                    let getReadyText = "GAME OVER"
-                    getReadyLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
-                    getReadyLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-                    getReadyLabel.alpha = 1.0
-                    getReadyLabel.position = CGPoint(x: 0, y: 0)
-                    getReadyLabel.zPosition = 50
-                    getReadyLabel.text = getReadyText
-                    getReadyLabel.fontSize = 46
-                    getReadyLabel.alpha = 1.0
-                    anchorNode.addChild(getReadyLabel)
-                    
-                    if let score = scoreLabel.text, Int(score) ?? 0 > 1, settings.sound {
-                        try? speech("Game Over. You scored \(score) points.")
-                    } else if let score = scoreLabel.text, Int(score) ?? 0 == 1, settings.sound {
-                        try? speech("Game Over. You scored one point.")
-                    } else if settings.sound {
-                        try? speech("Game Over. You managed to score zero points. Try watching Ted Lassoe.")
+                    let wait1 = SKAction.wait(forDuration: 1.0)
+                    let wait2 = SKAction.wait(forDuration: 1.5)
+                    let gameOverCode = SKAction.run { [unowned self] in
+                        
+                        let getReadyText = "GAME OVER"
+                        getReadyLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+                        getReadyLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+                        getReadyLabel.alpha = 1.0
+                        getReadyLabel.position = CGPoint(x: 0, y: 0)
+                        getReadyLabel.zPosition = 50
+                        getReadyLabel.text = getReadyText
+                        getReadyLabel.fontSize = 46
+                        getReadyLabel.alpha = 1.0
+                        anchorNode.addChild(getReadyLabel)
+                        
+                        if let score = scoreLabel.text, Int(score) ?? 0 > 1, settings.sound {
+                            try? speech("Game Over. You scored \(score) points.")
+                        } else if let score = scoreLabel.text, Int(score) ?? 0 == 1, settings.sound {
+                            try? speech("Game Over. You scored one point.")
+                        } else if settings.sound {
+                            try? speech("Game Over. You managed to score zero points. Try watching Ted Lassoe.")
+                        }
                     }
+                    
+                    let runcode = SKAction.run {
+                        NotificationCenter.default.post(name: Notification.Name("loadGameView"), object: nil)
+                    }
+                    
+                    self.anchorNode.run(SKAction.sequence([wait1,gameOverCode,wait2,runcode]))
                 }
-                
-                let runcode = SKAction.run {
-                    NotificationCenter.default.post(name: Notification.Name("loadGameView"), object: nil)
-                }
-                
-                anchorNode.run(SKAction.sequence([decay1,gameOverCode,decay2,runcode]))
+          
+                let seq = SKAction.sequence([action2, action1, action3])
+                scene?.run(seq)
             }
             
         case powerCategory | paddleCategory:
