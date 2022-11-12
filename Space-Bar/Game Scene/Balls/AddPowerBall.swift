@@ -43,8 +43,7 @@ extension GameScene {
         
         powerNode.physicsBody?.categoryBitMask = powerCategory
         powerNode.physicsBody?.contactTestBitMask = paddleCategory + wallCategory
-        powerNode.physicsBody?.collisionBitMask = paddleCategory + brickCategory + wallCategory
-        
+        powerNode.physicsBody?.collisionBitMask = paddleCategory + brickCategory + wallCategory + goalCategory
         powerNode.zPosition = 50
         powerNode.physicsBody?.affectedByGravity = false
         powerNode.physicsBody?.isDynamic = true
@@ -59,7 +58,7 @@ extension GameScene {
         powerNode.position = CGPoint(x: -100,y: -100)
         powerNode.speed = CGFloat(1.0)
         swapper.toggle()
-        let negative: CGFloat = swapper ? 1 : 0
+        let negative: CGFloat = swapper ? 1 : -1
         powerNode.addChild(powerTexture)
         //powerNode.physicsBody?.velocity = CGVector(dx: -centerHeight, dy: 2000)
         powerNode.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
@@ -99,7 +98,7 @@ extension GameScene {
         
         fireBallNode.physicsBody?.categoryBitMask = fireBallCategory
         fireBallNode.physicsBody?.contactTestBitMask = fireBallCategory + brickCategory
-        fireBallNode.physicsBody?.collisionBitMask = brickCategory + wallCategory + paddleCategory
+        fireBallNode.physicsBody?.collisionBitMask = brickCategory + wallCategory + paddleCategory + goalCategory   
         fireBallNode.zPosition = 50
         fireBallNode.physicsBody?.affectedByGravity = false
         fireBallNode.physicsBody?.isDynamic = true
@@ -123,8 +122,8 @@ extension GameScene {
         scene?.addChild(copy)
         
         //let remove = SKAction.removeFromParent()
-        let wait = SKAction.wait(forDuration: TimeInterval(1 + (settings.level + 1 / 100)))
-        let live = SKAction.wait(forDuration: TimeInterval(2 + (settings.level + 1 / 100 * 2)))
+        let wait = SKAction.wait(forDuration: TimeInterval(0.5 + Double(settings.level + 1 * 2 / 100)))
+        let live = SKAction.wait(forDuration: TimeInterval(1.5 - Double(settings.level + 1 / 100 * 2)))
 
         let fade = SKAction.fadeOut(withDuration: 1.0)
         let rmfp = SKAction.removeFromParent()

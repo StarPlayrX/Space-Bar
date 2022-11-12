@@ -30,14 +30,19 @@ extension GameScene {
             var bonus = "Level"
             
             if (settings.currentlevel + 1) % 5 == 0 {
-                if gameLives < 5 {
-                    gameLives += 1
-                }
                 bonus = "Bonus Round"
             }
             
-            if let lvl = levelLabel.text, let score = scoreLabel.text, score == "0", settings.sound {
+            if (settings.currentlevel + 1) % 7 == 0 {
+                if gameLives < 4 {
+                    gameLives += 1
+                }
+            }
+            
+            if let lvl = levelLabel.text, let score = scoreLabel.text, score == "0", settings.sound && gameLives > 1 {
                 try? speech("\(bonus) \(lvl). You have \(gameLives) lives. Get Ready!")
+            } else if let lvl = levelLabel.text, let score = scoreLabel.text, score == "0", settings.sound && gameLives == 1  {
+                try? speech("\(bonus) \(lvl). You have \(gameLives) life. Get Ready!")
             }
         }
         
@@ -67,7 +72,7 @@ extension GameScene {
                 addPuck(removePreviousPuck: false)
             }
             
-            if (settings.currentlevel + 1) % 8 == 0 {
+            if (settings.currentlevel + 1) % 7 == 0 {
                 addPowerBall()
             }
             

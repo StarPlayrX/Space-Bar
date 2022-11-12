@@ -29,9 +29,7 @@ extension GameScene {
             
             settings.currentlevel += 1
             settings.currentlevel %= Global.shared.levels.count
-            
-            
-            
+        
             var bonus = "Level"
             
             if (settings.currentlevel + 1) % 5 == 0 {
@@ -39,6 +37,12 @@ extension GameScene {
                     gameLives += 1
                 }
                 bonus = "Bonus Round"
+            }
+            
+            if (settings.currentlevel + 1) % 7 == 0 {
+                if gameLives < 4 {
+                    gameLives += 1
+                }
             }
             
             //livesLabel.text = String(gameLives)
@@ -93,7 +97,7 @@ extension GameScene {
                     addPuck(removePreviousPuck: false)
                 }
                 
-                if (settings.currentlevel + 1) % 8 == 0 {
+                if (settings.currentlevel + 1) % 7 == 0 {
                     addPowerBall()
                 }
                 

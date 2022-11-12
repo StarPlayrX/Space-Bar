@@ -53,6 +53,12 @@ extension GameScene {
         drawPaddle()
         drawLevel()
     
+        if (settings.currentlevel + 1) % 5 == 0 {
+            if gameLives < 5 {
+                gameLives += 1
+            }
+        }
+        
         getReady()
     }
 }

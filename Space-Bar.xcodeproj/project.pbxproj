@@ -347,6 +347,7 @@
 			children = (
 				5F4203AC291987C400F7FF16 /* Update.swift */,
 				5F4203AA2919877800F7FF16 /* DidBeginContact.swift */,
+				5F4203B4291988A600F7FF16 /* SetHighScore.swift */,
 			);
 			path = Physics;
 			sourceTree = "<group>";
@@ -376,7 +377,6 @@
 			isa = PBXGroup;
 			children = (
 				5F4203A6291986C900F7FF16 /* CocoaTouch.swift */,
-				5F4203B4291988A600F7FF16 /* SetHighScore.swift */,
 			);
 			path = IO;
 			sourceTree = "<group>";
@@ -388,6 +388,7 @@
 				EABB3B0C203D0102000217E1 /* level2.sks */,
 				5FABED8D2905CBAF002EADA3 /* level3.sks */,
 				6F27254F26DAA8D30009B5B5 /* level4.sks */,
+				6F4BBA0326E83C3900BABA11 /* level12.sks */,
 				5FABED8E2905CBAF002EADA3 /* level5.sks */,
 				5FABED8B2905CBAF002EADA3 /* level6.sks */,
 				5FABED8C2905CBAF002EADA3 /* level7.sks */,
@@ -402,7 +403,6 @@
 			isa = PBXGroup;
 			children = (
 				6F4BBA0126E83C0100BABA11 /* level11.sks */,
-				6F4BBA0326E83C3900BABA11 /* level12.sks */,
 				EABB3AFA203CFA27000217E1 /* level13.sks */,
 				6F27255726DAA8D30009B5B5 /* level14.sks */,
 				5F4288C82906F86E00C38D01 /* level15.sks */,

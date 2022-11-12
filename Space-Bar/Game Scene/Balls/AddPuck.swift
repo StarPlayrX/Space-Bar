@@ -13,17 +13,15 @@ extension GameScene {
     //add Puck
     func addPuck(removePreviousPuck: Bool) {
         ballCounter = ballTimeOut
-        
+    
         if removePreviousPuck {
             for whatDaPuck in anchorNode.children {
                 if let name = whatDaPuck.name, name == "ball" {
                     whatDaPuck.removeFromParent()
                 }
             }
-            
         }
-       
-        //ballNode = nil
+    
         ballNode = SKSpriteNode()
         
         let ballEmoji = SKLabelNode(fontNamed:"SpaceBarColors")
@@ -32,7 +30,12 @@ extension GameScene {
         ballEmoji.alpha = 1.0
         ballEmoji.position = CGPoint.zero
         ballEmoji.zPosition = 50
-        ballEmoji.text = Global.shared.gameBall[settings.puck]
+        
+        if !removePreviousPuck {
+            ballEmoji.text = Global.shared.gameBall[settings.puck + 2 % 8]
+        } else {
+            ballEmoji.text = Global.shared.gameBall[settings.puck]
+        }
         ballEmoji.fontSize = 50 //* 2
         
         let rnd = arc4random_uniform(UInt32(360))
@@ -41,7 +44,6 @@ extension GameScene {
         if let texture = view?.texture(from: ballEmoji) {
             ballNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
-            // This fall back should not happen, but we may use this in the future for iOS' that fail
             ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 27)
         }
         
@@ -67,9 +69,24 @@ extension GameScene {
         ballNode.speed = CGFloat(1.0)
         
         swapper.toggle()
-        let negative: CGFloat = swapper ? 1 : 0
+        let negative: CGFloat = swapper ? 1 : -1
         ballNode.addChild(ballEmoji)
-        ballNode.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity + CGFloat(settings.level * 2))
-        anchorNode.addChild(ballNode)
+        ballNode.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) + CGFloat(settings.level * 4) * negative, dy: initialVelocity + CGFloat(settings.level * 4))
+        
+        let copy = ballNode.copy() as! SKSpriteNode
+        
+        let act = SKAction.run {
+            copy.name = "extraball"
+            self.anchorNode.addChild(copy)
+        }
+                
+        let wait = SKAction.wait(forDuration: 1.0)
+        let seq = SKAction.sequence([wait,act])
+
+        if !removePreviousPuck {
+            run(seq)
+        } else {
+            anchorNode.addChild(copy)
+        }
     }
 }

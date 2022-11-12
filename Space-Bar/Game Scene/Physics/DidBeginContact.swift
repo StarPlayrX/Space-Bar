@@ -18,7 +18,6 @@ extension GameScene {
             return
         }
         
-        
         // Defaults for bodyA and BodyB
         var firstBody = contact.bodyB
         var secondBody = contact.bodyA
@@ -40,8 +39,6 @@ extension GameScene {
             secondBody.node?.run(rotateAction)
         }
         
-        
-     
         switch catMask {
             
         case fireBallCategory | brickCategory :
@@ -54,8 +51,6 @@ extension GameScene {
                 a.removeFromParent()
                 checker(firstBody)
             }
-    
-            
             
         case ballCategory | brickCategory :
             ballCounter = ballTimeOut
@@ -67,8 +62,7 @@ extension GameScene {
                 a.removeFromParent()
                 checker(firstBody)
             }
-            
-            
+  
         case powerCategory | brickCategory :
             if settings.sound { run(brickSound) }
             gameScore += 1
@@ -106,28 +100,31 @@ extension GameScene {
         case ballCategory | goalCategory:
             ballCounter = ballTimeOut
             
-            let a = SKAction.fadeAlpha(to: 0, duration: 0.125)
-            let b = SKAction.wait(forDuration: 0.125)
-            let c = SKAction.removeFromParent()
-            
-            if let ball = firstBody.node {
-                ball.run(SKAction.sequence([a,b,c]))
+            if let a = firstBody.node {
+                a.removeFromParent()
             }
             
             if settings.sound { run(goalSound) }
             
+            var puckExists = false
+
             if gameLives > 0 {
                 gameLives -= 1
+
                 //livesLabel.text = String(gameLives)
                 let puck = Global.shared.gameBall[settings.puck]
                 livesLabel.text = String(repeating: puck + "\u{2009}\u{2009}\u{2009}", count: gameLives > 0 ? gameLives - 1 : 0)
+                
+               for whatDaPuck in anchorNode.children {
+                   if let name = whatDaPuck.name, name == "extraball" || name == "ball" {
+                       puckExists = true
+                   }
+               }
             }
             
-            //lives to come
-            if gameLives > 0 {
+            if !puckExists && gameLives > 0 {
                 addPuck(removePreviousPuck: true)
             }
-            
             
             if gameLives < 0 {
                 gameLives = 0
@@ -138,15 +135,11 @@ extension GameScene {
             if gameLives == 0 && gameOver == nil {
                 gameOver = true
                 timer.invalidate()
-                
-               
-                
-                let action1 = SKAction.wait(forDuration: 2.0)
+                let action1 = SKAction.wait(forDuration: 1.0)
                 
                 let action2 = SKAction.run { [self] in
                     removeFireBall(willFade: true)
                     removePowerBall()
-                    removeBall()
                 }
                 
                 let action3 = SKAction.run { [self] in
@@ -154,8 +147,8 @@ extension GameScene {
 
                     let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
                     
-                    let wait1 = SKAction.wait(forDuration: 1.0)
-                    let wait2 = SKAction.wait(forDuration: 1.5)
+                    let wait1 = SKAction.wait(forDuration: 0.5)
+                    let wait2 = SKAction.wait(forDuration: 1.0)
                     let gameOverCode = SKAction.run { [unowned self] in
                         
                         let getReadyText = "GAME OVER"
