@@ -13,7 +13,7 @@ extension GameScene {
     //addPower
     func addPowerBall() {
         removePowerBall()
-        let powerNode = SKSpriteNode()
+        let fireNode = SKSpriteNode()
         
         let powerTexture = SKLabelNode(fontNamed:"SpaceBarColors")
         powerTexture.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
@@ -35,35 +35,35 @@ extension GameScene {
         powerTexture.zRotation = CGFloat(Int(rnd).degrees)
         
         if let texture = view?.texture(from: powerTexture) {
-            powerNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
+            fireNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
             // This fall back should not happen, but we may use this in the future for iOS' that fail
-            powerNode.physicsBody = SKPhysicsBody(circleOfRadius: 27)
+            fireNode.physicsBody = SKPhysicsBody(circleOfRadius: 27)
         }
         
-        powerNode.physicsBody?.categoryBitMask = powerCategory
-        powerNode.physicsBody?.contactTestBitMask = paddleCategory + wallCategory
-        powerNode.physicsBody?.collisionBitMask = paddleCategory + brickCategory + wallCategory + goalCategory
-        powerNode.zPosition = 50
-        powerNode.physicsBody?.affectedByGravity = false
-        powerNode.physicsBody?.isDynamic = true
-        powerNode.physicsBody?.allowsRotation = true
-        powerNode.physicsBody?.friction = 0
-        powerNode.physicsBody?.linearDamping = 0
-        powerNode.physicsBody?.angularDamping = 0
-        powerNode.physicsBody?.restitution = 1.0
-        powerNode.physicsBody?.mass = 1.0
-        powerNode.physicsBody?.fieldBitMask = 0
-        powerNode.name = "powerball"
-        powerNode.position = CGPoint(x: -100,y: -100)
-        powerNode.speed = CGFloat(1.0)
+        fireNode.physicsBody?.categoryBitMask = powerCategory
+        fireNode.physicsBody?.contactTestBitMask = paddleCategory + wallCategory
+        fireNode.physicsBody?.collisionBitMask = paddleCategory + brickCategory + wallCategory + goalCategory
+        fireNode.zPosition = 50
+        fireNode.physicsBody?.affectedByGravity = false
+        fireNode.physicsBody?.isDynamic = true
+        fireNode.physicsBody?.allowsRotation = true
+        fireNode.physicsBody?.friction = 0
+        fireNode.physicsBody?.linearDamping = 0
+        fireNode.physicsBody?.angularDamping = 0
+        fireNode.physicsBody?.restitution = 1.0
+        fireNode.physicsBody?.mass = 1.0
+        fireNode.physicsBody?.fieldBitMask = 0
+        fireNode.name = "fireball"
+        fireNode.position = CGPoint(x: -100,y: -100)
+        fireNode.speed = CGFloat(1.0)
         swapper.toggle()
         let negative: CGFloat = swapper ? 1 : -1
-        powerNode.addChild(powerTexture)
-        //powerNode.physicsBody?.velocity = CGVector(dx: -centerHeight, dy: 2000)
-        powerNode.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
+        fireNode.addChild(powerTexture)
+        //fireNode.physicsBody?.velocity = CGVector(dx: -centerHeight, dy: 2000)
+        fireNode.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
 
-        anchorNode.addChild(powerNode)
+        anchorNode.addChild(fireNode)
     }
     
     

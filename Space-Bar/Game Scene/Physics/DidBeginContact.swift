@@ -83,9 +83,9 @@ extension GameScene {
                 return
             }
             
-            if settings.sound && ballNode.name == "ball" { run(wallSound) }
+            if settings.sound && ballNode.name == "ball" || ballNode.name == "extraball" { run(wallSound) }
             
-            if ballNode.name != "powerball" || ballNode.name != "ball" { return }
+            if ballNode.name != "fireball" || ballNode.name != "ball" || ballNode.name != "extraball" { return }
                         
             let absTotal = abs(x) + abs(y)
             

@@ -88,7 +88,7 @@ extension GameScene {
                 livesLabel.text = String(repeating: puck + "\u{2009}\u{2009}\u{2009}", count: gameLives > 0 ? gameLives - 1 : 0)
 
                 for whatDaPuck in anchorNode.children {
-                    if let name = whatDaPuck.name, name == "powerball" {
+                    if let name = whatDaPuck.name, name == "fireball" {
                         whatDaPuck.removeFromParent()
                     }
                 }

@@ -11,9 +11,9 @@ import SpriteKit
 
 extension GameScene {
     func removePowerBall() {
-        for powerball in anchorNode.children {
-            if let name = powerball.name, name.contains("powerball") {
-                powerball.removeFromParent()
+        for fireball in anchorNode.children {
+            if let name = fireball.name, name.contains("fireball") {
+                fireball.removeFromParent()
             }
         }
     }
@@ -38,9 +38,9 @@ extension GameScene {
     }
     
     func removeBall() {
-        for powerball in anchorNode.children {
-            if let name = powerball.name, name.contains("ball") {
-                powerball.removeFromParent()
+        for fireball in anchorNode.children {
+            if let name = fireball.name, name.contains("ball") {
+                fireball.removeFromParent()
             }
         }
     }
