@@ -15,8 +15,8 @@ extension GameScene {
         drawParallax()
         
         //setup physicsWorld
-        physicsWorld.gravity.dx =  0
-        physicsWorld.gravity.dy =  0
+        physicsWorld.gravity.dx =  0.05
+        physicsWorld.gravity.dy =  0.1
         physicsWorld.contactDelegate = self
         
         screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
@@ -52,13 +52,23 @@ extension GameScene {
         drawGoal()
         drawPaddle()
         drawLevel()
+        bonusLives()
+        getReady()
+    }
     
-        if (settings.currentlevel + 1) % 5 == 0 {
+    func bonusLives() {
+        
+        if (settings.currentlevel + 1) % 8 == 0 {
+            if gameLives < 5 {
+                gameLives += 2
+                return
+            }
+        }
+        
+        if (settings.currentlevel + 1) % 5 == 0 || (settings.currentlevel + 1) % 10 == 0 {
             if gameLives < 5 {
                 gameLives += 1
             }
         }
-        
-        getReady()
     }
 }

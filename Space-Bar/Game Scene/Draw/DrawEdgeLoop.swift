@@ -15,7 +15,7 @@ extension GameScene {
         let edgeLoop = SKNode()
         edgeLoop.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
         edgeLoop.physicsBody?.isDynamic = false
-        edgeLoop.physicsBody?.restitution = 0
+        edgeLoop.physicsBody?.restitution = 1.0
         edgeLoop.name = "wall"
         edgeLoop.position = CGPoint(x: 0, y: 0)
         edgeLoop.physicsBody?.contactTestBitMask = ballCategory + paddleCategory

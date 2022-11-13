@@ -19,6 +19,10 @@ extension GameScene {
                 if let name = whatDaPuck.name, name == "ball" {
                     whatDaPuck.removeFromParent()
                 }
+                
+                if let name = whatDaPuck.name, name == "extraball" {
+                    whatDaPuck.removeFromParent()
+                }
             }
         }
     
@@ -33,9 +37,11 @@ extension GameScene {
         
         if !removePreviousPuck {
             ballEmoji.text = Global.shared.gameBall[settings.puck + 2 % 8]
+
         } else {
             ballEmoji.text = Global.shared.gameBall[settings.puck]
         }
+
         ballEmoji.fontSize = 50 //* 2
         
         let rnd = arc4random_uniform(UInt32(360))
@@ -67,16 +73,18 @@ extension GameScene {
         ballNode.name = "ball"
         ballNode.position = CGPoint(x:0,y:0)
         ballNode.speed = CGFloat(1.0)
-        
-        swapper.toggle()
-        let negative: CGFloat = swapper ? 1 : -1
         ballNode.addChild(ballEmoji)
-        ballNode.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) + CGFloat(settings.level * 4) * negative, dy: initialVelocity + CGFloat(settings.level * 4))
+     
+        let negative: CGFloat = CGFloat.random(in: -1...1)
+        ballNode.physicsBody?.velocity = ballSpeed(negative)
+        
+    
         
         let copy = ballNode.copy() as! SKSpriteNode
         
         let act = SKAction.run {
             copy.name = "extraball"
+            copy.color = .systemGray
             self.anchorNode.addChild(copy)
         }
                 
@@ -88,5 +96,12 @@ extension GameScene {
         } else {
             anchorNode.addChild(copy)
         }
+    }
+    
+    func ballSpeed(_ negative: CGFloat) -> CGVector {
+        CGVector(
+            dx: ((initialVelocity + CGFloat(settings.currentlevel)) / ratio) * negative,
+            dy: ((initialVelocity + CGFloat(settings.currentlevel)) * 1.25)
+        )
     }
 }

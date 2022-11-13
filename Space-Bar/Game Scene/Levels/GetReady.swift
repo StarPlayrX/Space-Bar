@@ -26,19 +26,9 @@ extension GameScene {
             getReadyLabel.fontSize = 46
             getReadyLabel.alpha = 1.0
             anchorNode.addChild(getReadyLabel)
-            
-            var bonus = "Level"
-            
-            if (settings.currentlevel + 1) % 5 == 0 {
-                bonus = "Bonus Round"
-            }
-            
-            if (settings.currentlevel + 1) % 7 == 0 {
-                if gameLives < 4 {
-                    gameLives += 1
-                }
-            }
-            
+                        
+            let bonus = bonusRound()
+
             if let lvl = levelLabel.text, let score = scoreLabel.text, score == "0", settings.sound && gameLives > 1 {
                 try? speech("\(bonus) \(lvl). You have \(gameLives) lives. Get Ready!")
             } else if let lvl = levelLabel.text, let score = scoreLabel.text, score == "0", settings.sound && gameLives == 1  {
@@ -68,20 +58,20 @@ extension GameScene {
                 }
             }
             
-            if (settings.currentlevel + 1) % 5 == 0 {
-                addPuck(removePreviousPuck: false)
-            }
-            
-            if (settings.currentlevel + 1) % 7 == 0 {
-                addPowerBall()
-            }
-            
-            if (settings.currentlevel + 1) % 10 == 0 {
-                createFireBall()
-            } else {
-                removeFireBall(willFade: false)
-            }
+            getPuck()
         }
         run(SKAction.sequence([levelUp,delay,showGetReady,delay,startGame]))
+    }
+    
+    func getPuck() {
+        if (settings.currentlevel + 1) % 5 == 0 && (settings.currentlevel + 1) % 10 != 0 {
+            addTennisBall()
+        } else if (settings.currentlevel + 1) % 8 == 0 {
+            addPuck(removePreviousPuck: false)
+        } else if (settings.currentlevel + 1) % 10 == 0 {
+            createFireBall()
+        } else {
+            removeFireBall(willFade: false)
+        }
     }
 }

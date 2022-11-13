@@ -22,13 +22,13 @@ extension GameScene {
         topWall.physicsBody?.angularDamping = 0
         topWall.zPosition = 50
         topWall.physicsBody?.isDynamic = false
-        topWall.physicsBody?.mass = 1.0
+        topWall.physicsBody?.mass = 0.25
         topWall.physicsBody?.contactTestBitMask = ballCategory
         topWall.physicsBody?.categoryBitMask = wallCategory
         topWall.physicsBody?.collisionBitMask = wallCategory + ballCategory
         topWall.position = CGPoint(x: 0, y: height / 2 - 60)
         topWall.size = topWallSize
-        topWall.physicsBody?.restitution = 1.0
+        topWall.physicsBody?.restitution = 0.25
         topWall.name = "wall"
         topWall.alpha = 0.667
         anchorNode.addChild(topWall)
@@ -44,13 +44,13 @@ extension GameScene {
         upperLeftWall.physicsBody?.angularDamping = 0
         upperLeftWall.zPosition = 50
         upperLeftWall.physicsBody?.isDynamic = false
-        upperLeftWall.physicsBody?.mass = 1.0
+        upperLeftWall.physicsBody?.mass = 0.25
         upperLeftWall.physicsBody?.contactTestBitMask = ballCategory
         upperLeftWall.physicsBody?.categoryBitMask = wallCategory
         upperLeftWall.physicsBody?.collisionBitMask = wallCategory + ballCategory
         upperLeftWall.position = CGPoint(x: -centerWidth + 2, y: centerHeight / 2 - 16)
         upperLeftWall.size = upperLeftWallSize
-        upperLeftWall.physicsBody?.restitution = 1.0
+        upperLeftWall.physicsBody?.restitution = 0.25
         upperLeftWall.name = "wall"
         upperLeftWall.alpha = 0.667
         anchorNode.addChild(upperLeftWall)
@@ -66,13 +66,13 @@ extension GameScene {
         upperRightWall.physicsBody?.angularDamping = 0
         upperRightWall.zPosition = 50
         upperRightWall.physicsBody?.isDynamic = false
-        upperRightWall.physicsBody?.mass = 1.0
+        upperRightWall.physicsBody?.mass = 0.25
         upperRightWall.physicsBody?.contactTestBitMask = ballCategory
         upperRightWall.physicsBody?.categoryBitMask = wallCategory
         upperRightWall.physicsBody?.collisionBitMask = wallCategory + ballCategory
         upperRightWall.position = CGPoint(x: centerWidth - 2, y: centerHeight / 2 - 16)
         upperRightWall.size = upperRightWallSize
-        upperRightWall.physicsBody?.restitution = 1.0
+        upperRightWall.physicsBody?.restitution = 0.25
         upperRightWall.name = "wall"
         upperRightWall.alpha = 0.667
         anchorNode.addChild(upperRightWall)
@@ -88,13 +88,13 @@ extension GameScene {
         lowerLeftWall.physicsBody?.angularDamping = 0
         lowerLeftWall.zPosition = 50
         lowerLeftWall.physicsBody?.isDynamic = false
-        lowerLeftWall.physicsBody?.mass = 1.0
+        lowerLeftWall.physicsBody?.mass = 0.25
         lowerLeftWall.physicsBody?.contactTestBitMask = ballCategory
         lowerLeftWall.physicsBody?.categoryBitMask = wallCategory
         lowerLeftWall.physicsBody?.collisionBitMask = wallCategory + ballCategory
         lowerLeftWall.position = CGPoint(x: -centerWidth + 2, y: -centerHeight / 2 + 18)
         lowerLeftWall.size = lowerLeftWallSize
-        lowerLeftWall.physicsBody?.restitution = 1.0
+        lowerLeftWall.physicsBody?.restitution = 0.25
         lowerLeftWall.name = "wall"
         lowerLeftWall.alpha = 0.667
         anchorNode.addChild(lowerLeftWall)
@@ -110,13 +110,13 @@ extension GameScene {
         lowerRightWall.physicsBody?.angularDamping = 0
         lowerRightWall.zPosition = 50
         lowerRightWall.physicsBody?.isDynamic = false
-        lowerRightWall.physicsBody?.mass = 1.0
+        lowerRightWall.physicsBody?.mass = 0.25
         lowerRightWall.physicsBody?.contactTestBitMask = ballCategory
         lowerRightWall.physicsBody?.categoryBitMask = wallCategory
         lowerRightWall.physicsBody?.collisionBitMask = wallCategory + ballCategory
         lowerRightWall.position = CGPoint(x: centerWidth - 2, y: -centerHeight / 2 + 18)
         lowerRightWall.size = lowerRightWallSize
-        lowerRightWall.physicsBody?.restitution = 1.0
+        lowerRightWall.physicsBody?.restitution = 0.25
         lowerRightWall.name = "wall"
         lowerRightWall.alpha = 0.667
         anchorNode.addChild(lowerRightWall)
@@ -131,13 +131,13 @@ extension GameScene {
         recessWallNodeR.physicsBody?.angularDamping = 0
         recessWallNodeR.zPosition = 50
         recessWallNodeR.physicsBody?.isDynamic = false
-        recessWallNodeR.physicsBody?.mass = 1.0
+        recessWallNodeR.physicsBody?.mass = 0.25
         recessWallNodeR.physicsBody?.contactTestBitMask = ballCategory
         recessWallNodeR.physicsBody?.categoryBitMask = wallCategory
         recessWallNodeR.physicsBody?.collisionBitMask = wallCategory + ballCategory
         recessWallNodeR.position = CGPoint(x: (width + 2) / -3, y: -centerHeight + 64)
         recessWallNodeR.size = CGSize(width: (width + 2) / 3, height: 4)
-        recessWallNodeR.physicsBody?.restitution = 1.0
+        recessWallNodeR.physicsBody?.restitution = 0.25
         recessWallNodeR.name = "wall"
         recessWallNodeR.alpha = 0.667
         anchorNode.addChild(recessWallNodeR)
@@ -152,13 +152,13 @@ extension GameScene {
         recessWallNodeL.physicsBody?.angularDamping = 0
         recessWallNodeL.zPosition = 50
         recessWallNodeL.physicsBody?.isDynamic = false
-        recessWallNodeL.physicsBody?.mass = 1.0
+        recessWallNodeL.physicsBody?.mass = 0.25
         recessWallNodeL.physicsBody?.contactTestBitMask = ballCategory
         recessWallNodeL.physicsBody?.categoryBitMask = wallCategory
         recessWallNodeL.physicsBody?.collisionBitMask = wallCategory + ballCategory
         recessWallNodeL.position = CGPoint(x: (width + 2) / 3, y: -centerHeight + 64)
         recessWallNodeL.size = CGSize(width: (width + 2) / 3, height: 4)
-        recessWallNodeL.physicsBody?.restitution = 1.0
+        recessWallNodeL.physicsBody?.restitution = 0.25
         recessWallNodeL.name = "wall"
         recessWallNodeL.alpha = 0.667
         anchorNode.addChild(recessWallNodeL)

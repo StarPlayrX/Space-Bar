@@ -16,13 +16,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     
     var gameOver: Bool?
     var ballCounter = 10
-    let ballTimeOut = 10
+    let ballTimeOut = 5
     var timer = Timer()
-    let boost = CGFloat(30)
-    let ratio = CGFloat(1.5)
+    let boost = CGFloat(33)
+    let ratio = CGFloat(1.75)
     let zero = CGFloat(0)
-    var initialVelocity = CGFloat(750)
-    let differentiator = CGFloat(250)
+    let initialVelocity = CGFloat(777)
+    let differentiator = CGFloat(222)
     
     var ballNode    = SKSpriteNode()
     var fireNode    = SKSpriteNode()

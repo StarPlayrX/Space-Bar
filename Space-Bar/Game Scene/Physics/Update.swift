@@ -38,14 +38,10 @@ extension GameScene {
         
         if abs(ballBody.velocity.dx) < abs(initialVelocity) {
             ballBody.velocity.dx <= zero ? (ballBody.velocity.dx -= boost) : (ballBody.velocity.dx += boost)
-            ballBody.velocity.dx += CGFloat(settings.level * 2) + 1 / 2
- 
         }
         
         if abs(ballBody.velocity.dy) < abs(initialVelocity) {
             ballBody.velocity.dy <= zero ? (ballBody.velocity.dy -= boost * ratio) : (ballBody.velocity.dy += boost * ratio)
-            ballBody.velocity.dy += CGFloat(settings.level * 2) + 1
-         
         }
     }
 }

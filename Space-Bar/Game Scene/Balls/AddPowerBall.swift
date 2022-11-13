@@ -11,9 +11,9 @@ import SpriteKit
 
 extension GameScene {
     //addPower
-    func addPowerBall() {
+    func addTennisBall() {
         removePowerBall()
-        let fireNode = SKSpriteNode()
+        let tennisBallNode = SKSpriteNode()
         
         let powerTexture = SKLabelNode(fontNamed:"SpaceBarColors")
         powerTexture.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
@@ -35,35 +35,34 @@ extension GameScene {
         powerTexture.zRotation = CGFloat(Int(rnd).degrees)
         
         if let texture = view?.texture(from: powerTexture) {
-            fireNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
+            tennisBallNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
             // This fall back should not happen, but we may use this in the future for iOS' that fail
-            fireNode.physicsBody = SKPhysicsBody(circleOfRadius: 27)
+            tennisBallNode.physicsBody = SKPhysicsBody(circleOfRadius: 27)
         }
         
-        fireNode.physicsBody?.categoryBitMask = powerCategory
-        fireNode.physicsBody?.contactTestBitMask = paddleCategory + wallCategory
-        fireNode.physicsBody?.collisionBitMask = paddleCategory + brickCategory + wallCategory + goalCategory
-        fireNode.zPosition = 50
-        fireNode.physicsBody?.affectedByGravity = false
-        fireNode.physicsBody?.isDynamic = true
-        fireNode.physicsBody?.allowsRotation = true
-        fireNode.physicsBody?.friction = 0
-        fireNode.physicsBody?.linearDamping = 0
-        fireNode.physicsBody?.angularDamping = 0
-        fireNode.physicsBody?.restitution = 1.0
-        fireNode.physicsBody?.mass = 1.0
-        fireNode.physicsBody?.fieldBitMask = 0
-        fireNode.name = "fireball"
-        fireNode.position = CGPoint(x: -100,y: -100)
-        fireNode.speed = CGFloat(1.0)
-        swapper.toggle()
-        let negative: CGFloat = swapper ? 1 : -1
-        fireNode.addChild(powerTexture)
-        //fireNode.physicsBody?.velocity = CGVector(dx: -centerHeight, dy: 2000)
-        fireNode.physicsBody?.velocity = CGVector(dx: initialVelocity / CGFloat(2) * negative, dy: initialVelocity)
+        tennisBallNode.physicsBody?.categoryBitMask = powerCategory
+        tennisBallNode.physicsBody?.contactTestBitMask = paddleCategory + wallCategory
+        tennisBallNode.physicsBody?.collisionBitMask = paddleCategory + brickCategory + wallCategory + goalCategory
+        tennisBallNode.zPosition = 50
+        tennisBallNode.physicsBody?.affectedByGravity = false
+        tennisBallNode.physicsBody?.isDynamic = true
+        tennisBallNode.physicsBody?.allowsRotation = true
+        tennisBallNode.physicsBody?.friction = 0
+        tennisBallNode.physicsBody?.linearDamping = 0
+        tennisBallNode.physicsBody?.angularDamping = 0
+        tennisBallNode.physicsBody?.restitution = 1.0
+        tennisBallNode.physicsBody?.mass = 1.0
+        tennisBallNode.physicsBody?.fieldBitMask = 0
+        tennisBallNode.name = "fireball"
+        tennisBallNode.position = CGPoint(x: -100,y: -100)
+        tennisBallNode.speed = CGFloat(1.0)
+        tennisBallNode.addChild(powerTexture)
 
-        anchorNode.addChild(fireNode)
+        let negative: CGFloat = CGFloat.random(in: -1...1)
+        tennisBallNode.physicsBody?.velocity = ballSpeed(negative)
+        
+        anchorNode.addChild(tennisBallNode)
     }
     
     
@@ -106,24 +105,25 @@ extension GameScene {
         fireBallNode.physicsBody?.friction = 0
         fireBallNode.physicsBody?.linearDamping = 0.001
         fireBallNode.physicsBody?.angularDamping = 0.001
-        fireBallNode.physicsBody?.restitution = 0.5
+        fireBallNode.physicsBody?.restitution = 1.0
         fireBallNode.physicsBody?.mass = 0.9
         fireBallNode.physicsBody?.fieldBitMask = 0
         fireBallNode.name = "fireball"
         fireBallNode.addChild(fireBallTexture)
         fireBallNode.position = CGPoint(x: paddleNode.position.x, y: paddleNode.position.y + 50)
         fireBallNode.speed = CGFloat(1.0)
-        fireBallNode.alpha = 0.8
-        swapper.toggle()
-        let negative: CGFloat = swapper ? 1 : -1
-        fireBallNode.physicsBody?.velocity = CGVector(dx: initialVelocity / 2 * negative, dy: initialVelocity + CGFloat(settings.level * 2) + 1)
-
+        fireBallNode.alpha = 0.85
+        fireBallNode.blendMode = .multiply
+                
+        let negative: CGFloat = CGFloat.random(in: -1...1)
+        fireBallNode.physicsBody?.velocity = ballSpeed(negative)
+        
         let copy = fireBallNode.copy() as! SKSpriteNode
         scene?.addChild(copy)
         
         //let remove = SKAction.removeFromParent()
-        let wait = SKAction.wait(forDuration: TimeInterval(0.5 + Double(settings.level + 1 * 2 / 100)))
-        let live = SKAction.wait(forDuration: TimeInterval(1.5 - Double(settings.level + 1 / 100 * 2)))
+        let wait = SKAction.wait(forDuration: TimeInterval(1.0 + Double(settings.level / 100)))
+        let live = SKAction.wait(forDuration: TimeInterval(2.0 - Double(settings.level / 100)))
 
         let fade = SKAction.fadeOut(withDuration: 1.0)
         let rmfp = SKAction.removeFromParent()

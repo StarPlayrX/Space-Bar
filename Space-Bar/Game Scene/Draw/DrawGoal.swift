@@ -30,7 +30,7 @@ extension GameScene {
         goalWallRightNode.physicsBody?.collisionBitMask = wallCategory + ballCategory
         goalWallRightNode.position = CGPoint(x: centerWidth / 3 + 3, y: -centerHeight + 32)
         goalWallRightNode.size = goalWallRightNodeSize
-        goalWallRightNode.physicsBody?.restitution = 0.25
+        goalWallRightNode.physicsBody?.restitution = 1.0
         goalWallRightNode.name = "wall"
         goalWallRightNode.alpha = 0.667 
         anchorNode.addChild(goalWallRightNode)
@@ -54,7 +54,7 @@ extension GameScene {
         goalWallLeftNode.physicsBody?.collisionBitMask = wallCategory + ballCategory
         goalWallLeftNode.position = CGPoint(x: (centerWidth / -3) - 2, y: -centerHeight + 32)
         goalWallLeftNode.size = goalWallLeftNodeSize
-        goalWallLeftNode.physicsBody?.restitution = 0.25
+        goalWallLeftNode.physicsBody?.restitution = 1.0
         goalWallLeftNode.name = "wall"
         goalWallLeftNode.alpha = 0.667
         anchorNode.addChild(goalWallLeftNode)
@@ -76,7 +76,7 @@ extension GameScene {
         goalNode.physicsBody?.categoryBitMask = goalCategory
         goalNode.position = CGPoint(x:0,y:-centerHeight + 2)
         goalNode.size = goalNodeSize
-        goalNode.physicsBody?.restitution = 0
+        goalNode.physicsBody?.restitution = 1.0
         goalNode.name = "goal"
         goalNode.alpha = 0.667
         anchorNode.addChild(goalNode)

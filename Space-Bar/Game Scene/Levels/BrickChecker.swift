@@ -9,8 +9,13 @@
 import Foundation
 import SpriteKit
 
+var resettingGameBoard = false
+
 extension GameScene {
     func checker(_ firstBody: SKPhysicsBody) {
+        
+        if resettingGameBoard { return }
+        
         // There are two mysterious "bricks" that do not seem to exist
         if let count = space?.children.count, count - 1 <= 0  {
             
@@ -18,7 +23,10 @@ extension GameScene {
             let b = SKAction.removeFromParent()
             let c = SKAction.wait(forDuration: 0.5)
             let d = SKAction.run { [unowned self] in
-                resetGameBoard(lives: true)
+                if !resettingGameBoard {
+                    resettingGameBoard = true
+                    resetGameBoard(lives: true)
+                }
             }
             
             if let ball = firstBody.node {

@@ -30,24 +30,12 @@ extension GameScene {
             settings.currentlevel += 1
             settings.currentlevel %= Global.shared.levels.count
         
-            var bonus = "Level"
+            let bonus = bonusRound()
+    
+            bonusLives()
             
-            if (settings.currentlevel + 1) % 5 == 0 {
-                if gameLives < 5 {
-                    gameLives += 1
-                }
-                bonus = "Bonus Round"
-            }
-            
-            if (settings.currentlevel + 1) % 7 == 0 {
-                if gameLives < 4 {
-                    gameLives += 1
-                }
-            }
-            
-            //livesLabel.text = String(gameLives)
             let puck = Global.shared.gameBall[settings.puck]
-            livesLabel.text = String(repeating: puck + "\u{2009}\u{2009}\u{2009}", count: gameLives > 0 ? gameLives  : 0)
+            livesLabel.text = String(repeating: puck + "\u{2009}\u{2009}\u{2009}", count: gameLives > 0 ? gameLives : 0)
             levelLabel.text = String(settings.currentlevel + 1)
             scoreLabel.text = String(gameScore)
             setHighScore()
@@ -92,30 +80,23 @@ extension GameScene {
                         whatDaPuck.removeFromParent()
                     }
                 }
-                
-                if (settings.currentlevel + 1) % 5 == 0 {
-                    addPuck(removePreviousPuck: false)
-                }
-                
-                if (settings.currentlevel + 1) % 7 == 0 {
-                    addPowerBall()
-                }
-                
-                if (settings.currentlevel + 1) % 10 == 0 {
-                    createFireBall()
-                } else {
-                    removeFireBall(willFade: false)
-                }
-                
+                getPuck()
             }
-            
             run(SKAction.sequence([delay,levelUp,delay,getReadyFade,delay,startLevel]))
         }
-        
         let seq = SKAction.sequence([action1,delay,action2])
-        
         scene?.run(seq)
-
-     
+        
+        resettingGameBoard = false
+    }
+    
+    func bonusRound() -> String {
+        if (settings.currentlevel + 1) % 8 == 0 {
+            return "Double Lives Bonus Round"
+        } else if (settings.currentlevel + 1) % 5 == 0 {
+            return "Bonus Round"
+        }
+        
+        return "Level"
     }
 }
