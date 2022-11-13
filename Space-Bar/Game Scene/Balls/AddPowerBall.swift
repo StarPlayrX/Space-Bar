@@ -13,7 +13,6 @@ extension GameScene {
     //addPower
     func addTennisBall() {
         removePowerBall()
-        let tennisBallNode = SKSpriteNode()
         
         let powerTexture = SKLabelNode(fontNamed:"SpaceBarColors")
         powerTexture.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
@@ -35,38 +34,35 @@ extension GameScene {
         powerTexture.zRotation = CGFloat(Int(rnd).degrees)
         
         if let texture = view?.texture(from: powerTexture) {
-            tennisBallNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
+            tennisNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
             // This fall back should not happen, but we may use this in the future for iOS' that fail
-            tennisBallNode.physicsBody = SKPhysicsBody(circleOfRadius: 27)
+            tennisNode.physicsBody = SKPhysicsBody(circleOfRadius: 27)
         }
         
-        tennisBallNode.physicsBody?.categoryBitMask = powerCategory
-        tennisBallNode.physicsBody?.contactTestBitMask = paddleCategory + wallCategory
-        tennisBallNode.physicsBody?.collisionBitMask = paddleCategory + brickCategory + wallCategory + goalCategory
-        tennisBallNode.zPosition = 50
-        tennisBallNode.physicsBody?.affectedByGravity = false
-        tennisBallNode.physicsBody?.isDynamic = true
-        tennisBallNode.physicsBody?.allowsRotation = true
-        tennisBallNode.physicsBody?.friction = 0
-        tennisBallNode.physicsBody?.linearDamping = 0
-        tennisBallNode.physicsBody?.angularDamping = 0
-        tennisBallNode.physicsBody?.restitution = 1.0
-        tennisBallNode.physicsBody?.mass = 1.0
-        tennisBallNode.physicsBody?.fieldBitMask = 0
-        tennisBallNode.name = "fireball"
-        tennisBallNode.position = CGPoint(x: -100,y: -100)
-        tennisBallNode.speed = CGFloat(1.0)
-        tennisBallNode.addChild(powerTexture)
-
-        let negative: CGFloat = CGFloat.random(in: -1...1)
-        tennisBallNode.physicsBody?.velocity = ballSpeed(negative)
-        
-        anchorNode.addChild(tennisBallNode)
+        tennisNode.physicsBody?.categoryBitMask = powerCategory
+        tennisNode.physicsBody?.contactTestBitMask = paddleCategory + wallCategory
+        tennisNode.physicsBody?.collisionBitMask = paddleCategory + brickCategory + wallCategory + goalCategory
+        tennisNode.zPosition = 50
+        tennisNode.physicsBody?.affectedByGravity = false
+        tennisNode.physicsBody?.isDynamic = true
+        tennisNode.physicsBody?.allowsRotation = true
+        tennisNode.physicsBody?.friction = 0
+        tennisNode.physicsBody?.linearDamping = 0
+        tennisNode.physicsBody?.angularDamping = 0
+        tennisNode.physicsBody?.restitution = 1.0
+        tennisNode.physicsBody?.mass = 1.0
+        tennisNode.physicsBody?.fieldBitMask = 0
+        tennisNode.name = "fireball"
+        tennisNode.position = CGPoint.zero
+        tennisNode.speed = CGFloat(1.0)
+        tennisNode.physicsBody?.velocity = ballSpeed()
+        tennisNode.addChild(powerTexture)
+        anchorNode.addChild(tennisNode)
     }
     
     
-    func createFireBall() {
+    func shootFireBalls() {
         let fireBallNode = SKSpriteNode()
         
         let fireBallTexture = SKLabelNode(fontNamed:"SpaceBarColors")
@@ -114,26 +110,28 @@ extension GameScene {
         fireBallNode.speed = CGFloat(1.0)
         fireBallNode.alpha = 0.85
         fireBallNode.blendMode = .multiply
-                
-        let negative: CGFloat = CGFloat.random(in: -1...1)
-        fireBallNode.physicsBody?.velocity = ballSpeed(negative)
+        fireBallNode.physicsBody?.velocity = CGVector(dx: 0, dy: (initialVelocity + CGFloat(settings.level)) + (boost * 5))
         
         let copy = fireBallNode.copy() as! SKSpriteNode
         scene?.addChild(copy)
         
         //let remove = SKAction.removeFromParent()
-        let wait = SKAction.wait(forDuration: TimeInterval(1.0 + Double(settings.level / 100)))
-        let live = SKAction.wait(forDuration: TimeInterval(2.0 - Double(settings.level / 100)))
+        let wait = SKAction.wait(forDuration: TimeInterval(1.5 + Double(settings.level / 100)))
+        let live = SKAction.wait(forDuration: TimeInterval(2.5 - Double(settings.level / 100)))
 
         let fade = SKAction.fadeOut(withDuration: 1.0)
         let rmfp = SKAction.removeFromParent()
 
         let code = SKAction.run {
-            self.createFireBall()
+            self.shootFireBalls()
         }
 
         let seq = SKAction.sequence([wait,code,live,fade,rmfp])
         copy.run(seq)
+    }
+    
+    func scaleNode() {
+       
     }
 }
 

@@ -12,22 +12,27 @@ import SpriteKit
 extension GameScene {
     // Called before each frame is rendered (this may be expensive, see if we can just do this on collisions instead)
     override func update(_ currentTime: TimeInterval) {
-        guard
-            let x = ballNode.physicsBody?.velocity.dx,
-            let y = ballNode.physicsBody?.velocity.dy,
-            let body = ballNode.physicsBody
-        else {
-            return
-        }
         
-        if ballNode.name != "ball" { return }
+        let nodes = [ballNode,tennisNode,extraNode]
         
-        let absTotal = abs(x) + abs(y)
-        
-        if absTotal <= initialVelocity * ratio {
-            booster(body, boost, initialVelocity)
-        } else if absTotal > initialVelocity + differentiator {
-            booster(body, -boost, initialVelocity + differentiator)
+        for node in nodes {
+            guard
+                let x = node.physicsBody?.velocity.dx,
+                let y = node.physicsBody?.velocity.dy,
+                let body = node.physicsBody
+            else {
+                return
+            }
+            
+            if node.name != "ball" { return }
+            
+            let absTotal = abs(x) + abs(y)
+            
+            if absTotal <= initialVelocity * ratio {
+                booster(body, boost, initialVelocity)
+            } else if absTotal > initialVelocity + differentiator {
+                booster(body, -boost, initialVelocity + differentiator)
+            }
         }
     }
 

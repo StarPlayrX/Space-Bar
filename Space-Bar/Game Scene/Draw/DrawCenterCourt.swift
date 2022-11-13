@@ -13,14 +13,15 @@ extension GameScene {
     func drawCenterCourt() {
         //centercourt circle
         
-        let centerCourtNode = SKShapeNode(circleOfRadius: centerWidth / 3 + 4) // Size of Circle
+       
+        let centerCourtNode = SKShapeNode(circleOfRadius: centerWidth / 3 + 4)
         centerCourtNode.strokeColor = .systemRed
         centerCourtNode.lineWidth = 3.0
         centerCourtNode.glowWidth = 1.0
         centerCourtNode.alpha = 0.667
         centerCourtNode.fillColor = SKColor.clear
         //centerCourtNode.size = CGSize(width: 50, height: 50)
-        centerCourtNode.position = CGPoint(x:0,y:0)
+        centerCourtNode.position = CGPoint.zero
         anchorNode.addChild(centerCourtNode)
         
         //centercourt line

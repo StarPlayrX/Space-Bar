@@ -32,10 +32,10 @@ extension GameScene {
         
             let bonus = bonusRound()
     
-            bonusLives()
+            bonusLives(minor: true, major: false)
             
             let puck = Global.shared.gameBall[settings.puck]
-            livesLabel.text = String(repeating: puck + "\u{2009}\u{2009}\u{2009}", count: gameLives > 0 ? gameLives : 0)
+            livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives : 0)
             levelLabel.text = String(settings.currentlevel + 1)
             scoreLabel.text = String(gameScore)
             setHighScore()
@@ -72,8 +72,8 @@ extension GameScene {
             }
             
             let startLevel = SKAction.run { [unowned self] in
-                addPuck(removePreviousPuck: true)
-                livesLabel.text = String(repeating: puck + "\u{2009}\u{2009}\u{2009}", count: gameLives > 0 ? gameLives - 1 : 0)
+                addPuck()
+                livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives - 1 : 0)
 
                 for whatDaPuck in anchorNode.children {
                     if let name = whatDaPuck.name, name == "fireball" {
@@ -91,9 +91,7 @@ extension GameScene {
     }
     
     func bonusRound() -> String {
-        if (settings.currentlevel + 1) % 8 == 0 {
-            return "Double Lives Bonus Round"
-        } else if (settings.currentlevel + 1) % 5 == 0 {
+        if (settings.currentlevel + 1) % 5 == 0 {
             return "Bonus Round"
         }
         

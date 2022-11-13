@@ -18,14 +18,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     var ballCounter = 10
     let ballTimeOut = 5
     var timer = Timer()
-    let boost = CGFloat(33)
-    let ratio = CGFloat(1.75)
+    let boost = CGFloat(25)
+    let ratio = CGFloat(1.875)
     let zero = CGFloat(0)
-    let initialVelocity = CGFloat(777)
-    let differentiator = CGFloat(222)
+    var initialVelocity = CGFloat(700)
+    let differentiator = CGFloat(75)
     
     var ballNode    = SKSpriteNode()
-    var fireNode    = SKSpriteNode()
+    var extraNode   = SKSpriteNode()
+    var tennisNode  = SKSpriteNode()
     
     let appSettings = AppSettings()
     
@@ -67,7 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     let scoreLabel = SKLabelNode(fontNamed:"emulogic")
     let levelLabel = SKLabelNode(fontNamed:"emulogic")
     let livesLabel = SKLabelNode(fontNamed:"SpaceBarColors")
-    
+
     let goalSound   = SKAction.playSoundFileNamed("Dah.mp3", waitForCompletion: false)
     let brickSound  = SKAction.playSoundFileNamed("Bip.mp3", waitForCompletion: false)
     let paddleSound = SKAction.playSoundFileNamed("Knock.mp3", waitForCompletion: false)

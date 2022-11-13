@@ -29,16 +29,19 @@ extension GameScene {
         
         let catMask = firstBody.categoryBitMask | secondBody.categoryBitMask
         swapper.toggle()
-        let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(swapper ? 1 : -1), duration: 2)
+        let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(swapper ? 1 : -1), duration: 4)
         
-        if firstBody.node?.name == "ball" {
+        let rotationTestA = firstBody.node?.name == "ball" || firstBody.node?.name == "extraball" || firstBody.node?.name == "fireball"
+        let rotationTestB = secondBody.node?.name == "ball" || secondBody.node?.name == "extraball" || secondBody.node?.name == "fireball"
+
+        if rotationTestA {
             firstBody.node?.run(rotateAction)
-            firstBody.node?.run(rotateAction)
-        } else if secondBody.node?.name == "ball" {
-            secondBody.node?.run(rotateAction)
+        }
+
+        if rotationTestB {
             secondBody.node?.run(rotateAction)
         }
-        
+    
         switch catMask {
             
         case fireBallCategory | brickCategory :
@@ -100,35 +103,27 @@ extension GameScene {
         case ballCategory | goalCategory:
             ballCounter = ballTimeOut
             
+            guard let name = firstBody.node?.name else { return }
+            
             if let a = firstBody.node {
                 a.removeFromParent()
             }
             
             if settings.sound { run(goalSound) }
             
-            var puckExists = false
-
             if gameLives > 0 {
                 gameLives -= 1
-
-                //livesLabel.text = String(gameLives)
                 let puck = Global.shared.gameBall[settings.puck]
-                livesLabel.text = String(repeating: puck + "\u{2009}\u{2009}\u{2009}", count: gameLives > 0 ? gameLives - 1 : 0)
-                
-               for whatDaPuck in anchorNode.children {
-                   if let name = whatDaPuck.name, name == "extraball" || name == "ball" {
-                       puckExists = true
-                   }
-               }
+                livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives - 1 : 0)
             }
             
-            if !puckExists && gameLives > 0 {
-                addPuck(removePreviousPuck: true)
+            if gameLives > 0 && name != "extraball" {
+                addPuck()
+                return
             }
             
             if gameLives < 0 {
                 gameLives = 0
-                //livesLabel.text = String(gameLives)
                 livesLabel.text = ""
             }
             
@@ -140,6 +135,7 @@ extension GameScene {
                 let action2 = SKAction.run { [self] in
                     removeFireBall(willFade: true)
                     removePowerBall()
+                    removeBall()
                 }
                 
                 let action3 = SKAction.run { [self] in

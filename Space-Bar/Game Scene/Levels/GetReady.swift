@@ -12,7 +12,7 @@ import SpriteKit
 extension GameScene {
     func getReady() {
         let puck = Global.shared.gameBall[settings.puck]
-        livesLabel.text = String(repeating: puck + "\u{2009}\u{2009}\u{2009}", count: gameLives > 0 ? gameLives : 0)
+        livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives : 0)
         let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
         let delay = SKAction.wait(forDuration: 1.5)
         let levelUp = SKAction.run { [unowned self] in
@@ -42,19 +42,15 @@ extension GameScene {
         }
         
         let startGame = SKAction.run { [unowned self] in
-            addPuck(removePreviousPuck: true)
-            livesLabel.text = String(repeating: puck + "\u{2009}\u{2009}\u{2009}", count: gameLives > 0 ? gameLives - 1 : 0)
+            addPuck()
+            livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives - 1 : 0)
 
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 self.ballCounter -= 1
                 
                 if self.ballCounter < 0 {
                     self.ballCounter = self.ballTimeOut
-                    self.addPuck(removePreviousPuck: true)
-                    
-                    if (settings.currentlevel + 1) % 5 == 0  {
-                        self.addPuck(removePreviousPuck: false)
-                    }
+                    self.addPuck()
                 }
             }
             
@@ -63,13 +59,22 @@ extension GameScene {
         run(SKAction.sequence([levelUp,delay,showGetReady,delay,startGame]))
     }
     
+    //MARK: Bonus levels occur 20% of the time
     func getPuck() {
-        if (settings.currentlevel + 1) % 5 == 0 && (settings.currentlevel + 1) % 10 != 0 {
+        let bonusLevel = settings.currentlevel + 1
+        //Extra Ball 20, 40, 60, 80, 100
+        if bonusLevel % 20 == 0 {
+            addExtraBall()
+            
+        //Shoot FireBalls 10, 30, 50, 70, 90
+        } else if bonusLevel % 10 == 0 {
+            shootFireBalls()
+            
+        //Tennis Ball 5, 15, 25, 35, 45, 55, 65, 75, 85, 95
+        } else if bonusLevel % 5 == 0 {
             addTennisBall()
-        } else if (settings.currentlevel + 1) % 8 == 0 {
-            addPuck(removePreviousPuck: false)
-        } else if (settings.currentlevel + 1) % 10 == 0 {
-            createFireBall()
+            
+        //Clean up
         } else {
             removeFireBall(willFade: false)
         }
