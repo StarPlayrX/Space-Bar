@@ -13,25 +13,23 @@ extension GameScene {
     // Called before each frame is rendered (this may be expensive, see if we can just do this on collisions instead)
     override func update(_ currentTime: TimeInterval) {
         
-        let nodes = [ballNode,tennisNode,extraNode]
+        let nodes = [ballNode, extraNode, tennisNode] //Can be expanded to other balls
         
         for node in nodes {
             guard
                 let x = node.physicsBody?.velocity.dx,
                 let y = node.physicsBody?.velocity.dy,
-                let body = node.physicsBody
+                let body = node.physicsBody,
+                let name = node.name,
+                name.contains("ball")
             else {
                 return
             }
-            
-            if node.name != "ball" { return }
-            
+                        
             let absTotal = abs(x) + abs(y)
             
             if absTotal <= initialVelocity * ratio {
                 booster(body, boost, initialVelocity + CGFloat(settings.currentlevel))
-            } else if absTotal > initialVelocity + differentiator {
-                booster(body, -boost, initialVelocity + differentiator + CGFloat(settings.currentlevel))
             }
         }
     }
@@ -39,20 +37,26 @@ extension GameScene {
     func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat, _ initialVelocity: CGFloat ) {
         guard let ballBody = ballBody else { return }
                 
-        if abs(ballBody.velocity.dx) < abs(initialVelocity) {
+        if abs(ballBody.velocity.dx) < abs(initialVelocity) && abs(ballBody.velocity.dx) < 650 {
             ballBody.velocity.dx <= zero ? (ballBody.velocity.dx -= boost) : (ballBody.velocity.dx += boost)
-            
-            if ballBody.velocity.dx > 888 {
-                ballBody.velocity.dx = 888
-            }
         }
         
-        if abs(ballBody.velocity.dy) < abs(initialVelocity) {
+        //MARK: To do switch to a clamp algorithm
+        if ballBody.velocity.dx > 650 {
+            ballBody.velocity.dx = 650
+        } else if ballBody.velocity.dx < -650 {
+            ballBody.velocity.dx = -650
+        }
+        
+        if abs(ballBody.velocity.dy) < abs(initialVelocity) && abs(ballBody.velocity.dy) < 1300 {
             ballBody.velocity.dy <= zero ? (ballBody.velocity.dy -= boost * ratio) : (ballBody.velocity.dy += boost * ratio)
-            
-            if ballBody.velocity.dy > 888 {
-                ballBody.velocity.dy = 888
-            }
+        }
+        
+        //To do switch to a clamp algorithm
+        if ballBody.velocity.dy > 1300 {
+            ballBody.velocity.dy = 1300
+        } else if ballBody.velocity.dy < -1300 {
+            ballBody.velocity.dy = -1300
         }
     }
 }

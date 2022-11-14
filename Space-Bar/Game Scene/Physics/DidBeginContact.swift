@@ -94,9 +94,7 @@ extension GameScene {
             
             if absTotal <= initialVelocity * ratio {
                 booster(body, boost, initialVelocity)
-            } else if absTotal > initialVelocity + differentiator {
-                booster(body, -boost, initialVelocity + differentiator)
-            }
+            } 
             
         case ballCategory | midFieldCategory :
             ballCounter = ballTimeOut
@@ -127,7 +125,6 @@ extension GameScene {
                 addPuck()
                 
                 if (settings.currentlevel + 1) % 20 == 0 {
-                    print("HELLO")
                     addExtraBall()
                 }
                 return

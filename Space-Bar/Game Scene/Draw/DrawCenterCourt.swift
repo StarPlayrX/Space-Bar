@@ -12,7 +12,6 @@ import SpriteKit
 extension GameScene {
     func drawCenterCourt() {
         //centercourt circle
-        
        
         let centerCourtNode = SKShapeNode(circleOfRadius: centerWidth / 3 + 4)
         centerCourtNode.strokeColor = .systemRed
