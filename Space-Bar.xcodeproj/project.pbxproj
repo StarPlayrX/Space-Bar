@@ -89,7 +89,7 @@
 		5F9AFCD02905D7DA001C79E5 /* level40.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F9AFCCF2905D7DA001C79E5 /* level40.sks */; };
 		5FAA25F62906F6E700DDD813 /* level10.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FAA25F52906F6E700DDD813 /* level10.sks */; };
 		5FABED8F2905CBAF002EADA3 /* level6.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED8B2905CBAF002EADA3 /* level6.sks */; };
-		5FABED902905CBAF002EADA3 /* level7.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED8C2905CBAF002EADA3 /* level7.sks */; };
+		5FABED902905CBAF002EADA3 /* level4.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED8C2905CBAF002EADA3 /* level4.sks */; };
 		5FABED912905CBAF002EADA3 /* level3.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED8D2905CBAF002EADA3 /* level3.sks */; };
 		5FABED922905CBAF002EADA3 /* level5.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED8E2905CBAF002EADA3 /* level5.sks */; };
 		5FABED942905D1EA002EADA3 /* level38.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FABED932905D1EA002EADA3 /* level38.sks */; };
@@ -111,7 +111,7 @@
 		6F27255C26DAA8D30009B5B5 /* level35.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27254C26DAA8D30009B5B5 /* level35.sks */; };
 		6F27255D26DAA8D30009B5B5 /* level33.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27254D26DAA8D30009B5B5 /* level33.sks */; };
 		6F27255E26DAA8D30009B5B5 /* level24.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27254E26DAA8D30009B5B5 /* level24.sks */; };
-		6F27255F26DAA8D30009B5B5 /* level4.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27254F26DAA8D30009B5B5 /* level4.sks */; };
+		6F27255F26DAA8D30009B5B5 /* level7.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27254F26DAA8D30009B5B5 /* level7.sks */; };
 		6F27256026DAA8D30009B5B5 /* level43.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27255026DAA8D30009B5B5 /* level43.sks */; };
 		6F27256126DAA8D30009B5B5 /* level34.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27255126DAA8D30009B5B5 /* level34.sks */; };
 		6F27256226DAA8D30009B5B5 /* level30.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6F27255226DAA8D30009B5B5 /* level30.sks */; };
@@ -237,7 +237,7 @@
 		5F9AFCCF2905D7DA001C79E5 /* level40.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level40.sks; sourceTree = "<group>"; };
 		5FAA25F52906F6E700DDD813 /* level10.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level10.sks; sourceTree = "<group>"; };
 		5FABED8B2905CBAF002EADA3 /* level6.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level6.sks; sourceTree = "<group>"; };
-		5FABED8C2905CBAF002EADA3 /* level7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level7.sks; sourceTree = "<group>"; };
+		5FABED8C2905CBAF002EADA3 /* level4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level4.sks; sourceTree = "<group>"; };
 		5FABED8D2905CBAF002EADA3 /* level3.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level3.sks; sourceTree = "<group>"; };
 		5FABED8E2905CBAF002EADA3 /* level5.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level5.sks; sourceTree = "<group>"; };
 		5FABED932905D1EA002EADA3 /* level38.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level38.sks; sourceTree = "<group>"; };
@@ -260,7 +260,7 @@
 		6F27254C26DAA8D30009B5B5 /* level35.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level35.sks; sourceTree = "<group>"; };
 		6F27254D26DAA8D30009B5B5 /* level33.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level33.sks; sourceTree = "<group>"; };
 		6F27254E26DAA8D30009B5B5 /* level24.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level24.sks; sourceTree = "<group>"; };
-		6F27254F26DAA8D30009B5B5 /* level4.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level4.sks; sourceTree = "<group>"; };
+		6F27254F26DAA8D30009B5B5 /* level7.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level7.sks; sourceTree = "<group>"; };
 		6F27255026DAA8D30009B5B5 /* level43.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level43.sks; sourceTree = "<group>"; };
 		6F27255126DAA8D30009B5B5 /* level34.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level34.sks; sourceTree = "<group>"; };
 		6F27255226DAA8D30009B5B5 /* level30.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level30.sks; sourceTree = "<group>"; };
@@ -387,11 +387,11 @@
 				EA69D56E203FCC1F008D9359 /* level1.sks */,
 				EABB3B0C203D0102000217E1 /* level2.sks */,
 				5FABED8D2905CBAF002EADA3 /* level3.sks */,
-				6F27254F26DAA8D30009B5B5 /* level4.sks */,
+				5FABED8C2905CBAF002EADA3 /* level4.sks */,
 				5FABED8E2905CBAF002EADA3 /* level5.sks */,
 				EA69D55C203FC488008D9359 /* level8.sks */,
 				5FABED8B2905CBAF002EADA3 /* level6.sks */,
-				5FABED8C2905CBAF002EADA3 /* level7.sks */,
+				6F27254F26DAA8D30009B5B5 /* level7.sks */,
 				6F4BB9FF26E83B0300BABA11 /* level9.sks */,
 				5FAA25F52906F6E700DDD813 /* level10.sks */,
 			);
@@ -820,11 +820,11 @@
 				EABB3B0D203D0102000217E1 /* level2.sks in Resources */,
 				5F1476D3291F0BA5007B58F8 /* level92.sks in Resources */,
 				6F4BB9D626E3F3A900BABA11 /* Bip.mp3 in Resources */,
-				5FABED902905CBAF002EADA3 /* level7.sks in Resources */,
+				5FABED902905CBAF002EADA3 /* level4.sks in Resources */,
 				5F4203E0291B34A400F7FF16 /* level73.sks in Resources */,
 				5F1476CC291F0BA5007B58F8 /* level95.sks in Resources */,
 				5FABED9E2905D758002EADA3 /* level51.sks in Resources */,
-				6F27255F26DAA8D30009B5B5 /* level4.sks in Resources */,
+				6F27255F26DAA8D30009B5B5 /* level7.sks in Resources */,
 				6F4BB9D826E3F3A900BABA11 /* Knock.mp3 in Resources */,
 				5F77D8F822E3FED800E8C4F3 /* hexTileSet.sks in Resources */,
 				5F62F0CC29088B5900672C78 /* level72.sks in Resources */,
@@ -1040,7 +1040,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 42;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
@@ -1068,7 +1068,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 42;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";

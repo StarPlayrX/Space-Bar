@@ -15,7 +15,7 @@ extension GameScene {
 
         livesLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
         livesLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-        livesLabel.position = CGPoint(x: centerWidth - 5, y: -centerHeight + labelspace)
+        livesLabel.position = CGPoint(x: centerWidth - 9.5, y: -centerHeight + labelspace)
         livesLabel.zPosition = 50
         livesLabel.numberOfLines = 2
         livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives : 0)

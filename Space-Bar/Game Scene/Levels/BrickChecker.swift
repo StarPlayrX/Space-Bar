@@ -31,7 +31,10 @@ extension GameScene {
                     
                     for whatDaPuck in anchorNode.children {
                          if let name = whatDaPuck.name, name == "extraball" && (settings.currentlevel + 1) % 20 == 0 {
-                             gameLives += 1
+                             
+                             if gameLives >= 5 {
+                                 gameLives += 1
+                             }
                          }
                     }
                 }
