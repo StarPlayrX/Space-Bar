@@ -20,7 +20,6 @@ extension GameScene {
         centerCourtNode.glowWidth = 1.0
         centerCourtNode.alpha = 0.667
         centerCourtNode.fillColor = SKColor.clear
-        //centerCourtNode.size = CGSize(width: 50, height: 50)
         centerCourtNode.position = CGPoint.zero
         anchorNode.addChild(centerCourtNode)
         

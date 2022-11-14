@@ -74,7 +74,7 @@ extension GameScene {
         let negative: CGFloat = swapper ? 1 : -1
         swapper.toggle()
         
-        return CGVector(dx: (initialVelocity + CGFloat(settings.level)) / CGFloat(ratio) * negative, dy: initialVelocity + CGFloat(settings.level))
+        return CGVector(dx: (initialVelocity + CGFloat(settings.currentlevel)) / CGFloat(ratio) * negative, dy: initialVelocity + CGFloat(settings.currentlevel))
     }
     
     func addExtraBall() {
@@ -82,11 +82,11 @@ extension GameScene {
         let extraball = "extraball"
         
         // Ensures no pucks pre-exist
-        for whatDaPuck in anchorNode.children {
-            if let name = whatDaPuck.name, name == extraball {
-                whatDaPuck.removeFromParent()
-            }
-        }
+//        for whatDaPuck in anchorNode.children {
+//            if let name = whatDaPuck.name, name == extraball {
+//                whatDaPuck.removeFromParent()
+//            }
+//        }
         
         //ballNode = nil
         extraNode = SKSpriteNode()

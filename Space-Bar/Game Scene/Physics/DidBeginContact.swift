@@ -101,24 +101,35 @@ extension GameScene {
         case ballCategory | midFieldCategory :
             ballCounter = ballTimeOut
         case ballCategory | goalCategory:
-            ballCounter = ballTimeOut
-            
-            guard let name = firstBody.node?.name else { return }
-            
-            if let a = firstBody.node {
+            if let a = firstBody.node, let name = firstBody.node?.name {
+                a.physicsBody = nil
                 a.removeFromParent()
+
+                if name == "extraball" {
+                    if gameLives > 0 {
+                        return
+                    }
+                }
+            } else {
+                return
             }
             
-            if settings.sound { run(goalSound) }
+            ballCounter = ballTimeOut
             
             if gameLives > 0 {
                 gameLives -= 1
+                if settings.sound { run(goalSound) }
                 let puck = Global.shared.gameBall[settings.puck]
                 livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives - 1 : 0)
             }
             
             if gameLives > 0 && name != "extraball" {
                 addPuck()
+                
+                if (settings.currentlevel + 1) % 20 == 0 {
+                    print("HELLO")
+                    addExtraBall()
+                }
                 return
             }
             

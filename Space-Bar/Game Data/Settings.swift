@@ -22,7 +22,7 @@ struct Settings: Codable {
 var settings = Settings()
 
 struct AppSettings {
-    let spaceBarGameSettings = "JobsWozAtariSpaceBarToddBrussOfficial"
+    let spaceBarGameSettings = "JobsWozAtariSpaceBarToddBrussOfficialRelease"
     func saveUserDefaults() {
       UserDefaults.standard.set(try? PropertyListEncoder().encode(settings), forKey:spaceBarGameSettings)
     }

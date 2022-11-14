@@ -36,12 +36,8 @@ extension GameScene {
         if xPos.indices.contains(settings.currentlevel) {
             x = xPos[settings.currentlevel] * 12.5
         }
-        
-//        space?.position = screenType == .iPad ? CGPoint(x: x, y: centerHeight - 240) : CGPoint(x: x, y: centerHeight - 290)
-//        space?.xScale = screenType == .iPad ? 0.667 : 0.9
-//        space?.yScale = screenType == .iPad ? 0.667 : 0.9
-        
-        space?.position = CGPoint(x: x, y: centerHeight - 290)
+                
+        space?.position = CGPoint(x: x, y: centerHeight - 296)
         space?.xScale = 0.9
         space?.yScale = 0.9
     }

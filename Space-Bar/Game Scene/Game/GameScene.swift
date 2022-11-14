@@ -18,11 +18,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     var ballCounter = 10
     let ballTimeOut = 5
     var timer = Timer()
-    let boost = CGFloat(25)
-    let ratio = CGFloat(1.875)
+    let boost = CGFloat(33)
+    let ratio = CGFloat(1.95)
     let zero = CGFloat(0)
-    var initialVelocity = CGFloat(700)
-    let differentiator = CGFloat(75)
+    var initialVelocity = CGFloat(667)
+    let differentiator = CGFloat(67)
     
     var ballNode    = SKSpriteNode()
     var extraNode   = SKSpriteNode()

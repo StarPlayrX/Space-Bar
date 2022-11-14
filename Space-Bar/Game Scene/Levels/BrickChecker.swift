@@ -16,28 +16,29 @@ extension GameScene {
         
         if resettingGameBoard { return }
         
+        resettingGameBoard = true
+        
+    
+
         // There are two mysterious "bricks" that do not seem to exist
         if let count = space?.children.count, count - 1 <= 0  {
-            
-            bonusLives(minor: true, major: true)
+           
+            for whatDaPuck in anchorNode.children {
+                if let name = whatDaPuck.name, name == "extraball" {
+                    whatDaPuck.removeFromParent()
+                    if gameLives < 5 {
+                        gameLives += 1
+                    }
+                }
+            }
+         
+            bonusLives(minor: false, major: true, large: false)
 
             let a = SKAction.fadeAlpha(to: 0, duration: 0.25)
             let b = SKAction.removeFromParent()
             let c = SKAction.wait(forDuration: 0.5)
             let d = SKAction.run { [unowned self] in
-                if !resettingGameBoard {
-                    resettingGameBoard = true
-                    resetGameBoard(lives: true)
-                    
-                    for whatDaPuck in anchorNode.children {
-                         if let name = whatDaPuck.name, name == "extraball" && (settings.currentlevel + 1) % 20 == 0 {
-                             
-                             if gameLives >= 5 {
-                                 gameLives += 1
-                             }
-                         }
-                    }
-                }
+                resetGameBoard(lives: true)
             }
             
             if let ball = firstBody.node {
@@ -45,6 +46,8 @@ extension GameScene {
             }
             
             run(SKAction.sequence([c,d]))
+        } else {
+            resettingGameBoard = false
         }
     }
 }

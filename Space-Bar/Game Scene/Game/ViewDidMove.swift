@@ -44,7 +44,7 @@ extension GameScene {
         //MARK: - Game Frame
         let frame = CGRect(x: -centerWidth, y: -centerHeight, width: width, height: height)
         
-        bonusLives(minor: true, major: false)
+        bonusLives(minor: true, major: false, large: true)
         drawHUD()
         drawEdgeLoop(frame)
         drawMidCorners()
@@ -56,13 +56,13 @@ extension GameScene {
         getReady()
     }
     
-    func bonusLives(minor: Bool, major: Bool) {
+    func bonusLives(minor: Bool, major: Bool, large: Bool) {
         if gameLives >= 5 {
             return
         }
         
         if (settings.currentlevel + 1) % 20 == 0 {
-            gameLives += 1
+            if large { gameLives += 1 }
         } else if (settings.currentlevel + 1) % 10 == 0 {
             if major { gameLives += 1 }
         } else if (settings.currentlevel + 1) % 5 == 0 {

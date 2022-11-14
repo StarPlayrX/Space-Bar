@@ -29,24 +29,30 @@ extension GameScene {
             let absTotal = abs(x) + abs(y)
             
             if absTotal <= initialVelocity * ratio {
-                booster(body, boost, initialVelocity)
+                booster(body, boost, initialVelocity + CGFloat(settings.currentlevel))
             } else if absTotal > initialVelocity + differentiator {
-                booster(body, -boost, initialVelocity + differentiator)
+                booster(body, -boost, initialVelocity + differentiator + CGFloat(settings.currentlevel))
             }
         }
     }
 
     func booster(_ ballBody: SKPhysicsBody?, _ boost: CGFloat, _ initialVelocity: CGFloat ) {
         guard let ballBody = ballBody else { return }
-        
-        let ratio = 1.875
-        
+                
         if abs(ballBody.velocity.dx) < abs(initialVelocity) {
             ballBody.velocity.dx <= zero ? (ballBody.velocity.dx -= boost) : (ballBody.velocity.dx += boost)
+            
+            if ballBody.velocity.dx > 888 {
+                ballBody.velocity.dx = 888
+            }
         }
         
         if abs(ballBody.velocity.dy) < abs(initialVelocity) {
             ballBody.velocity.dy <= zero ? (ballBody.velocity.dy -= boost * ratio) : (ballBody.velocity.dy += boost * ratio)
+            
+            if ballBody.velocity.dy > 888 {
+                ballBody.velocity.dy = 888
+            }
         }
     }
 }

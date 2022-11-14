@@ -11,7 +11,8 @@ import SpriteKit
 
 extension GameScene {
     func resetGameBoard(lives: Bool) {
-        
+        resettingGameBoard = true
+
         let delay = SKAction.wait(forDuration: 0.5)
         
         let action1 = SKAction.run { [self] in
@@ -32,8 +33,8 @@ extension GameScene {
         
             let bonus = bonusRound()
     
-            bonusLives(minor: true, major: false)
-            
+            bonusLives(minor: true, major: false, large: true)
+
             let puck = Global.shared.gameBall[settings.puck]
             livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives : 0)
             levelLabel.text = String(settings.currentlevel + 1)
@@ -81,13 +82,13 @@ extension GameScene {
                     }
                 }
                 getPuck()
+                resettingGameBoard = false
             }
             run(SKAction.sequence([delay,levelUp,delay,getReadyFade,delay,startLevel]))
         }
         let seq = SKAction.sequence([action1,delay,action2])
         scene?.run(seq)
         
-        resettingGameBoard = false
     }
     
     func bonusRound() -> String {

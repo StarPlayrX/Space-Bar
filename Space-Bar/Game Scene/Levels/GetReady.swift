@@ -43,8 +43,9 @@ extension GameScene {
         
         let startGame = SKAction.run { [unowned self] in
             addPuck()
+            
             livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives - 1 : 0)
-
+            
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 self.ballCounter -= 1
                 
