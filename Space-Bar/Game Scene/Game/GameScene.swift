@@ -21,7 +21,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     let boost = CGFloat(25)
     let ratio = CGFloat(2)
     let zero = CGFloat(0)
-    var initialVelocity = CGFloat(625)
+    var initialVelocity = CGFloat(600)
     var ballNode    = SKSpriteNode()
     var extraNode   = SKSpriteNode()
     var tennisNode  = SKSpriteNode()
@@ -38,6 +38,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     var bricksChecksum = 0
     var bricksChecksumPrev = 1
     var swapper = false
+    var swapper2 = false
+    var swapper3 = false
     var paddleNode =  SKSpriteNode() //available to the entire class
     
     //Categories

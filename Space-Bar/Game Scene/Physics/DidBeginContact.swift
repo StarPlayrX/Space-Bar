@@ -13,7 +13,9 @@ extension GameScene {
     func didBegin(_ contact: SKPhysicsContact) {
         guard
             let _ = contact.bodyA.node,
-            let _ = contact.bodyB.node
+            let _ = contact.bodyB.node,
+            let name1 = contact.bodyA.node?.name,
+            let name2 = contact.bodyA.node?.name
         else {
             return
         }
@@ -28,17 +30,16 @@ extension GameScene {
         }
         
         let catMask = firstBody.categoryBitMask | secondBody.categoryBitMask
-        swapper.toggle()
-        let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(swapper ? 1 : -1), duration: 4)
         
-        let rotationTestA = firstBody.node?.name == "ball" || firstBody.node?.name == "extraball" || firstBody.node?.name == "fireball"
-        let rotationTestB = secondBody.node?.name == "ball" || secondBody.node?.name == "extraball" || secondBody.node?.name == "fireball"
-
-        if rotationTestA {
+        if name1.contains("ball") {
+            swapper2.toggle()
+            let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(swapper2 ? 1 : -1), duration: 2)
             firstBody.node?.run(rotateAction)
         }
 
-        if rotationTestB {
+        if name2.contains("ball") {
+            swapper3.toggle()
+            let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(swapper3 ? 1 : -1), duration: 2)
             secondBody.node?.run(rotateAction)
         }
     
@@ -77,30 +78,13 @@ extension GameScene {
             }
             
         case powerCategory | wallCategory, ballCategory | wallCategory:
-            guard
-                let ballNode = firstBody.node,
-                let x = ballNode.physicsBody?.velocity.dx,
-                let y = ballNode.physicsBody?.velocity.dy,
-                let body = ballNode.physicsBody
-            else {
-                return
-            }
-            
-            if settings.sound && ballNode.name == "ball" || ballNode.name == "extraball" { run(wallSound) }
-            
-            if ballNode.name != "fireball" || ballNode.name != "ball" || ballNode.name != "extraball" { return }
-                        
-            let absTotal = abs(x) + abs(y)
-            
-            if absTotal <= initialVelocity * ratio {
-                booster(body, boost, initialVelocity)
-            } 
-            
+            if settings.sound { run(wallSound) }            
         case ballCategory | midFieldCategory :
             ballCounter = ballTimeOut
         case ballCategory | goalCategory:
             if let a = firstBody.node, let name = firstBody.node?.name {
                 a.physicsBody = nil
+                a.name = ""
                 a.removeFromParent()
 
                 if name == "extraball" {

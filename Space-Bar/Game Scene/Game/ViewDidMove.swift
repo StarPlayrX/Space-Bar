@@ -15,8 +15,8 @@ extension GameScene {
         drawParallax()
         
         //setup physicsWorld
-        physicsWorld.gravity.dx =  0.05
-        physicsWorld.gravity.dy =  0.1
+        physicsWorld.gravity.dx = 0
+        physicsWorld.gravity.dy = 0
         physicsWorld.contactDelegate = self
         
         screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)

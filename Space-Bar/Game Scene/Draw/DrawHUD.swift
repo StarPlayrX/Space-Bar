@@ -36,7 +36,7 @@ extension GameScene {
         
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-        scoreLabel.fontColor = .systemBlue
+        scoreLabel.fontColor = .white
         scoreLabel.blendMode = .multiplyX2
         scoreLabel.position = CGPoint(x: centerWidth - 20, y: centerHeight - labelspace)
         scoreLabel.zPosition = 50
