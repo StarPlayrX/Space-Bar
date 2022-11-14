@@ -15,7 +15,7 @@ extension GameScene {
 
         livesLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
         livesLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-        livesLabel.position = CGPoint(x: centerWidth, y: centerHeight - labelspace)
+        livesLabel.position = CGPoint(x: centerWidth - 5, y: -centerHeight + labelspace)
         livesLabel.zPosition = 50
         livesLabel.numberOfLines = 2
         livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives : 0)
@@ -34,14 +34,15 @@ extension GameScene {
         levelLabel.alpha = 0.667
         anchorNode.addChild(levelLabel)
         
-        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
-        scoreLabel.fontColor = .systemBlue
-        scoreLabel.position = CGPoint(x: 0, y: centerHeight - labelspace)
+        scoreLabel.fontColor = .white
+        scoreLabel.blendMode = .multiplyX2
+        scoreLabel.position = CGPoint(x: centerWidth - 20, y: centerHeight - labelspace)
         scoreLabel.zPosition = 50
         scoreLabel.text = String(gameScore)
         scoreLabel.fontSize = 36
-        scoreLabel.alpha = 0.667
+        scoreLabel.alpha = 0.90
         anchorNode.addChild(scoreLabel)
     }
 }

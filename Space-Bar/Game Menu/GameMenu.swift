@@ -163,13 +163,13 @@ class GameMenu: SKScene {
             let label = SKLabelNode(fontNamed: "HelveticaNeue")
             label.fontColor = UIColor.white
             label.name = "copyright"
-            label.fontSize = 27.5
+            label.fontSize = 30
             label.horizontalAlignmentMode = .center
             label.verticalAlignmentMode = .center
             label.position = pos
             label.position.y -= 90
             label.alpha = 0.5
-            label.text = "1.0 © 2022 StarPlayrX, Created by Todd Bruss"
+            label.text = "© 2022 by Todd Bruss, all rights reserved"
             scene?.addChild(label)
         }
        

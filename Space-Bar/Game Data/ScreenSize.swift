@@ -26,23 +26,25 @@ struct ScreenSize {
     func setSceneSizeForGame(scene:SKScene, size: CGSize) -> ScreenType {
         var screenType = ScreenType.iPhone
         let ratio = round((size.width / size.height ) * 10)
-
+        let height = CGFloat(1300)
+        let width = CGFloat(1300 * 0.50)
+       
+        print("ratio", ratio)
+        print("size.height", size.height)
         if ratio == 8.0 {
             screenType = .iPad
-            scene.size = CGSize(width: 667.0 * 2.0 * 0.60, height: 667.0 * 2.0)
         } else if ratio == 7.0 {
             screenType = .iPad
-            scene.size = CGSize(width: 667.0 * 2.0 * 0.60, height: 667.0 * 2.0)
         } else if ratio == 6.0 {
             screenType = .iPhone
-            scene.size = CGSize(width: 667.0 * 2.0 * 0.60, height: 667.0 * 2.0)
         } else if ratio == 5.0 {
             screenType = .iPhoneProMax
-            scene.size = CGSize(width: 1300 * 0.50, height: 1300)
         } else {
             screenType = .iAny
-            scene.size = CGSize(width: 1300 * 0.50, height: 1300)
         }
+        
+        //Settings on a one size fits all otherwise it throws of the screen ratio in the game.
+        scene.size = CGSize(width: width, height: height)
         
         return screenType
     }
