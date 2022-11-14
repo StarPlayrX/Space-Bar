@@ -29,8 +29,6 @@ struct ScreenSize {
         let height = CGFloat(1300)
         let width = CGFloat(1300 * 0.50)
        
-        print("ratio", ratio)
-        print("size.height", size.height)
         if ratio == 8.0 {
             screenType = .iPad
         } else if ratio == 7.0 {
@@ -43,7 +41,7 @@ struct ScreenSize {
             screenType = .iAny
         }
         
-        //Settings on a one size fits all otherwise it throws of the screen ratio in the game.
+        //Settling on a one size fits all otherwise it throws of the screen ratio in the game.
         scene.size = CGSize(width: width, height: height)
         
         return screenType
