@@ -103,6 +103,7 @@
 		5FB569882908AAEB0056FCD0 /* level68.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FB569852908AAEB0056FCD0 /* level68.sks */; };
 		5FB569892908AAEB0056FCD0 /* level69.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FB569862908AAEB0056FCD0 /* level69.sks */; };
 		5FB5698A2908AAEB0056FCD0 /* level70.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FB569872908AAEB0056FCD0 /* level70.sks */; };
+		5FCA9D8C29234AE900DB4B9B /* UpdateScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCA9D8B29234AE900DB4B9B /* UpdateScene.swift */; };
 		5FCEE07F2313415E0002A5CF /* GameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCEE07E2313415E0002A5CF /* GameMenu.swift */; };
 		5FCEE081231341680002A5CF /* GameMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FCEE080231341680002A5CF /* GameMenu.sks */; };
 		5FE5CD6D290A1EDA00BD4B68 /* level63.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FE5CD6C290A1EDA00BD4B68 /* level63.sks */; };
@@ -251,6 +252,7 @@
 		5FB569862908AAEB0056FCD0 /* level69.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level69.sks; sourceTree = "<group>"; };
 		5FB569872908AAEB0056FCD0 /* level70.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level70.sks; sourceTree = "<group>"; };
 		5FC5E32722E40F1F00E1159A /* Space-Bar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Space-Bar.entitlements"; sourceTree = "<group>"; };
+		5FCA9D8B29234AE900DB4B9B /* UpdateScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateScene.swift; sourceTree = "<group>"; };
 		5FCEE07E2313415E0002A5CF /* GameMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
 		5FCEE080231341680002A5CF /* GameMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameMenu.sks; sourceTree = "<group>"; };
 		5FE5CD6C290A1EDA00BD4B68 /* level63.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = level63.sks; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				5F4203AA2919877800F7FF16 /* DidBeginContact.swift */,
+				5FCA9D8B29234AE900DB4B9B /* UpdateScene.swift */,
 				5F4203B4291988A600F7FF16 /* SetHighScore.swift */,
 			);
 			path = Physics;
@@ -875,6 +878,7 @@
 				5F42039B291983EB00F7FF16 /* ViewDidMove.swift in Sources */,
 				5F77D8DF22E3FCF900E8C4F3 /* GameViewController.swift in Sources */,
 				5F4203B32919887500F7FF16 /* TileMapRun.swift in Sources */,
+				5FCA9D8C29234AE900DB4B9B /* UpdateScene.swift in Sources */,
 				6FA1ABBD26E99AE5003CBD2D /* LevelPosition.swift in Sources */,
 				5F4203C5291A9ADE00F7FF16 /* GetReady.swift in Sources */,
 				5FCEE07F2313415E0002A5CF /* GameMenu.swift in Sources */,
@@ -1036,7 +1040,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 64;
+				CURRENT_PROJECT_VERSION = 68;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
@@ -1064,7 +1068,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 64;
+				CURRENT_PROJECT_VERSION = 68;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
