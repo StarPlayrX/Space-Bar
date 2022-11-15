@@ -18,10 +18,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     var ballCounter = 10
     let ballTimeOut = 5
     var timer = Timer()
-    let boost = CGFloat(25)
     let ratio = CGFloat(2)
     let zero = CGFloat(0)
-    var initialVelocity = CGFloat(600)
+    var velocity = CGFloat(800)
     var ballNode    = SKSpriteNode()
     var extraNode   = SKSpriteNode()
     var tennisNode  = SKSpriteNode()
@@ -51,6 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     let wallCategory     : UInt32 = 64
     let goalCategory     : UInt32 = 128
     let midFieldCategory : UInt32 = 256
+    let middieCategory   : UInt32 = 512
 
     var space : SKReferenceNode? = nil
     

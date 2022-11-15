@@ -76,7 +76,7 @@ extension GameScene {
         goalNode.physicsBody?.categoryBitMask = goalCategory
         goalNode.position = CGPoint(x:0,y:-centerHeight + 2)
         goalNode.size = goalNodeSize
-        goalNode.physicsBody?.restitution = 0.25
+        goalNode.physicsBody?.restitution = 1.0
         goalNode.name = "goal"
         goalNode.alpha = 0.667
         anchorNode.addChild(goalNode)

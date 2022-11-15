@@ -37,7 +37,6 @@
 		5F4203A7291986C900F7FF16 /* CocoaTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203A6291986C900F7FF16 /* CocoaTouch.swift */; };
 		5F4203A92919870500F7FF16 /* ResetGameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203A82919870500F7FF16 /* ResetGameBoard.swift */; };
 		5F4203AB2919877800F7FF16 /* DidBeginContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203AA2919877800F7FF16 /* DidBeginContact.swift */; };
-		5F4203AD291987C400F7FF16 /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203AC291987C400F7FF16 /* Update.swift */; };
 		5F4203AF2919881300F7FF16 /* BrickChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203AE2919881300F7FF16 /* BrickChecker.swift */; };
 		5F4203B12919885A00F7FF16 /* RemovePowerBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203B02919885A00F7FF16 /* RemovePowerBall.swift */; };
 		5F4203B32919887500F7FF16 /* TileMapRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4203B22919887500F7FF16 /* TileMapRun.swift */; };
@@ -184,7 +183,6 @@
 		5F4203A6291986C900F7FF16 /* CocoaTouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaTouch.swift; sourceTree = "<group>"; };
 		5F4203A82919870500F7FF16 /* ResetGameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetGameBoard.swift; sourceTree = "<group>"; };
 		5F4203AA2919877800F7FF16 /* DidBeginContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidBeginContact.swift; sourceTree = "<group>"; };
-		5F4203AC291987C400F7FF16 /* Update.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
 		5F4203AE2919881300F7FF16 /* BrickChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrickChecker.swift; sourceTree = "<group>"; };
 		5F4203B02919885A00F7FF16 /* RemovePowerBall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemovePowerBall.swift; sourceTree = "<group>"; };
 		5F4203B22919887500F7FF16 /* TileMapRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileMapRun.swift; sourceTree = "<group>"; };
@@ -345,7 +343,6 @@
 		5F4203C8291B12EB00F7FF16 /* Physics */ = {
 			isa = PBXGroup;
 			children = (
-				5F4203AC291987C400F7FF16 /* Update.swift */,
 				5F4203AA2919877800F7FF16 /* DidBeginContact.swift */,
 				5F4203B4291988A600F7FF16 /* SetHighScore.swift */,
 			);
@@ -872,7 +869,6 @@
 				5F42039F2919857000F7FF16 /* DrawParallax.swift in Sources */,
 				5F971A9D2908B70D007895AC /* Speech.swift in Sources */,
 				6F27256D26DC41240009B5B5 /* Settings.swift in Sources */,
-				5F4203AD291987C400F7FF16 /* Update.swift in Sources */,
 				5F4203A7291986C900F7FF16 /* CocoaTouch.swift in Sources */,
 				5F4203AF2919881300F7FF16 /* BrickChecker.swift in Sources */,
 				6F55698626D1F9300060D0E7 /* ScreenSize.swift in Sources */,
@@ -1040,7 +1036,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 56;
+				CURRENT_PROJECT_VERSION = 64;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
@@ -1068,7 +1064,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 56;
+				CURRENT_PROJECT_VERSION = 64;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";

@@ -44,43 +44,28 @@ extension GameScene {
         }
     
         switch catMask {
-            
-        case fireBallCategory | brickCategory :
+        
+        case powerCategory | wallCategory, ballCategory | wallCategory:
+            if settings.sound { run(wallSound) }
+        case ballCategory | midFieldCategory :
+            ballCounter = ballTimeOut
+        case powerCategory | brickCategory,  fireBallCategory | brickCategory:
             if settings.sound { run(brickSound) }
             gameScore += 1
-            
             scoreLabel.text = String(gameScore)
-           
             if let a = secondBody.node {
                 a.removeFromParent()
                 checker(firstBody)
             }
-            
         case ballCategory | brickCategory :
             ballCounter = ballTimeOut
             if settings.sound { run(brickSound) }
             gameScore += 1
-            
             scoreLabel.text = String(gameScore)
             if let a = secondBody.node {
                 a.removeFromParent()
                 checker(firstBody)
             }
-  
-        case powerCategory | brickCategory :
-            if settings.sound { run(brickSound) }
-            gameScore += 1
-            
-            scoreLabel.text = String(gameScore)
-            if let a = secondBody.node {
-                a.removeFromParent()
-                checker(firstBody)
-            }
-            
-        case powerCategory | wallCategory, ballCategory | wallCategory:
-            if settings.sound { run(wallSound) }            
-        case ballCategory | midFieldCategory :
-            ballCounter = ballTimeOut
         case ballCategory | goalCategory:
             if let a = firstBody.node, let name = firstBody.node?.name {
                 a.physicsBody = nil
@@ -169,7 +154,6 @@ extension GameScene {
                 let seq = SKAction.sequence([action2, action1, action3])
                 scene?.run(seq)
             }
-            
         case powerCategory | paddleCategory:
             if settings.sound { run(paddleSound) }
             scoreLabel.text = String(gameScore)
@@ -178,6 +162,13 @@ extension GameScene {
             ballCounter = ballTimeOut
             if settings.sound { run(paddleSound) }
             scoreLabel.text = String(gameScore)
+            
+            if let b = secondBody.node {
+
+                let dy = CGFloat.random(in:  0...1)
+
+                b.physicsBody?.applyImpulse(CGVector(dx: 0, dy: dy))
+            }
         default:
             break
         }

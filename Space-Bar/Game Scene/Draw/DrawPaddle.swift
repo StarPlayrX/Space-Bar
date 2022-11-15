@@ -25,13 +25,14 @@ extension GameScene {
         paddle.physicsBody?.isDynamic = false
         paddle.physicsBody?.fieldBitMask = 0
         paddle.physicsBody?.affectedByGravity = false
-        paddle.physicsBody?.mass = 1
+        paddle.physicsBody?.mass = 2
+        paddle.physicsBody?.restitution = 1.0
+
         paddle.physicsBody?.contactTestBitMask = ballCategory
         paddle.physicsBody?.categoryBitMask = paddleCategory
         paddle.physicsBody?.collisionBitMask = ballCategory
         paddle.position = CGPoint(x:frame.width / 2,y:frame.height / paddleHeight)
         paddle.size = CGSize(width: paddleTexture.size().width, height: paddleTexture.size().height)
-        paddle.physicsBody?.restitution = 1.0
         paddle.name = "paddle"
         paddleNode = paddle
         scene?.addChild(paddle)

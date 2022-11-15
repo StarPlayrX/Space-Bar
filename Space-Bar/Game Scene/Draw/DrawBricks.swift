@@ -37,18 +37,18 @@ extension GameScene {
         }
         
         BricksNode.zPosition = 50
-        BricksNode.physicsBody?.restitution = 1.0
+        BricksNode.physicsBody?.restitution = 0.25
         BricksNode.physicsBody?.categoryBitMask = brickCategory
-        BricksNode.physicsBody?.collisionBitMask = ballCategory + powerCategory
-        BricksNode.physicsBody?.fieldBitMask = ballCategory + powerCategory
-        BricksNode.physicsBody?.contactTestBitMask = ballCategory + powerCategory
+        BricksNode.physicsBody?.collisionBitMask = ballCategory + powerCategory + fireBallCategory
+        BricksNode.physicsBody?.fieldBitMask = ballCategory + powerCategory + fireBallCategory
+        BricksNode.physicsBody?.contactTestBitMask = ballCategory + powerCategory + fireBallCategory
         BricksNode.physicsBody?.allowsRotation = false
         BricksNode.physicsBody?.affectedByGravity = false
         BricksNode.physicsBody?.isDynamic = false
         BricksNode.physicsBody?.pinned = false
         BricksNode.physicsBody?.isResting = false
         BricksNode.physicsBody?.friction = 0.0
-        BricksNode.physicsBody?.mass = 1.0
+        BricksNode.physicsBody?.mass = 0.5
         BricksNode.name = "brick"
         BricksNode.position = center
         

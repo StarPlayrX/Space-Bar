@@ -18,6 +18,8 @@ extension GameScene {
         centerCourtNode.lineWidth = 3.0
         centerCourtNode.glowWidth = 1.0
         centerCourtNode.alpha = 0.667
+        centerCourtNode.name = "centercircle"
+
         centerCourtNode.fillColor = SKColor.clear
         centerCourtNode.position = CGPoint.zero
         anchorNode.addChild(centerCourtNode)
@@ -28,6 +30,7 @@ extension GameScene {
         let centerLineBody = SKPhysicsBody(rectangleOf: centerCourtLineSize)
         centerCourtLineNode.color = .systemRed
         centerCourtLineNode.alpha = 0.667
+        centerCourtLineNode.name = "centercourt"
         centerCourtLineNode.physicsBody = centerLineBody
         centerCourtLineNode.physicsBody?.contactTestBitMask = ballCategory
         centerCourtLineNode.physicsBody?.categoryBitMask = midFieldCategory

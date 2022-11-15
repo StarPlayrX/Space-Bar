@@ -74,7 +74,7 @@ extension GameScene {
         let negative: CGFloat = swapper ? 1 : -1
         swapper.toggle()
         
-        return CGVector(dx: (initialVelocity + CGFloat(settings.currentlevel)) / CGFloat(ratio) * negative, dy: initialVelocity + CGFloat(settings.currentlevel))
+        return CGVector(dx: (velocity + CGFloat(settings.currentlevel) / 50) / CGFloat(ratio) * negative, dy: velocity + CGFloat(settings.currentlevel) / 25)
     }
     
     func addExtraBall() {
@@ -111,12 +111,8 @@ extension GameScene {
         }
         
         extraNode.physicsBody?.categoryBitMask = ballCategory
-        extraNode.physicsBody?.contactTestBitMask =
-        paddleCategory + wallCategory + goalCategory
-        
-        extraNode.physicsBody?.collisionBitMask =
-        paddleCategory + brickCategory + wallCategory
-        
+        extraNode.physicsBody?.contactTestBitMask = paddleCategory + wallCategory + goalCategory
+        extraNode.physicsBody?.collisionBitMask = paddleCategory + brickCategory + wallCategory
         extraNode.zPosition = 50
         extraNode.physicsBody?.affectedByGravity = true
         extraNode.physicsBody?.isDynamic = true
@@ -125,6 +121,7 @@ extension GameScene {
         extraNode.physicsBody?.linearDamping = 0
         extraNode.physicsBody?.angularDamping = 0
         extraNode.physicsBody?.restitution = 1.0
+
         extraNode.physicsBody?.mass = 1.0
         extraNode.physicsBody?.fieldBitMask = 0
         extraNode.name = extraball

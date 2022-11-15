@@ -110,14 +110,16 @@ extension GameScene {
         fireBallNode.speed = CGFloat(1.0)
         fireBallNode.alpha = 0.85
         fireBallNode.blendMode = .multiply
-        fireBallNode.physicsBody?.velocity = CGVector(dx: 0, dy: (initialVelocity + CGFloat(settings.level)) + (boost * 5))
+        
+        let fireRnd = Int.random(in: -1...1)
+        fireBallNode.physicsBody?.velocity = CGVector(dx: 50 * CGFloat(fireRnd), dy: (velocity + CGFloat(settings.level)) + (50 * 7))
         
         let copy = fireBallNode.copy() as! SKSpriteNode
         scene?.addChild(copy)
         
         //let remove = SKAction.removeFromParent()
-        let wait = SKAction.wait(forDuration: TimeInterval(1.5 + Double(settings.level / 100)))
-        let live = SKAction.wait(forDuration: TimeInterval(2.5 - Double(settings.level / 100)))
+        let half = SKAction.wait(forDuration: TimeInterval(1.5 / 2 - Double(settings.level / 200)))
+        let life = SKAction.wait(forDuration: TimeInterval(1.5 - Double(settings.level / 200)))
 
         let fade = SKAction.fadeOut(withDuration: 1.0)
         let rmfp = SKAction.removeFromParent()
@@ -126,7 +128,7 @@ extension GameScene {
             self.shootFireBalls()
         }
 
-        let seq = SKAction.sequence([wait,code,live,fade,rmfp])
+        let seq = SKAction.sequence([half,code,life,fade,rmfp])
         copy.run(seq)
     }
     

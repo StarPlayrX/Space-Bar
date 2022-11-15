@@ -31,13 +31,12 @@ extension GameScene {
         levelLabel.text = String(settings.currentlevel + 1)
         levelLabel.fontSize = 36
         levelLabel.fontColor = .systemRed
-        levelLabel.alpha = 0.90
+        levelLabel.alpha = 0.75
         anchorNode.addChild(levelLabel)
         
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
         scoreLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         scoreLabel.fontColor = .white
-        scoreLabel.blendMode = .multiplyX2
         scoreLabel.position = CGPoint(x: centerWidth - 20, y: centerHeight - labelspace)
         scoreLabel.zPosition = 50
         scoreLabel.text = String(gameScore)
