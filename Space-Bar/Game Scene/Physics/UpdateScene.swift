@@ -16,11 +16,11 @@ extension GameScene {
         var nodes = [ballNode] //Can be expanded to other balls
         
         if (settings.currentlevel + 1) % 20 == 0 {
-            nodes = [extraNode, ballNode]
+            nodes = [ballNode, extraNode]
         } else if (settings.currentlevel + 1) % 10 == 0 {
             nodes = [ballNode]
         } else if (settings.currentlevel + 1) % 5 == 0 {
-            nodes = [tennisNode, ballNode]
+            nodes = [ballNode, tennisNode]
         }
         
         for node in nodes {
