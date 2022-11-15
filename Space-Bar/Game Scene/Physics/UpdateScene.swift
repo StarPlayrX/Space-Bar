@@ -30,27 +30,30 @@ extension GameScene {
                 return
             }
             
+            let minSpeed = CGFloat(99)
+            let maxSpeed = CGFloat(1299)
+            
             let level = CGFloat(settings.currentlevel + 1)
             let half  = CGFloat(settings.currentlevel + 1) / 2
             let quart = CGFloat(settings.currentlevel + 1) / 4
 
             //MARK: Min Speed dy (Thrust)
-            if abs(body.velocity.dy) < CGFloat(99 + half) {
+            if abs(body.velocity.dy) < CGFloat(minSpeed + half) {
                 body.velocity.dy <= zero ? body.applyImpulse(CGVector(dx: 0, dy: -25)) : body.applyImpulse(CGVector(dx: 0, dy: 25))
             }
             
             //MARK: Min Speed dx (Thrust)
-            if abs(body.velocity.dx) < CGFloat(99 + quart) {
+            if abs(body.velocity.dx) < CGFloat(minSpeed + quart) {
                 body.velocity.dx <= zero ? body.applyImpulse(CGVector(dx: -12.5, dy: 0)) : body.applyImpulse(CGVector(dx: 12.5, dy: 0))
             }
             
             //MARK: Max Speed dy (Breaks)
-            if abs(body.velocity.dy) > CGFloat(1199 + level) {
+            if abs(body.velocity.dy) > CGFloat(maxSpeed + level) {
                 body.velocity.dy <= zero ? body.applyImpulse(CGVector(dx: 0, dy: 12.5)) : body.applyImpulse(CGVector(dx: 0, dy: -12.5))
             }
             
             //MARK: Max Speed dx (Breaks)
-            if abs(body.velocity.dx) > CGFloat(1199 + half) {
+            if abs(body.velocity.dx) > CGFloat(maxSpeed + half) {
                 body.velocity.dx <= zero ? body.applyImpulse(CGVector(dx: 25, dy: 0)) : body.applyImpulse(CGVector(dx: -25, dy: 0))
             }
         }
