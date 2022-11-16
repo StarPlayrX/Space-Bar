@@ -99,8 +99,8 @@ extension GameScene {
         fireBallNode.physicsBody?.isDynamic = true
         fireBallNode.physicsBody?.allowsRotation = true
         fireBallNode.physicsBody?.friction = 0
-        fireBallNode.physicsBody?.linearDamping = 0.001
-        fireBallNode.physicsBody?.angularDamping = 0.001
+        fireBallNode.physicsBody?.linearDamping = 0
+        fireBallNode.physicsBody?.angularDamping = 0
         fireBallNode.physicsBody?.restitution = 1.0
         fireBallNode.physicsBody?.mass = 0.9
         fireBallNode.physicsBody?.fieldBitMask = 0

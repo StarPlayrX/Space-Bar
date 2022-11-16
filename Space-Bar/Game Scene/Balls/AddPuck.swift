@@ -53,7 +53,7 @@ extension GameScene {
         paddleCategory + brickCategory + wallCategory
         
         ballNode.zPosition = 50
-        ballNode.physicsBody?.affectedByGravity = true
+        ballNode.physicsBody?.affectedByGravity = false
         ballNode.physicsBody?.isDynamic = true
         ballNode.physicsBody?.allowsRotation = true
         ballNode.physicsBody?.friction = 0
@@ -114,7 +114,7 @@ extension GameScene {
         extraNode.physicsBody?.contactTestBitMask = paddleCategory + wallCategory + goalCategory
         extraNode.physicsBody?.collisionBitMask = paddleCategory + brickCategory + wallCategory
         extraNode.zPosition = 50
-        extraNode.physicsBody?.affectedByGravity = true
+        extraNode.physicsBody?.affectedByGravity = false
         extraNode.physicsBody?.isDynamic = true
         extraNode.physicsBody?.allowsRotation = true
         extraNode.physicsBody?.friction = 0

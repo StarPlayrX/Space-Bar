@@ -513,8 +513,6 @@
 				5F4203DE291B34A400F7FF16 /* level78.sks */,
 				5F62F0CD29088FD300672C78 /* level79.sks */,
 				5F4203E2291B34E400F7FF16 /* level80.sks */,
-				5F9BB57D291F17C800C836CA /* Levels 81-90 */,
-				5F9BB57E291F17D700C836CA /* 91-100 */,
 			);
 			name = "Levels 71-80";
 			sourceTree = "<group>";
@@ -594,7 +592,7 @@
 			name = "Levels 81-90";
 			sourceTree = "<group>";
 		};
-		5F9BB57E291F17D700C836CA /* 91-100 */ = {
+		5F9BB57E291F17D700C836CA /* Levels 91-100 */ = {
 			isa = PBXGroup;
 			children = (
 				5F1476C5291F0BA5007B58F8 /* level91.sks */,
@@ -608,7 +606,7 @@
 				5F1476C2291F0BA5007B58F8 /* level99.sks */,
 				5F1476BA291F0BA5007B58F8 /* level100.sks */,
 			);
-			name = "91-100";
+			name = "Levels 91-100";
 			sourceTree = "<group>";
 		};
 		5FCEE07D2313413D0002A5CF /* Game Menu */ = {
@@ -671,8 +669,6 @@
 		EAFBF6DF203663520086084A /* Game Levels */ = {
 			isa = PBXGroup;
 			children = (
-				5F77D8F722E3FED800E8C4F3 /* hexTileSet.sks */,
-				6FE658D826F6826800B28192 /* gridTileSet.sks */,
 				5F4203CC291B23AF00F7FF16 /* Levels 01-10 */,
 				5F4203CD291B23BA00F7FF16 /* Levels 11-20 */,
 				5F4203CE291B23DC00F7FF16 /* Levels 21-30 */,
@@ -681,6 +677,10 @@
 				5F4203D1291B241200F7FF16 /* Levels 51-60 */,
 				5F4203D2291B242300F7FF16 /* Levels 61-70 */,
 				5F4203D3291B243100F7FF16 /* Levels 71-80 */,
+				5F9BB57D291F17C800C836CA /* Levels 81-90 */,
+				5F9BB57E291F17D700C836CA /* Levels 91-100 */,
+				5F77D8F722E3FED800E8C4F3 /* hexTileSet.sks */,
+				6FE658D826F6826800B28192 /* gridTileSet.sks */,
 			);
 			name = "Game Levels";
 			sourceTree = "<group>";
@@ -1040,7 +1040,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 72;
+				CURRENT_PROJECT_VERSION = 73;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
@@ -1068,7 +1068,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 72;
+				CURRENT_PROJECT_VERSION = 73;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";

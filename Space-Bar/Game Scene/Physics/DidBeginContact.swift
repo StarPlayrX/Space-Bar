@@ -49,7 +49,21 @@ extension GameScene {
             if settings.sound { run(wallSound) }
         case ballCategory | midFieldCategory :
             ballCounter = ballTimeOut
-        case powerCategory | brickCategory,  fireBallCategory | brickCategory:
+        case fireBallCategory | brickCategory:
+            if settings.sound { run(brickSound) }
+            gameScore += 1
+            scoreLabel.text = String(gameScore)
+            if let a = secondBody.node {
+                a.removeFromParent()
+                checker(firstBody)
+            }
+            
+            if let b = firstBody.node {
+                b.removeFromParent()
+                checker(firstBody)
+                shootFireBalls()
+            }
+        case powerCategory | brickCategory:
             if settings.sound { run(brickSound) }
             gameScore += 1
             scoreLabel.text = String(gameScore)
