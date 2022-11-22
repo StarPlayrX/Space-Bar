@@ -35,5 +35,4 @@ struct Global {
                   "🥳", "😜", "🥰", "😃", //100
                   ]
     var initialScreenSize: CGSize?
-
 }

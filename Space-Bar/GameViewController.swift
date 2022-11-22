@@ -1,5 +1,69 @@
 //
 //  GameViewController.swift
+//  Space-Bar
+//
+//  Created by Todd Bruss on 11/21/22.
+//
+
+//import UIKit
+//import SpriteKit
+//import GameplayKit
+//
+//var initialScreenSize = CGSize()
+//
+//class GameViewController: UIViewController {
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        if let view = self.view as! SKView? {
+//            // Load the SKScene from 'GameScene.sks'
+//            if let scene = SKScene(fileNamed: "GameMenu") {
+//                // Present the scene
+//                scene.scaleMode = .aspectFit
+//                view.ignoresSiblingOrder = true
+//                view.showsFields = false
+//                view.showsPhysics = false
+//                view.isAsynchronous = true
+//                view.isMultipleTouchEnabled = false
+//                view.isOpaque = true
+//                view.allowsTransparency = false
+//                view.showsFPS = false
+//
+//                view.showsNodeCount = false
+//                //view.preferredFramesPerSecond = 30
+//
+//                view.presentScene(scene, transition: SKTransition.fade(withDuration: 2.0))
+//            }
+//
+////            view.ignoresSiblingOrder = true
+////
+////            view.showsFPS = true
+////            view.showsNodeCount = true
+//        }
+//    }
+//
+////    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+////        if UIDevice.current.userInterfaceIdiom == .phone {
+////            return [.portrait, .allButUpsideDown]
+////        } else if UIDevice.current.userInterfaceIdiom == .pad {
+////            return [.portrait, .allButUpsideDown]
+////        }
+////
+////        return [.portrait]
+////
+////    }
+//
+//    override var prefersStatusBarHidden: Bool {
+//        return true
+//    }
+//}
+
+
+
+
+//
+//  GameViewController.swift
 //  Space Bar
 //
 //  Created by Todd Bruss on 10/5/22.
@@ -60,7 +124,6 @@ class GameViewController: UIViewController {
         }
         
         try? audioSession.setActive(true)
-
     }
 
     override var shouldAutorotate: Bool {
