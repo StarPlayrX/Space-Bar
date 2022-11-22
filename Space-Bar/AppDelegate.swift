@@ -28,9 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
               
               
  
-              let heightB = (windowScene.screen.nativeBounds.height + yCoverMacOS ) / 2 - 2
+              let heightB = (windowScene.screen.nativeBounds.height + yCoverMacOS ) / 1.8 - 2
               
-              let heightC = (windowScene.screen.nativeBounds.height + yCoverMacOS / 2 ) / 2
+              let heightC = (windowScene.screen.nativeBounds.height + yCoverMacOS / 2 ) / 1.8
 
               let width = heightC / 2
               windowScene.sizeRestrictions?.minimumSize = CGSize(width: width, height: heightB)
