@@ -11,6 +11,7 @@ import SpriteKit
 
 extension GameScene {
     override func didMove(to view: SKView) {
+        
         speed = 1.0
         drawParallax()
         
@@ -23,7 +24,7 @@ extension GameScene {
         
         guard
             let w = scene?.size.width,
-            let h = scene?.size.height
+            case let h = (scene?.size.height ?? 0) - yCoverMacOS
         else {
             return
         }
@@ -54,6 +55,7 @@ extension GameScene {
         drawPaddle()
         drawLevel()
         getReady()
+        
     }
     
     func bonusLives(minor: Bool, major: Bool, large: Bool) {

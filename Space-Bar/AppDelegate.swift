@@ -7,12 +7,14 @@
 
 import UIKit
 
+var yCoverMacOS = CGFloat(0)
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -21,10 +23,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           /* some margin */
           UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
               windowScene.titlebar?.titleVisibility = .hidden
-              let height = (windowScene.screen.nativeBounds.height ) / 2 + 200
-              let width = (0.5 * height) + 150
-              windowScene.sizeRestrictions?.minimumSize = CGSize(width: width, height: height)
-              windowScene.sizeRestrictions?.maximumSize = CGSize(width: width, height: height)
+              
+              yCoverMacOS = 32
+              
+              
+ 
+              let heightB = (windowScene.screen.nativeBounds.height + yCoverMacOS ) / 2 - 2
+              
+              let heightC = (windowScene.screen.nativeBounds.height + yCoverMacOS / 2 ) / 2
+
+              let width = heightC / 2
+              windowScene.sizeRestrictions?.minimumSize = CGSize(width: width, height: heightB)
+              windowScene.sizeRestrictions?.maximumSize = CGSize(width: width, height: heightB)
           }
           #endif
         

@@ -99,5 +99,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     
     //MARK: - Cocoa Touch
     let constraint = CGFloat(64)
-    
 }

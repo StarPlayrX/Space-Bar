@@ -17,8 +17,6 @@ extension GameScene {
         if resettingGameBoard { return }
         
         resettingGameBoard = true
-        
-    
 
         // There are two mysterious "bricks" that do not seem to exist
         if let count = space?.children.count, count - 1 <= 0  {
