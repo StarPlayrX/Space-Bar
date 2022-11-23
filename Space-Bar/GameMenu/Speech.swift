@@ -11,9 +11,9 @@ import AVFoundation
 let synthesizer = AVSpeechSynthesizer()            
 
 func speech(_ text: String) throws {
+    #if !targetEnvironment(macCatalyst)
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-        utterance.rate = 0.5
-        utterance.volume = 2.0
         synthesizer.speak(utterance)
+    #endif
 }

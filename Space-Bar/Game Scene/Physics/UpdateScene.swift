@@ -31,9 +31,9 @@ extension GameScene {
             }
             
             let minSpeed = CGFloat(99)
-            let maxSpeed = CGFloat(999)
-            let brakesX = 5
-            let brakesY = 10
+            let maxSpeed = CGFloat(750)
+            let brakesX = 2.5
+            let brakesY = 5
 
             let half  = CGFloat(settings.currentlevel + 1) / 2
             let quart = CGFloat(settings.currentlevel + 1) / 4

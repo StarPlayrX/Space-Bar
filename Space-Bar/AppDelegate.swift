@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-          Thread.sleep(forTimeInterval: 0.5)
+         // Thread.sleep(forTimeInterval: 0.5)
           #if targetEnvironment(macCatalyst)
           /* some margin */
           UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in

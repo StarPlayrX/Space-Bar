@@ -9,7 +9,7 @@
 import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //AVSpeechSynthesizerDelegate
-    
+
     var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
@@ -20,7 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     var timer = Timer()
     let ratio = CGFloat(2)
     let zero = CGFloat(0)
-    var velocity = CGFloat(800)
+    var velocity = CGFloat(650)
     var ballNode    = SKSpriteNode()
     var extraNode   = SKSpriteNode()
     var tennisNode  = SKSpriteNode()
@@ -39,7 +39,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     var swapper = false
     var swapper2 = false
     var swapper3 = false
-    var paddleNode =  SKSpriteNode() //available to the entire class
     
     //Categories
     let paddleCategory   : UInt32 = 2
@@ -97,6 +96,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         3: ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣"],
     ]
     
-    //MARK: - Cocoa Touch
-    let constraint = CGFloat(64)
+
 }
