@@ -27,7 +27,6 @@ extension GameScene {
         paddle.physicsBody?.affectedByGravity = false
         paddle.physicsBody?.mass = 2
         paddle.physicsBody?.restitution = 1.0
-
         paddle.physicsBody?.contactTestBitMask = ballCategory
         paddle.physicsBody?.categoryBitMask = paddleCategory
         paddle.physicsBody?.collisionBitMask = ballCategory

@@ -60,7 +60,7 @@ extension GameScene {
         anchorNode.addChild(goalWallLeftNode)
         
         let goalNode = SKSpriteNode()
-        let goalNodeSize = CGSize(width: width / 3, height: 4)
+        let goalNodeSize = CGSize(width: (width + 8) / 3, height: 4)
         let goalPhysicsBody = SKPhysicsBody(rectangleOf: goalNodeSize)
         goalNode.color = .systemRed
         goalNode.physicsBody = goalPhysicsBody

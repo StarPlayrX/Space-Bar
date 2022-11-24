@@ -35,4 +35,10 @@ struct Global {
                   "🥳", "😜", "🥰", "😃", //100
                   ]
     var initialScreenSize: CGSize?
+    let constraint = CGFloat(64)
+    let windspeed: Double = 0.3
+    let movement: Double = 10
+    let moveLeft: String = "moveLeft"
+    let moveRight: String = "moveRight"
+    var showCursor: Bool = true
 }

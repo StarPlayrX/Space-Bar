@@ -12,7 +12,6 @@ import SpriteKit
 extension GameScene {
     // Called before each frame is rendered (this may be expensive, see if we can just do this on collisions instead)
     override func update(_ currentTime: TimeInterval) {
-        
         var nodes = [ballNode] //Can be expanded to other balls
         
         if (settings.currentlevel + 1) % 20 == 0 {

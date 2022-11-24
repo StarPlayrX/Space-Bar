@@ -8,7 +8,12 @@
 
 import SpriteKit
 
+
 class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //AVSpeechSynthesizerDelegate
+
+    var g = Global.shared
+    
+    var paddleNode = SKSpriteNode() //available to the entire class
 
     var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -68,10 +73,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
     let levelLabel = SKLabelNode(fontNamed:"emulogic")
     let livesLabel = SKLabelNode(fontNamed:"SpaceBarColors")
 
-    let goalSound   = SKAction.playSoundFileNamed("Dah.mp3", waitForCompletion: false)
-    let brickSound  = SKAction.playSoundFileNamed("Bip.mp3", waitForCompletion: false)
-    let paddleSound = SKAction.playSoundFileNamed("Knock.mp3", waitForCompletion: false)
-    let wallSound   = SKAction.playSoundFileNamed("Dat.mp3", waitForCompletion: false)
+    let goalSound   = SKAction.playSoundFileNamed("Dah.m4a", waitForCompletion: false)
+    let brickSound  = SKAction.playSoundFileNamed("Bip.m4a", waitForCompletion: false)
+    let paddleSound = SKAction.playSoundFileNamed("Knock.m4a", waitForCompletion: false)
+    let wallSound   = SKAction.playSoundFileNamed("Dat.m4a", waitForCompletion: false)
     
     //corners
     let corneredge    = CGFloat(32)
@@ -95,6 +100,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //
         2: ["😍", "🥰", "😘", "😗", "😙", "😚", "😋", "😛"],
         3: ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣"],
     ]
-    
-
 }

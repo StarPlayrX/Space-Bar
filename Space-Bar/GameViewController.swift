@@ -10,63 +10,13 @@ import UIKit
 import SpriteKit
 import AVFoundation
 
+
 var initialScreenSize = CGSize()
 
 class GameViewController: UIViewController {
-
+    var g = Global.shared
     let ncDef = NotificationCenter.default
 
- 
-    private func addHoverGesture() {
-      let hoverGesture
-        = UIHoverGestureRecognizer(target: self,
-                                   action: #selector(hovering(_:)))
-      view.addGestureRecognizer(hoverGesture)
-    }
-
-    
-    /*
-     
-     
-     @objc func mouseDidMove(with recognizer: UIHoverGestureRecognizer) {
-
-         guard let view = recognizer.view else { return }
-
-         // Calculate the location
-
-         let locationInView = recognizer.location(in: view)
-
-         print(\"Hovering at location \(locationInView)\")
-
-     }
-
-     
-     */
-    @objc private func hovering(_ recognizer: UIHoverGestureRecognizer) {
-      // 1
-        
-        guard let view = recognizer.view else { return }
-
-        let locationInView = recognizer.location(in: view)
-
-        print("Hovering at location \(locationInView)")
-
-     // guard !isSelected else { return }
-      // 2
-      switch recognizer.state {
-      // 3
-      case .began, .changed:
-      // 4
-          print("began or changed")
-
-      case .ended:
-          print("ended")
-      default:
-        break
-      }
-    }
-
-    
     override var prefersHomeIndicatorAutoHidden: Bool {
        return true
     }
@@ -78,7 +28,7 @@ class GameViewController: UIViewController {
     @objc func loadGameView() {
         if let view = view as? SKView,
            let scene = SKScene(fileNamed: "GameMenu") {
-
+            
             initialScreenSize = CGSize(width: view.frame.width, height: view.frame.height)
             scene.scaleMode = .aspectFit
             view.ignoresSiblingOrder = true
@@ -90,21 +40,21 @@ class GameViewController: UIViewController {
             view.allowsTransparency = false
             view.showsFPS = false
             view.showsNodeCount = false
-            //view.preferredFramesPerSecond = 30
-
             view.presentScene(scene, transition: SKTransition.fade(withDuration: 2.0))
         }
     }
     
+    @objc func buttonAction(sender: UIButton!) {
+      print("Button tapped")
+    }
+
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        addHoverGesture()
         
         //For some reason the game works better this way, weird stuff (Game over never finishes without this)
         ncDef.addObserver(self,selector: #selector(self.loadGameView), name: NSNotification.Name.init(rawValue: "loadGameView"),object: nil)
         ncDef.post(name: Notification.Name("loadGameView"), object: nil)
-        
         
         #if !targetEnvironment(macCatalyst)
         let audioSession = AVAudioSession.sharedInstance()
@@ -117,7 +67,6 @@ class GameViewController: UIViewController {
         
         try? audioSession.setActive(true)
         #endif
-   
     }
 
     override var shouldAutorotate: Bool {
@@ -125,8 +74,8 @@ class GameViewController: UIViewController {
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
+        if UIDevice.current.userInterfaceIdiom == .phone || UIDevice.current.userInterfaceIdiom == .pad {
+            return [.portrait, .portraitUpsideDown]
         } else {
             return .all
         }
@@ -140,4 +89,41 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        func bitSet(_ bits: [Int]) -> UInt {
+            return bits.reduce(0) { $0 | (1 << $1) }
+        }
+
+        func property(_ property: String, object: NSObject, set: [Int], clear: [Int]) {
+            if let value = object.value(forKey: property) as? UInt {
+                object.setValue((value & ~bitSet(clear)) | bitSet(set), forKey: property)
+            }
+        }
+
+        // disable full-screen button
+        if  let NSApplication = NSClassFromString("NSApplication") as? NSObject.Type,
+            let sharedApplication = NSApplication.value(forKeyPath: "sharedApplication") as? NSObject,
+            let windows = sharedApplication.value(forKeyPath: "windows") as? [NSObject]
+        {
+            for window in windows {
+                let floating = 1
+
+                let resizable = 3
+                let fullScreenPrimary = 7
+                let fullScreenAuxiliary = 8
+                let fullScreenNone = 9
+                
+                property("level", object: window, set: [floating], clear: [])
+                property("styleMask", object: window, set: [], clear: [resizable])
+                property("collectionBehavior", object: window, set: [fullScreenNone], clear: [fullScreenPrimary, fullScreenAuxiliary])
+            }
+        }
+    }
+    
+    
+
 }
+

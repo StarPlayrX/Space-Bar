@@ -116,26 +116,21 @@ class GameMenu: SKScene {
                     if keyPressed { return }
                     keyPressed = true
                     
-                    let runcode = SKAction.run { [weak self] in
+                    let runcode = SKAction.run { [self] in
                         
-                        if let scene = GameScene( fileNamed:"GameScene"),
-                           let view = self?.view {
-                            scene.scaleMode = .aspectFit
-
-                            // Configure the view.
-                            view.showsFPS = false
-                            view.showsNodeCount = false
-                            view.showsPhysics = false
-                            view.showsFields = false
-                            //view.preferredFramesPerSecond = 60
-                            view.clearsContextBeforeDrawing = true
-                            view.isAsynchronous = true
-                            view.ignoresSiblingOrder = true
-                            view.clipsToBounds = true
-                            view.backgroundColor = SKColor.black
-                            view.isMultipleTouchEnabled = false
-                            view.presentScene(scene, transition: SKTransition.fade(withDuration: 2.0))
-                        }
+                        gScene = GameScene( fileNamed:"GameScene")
+                        gScene?.scaleMode = .aspectFit
+                        view?.showsFPS = false
+                        view?.showsNodeCount = false
+                        view?.showsPhysics = false
+                        view?.showsFields = false
+                        view?.clearsContextBeforeDrawing = true
+                        view?.isAsynchronous = true
+                        view?.ignoresSiblingOrder = true
+                        view?.clipsToBounds = true
+                        view?.backgroundColor = SKColor.black
+                        view?.isMultipleTouchEnabled = false
+                        view?.presentScene(gScene!, transition: SKTransition.fade(withDuration: 2.0))
                     }
                     
                     let fade1 = SKAction.fadeAlpha(to: 0.7, duration:TimeInterval(0.15))
@@ -149,6 +144,10 @@ class GameMenu: SKScene {
     
     override func didMove(to view: SKView) {
         
+        var g = Global.shared
+        
+        g.showCursor = true
+        NSCursor.unhide()
        
         settings.level = 0
         scene?.alpha = 0.0

@@ -9,11 +9,30 @@
 import Foundation
 import SpriteKit
 
+
+var gSpeed: CGFloat = 1.0
+var gScene: SKScene? = nil
+
 extension GameScene {
+
     override func didMove(to view: SKView) {
+        g.showCursor = false
+        NSCursor.hide()
+
+        speed = 0.0
         
-        speed = 1.0
+        gSpeed = speed
+        gScene = scene
+        
         drawParallax()
+      
+        
+        let mouseInput
+          = UIHoverGestureRecognizer(target: self,
+                                     action: #selector(mouseDidMove(_:)))
+        
+        view.addGestureRecognizer(mouseInput)
+        
         
         //setup physicsWorld
         physicsWorld.gravity.dx = 0
