@@ -14,9 +14,13 @@ import AVFoundation
 var initialScreenSize = CGSize()
 
 class GameViewController: UIViewController {
+   
+    
     var g = Global.shared
     let ncDef = NotificationCenter.default
 
+
+    
     override var prefersHomeIndicatorAutoHidden: Bool {
        return true
     }
@@ -43,14 +47,10 @@ class GameViewController: UIViewController {
             view.presentScene(scene, transition: SKTransition.fade(withDuration: 2.0))
         }
     }
-    
-    @objc func buttonAction(sender: UIButton!) {
-      print("Button tapped")
-    }
-
    
     override func viewDidLoad() {
         super.viewDidLoad()
+                
         
         //For some reason the game works better this way, weird stuff (Game over never finishes without this)
         ncDef.addObserver(self,selector: #selector(self.loadGameView), name: NSNotification.Name.init(rawValue: "loadGameView"),object: nil)
@@ -117,7 +117,7 @@ class GameViewController: UIViewController {
                 let fullScreenNone = 9
                 
                 property("level", object: window, set: [floating], clear: [])
-                property("styleMask", object: window, set: [], clear: [resizable])
+                property("styleMask", object: window, set: [resizable], clear: [])
                 property("collectionBehavior", object: window, set: [fullScreenNone], clear: [fullScreenPrimary, fullScreenAuxiliary])
             }
         }

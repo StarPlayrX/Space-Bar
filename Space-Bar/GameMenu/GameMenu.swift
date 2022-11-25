@@ -8,6 +8,7 @@
 
 import SpriteKit
 
+var gScene = SKScene()
 class GameMenu: SKScene {
       
      var prefersHomeIndicatorAutoHidden: Bool {
@@ -118,8 +119,8 @@ class GameMenu: SKScene {
                     
                     let runcode = SKAction.run { [self] in
                         
-                        gScene = GameScene( fileNamed:"GameScene")
-                        gScene?.scaleMode = .aspectFit
+                        gScene = GameScene(fileNamed:"GameScene")!
+                        gScene.scaleMode = .aspectFit
                         view?.showsFPS = false
                         view?.showsNodeCount = false
                         view?.showsPhysics = false
@@ -130,7 +131,9 @@ class GameMenu: SKScene {
                         view?.clipsToBounds = true
                         view?.backgroundColor = SKColor.black
                         view?.isMultipleTouchEnabled = false
-                        view?.presentScene(gScene!, transition: SKTransition.fade(withDuration: 2.0))
+                        view?.presentScene(gScene, transition: SKTransition.fade(withDuration: 2.0))
+                       
+            
                     }
                     
                     let fade1 = SKAction.fadeAlpha(to: 0.7, duration:TimeInterval(0.15))

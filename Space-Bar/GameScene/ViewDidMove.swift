@@ -10,19 +10,20 @@ import Foundation
 import SpriteKit
 
 
-var gSpeed: CGFloat = 1.0
-var gScene: SKScene? = nil
+
 
 extension GameScene {
 
     override func didMove(to view: SKView) {
         g.showCursor = false
-        NSCursor.hide()
-
-        speed = 0.0
+        NSCursor.hide()        
+       // speed = 0.0
         
-        gSpeed = speed
-        gScene = scene
+//        var gSpeed: CGFloat = 1.0
+//        var gScene: SKScene? = nil
+//        
+//        gSpeed = speed
+//        gScene = scene
         
         drawParallax()
       
@@ -32,8 +33,7 @@ extension GameScene {
                                      action: #selector(mouseDidMove(_:)))
         
         view.addGestureRecognizer(mouseInput)
-        
-        
+                
         //setup physicsWorld
         physicsWorld.gravity.dx = 0
         physicsWorld.gravity.dy = 0
@@ -59,7 +59,7 @@ extension GameScene {
         //for the field node to work properly
         anchor = CGPoint(x: centerWidth, y: centerHeight)
         anchorNode.position = anchor
-        addChild(anchorNode)
+        scene?.addChild(anchorNode)
         
         //MARK: - Game Frame
         let frame = CGRect(x: -centerWidth, y: -centerHeight, width: width, height: height)

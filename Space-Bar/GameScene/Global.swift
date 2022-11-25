@@ -42,3 +42,9 @@ struct Global {
     let moveRight: String = "moveRight"
     var showCursor: Bool = true
 }
+
+var gameSceneDelegate: GameSceneDelegate!
+
+protocol GameSceneDelegate: AnyObject {
+    func playPause()
+}

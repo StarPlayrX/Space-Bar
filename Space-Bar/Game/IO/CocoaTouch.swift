@@ -16,6 +16,8 @@ protocol KeyBoardController {
     func goRight()
 }
 
+var paddleNode = SKSpriteNode() //available to the entire class
+
 extension GameScene {
     
     func movePaddle(pos: CGPoint, duration: Double) {
@@ -26,8 +28,55 @@ extension GameScene {
     }
     
     func moveWithMouse(pos: CGPoint, duration: Double) {
-            let action = SKAction.moveTo(x: pos.x + g.constraint + g.constraint / 4, duration: duration)
-            paddleNode.run(action)
+        let action = SKAction.moveTo(x: pos.x + g.constraint + g.constraint / 4, duration: duration)
+        paddleNode.run(action)
+        
+        /*
+         
+         guard
+             let size = paddleNode.texture?.size()
+         else {
+             return
+         }
+         
+         let mouseConstraint = (size.width + 8) / 2
+
+         if pos.x >= frame.width - mouseConstraint && pos.x <= frame.width - mouseConstraint {
+             let action = SKAction.moveTo(x: frame.width - mouseConstraint, duration: duration)
+             let wait = SKAction.wait(forDuration: duration)
+             let seq = SKAction.sequence([action,wait])
+             paddleNode.run(seq)
+         } else if pos.x <= 30 {
+             let action = SKAction.moveTo(x: mouseConstraint, duration: duration)
+             let wait = SKAction.wait(forDuration: duration)
+             let seq = SKAction.sequence([action,wait])
+             paddleNode.run(seq)
+         }
+         
+         */
+        
+        guard
+            let size = paddleNode.texture?.size()
+        else {
+            return
+        }
+        
+        let a = size.width
+        let b = CGFloat(8)
+        let c = CGFloat(2)
+
+        if pos.x >= frame.width - a * c && pos.x <= frame.width - (a + b) / c {
+            let action = SKAction.moveTo(x: frame.width - (a + b) / c, duration: duration)
+            let wait = SKAction.wait(forDuration: duration)
+            let seq = SKAction.sequence([action,wait])
+            paddleNode.run(seq)
+        } else if pos.x <= 30 {
+            let action = SKAction.moveTo(x: (a + b) / c, duration: duration)
+            let wait = SKAction.wait(forDuration: duration)
+            let seq = SKAction.sequence([action,wait])
+            paddleNode.run(seq)
+        }
+      
     }
     
     func touchDown(atPoint pos: CGPoint) {
@@ -51,14 +100,14 @@ extension GameScene {
         guard let view = recognizer.view else { return }
         
         let pos = recognizer.location(in: view)
-                
+        
         if pos == CGPoint.zero {
             if !g.showCursor {
                 g.showCursor = true
                 NSCursor.unhide()
             }
         }
-  
+        
         switch recognizer.state {
             // 3
         case .began, .changed:
@@ -79,7 +128,7 @@ extension GameScene {
         default:
             break
             
-
+            
         }
     }
 }
@@ -87,10 +136,10 @@ extension GameScene {
 
 
 
-extension GameViewController: KeyBoardController {
-
+extension GameViewController {
+    
     func goLeft() {
-        if gScene?.paddleNode.position.x >= g.constraint + g.constraint / 2  {
+        if paddleNode.position.x >= g.constraint + g.constraint / 2  {
             let action = SKAction.moveTo(x: paddleNode.position.x - g.constraint / 2, duration: g.windspeed / g.movement)
             paddleNode.run(action)
         }
@@ -123,7 +172,7 @@ extension GameViewController: KeyBoardController {
                 let goLeft = SKAction.run {
                     self.goLeft()
                 }
-                                
+                
                 let wait = SKAction.wait(forDuration: g.windspeed / g.movement)
                 let seq = SKAction.sequence([goLeft,wait])
                 let rep = SKAction.repeatForever(seq)
@@ -144,12 +193,10 @@ extension GameViewController: KeyBoardController {
             }
             
             if key.charactersIgnoringModifiers == " " {
-                print("SPACE")
-                
-                gScene?.speed = gScene?.speed == 1 ? 0 : 1
-                paddleNode.isPaused = paddleNode.isPaused == true ? false : true
-
+                gameSceneDelegate?.playPause()
             }
         }
     }
 }
+
+

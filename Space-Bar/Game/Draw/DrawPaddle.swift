@@ -34,6 +34,6 @@ extension GameScene {
         paddle.size = CGSize(width: paddleTexture.size().width, height: paddleTexture.size().height)
         paddle.name = "paddle"
         paddleNode = paddle
-        scene?.addChild(paddle)
+        addChild(paddle)
     }
 }

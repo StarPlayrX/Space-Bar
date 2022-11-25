@@ -9,12 +9,19 @@
 import SpriteKit
 
 
-class GameScene: SKScene, SKPhysicsContactDelegate { // AVAudioPlayerDelegate //AVSpeechSynthesizerDelegate
-
+class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneDelegate {
+    func playPause() {
+        // For some reason still have to use a Global here for gScene. Odd, doesn't run correctly using the local
+        gScene.isPaused.toggle()
+        gScene.speed = gScene.isPaused ? 0 : 1
+    }
+    
+    override func sceneDidLoad() {
+        gameSceneDelegate = self
+    }
+    
     var g = Global.shared
     
-    var paddleNode = SKSpriteNode() //available to the entire class
-
     var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }

@@ -47,11 +47,16 @@ extension GameScene {
             livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives - 1 : 0)
             
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-                self.ballCounter -= 1
                 
-                if self.ballCounter < 0 {
-                    self.ballCounter = self.ballTimeOut
-                    self.addPuck()
+                if !gScene.isPaused {
+                    self.ballCounter -= 1
+                    
+                    if self.ballCounter < 0 {
+                        self.ballCounter = self.ballTimeOut
+                        self.addPuck()
+                    }
+                } else {
+                    self.ballCounter = 5
                 }
             }
             
