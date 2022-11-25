@@ -7,7 +7,6 @@
 
 import UIKit
 
-var yCoverMacOS = CGFloat(0)
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,22 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         appSettings.loadUserDefaults()
 
-         // Thread.sleep(forTimeInterval: 0.5)
           #if targetEnvironment(macCatalyst)
-          /* some margin */
           UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
-              
               windowScene.titlebar?.titleVisibility = .hidden
-              
               yCoverMacOS = 32
-            
               let y = windowScene.screen.bounds.height - 150
               windowScene.sizeRestrictions?.minimumSize = CGSize(width: y / 2, height: y)
               windowScene.sizeRestrictions?.maximumSize = CGSize(width: y / 2, height: y)
           }
           #endif
-        
-
         return true
     }
 
@@ -45,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appSettings.saveUserDefaults()
 
     }
-
    
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
@@ -64,7 +55,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         appSettings.saveUserDefaults()
     }
-
-
 }
-

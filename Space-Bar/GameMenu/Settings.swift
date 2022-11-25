@@ -19,8 +19,6 @@ struct Settings: Codable {
     var sound       : Bool =  true
 }
 
-var settings = Settings()
-
 struct AppSettings {
     let spaceBarGameSettings = "SpaceBarGameSettingsX1"
     func saveUserDefaults() {

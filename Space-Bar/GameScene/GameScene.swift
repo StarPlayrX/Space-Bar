@@ -9,17 +9,11 @@
 import SpriteKit
 
 
-class GameScene: SKScene, SKPhysicsContactDelegate, GameSceneDelegate {
-    func playPause() {
-        // For some reason still have to use a Global here for gScene. Odd, doesn't run correctly using the local
-        gScene.isPaused.toggle()
-        gScene.speed = gScene.isPaused ? 0 : 1
-    }
+class GameScene: SKScene {
+    static var shared = GameScene()
     
-    override func sceneDidLoad() {
-        gameSceneDelegate = self
-    }
-    
+    var paddleNode = SKSpriteNode() //required
+    var gameSceneDelegate: GameSceneDelegate! //required
     var g = Global.shared
     
     var prefersHomeIndicatorAutoHidden: Bool {

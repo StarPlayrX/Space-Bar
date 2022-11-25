@@ -11,15 +11,10 @@ import SpriteKit
 import AVFoundation
 
 
-var initialScreenSize = CGSize()
-
 class GameViewController: UIViewController {
    
-    
     var g = Global.shared
     let ncDef = NotificationCenter.default
-
-
     
     override var prefersHomeIndicatorAutoHidden: Bool {
        return true
@@ -50,8 +45,7 @@ class GameViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        
+            
         //For some reason the game works better this way, weird stuff (Game over never finishes without this)
         ncDef.addObserver(self,selector: #selector(self.loadGameView), name: NSNotification.Name.init(rawValue: "loadGameView"),object: nil)
         ncDef.post(name: Notification.Name("loadGameView"), object: nil)

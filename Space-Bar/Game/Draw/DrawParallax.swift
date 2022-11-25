@@ -23,7 +23,6 @@ extension GameScene {
             autoreleasepool {
                 let sprite = SKSpriteNode(texture: starryNightTexture)
                 sprite.position = CGPoint(x: -centerWidth, y: CGFloat(i) * sprite.size.height)
-                sprite.alpha = 0.85
                 sprite.run(moveGroundSpritesForever)
                 backParalax.addChild(sprite)
                 backParalax.zPosition = -10

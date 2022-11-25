@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SpriteKit
 
 struct Global {
     static var shared = Global()
@@ -43,8 +44,9 @@ struct Global {
     var showCursor: Bool = true
 }
 
-var gameSceneDelegate: GameSceneDelegate!
+// Global Vars used outside, some are required
+var settings = Settings() //required
 
-protocol GameSceneDelegate: AnyObject {
-    func playPause()
-}
+var initialScreenSize = CGSize()
+var yCoverMacOS = CGFloat(0)
+var resettingGameBoard = false

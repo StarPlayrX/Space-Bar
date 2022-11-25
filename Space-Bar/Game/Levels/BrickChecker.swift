@@ -9,8 +9,6 @@
 import Foundation
 import SpriteKit
 
-var resettingGameBoard = false
-
 extension GameScene {
     func checker(_ firstBody: SKPhysicsBody) {
         

@@ -8,9 +8,16 @@
 
 import SpriteKit
 
-var gScene = SKScene()
 class GameMenu: SKScene {
-      
+    override func sceneDidLoad() {
+        var g = Global.shared
+        
+        g.showCursor = true
+        NSCursor.unhide()
+       
+        GameScene.shared = GameScene()
+    }
+    
      var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
@@ -119,21 +126,21 @@ class GameMenu: SKScene {
                     
                     let runcode = SKAction.run { [self] in
                         
-                        gScene = GameScene(fileNamed:"GameScene")!
-                        gScene.scaleMode = .aspectFit
+                        guard let gameScene = GameScene(fileNamed:"GameScene") else { return }
+                        GameScene.shared = gameScene
+                        GameScene.shared .scaleMode = .aspectFit
                         view?.showsFPS = false
                         view?.showsNodeCount = false
                         view?.showsPhysics = false
                         view?.showsFields = false
+
                         view?.clearsContextBeforeDrawing = true
                         view?.isAsynchronous = true
                         view?.ignoresSiblingOrder = true
                         view?.clipsToBounds = true
                         view?.backgroundColor = SKColor.black
                         view?.isMultipleTouchEnabled = false
-                        view?.presentScene(gScene, transition: SKTransition.fade(withDuration: 2.0))
-                       
-            
+                        view?.presentScene(GameScene.shared , transition: SKTransition.fade(withDuration: 2.0))
                     }
                     
                     let fade1 = SKAction.fadeAlpha(to: 0.7, duration:TimeInterval(0.15))

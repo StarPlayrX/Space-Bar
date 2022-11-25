@@ -48,7 +48,7 @@ extension GameScene {
             
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 
-                if !gScene.isPaused {
+                if self.isPaused {
                     self.ballCounter -= 1
                     
                     if self.ballCounter < 0 {
