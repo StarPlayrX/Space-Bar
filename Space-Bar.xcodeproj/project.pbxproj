@@ -498,99 +498,18 @@
 		5F1BEF2C292C5C780074ADF6 /* sksLevels */ = {
 			isa = PBXGroup;
 			children = (
-				5F6814A4292FC07900A648E6 /* levels1-10 */,
-				5F1BEF2E292C5C780074ADF6 /* level17.sks */,
-				5F1BEF2F292C5C780074ADF6 /* level16.sks */,
-				5F1BEF31292C5C780074ADF6 /* level14.sks */,
-				5F1BEF32292C5C780074ADF6 /* level28.sks */,
-				5F1BEF33292C5C780074ADF6 /* level29.sks */,
-				5F1BEF34292C5C780074ADF6 /* level15.sks */,
-				5F1BEF35292C5C780074ADF6 /* level39.sks */,
-				5F1BEF36292C5C780074ADF6 /* level11.sks */,
-				5F1BEF38292C5C780074ADF6 /* level38.sks */,
-				5F1BEF39292C5C780074ADF6 /* level12.sks */,
-				5F1BEF3A292C5C780074ADF6 /* level13.sks */,
-				5F1BEF3B292C5C780074ADF6 /* level60.sks */,
-				5F1BEF3C292C5C780074ADF6 /* level74.sks */,
-				5F1BEF3D292C5C780074ADF6 /* level48.sks */,
-				5F1BEF3E292C5C780074ADF6 /* level49.sks */,
-				5F1BEF3F292C5C780074ADF6 /* level75.sks */,
-				5F1BEF40292C5C780074ADF6 /* level61.sks */,
-				5F1BEF41292C5C780074ADF6 /* level88.sks */,
-				5F1BEF42292C5C780074ADF6 /* level77.sks */,
-				5F1BEF43292C5C780074ADF6 /* level63.sks */,
-				5F1BEF44292C5C780074ADF6 /* level62.sks */,
-				5F1BEF45292C5C780074ADF6 /* level76.sks */,
-				5F1BEF46292C5C780074ADF6 /* level89.sks */,
-				5F1BEF47292C5C780074ADF6 /* level99.sks */,
-				5F1BEF48292C5C780074ADF6 /* level72.sks */,
-				5F1BEF49292C5C780074ADF6 /* level66.sks */,
-				5F1BEF4A292C5C780074ADF6 /* level67.sks */,
-				5F1BEF4B292C5C780074ADF6 /* level73.sks */,
-				5F1BEF4C292C5C780074ADF6 /* level98.sks */,
-				5F1BEF4D292C5C780074ADF6 /* level59.sks */,
-				5F1BEF4E292C5C780074ADF6 /* level65.sks */,
-				5F1BEF4F292C5C780074ADF6 /* level71.sks */,
-				5F1BEF50292C5C780074ADF6 /* level70.sks */,
-				5F1BEF51292C5C780074ADF6 /* level64.sks */,
-				5F1BEF52292C5C780074ADF6 /* level58.sks */,
-				5F1BEF53292C5C780074ADF6 /* level82.sks */,
-				5F1BEF54292C5C780074ADF6 /* level96.sks */,
-				5F1BEF55292C5C780074ADF6 /* level41.sks */,
-				5F1BEF56292C5C780074ADF6 /* level55.sks */,
-				5F1BEF57292C5C780074ADF6 /* level69.sks */,
-				5F1BEF58292C5C780074ADF6 /* level68.sks */,
-				5F1BEF59292C5C780074ADF6 /* level54.sks */,
-				5F1BEF5A292C5C780074ADF6 /* level40.sks */,
-				5F1BEF5B292C5C780074ADF6 /* level97.sks */,
-				5F1BEF5C292C5C780074ADF6 /* level83.sks */,
-				5F1BEF5D292C5C780074ADF6 /* hexTileSet.sks */,
-				5F1BEF5E292C5C780074ADF6 /* level95.sks */,
-				5F1BEF5F292C5C780074ADF6 /* level81.sks */,
-				5F1BEF60292C5C780074ADF6 /* level56.sks */,
-				5F1BEF61292C5C780074ADF6 /* level42.sks */,
-				5F1BEF62292C5C780074ADF6 /* level43.sks */,
-				5F1BEF63292C5C780074ADF6 /* level57.sks */,
-				5F1BEF64292C5C780074ADF6 /* level80.sks */,
-				5F1BEF65292C5C780074ADF6 /* level94.sks */,
-				5F1BEF66292C5C780074ADF6 /* level90.sks */,
-				5F1BEF67292C5C780074ADF6 /* level84.sks */,
-				5F1BEF68292C5C780074ADF6 /* level53.sks */,
-				5F1BEF69292C5C780074ADF6 /* level47.sks */,
-				5F1BEF6A292C5C780074ADF6 /* level46.sks */,
-				5F1BEF6B292C5C780074ADF6 /* level52.sks */,
-				5F1BEF6C292C5C780074ADF6 /* level85.sks */,
-				5F1BEF6D292C5C780074ADF6 /* level91.sks */,
 				5F1BEF6E292C5C780074ADF6 /* gridTileSet.sks */,
-				5F1BEF6F292C5C780074ADF6 /* level87.sks */,
-				5F1BEF70292C5C780074ADF6 /* level93.sks */,
-				5F1BEF71292C5C780074ADF6 /* level78.sks */,
-				5F1BEF72292C5C780074ADF6 /* level44.sks */,
-				5F1BEF73292C5C780074ADF6 /* level50.sks */,
-				5F1BEF74292C5C780074ADF6 /* level51.sks */,
-				5F1BEF75292C5C780074ADF6 /* level45.sks */,
-				5F1BEF76292C5C780074ADF6 /* level79.sks */,
-				5F1BEF77292C5C780074ADF6 /* level92.sks */,
-				5F1BEF78292C5C780074ADF6 /* level86.sks */,
-				5F1BEF79292C5C780074ADF6 /* level22.sks */,
-				5F1BEF7A292C5C780074ADF6 /* level36.sks */,
-				5F1BEF7B292C5C780074ADF6 /* level37.sks */,
-				5F1BEF7C292C5C780074ADF6 /* level23.sks */,
-				5F1BEF7E292C5C780074ADF6 /* level100.sks */,
-				5F1BEF80292C5C780074ADF6 /* level35.sks */,
-				5F1BEF81292C5C780074ADF6 /* level21.sks */,
-				5F1BEF82292C5C780074ADF6 /* level20.sks */,
-				5F1BEF83292C5C780074ADF6 /* level34.sks */,
-				5F1BEF86292C5C780074ADF6 /* level18.sks */,
-				5F1BEF87292C5C780074ADF6 /* level30.sks */,
-				5F1BEF88292C5C780074ADF6 /* level24.sks */,
-				5F1BEF89292C5C780074ADF6 /* level25.sks */,
-				5F1BEF8A292C5C780074ADF6 /* level31.sks */,
-				5F1BEF8B292C5C780074ADF6 /* level19.sks */,
-				5F1BEF8E292C5C780074ADF6 /* level27.sks */,
-				5F1BEF8F292C5C780074ADF6 /* level33.sks */,
-				5F1BEF90292C5C780074ADF6 /* level32.sks */,
-				5F1BEF91292C5C780074ADF6 /* level26.sks */,
+				5F1BEF5D292C5C780074ADF6 /* hexTileSet.sks */,
+				5FDA94EB2931893E00A9AFF7 /* New Group */,
+				5FDA94EC2931894800A9AFF7 /* New Group1 */,
+				5FDA94ED2931894F00A9AFF7 /* New Group2 */,
+				5FDA94EE2931895500A9AFF7 /* New Group3 */,
+				5FDA94EF2931895B00A9AFF7 /* New Group4 */,
+				5FDA94F02931896000A9AFF7 /* New Group5 */,
+				5FDA94F12931896500A9AFF7 /* New Group6 */,
+				5FDA94F22931896A00A9AFF7 /* New Group7 */,
+				5FDA94F32931896F00A9AFF7 /* New Group8 */,
+				5F6814A4292FC07900A648E6 /* levels1-10 */,
 			);
 			path = sksLevels;
 			sourceTree = "<group>";
@@ -610,6 +529,159 @@
 				5F1BEF37292C5C780074ADF6 /* level10.sks */,
 			);
 			path = "levels1-10";
+			sourceTree = "<group>";
+		};
+		5FDA94EB2931893E00A9AFF7 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				5F1BEF36292C5C780074ADF6 /* level11.sks */,
+				5F1BEF39292C5C780074ADF6 /* level12.sks */,
+				5F1BEF3A292C5C780074ADF6 /* level13.sks */,
+				5F1BEF31292C5C780074ADF6 /* level14.sks */,
+				5F1BEF34292C5C780074ADF6 /* level15.sks */,
+				5F1BEF2F292C5C780074ADF6 /* level16.sks */,
+				5F1BEF2E292C5C780074ADF6 /* level17.sks */,
+				5F1BEF86292C5C780074ADF6 /* level18.sks */,
+				5F1BEF8B292C5C780074ADF6 /* level19.sks */,
+				5F1BEF82292C5C780074ADF6 /* level20.sks */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		5FDA94EC2931894800A9AFF7 /* New Group1 */ = {
+			isa = PBXGroup;
+			children = (
+				5F1BEF81292C5C780074ADF6 /* level21.sks */,
+				5F1BEF79292C5C780074ADF6 /* level22.sks */,
+				5F1BEF7C292C5C780074ADF6 /* level23.sks */,
+				5F1BEF88292C5C780074ADF6 /* level24.sks */,
+				5F1BEF89292C5C780074ADF6 /* level25.sks */,
+				5F1BEF91292C5C780074ADF6 /* level26.sks */,
+				5F1BEF8E292C5C780074ADF6 /* level27.sks */,
+				5F1BEF32292C5C780074ADF6 /* level28.sks */,
+				5F1BEF33292C5C780074ADF6 /* level29.sks */,
+				5F1BEF87292C5C780074ADF6 /* level30.sks */,
+			);
+			path = "New Group1";
+			sourceTree = "<group>";
+		};
+		5FDA94ED2931894F00A9AFF7 /* New Group2 */ = {
+			isa = PBXGroup;
+			children = (
+				5F1BEF8A292C5C780074ADF6 /* level31.sks */,
+				5F1BEF90292C5C780074ADF6 /* level32.sks */,
+				5F1BEF8F292C5C780074ADF6 /* level33.sks */,
+				5F1BEF83292C5C780074ADF6 /* level34.sks */,
+				5F1BEF80292C5C780074ADF6 /* level35.sks */,
+				5F1BEF7A292C5C780074ADF6 /* level36.sks */,
+				5F1BEF7B292C5C780074ADF6 /* level37.sks */,
+				5F1BEF38292C5C780074ADF6 /* level38.sks */,
+				5F1BEF35292C5C780074ADF6 /* level39.sks */,
+				5F1BEF5A292C5C780074ADF6 /* level40.sks */,
+			);
+			path = "New Group2";
+			sourceTree = "<group>";
+		};
+		5FDA94EE2931895500A9AFF7 /* New Group3 */ = {
+			isa = PBXGroup;
+			children = (
+				5F1BEF55292C5C780074ADF6 /* level41.sks */,
+				5F1BEF61292C5C780074ADF6 /* level42.sks */,
+				5F1BEF62292C5C780074ADF6 /* level43.sks */,
+				5F1BEF72292C5C780074ADF6 /* level44.sks */,
+				5F1BEF75292C5C780074ADF6 /* level45.sks */,
+				5F1BEF6A292C5C780074ADF6 /* level46.sks */,
+				5F1BEF69292C5C780074ADF6 /* level47.sks */,
+				5F1BEF3D292C5C780074ADF6 /* level48.sks */,
+				5F1BEF3E292C5C780074ADF6 /* level49.sks */,
+				5F1BEF73292C5C780074ADF6 /* level50.sks */,
+			);
+			path = "New Group3";
+			sourceTree = "<group>";
+		};
+		5FDA94EF2931895B00A9AFF7 /* New Group4 */ = {
+			isa = PBXGroup;
+			children = (
+				5F1BEF74292C5C780074ADF6 /* level51.sks */,
+				5F1BEF6B292C5C780074ADF6 /* level52.sks */,
+				5F1BEF68292C5C780074ADF6 /* level53.sks */,
+				5F1BEF59292C5C780074ADF6 /* level54.sks */,
+				5F1BEF56292C5C780074ADF6 /* level55.sks */,
+				5F1BEF60292C5C780074ADF6 /* level56.sks */,
+				5F1BEF63292C5C780074ADF6 /* level57.sks */,
+				5F1BEF52292C5C780074ADF6 /* level58.sks */,
+				5F1BEF4D292C5C780074ADF6 /* level59.sks */,
+				5F1BEF3B292C5C780074ADF6 /* level60.sks */,
+			);
+			path = "New Group4";
+			sourceTree = "<group>";
+		};
+		5FDA94F02931896000A9AFF7 /* New Group5 */ = {
+			isa = PBXGroup;
+			children = (
+				5F1BEF40292C5C780074ADF6 /* level61.sks */,
+				5F1BEF44292C5C780074ADF6 /* level62.sks */,
+				5F1BEF43292C5C780074ADF6 /* level63.sks */,
+				5F1BEF51292C5C780074ADF6 /* level64.sks */,
+				5F1BEF4E292C5C780074ADF6 /* level65.sks */,
+				5F1BEF49292C5C780074ADF6 /* level66.sks */,
+				5F1BEF4A292C5C780074ADF6 /* level67.sks */,
+				5F1BEF58292C5C780074ADF6 /* level68.sks */,
+				5F1BEF57292C5C780074ADF6 /* level69.sks */,
+				5F1BEF50292C5C780074ADF6 /* level70.sks */,
+			);
+			path = "New Group5";
+			sourceTree = "<group>";
+		};
+		5FDA94F12931896500A9AFF7 /* New Group6 */ = {
+			isa = PBXGroup;
+			children = (
+				5F1BEF4F292C5C780074ADF6 /* level71.sks */,
+				5F1BEF48292C5C780074ADF6 /* level72.sks */,
+				5F1BEF4B292C5C780074ADF6 /* level73.sks */,
+				5F1BEF3C292C5C780074ADF6 /* level74.sks */,
+				5F1BEF3F292C5C780074ADF6 /* level75.sks */,
+				5F1BEF45292C5C780074ADF6 /* level76.sks */,
+				5F1BEF42292C5C780074ADF6 /* level77.sks */,
+				5F1BEF71292C5C780074ADF6 /* level78.sks */,
+				5F1BEF76292C5C780074ADF6 /* level79.sks */,
+				5F1BEF64292C5C780074ADF6 /* level80.sks */,
+			);
+			path = "New Group6";
+			sourceTree = "<group>";
+		};
+		5FDA94F22931896A00A9AFF7 /* New Group7 */ = {
+			isa = PBXGroup;
+			children = (
+				5F1BEF5F292C5C780074ADF6 /* level81.sks */,
+				5F1BEF53292C5C780074ADF6 /* level82.sks */,
+				5F1BEF5C292C5C780074ADF6 /* level83.sks */,
+				5F1BEF67292C5C780074ADF6 /* level84.sks */,
+				5F1BEF6C292C5C780074ADF6 /* level85.sks */,
+				5F1BEF78292C5C780074ADF6 /* level86.sks */,
+				5F1BEF6F292C5C780074ADF6 /* level87.sks */,
+				5F1BEF41292C5C780074ADF6 /* level88.sks */,
+				5F1BEF46292C5C780074ADF6 /* level89.sks */,
+				5F1BEF66292C5C780074ADF6 /* level90.sks */,
+			);
+			path = "New Group7";
+			sourceTree = "<group>";
+		};
+		5FDA94F32931896F00A9AFF7 /* New Group8 */ = {
+			isa = PBXGroup;
+			children = (
+				5F1BEF6D292C5C780074ADF6 /* level91.sks */,
+				5F1BEF77292C5C780074ADF6 /* level92.sks */,
+				5F1BEF70292C5C780074ADF6 /* level93.sks */,
+				5F1BEF65292C5C780074ADF6 /* level94.sks */,
+				5F1BEF5E292C5C780074ADF6 /* level95.sks */,
+				5F1BEF54292C5C780074ADF6 /* level96.sks */,
+				5F1BEF5B292C5C780074ADF6 /* level97.sks */,
+				5F1BEF4C292C5C780074ADF6 /* level98.sks */,
+				5F1BEF47292C5C780074ADF6 /* level99.sks */,
+				5F1BEF7E292C5C780074ADF6 /* level100.sks */,
+			);
+			path = "New Group8";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

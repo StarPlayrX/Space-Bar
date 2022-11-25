@@ -16,3 +16,8 @@ protocol GameSceneDelegate: AnyObject {
     func removeLeft()
     func removeRight()
 }
+
+protocol Arrow: AnyObject {
+    func unhide()
+    func hide()
+}

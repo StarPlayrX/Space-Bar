@@ -9,14 +9,22 @@
 import SpriteKit
 
 class GameMenu: SKScene {
+    
     override func sceneDidLoad() {
         var g = Global.shared
         
         g.showCursor = true
+        g.runningGame = false
+        
+        
+        #if targetEnvironment(macCatalyst)
         NSCursor.unhide()
+        #endif
+        
        
         GameScene.shared = GameScene()
     }
+    
     
      var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -43,7 +51,6 @@ class GameMenu: SKScene {
     var textLabel2: SKLabelNode = SKLabelNode(fontNamed: "CourierNeue")
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         super.touchesBegan(touches as Set<UITouch>, with: event)
         for touch: AnyObject in touches {
             let location: CGPoint = touch.location(in: self)
@@ -133,7 +140,6 @@ class GameMenu: SKScene {
                         view?.showsNodeCount = false
                         view?.showsPhysics = false
                         view?.showsFields = false
-
                         view?.clearsContextBeforeDrawing = true
                         view?.isAsynchronous = true
                         view?.ignoresSiblingOrder = true
@@ -157,7 +163,10 @@ class GameMenu: SKScene {
         var g = Global.shared
         
         g.showCursor = true
+        
+        #if targetEnvironment(macCatalyst)
         NSCursor.unhide()
+        #endif
        
         settings.level = 0
         scene?.alpha = 0.0

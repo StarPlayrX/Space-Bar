@@ -35,34 +35,28 @@ extension GameScene {
     }
 }
 
-extension GameScene {
+#if targetEnvironment(macCatalyst)
+extension GameScene: Arrow {
+    func unhide() {
+        g.showCursor = true
+        NSCursor.unhide()
+    }
+    
+    func hide() {
+        g.showCursor = false
+        NSCursor.hide()
+    }
+
     func moveWithMouse(pos: CGPoint, duration: Double) {
-        guard
-            let size = paddleNode.texture?.size()
-        else {
-            return
+
+        var xScale = (( widthiOS - paddle / center - rightBorder ) / widthMacOS ) * pos.x
+        
+        if xScale < paddle / center + leftBorder {
+            xScale = paddle / center + leftBorder
         }
         
-        let a = size.width
-        let b = CGFloat(8)
-        let c = CGFloat(2)
-        
-        let constraint = (a + b) / c
-        
-        let action = SKAction.moveTo(x: pos.x + constraint, duration: duration)
+        let action = SKAction.moveTo(x: xScale, duration: duration)
         paddleNode.run(action)
-        
-        if pos.x >= frame.width - a * c && pos.x <= frame.width - constraint {
-            let action = SKAction.moveTo(x: frame.width - constraint, duration: duration)
-            let wait = SKAction.wait(forDuration: duration)
-            let seq = SKAction.sequence([action,wait])
-            paddleNode.run(seq)
-        } else if pos.x <= 30 {
-            let action = SKAction.moveTo(x: constraint, duration: duration)
-            let wait = SKAction.wait(forDuration: duration)
-            let seq = SKAction.sequence([action,wait])
-            paddleNode.run(seq)
-        }
     }
     
     @objc func mouseDidMove(_ recognizer: UIHoverGestureRecognizer) {
@@ -72,32 +66,25 @@ extension GameScene {
         
         if pos == CGPoint.zero {
             if !g.showCursor {
-                g.showCursor = true
-                NSCursor.unhide()
+                unhide()
             }
         }
         
         switch recognizer.state {
-            // 3
+            
         case .began, .changed:
-            if g.showCursor {
-                g.showCursor = false
-                NSCursor.hide()
+            if g.showCursor && g.runningGame {
+                hide()
             }
             
             moveWithMouse(pos: pos, duration: 0.05)
         case .ended:
             if !g.showCursor {
-                g.showCursor = true
-                NSCursor.unhide()
+                unhide()
             }
         default:
             break
         }
     }
 }
-
-
-
-
-
+#endif

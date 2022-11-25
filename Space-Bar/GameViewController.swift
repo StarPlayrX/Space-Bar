@@ -9,13 +9,14 @@
 import UIKit
 import SpriteKit
 import AVFoundation
+import GameplayKit
 
 
 class GameViewController: UIViewController {
    
     var g = Global.shared
-    let ncDef = NotificationCenter.default
-    
+    let nc = NotificationCenter.default
+    let startGame = Notification.Name("loadGameView")
     override var prefersHomeIndicatorAutoHidden: Bool {
        return true
     }
@@ -24,7 +25,7 @@ class GameViewController: UIViewController {
         return UIRectEdge.bottom
     }
     
-    @objc func loadGameView() {
+    @objc func loadGameMenu() {
         if let view = view as? SKView,
            let scene = SKScene(fileNamed: "GameMenu") {
             
@@ -45,10 +46,10 @@ class GameViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-            
-        //For some reason the game works better this way, weird stuff (Game over never finishes without this)
-        ncDef.addObserver(self,selector: #selector(self.loadGameView), name: NSNotification.Name.init(rawValue: "loadGameView"),object: nil)
-        ncDef.post(name: Notification.Name("loadGameView"), object: nil)
+    
+        //MARK: A Space Oddity - Game Over code never finishes without this, prevents endless loop
+        nc.addObserver(self,selector: #selector(self.loadGameMenu), name: startGame, object: nil)
+        nc.post(name: startGame, object: nil)
         
         #if !targetEnvironment(macCatalyst)
         let audioSession = AVAudioSession.sharedInstance()

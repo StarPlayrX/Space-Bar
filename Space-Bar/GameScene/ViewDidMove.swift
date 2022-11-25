@@ -15,13 +15,14 @@ import SpriteKit
 extension GameScene {
     override func didMove(to view: SKView) {
         g.showCursor = false
-        NSCursor.hide()
         
+        #if targetEnvironment(macCatalyst)
+        NSCursor.hide()
         let mouseInput = UIHoverGestureRecognizer(
             target: self,
             action: #selector(mouseDidMove(_:)))
-        
         view.addGestureRecognizer(mouseInput)
+        #endif
         
         screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
         
@@ -37,7 +38,6 @@ extension GameScene {
         
         centerWidth  = width / 2
         centerHeight = height / 2
-        
         anchor = CGPoint(x: centerWidth, y: centerHeight)
         anchorNode.position = anchor
         scene?.addChild(anchorNode)

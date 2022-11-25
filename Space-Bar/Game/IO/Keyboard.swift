@@ -8,6 +8,7 @@
 import Foundation
 import SpriteKit
 
+#if targetEnvironment(macCatalyst)
 extension GameScene: GameSceneDelegate {
     func removeLeft() {
         paddleNode.removeAction(forKey: g.moveLeft)
@@ -18,15 +19,15 @@ extension GameScene: GameSceneDelegate {
     }
         
     func goLeft() {
-        if paddleNode.position.x >= g.constraint + g.constraint / 2  {
-            let action = SKAction.moveTo(x: paddleNode.position.x - g.constraint / 2, duration: g.windspeed / g.movement)
+        if paddleNode.position.x >= (paddle / center) + xOffset {
+            let action = SKAction.moveTo(x: paddleNode.position.x - xOffset, duration: 0.05)
             paddleNode.run(action)
         }
     }
     
     func goRight() {
-        if paddleNode.position.x <= initialScreenSize.width - g.constraint + g.constraint / 4 {
-            let action = SKAction.moveTo(x: paddleNode.position.x + g.constraint / 2, duration: g.windspeed / g.movement)
+        if paddleNode.position.x <= frame.width - (paddle / center) - xOffset  {
+            let action = SKAction.moveTo(x: paddleNode.position.x + xOffset, duration: 0.05)
             paddleNode.run(action)
         }
     }
@@ -36,7 +37,7 @@ extension GameScene: GameSceneDelegate {
             self.goLeft()
         }
         
-        let wait = SKAction.wait(forDuration: g.windspeed / g.movement)
+        let wait = SKAction.wait(forDuration: 0.05)
         let seq = SKAction.sequence([goLeft,wait])
         let rep = SKAction.repeatForever(seq)
         
@@ -48,7 +49,7 @@ extension GameScene: GameSceneDelegate {
             self.goRight()
         }
         
-        let wait = SKAction.wait(forDuration: g.windspeed / g.movement)
+        let wait = SKAction.wait(forDuration: 0.05)
         let seq = SKAction.sequence([goRight,wait])
         let rep = SKAction.repeatForever(seq)
         paddleNode.run(rep, withKey: g.moveRight)
@@ -91,3 +92,4 @@ extension GameViewController {
         }
     }
 }
+#endif

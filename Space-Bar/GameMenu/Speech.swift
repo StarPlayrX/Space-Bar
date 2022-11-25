@@ -11,9 +11,13 @@ import AVFoundation
 let synthesizer = AVSpeechSynthesizer()            
 
 func speech(_ text: String) throws {
-    #if !targetEnvironment(macCatalyst)
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-        synthesizer.speak(utterance)
+    let utterance = AVSpeechUtterance(string: text)
+    //print(AVSpeechSynthesisVoice.speechVoices())
+    #if targetEnvironment(macCatalyst)
+    utterance.voice = AVSpeechSynthesisVoice(identifier: "com.apple.speech.synthesis.voice.Alex")
     #endif
+    #if !targetEnvironment(macCatalyst)
+    utterance.voice = AVSpeechSynthesisVoice(identifier: "com.apple.speech.synthesis.voice.daniel.premium")
+    #endif
+    synthesizer.speak(utterance)
 }

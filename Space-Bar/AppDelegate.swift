@@ -23,9 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
               windowScene.titlebar?.titleVisibility = .hidden
               yCoverMacOS = 32
-              let y = windowScene.screen.bounds.height - 150
-              windowScene.sizeRestrictions?.minimumSize = CGSize(width: y / 2, height: y)
-              windowScene.sizeRestrictions?.maximumSize = CGSize(width: y / 2, height: y)
+              heightMacOS = windowScene.screen.bounds.height - 150
+              widthMacOS = heightMacOS / 2
+              windowScene.sizeRestrictions?.minimumSize = CGSize(width: widthMacOS, height: heightMacOS)
+              windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
           }
           #endif
         return true
@@ -55,4 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         appSettings.saveUserDefaults()
     }
+
 }
+

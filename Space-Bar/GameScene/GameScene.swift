@@ -15,7 +15,13 @@ class GameScene: SKScene {
     var paddleNode = SKSpriteNode() //required
     var gameSceneDelegate: GameSceneDelegate! //required
     var g = Global.shared
-    
+
+    let paddle = CGFloat(130)
+    let center = CGFloat(2)
+    let leftBorder = CGFloat(4)
+    let rightBorder = CGFloat(2)
+    let xOffset = CGFloat(32)
+
     var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }

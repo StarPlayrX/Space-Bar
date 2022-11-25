@@ -37,11 +37,12 @@ struct Global {
                   ]
     var initialScreenSize: CGSize?
     let constraint = CGFloat(64)
-    let windspeed: Double = 0.3
+    let windspeed: Double = 0.15
     let movement: Double = 10
     let moveLeft: String = "moveLeft"
     let moveRight: String = "moveRight"
     var showCursor: Bool = true
+    var runningGame: Bool = false
 }
 
 // Global Vars used outside, some are required
@@ -49,4 +50,9 @@ var settings = Settings() //required
 
 var initialScreenSize = CGSize()
 var yCoverMacOS = CGFloat(0)
+var widthMacOS = CGFloat(0)
+var heightMacOS = CGFloat(0)
+var widthiOS = CGFloat(650)
+var heightiOS = CGFloat(1300)
+
 var resettingGameBoard = false

@@ -11,6 +11,7 @@ import SpriteKit
 
 extension GameScene {
     func getReady() {
+        g.runningGame = true
         let puck = Global.shared.gameBall[settings.puck]
         livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives : 0)
         let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
