@@ -7,6 +7,7 @@ The iOS release is available now at the iOS AppStore. Search for 'Todd Bruss'
 The macOS Black Friday Preview is available here:
 https://starplayrx.com/4mac/Space-Bar.zip
 
+To do: These screenshots are old, will update soon.
 <img width="400" alt="Screen Shot 2022-10-23 at 8 32 47 PM" src="https://user-images.githubusercontent.com/52664524/198066544-53b56b6a-47a4-4cb9-bfb3-e21642559c63.png"><img width="400" alt="Screen Shot 2022-10-23 at 8 32 54 PM" src="https://user-images.githubusercontent.com/52664524/198065663-607e6a80-0c39-4ac0-b420-42e00c22daad.png">
 
 Space-Bar is a 2D brick breaker game inspired by Air Hockey and Breakout. This game is dedicated to designers Nolan Bushnell, Steve Jobs, Steve Wozniak and 2600 programmer Brad Stewart who created Breakout at Atari between 1976-1978. 
