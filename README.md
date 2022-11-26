@@ -24,4 +24,4 @@ Space-Bar is developed for iOS/iPadOS and makes use of its touch interface for t
 Space-Bar created in 100% Swift with SpriteKit and AVFoundation. It is an original work created by Todd Bruss (c) 2019-2022. It is designed specifically for iOS touch devices. Space-Bar is not affiliated with any break out style video game.
 
 Do you have a cool idea for a power up or level that you'd like to see in Space-Bar? Post it as an issue! Thank you.
-Interested in contributing? Space-Bar is open source and we always keep the very latest code in Master. Join the fun!
+Interested in contributing? Space-Bar is open source and we always keep the very latest code in Master. If your a Swift programmer or designer, now's the time to get in the game, literally!
