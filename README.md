@@ -15,7 +15,7 @@ Air Hockey was invented between 1962 and 1972 by a group of Brunswick Billiards 
 
 Space-Bar features original vector graphics and classic arcade sound effects.
 
-The game features a narrator with an English accent who comments on the game's progress. If you somehow are able to score exactly zero points in the game, there is an Easter Egg with some unusual PG-13 dialog. AVFoundation was used for the narrator. Known issue, the voice does not work with iOS 16.0, but was fixed by Apple with iOS 16.0.3 and later.
+The iOS version features a narrator with an English accent who comments on the game's progress. The macOS uses an American accent. If you somehow are able to score exactly zero points in the game, there is an Easter Egg with some unusual PG-13 dialog. AVFoundation was used for the narrator. Known issue, the voice does not work with iOS 16.0, but was fixed by Apple with iOS 16.0.3 and later.
 
 Space-Bar is developed for iOS/iPadOS and makes use of its touch interface for the game's paddle known as the Space-Bar. The game's official AppStore release will be between Nov 21st and Dec 21st, 2022. A macOS release is planned at a later date. Game mechanics and some bugs are being working on.
 
