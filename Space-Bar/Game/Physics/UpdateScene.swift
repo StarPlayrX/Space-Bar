@@ -17,7 +17,7 @@ extension GameScene {
         if (settings.currentlevel + 1) % 20 == 0 {
             nodes = [ballNode, extraNode]
         } else if (settings.currentlevel + 1) % 10 == 0 {
-            nodes = [ballNode]
+            nodes = [ballNode, gFireBallNode]
         } else if (settings.currentlevel + 1) % 5 == 0 {
             nodes = [ballNode, tennisNode]
         }

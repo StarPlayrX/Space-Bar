@@ -18,15 +18,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         appSettings.loadUserDefaults()
-
+        
+        
+        let screenDensity = UIScreen().getScale
+        
           #if targetEnvironment(macCatalyst)
           UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
               windowScene.titlebar?.titleVisibility = .hidden
               yCoverMacOS = 32
-              heightMacOS = windowScene.screen.bounds.height - 150
-              widthMacOS = heightMacOS / 2
-              windowScene.sizeRestrictions?.minimumSize = CGSize(width: widthMacOS, height: heightMacOS)
-              windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
+              
+              if screenDensity == 1.0 {
+                  heightMacOS = windowScene.screen.bounds.height * 2 - 150
+                  widthMacOS = heightMacOS / 2
+                  windowScene.sizeRestrictions?.minimumSize = CGSize(width: widthMacOS, height: heightMacOS)
+                  windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
+              } else {
+                  heightMacOS = windowScene.screen.bounds.height - 150
+                  widthMacOS = heightMacOS / 2
+                  windowScene.sizeRestrictions?.minimumSize = CGSize(width: widthMacOS, height: heightMacOS)
+                  windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
+              }
+             
           }
           #endif
         return true

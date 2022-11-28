@@ -13,7 +13,31 @@ extension GameScene {
     func drawPaddle() {
         //add our paddle
         let paddleTexture = SKTexture(imageNamed: "paddle")
-        let paddlePhysicsBody = SKPhysicsBody(texture: paddleTexture, alphaThreshold: 0.1, size: paddleTexture.size())
+        
+        let MacCatalystVerison = Double(UIDevice.current.systemVersion)
+
+        var alphaThreshold = Float(0.1)
+        
+        if let MacCatalystVerison = MacCatalystVerison, MacCatalystVerison < 14.0 {
+            alphaThreshold = Float(0.25)
+        }
+        
+        /*
+         macCatalyst 13.0 = macOS 10.15
+         macCatalyst 13.4 = macOS 10.15.4
+         macCatalyst 14.0 = macOS 11.0
+         macCatalyst 14.7 = macOS 11.6
+         macCatalyst 15.0 = macOS 12.0
+         macCatalyst 15.3 = macOS 12.2 and 12.2.1
+         macCatalyst 15.4 = macOS 12.3
+         macCatalyst 15.5 = macOS 12.4
+         macCatalyst 15.6 = macOS 12.5
+         macCatalyst 15.7 = macOS 12.6
+
+         */
+        
+        print("MacCatalystVerison", MacCatalystVerison)
+        let paddlePhysicsBody = SKPhysicsBody(texture: paddleTexture, alphaThreshold: Float(alphaThreshold), size: paddleTexture.size())
         let paddle = SKSpriteNode()
         paddle.texture = paddleTexture
         paddle.physicsBody = paddlePhysicsBody
@@ -31,7 +55,7 @@ extension GameScene {
         paddle.physicsBody?.categoryBitMask = paddleCategory
         paddle.physicsBody?.collisionBitMask = ballCategory
         paddle.position = CGPoint(x:frame.width / 2,y:frame.height / paddleHeight)
-        paddle.size = CGSize(width: paddleTexture.size().width, height: paddleTexture.size().height)
+        paddle.size = paddleTexture.size()
         paddle.name = "paddle"
         paddleNode = paddle
         addChild(paddle)

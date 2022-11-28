@@ -54,5 +54,6 @@ var widthMacOS = CGFloat(0)
 var heightMacOS = CGFloat(0)
 var widthiOS = CGFloat(650)
 var heightiOS = CGFloat(1300)
-
+var displayIsRetina: Bool = false
+var displayDensity: Double = 1.0
 var resettingGameBoard = false

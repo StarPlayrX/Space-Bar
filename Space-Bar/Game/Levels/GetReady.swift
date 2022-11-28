@@ -50,14 +50,14 @@ extension GameScene {
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 
                 if self.isPaused {
+                    self.ballCounter = 5
+                } else {
                     self.ballCounter -= 1
                     
                     if self.ballCounter < 0 {
                         self.ballCounter = self.ballTimeOut
                         self.addPuck()
                     }
-                } else {
-                    self.ballCounter = 5
                 }
             }
             

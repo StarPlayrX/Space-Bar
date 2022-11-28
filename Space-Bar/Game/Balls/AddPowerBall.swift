@@ -93,7 +93,7 @@ extension GameScene {
         
         fireBallNode.physicsBody?.categoryBitMask = fireBallCategory
         fireBallNode.physicsBody?.contactTestBitMask = fireBallCategory + brickCategory
-        fireBallNode.physicsBody?.collisionBitMask = brickCategory + wallCategory + paddleCategory + goalCategory   
+        fireBallNode.physicsBody?.collisionBitMask = brickCategory + wallCategory + paddleCategory + goalCategory + ballCategory
         fireBallNode.zPosition = 50
         fireBallNode.physicsBody?.affectedByGravity = false
         fireBallNode.physicsBody?.isDynamic = true
@@ -101,35 +101,24 @@ extension GameScene {
         fireBallNode.physicsBody?.friction = 0
         fireBallNode.physicsBody?.linearDamping = 0
         fireBallNode.physicsBody?.angularDamping = 0
-        fireBallNode.physicsBody?.restitution = 1.0
-        fireBallNode.physicsBody?.mass = 0.9
+        fireBallNode.physicsBody?.restitution = 0.1
+        fireBallNode.physicsBody?.mass = 10.0
         fireBallNode.physicsBody?.fieldBitMask = 0
         fireBallNode.name = "fireball"
         fireBallNode.addChild(fireBallTexture)
         fireBallNode.position = CGPoint(x: paddleNode.position.x, y: paddleNode.position.y + 50)
         fireBallNode.speed = CGFloat(1.0)
-        fireBallNode.alpha = 0.85
+        fireBallNode.alpha =  1.0
         fireBallNode.blendMode = .multiply
         
-        let fireRnd = Int.random(in: -1...1)
-        fireBallNode.physicsBody?.velocity = CGVector(dx: 50 * CGFloat(fireRnd), dy: (velocity + CGFloat(settings.level)) + (50 * 7))
+   
         
-        let copy = fireBallNode.copy() as! SKSpriteNode
-        scene?.addChild(copy)
+        let fireRnd2 = Float.random(in: -0.25...0.25)
+        fireBallNode.physicsBody?.velocity = CGVector(dx: velocity / 1.3 * CGFloat(fireRnd2), dy: velocity / 1.1)
         
-        //let remove = SKAction.removeFromParent()
-        let half = SKAction.wait(forDuration: TimeInterval(1.5 / 2 - Double(settings.level / 200)))
-        let life = SKAction.wait(forDuration: TimeInterval(1.5 - Double(settings.level / 200)))
-
-        let fade = SKAction.fadeOut(withDuration: 1.0)
-        let rmfp = SKAction.removeFromParent()
-
-        let code = SKAction.run {
-            self.shootFireBalls()
-        }
-
-        let seq = SKAction.sequence([half,code,life,fade,rmfp])
-        copy.run(seq)
+        gFireBallNode = fireBallNode.copy() as! SKSpriteNode
+        scene?.addChild(gFireBallNode)
+  
     }
     
     func scaleNode() {
@@ -137,5 +126,6 @@ extension GameScene {
     }
 }
 
+var gFireBallNode = SKSpriteNode()
 
 

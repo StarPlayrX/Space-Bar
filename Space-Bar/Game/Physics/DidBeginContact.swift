@@ -50,8 +50,7 @@ extension GameScene {
         case ballCategory | midFieldCategory :
             ballCounter = ballTimeOut
         case fireBallCategory | brickCategory:
-            if settings.sound { run(brickSound) }
-            gameScore += 1
+            gameScore += 2
             scoreLabel.text = String(gameScore)
             if let a = secondBody.node {
                 a.removeFromParent()
