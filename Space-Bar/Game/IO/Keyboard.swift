@@ -82,6 +82,8 @@ extension GameViewController {
                 GameScene.shared.gameSceneDelegate?.moveLeft()
             }
             
+            
+            #if targetEnvironment(macCatalyst)
             if key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow || key.charactersIgnoringModifiers == "w" {
                 UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
                     heightMacOS += 10
@@ -101,7 +103,8 @@ extension GameViewController {
                     windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
                 }
             }
-            
+            #endif
+
             
             if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || key.charactersIgnoringModifiers == "a" {
                 GameScene.shared.gameSceneDelegate?.moveLeft()

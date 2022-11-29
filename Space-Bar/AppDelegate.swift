@@ -20,9 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appSettings.loadUserDefaults()
         
         let MacCatalystVerison = UIDevice.current.systemVersion
-
-        print("MacCatalystVerison", MacCatalystVerison)
         
+        #if targetEnvironment(macCatalyst)
         UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
             windowScene.titlebar?.titleVisibility = .hidden
             yCoverMacOS = 32
@@ -40,6 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
             }
         }
+        #endif
+    
         
         return true
     }
