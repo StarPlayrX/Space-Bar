@@ -82,6 +82,31 @@ extension GameViewController {
                 GameScene.shared.gameSceneDelegate?.moveLeft()
             }
             
+            if key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow || key.charactersIgnoringModifiers == "w" {
+                UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
+                    heightMacOS += 10
+                    widthMacOS = heightMacOS / 2
+                    
+                    windowScene.sizeRestrictions?.minimumSize = CGSize(width: widthMacOS, height: heightMacOS)
+                    windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
+                }
+            }
+            
+            if key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow || key.charactersIgnoringModifiers == "s" {
+                UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
+                    heightMacOS -= 10
+                    widthMacOS = heightMacOS / 2
+                    
+                    windowScene.sizeRestrictions?.minimumSize = CGSize(width: widthMacOS, height: heightMacOS)
+                    windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
+                }
+            }
+            
+            
+            if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || key.charactersIgnoringModifiers == "a" {
+                GameScene.shared.gameSceneDelegate?.moveLeft()
+            }
+            
             if key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow || key.charactersIgnoringModifiers == "d" {
                 GameScene.shared.gameSceneDelegate?.moveRight()
             }

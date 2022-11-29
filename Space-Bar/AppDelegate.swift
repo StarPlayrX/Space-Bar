@@ -26,12 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
             windowScene.titlebar?.titleVisibility = .hidden
             yCoverMacOS = 32
-           // let titleHeight: CGFloat = 34 * 4
 
-           // let height = windowScene.screen.nativeBounds.height - titleHeight
-            //Mac OS 10.15 is nil
-            if MacCatalystVerison.starts(with: "10.15") || 1 == 1 {
-                
+            if MacCatalystVerison.starts(with: "10.15") {
                 heightMacOS = 1300
                 widthMacOS = heightMacOS / 2
                 
@@ -43,7 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 windowScene.sizeRestrictions?.minimumSize = CGSize(width: widthMacOS, height: heightMacOS)
                 windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
             }
-            
         }
         
         return true
