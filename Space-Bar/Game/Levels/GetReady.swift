@@ -76,7 +76,8 @@ extension GameScene {
         //Shoot FireBalls 10, 30, 50, 70, 90
         } else if bonusLevel % 10 == 0 {
             shootFireBalls()
-            
+            shootFireBalls()
+
         //Tennis Ball 5, 15, 25, 35, 45, 55, 65, 75, 85, 95
         } else if bonusLevel % 5 == 0 {
             addTennisBall()

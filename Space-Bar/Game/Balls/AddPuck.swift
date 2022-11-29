@@ -42,7 +42,7 @@ extension GameScene {
             ballNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
             // This fall back should not happen, but we may use this in the future for iOS' that fail
-            ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 27)
+            ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 25)
         }
         
         ballNode.physicsBody?.categoryBitMask = ballCategory
@@ -107,7 +107,7 @@ extension GameScene {
             extraNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
             // This fall back should not happen, but we may use this in the future for iOS' that fail
-            extraNode.physicsBody = SKPhysicsBody(circleOfRadius: 27)
+            extraNode.physicsBody = SKPhysicsBody(circleOfRadius: 25)
         }
         
         extraNode.physicsBody?.categoryBitMask = ballCategory

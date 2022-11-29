@@ -37,7 +37,7 @@ extension GameScene {
             tennisNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
             // This fall back should not happen, but we may use this in the future for iOS' that fail
-            tennisNode.physicsBody = SKPhysicsBody(circleOfRadius: 27)
+            tennisNode.physicsBody = SKPhysicsBody(circleOfRadius: 25)
         }
         
         tennisNode.physicsBody?.categoryBitMask = powerCategory
@@ -79,7 +79,7 @@ extension GameScene {
         }
         
         fireBallTexture.text = Global.shared.gameBall[ball]
-        fireBallTexture.fontSize = 48
+        fireBallTexture.fontSize = 50
         
         let rnd = arc4random_uniform(UInt32(360))
         fireBallTexture.zRotation = CGFloat(Int(rnd).degrees)
@@ -88,7 +88,7 @@ extension GameScene {
             fireBallNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
             // This fall back should not happen, but we may use this in the future for iOS' that fail
-            fireBallNode.physicsBody = SKPhysicsBody(circleOfRadius: 27)
+            fireBallNode.physicsBody = SKPhysicsBody(circleOfRadius: 25)
         }
         
         fireBallNode.physicsBody?.categoryBitMask = fireBallCategory
@@ -101,8 +101,8 @@ extension GameScene {
         fireBallNode.physicsBody?.friction = 0
         fireBallNode.physicsBody?.linearDamping = 0
         fireBallNode.physicsBody?.angularDamping = 0
-        fireBallNode.physicsBody?.restitution = 0.1
-        fireBallNode.physicsBody?.mass = 10.0
+        fireBallNode.physicsBody?.restitution = 0.5
+        fireBallNode.physicsBody?.mass = 2.0
         fireBallNode.physicsBody?.fieldBitMask = 0
         fireBallNode.name = "fireball"
         fireBallNode.addChild(fireBallTexture)

@@ -56,12 +56,6 @@ extension GameScene {
                 a.removeFromParent()
                 checker(firstBody)
             }
-            
-            if let b = firstBody.node {
-                b.removeFromParent()
-                checker(firstBody)
-                shootFireBalls()
-            }
         case powerCategory | brickCategory:
             if settings.sound { run(brickSound) }
             gameScore += 1
