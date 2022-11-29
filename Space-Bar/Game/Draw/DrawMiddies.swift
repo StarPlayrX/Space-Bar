@@ -11,11 +11,33 @@ import SpriteKit
 
 extension GameScene {
     func drawMidCorners() {
-        //left mid corner piece
+        //left mid corner piece, removed physicsBody, using corner edges instead, this is for looks only
         let leftMidNode = SKSpriteNode()
         let leftMidTexture = SKTexture(imageNamed: "leftmid")
-        let leftMidBody = SKPhysicsBody(texture: leftMidTexture, alphaThreshold: 0.1, size: leftMidTexture.size())
         leftMidNode.texture = leftMidTexture
+        leftMidNode.size = CGSize(width: 32, height: 64)
+        leftMidNode.position = CGPoint(x: -centerWidth + (corneredge / 2) + 2, y: 0)
+        leftMidNode.alpha = 0.667
+        anchorNode.addChild(leftMidNode)
+        
+        //right mid corner piece, removed physicsBody, using corner edges instead, this is for looks only
+        let rightMidNode = SKSpriteNode()
+        let rightMidTexture = SKTexture(imageNamed: "rightmid")
+        rightMidNode.texture = rightMidTexture
+        rightMidNode.size = CGSize(width: 32, height: 64)
+        rightMidNode.position = CGPoint(x: centerWidth - (corneredge / 2) - 2, y: 0)
+        rightMidNode.alpha = 0.667
+        anchorNode.addChild(rightMidNode)
+    }
+    
+    //This is a fix for Mac Catalyst 10.15.7, but we worked it out so the same code applies to all versions of MC
+    func drawMidEdges() {
+        let size = CGSize(width: 64, height: 64)
+        //left mid corner piece
+        let leftMidNode = SKSpriteNode()
+        let leftMidBody = SKPhysicsBody(rectangleOf: size)
+
+        leftMidNode.zRotation = .pi / 4
         leftMidNode.physicsBody = leftMidBody
         leftMidNode.physicsBody?.friction = 0
         leftMidNode.physicsBody?.fieldBitMask = 0
@@ -27,16 +49,15 @@ extension GameScene {
         leftMidNode.physicsBody?.mass = 1
         leftMidNode.physicsBody?.isDynamic = false
         leftMidNode.physicsBody?.affectedByGravity = false
-        leftMidNode.size = CGSize(width: 32, height: 64)
-        leftMidNode.position = CGPoint(x: -centerWidth + (corneredge / 2) + 2, y: 0)
-        leftMidNode.alpha = 0.667
+        leftMidNode.size = size
+        leftMidNode.position = CGPoint(x: -centerWidth + (corneredge / -2) + 4, y: 0)
         anchorNode.addChild(leftMidNode)
         
         //right mid corner piece
         let rightMidNode = SKSpriteNode()
-        let rightMidTexture = SKTexture(imageNamed: "rightmid")
-        let rightMidBody = SKPhysicsBody(texture: rightMidTexture, alphaThreshold: 0.1, size: rightMidTexture.size())
-        rightMidNode.texture = rightMidTexture
+        let rightMidBody = SKPhysicsBody(rectangleOf: size)
+
+        rightMidNode.zRotation = .pi / 4
         rightMidNode.physicsBody = rightMidBody
         rightMidNode.physicsBody?.friction = 0
         rightMidNode.physicsBody?.fieldBitMask = 0
@@ -48,9 +69,8 @@ extension GameScene {
         rightMidNode.physicsBody?.mass = 1
         rightMidNode.physicsBody?.isDynamic = false
         rightMidNode.physicsBody?.affectedByGravity = false
-        rightMidNode.size = CGSize(width: 32, height: 64)
-        rightMidNode.position = CGPoint(x: centerWidth - (corneredge / 2) - 2, y: 0)
-        rightMidNode.alpha = 0.667
+        rightMidNode.size = size
+        rightMidNode.position = CGPoint(x: centerWidth - (corneredge / -2) - 4, y: 0)
         anchorNode.addChild(rightMidNode)
     }
 }

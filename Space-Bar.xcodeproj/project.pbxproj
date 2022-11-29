@@ -24,8 +24,6 @@
 		5F1BEEF8292C5C560074ADF6 /* AddPowerBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1BEEDB292C5C560074ADF6 /* AddPowerBall.swift */; };
 		5F1BEEF9292C5C560074ADF6 /* CocoaTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1BEEDD292C5C560074ADF6 /* CocoaTouch.swift */; };
 		5F1BEEFA292C5C560074ADF6 /* ViewDidMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1BEEDF292C5C560074ADF6 /* ViewDidMove.swift */; };
-		5F1BEEFB292C5C560074ADF6 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F1BEEE0292C5C560074ADF6 /* GameScene.sks */; };
-		5F1BEEFC292C5C560074ADF6 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1BEEE1292C5C560074ADF6 /* GameScene.swift */; };
 		5F1BEEFD292C5C560074ADF6 /* UpdateScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1BEEE3292C5C560074ADF6 /* UpdateScene.swift */; };
 		5F1BEEFE292C5C560074ADF6 /* SetHighScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1BEEE4292C5C560074ADF6 /* SetHighScore.swift */; };
 		5F1BEEFF292C5C560074ADF6 /* DidBeginContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1BEEE5292C5C560074ADF6 /* DidBeginContact.swift */; };
@@ -163,6 +161,8 @@
 		5F6814CD2931302200A648E6 /* SceneDidLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6814CC2931302200A648E6 /* SceneDidLoad.swift */; };
 		5FDA94EA293146D200A9AFF7 /* GameSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDA94E9293146D200A9AFF7 /* GameSceneDelegate.swift */; };
 		5FDA94F52934786800A9AFF7 /* Retina.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDA94F42934786800A9AFF7 /* Retina.swift */; };
+		5FEC19BA293678F5008239D6 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5FEC19B8293678F4008239D6 /* GameScene.sks */; };
+		5FEC19BB293678F5008239D6 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FEC19B9293678F5008239D6 /* GameScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -185,8 +185,6 @@
 		5F1BEEDB292C5C560074ADF6 /* AddPowerBall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPowerBall.swift; sourceTree = "<group>"; };
 		5F1BEEDD292C5C560074ADF6 /* CocoaTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaTouch.swift; sourceTree = "<group>"; };
 		5F1BEEDF292C5C560074ADF6 /* ViewDidMove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewDidMove.swift; sourceTree = "<group>"; };
-		5F1BEEE0292C5C560074ADF6 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		5F1BEEE1292C5C560074ADF6 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		5F1BEEE3292C5C560074ADF6 /* UpdateScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateScene.swift; sourceTree = "<group>"; };
 		5F1BEEE4292C5C560074ADF6 /* SetHighScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetHighScore.swift; sourceTree = "<group>"; };
 		5F1BEEE5292C5C560074ADF6 /* DidBeginContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DidBeginContact.swift; sourceTree = "<group>"; };
@@ -325,6 +323,8 @@
 		5F7217C4292C6D6100729CAA /* Space-Bar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Space-Bar.entitlements"; sourceTree = "<group>"; };
 		5FDA94E9293146D200A9AFF7 /* GameSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneDelegate.swift; sourceTree = "<group>"; };
 		5FDA94F42934786800A9AFF7 /* Retina.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Retina.swift; sourceTree = "<group>"; };
+		5FEC19B8293678F4008239D6 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		5FEC19B9293678F5008239D6 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -422,8 +422,8 @@
 		5F1BEEDE292C5C560074ADF6 /* GameScene */ = {
 			isa = PBXGroup;
 			children = (
-				5F1BEEE1292C5C560074ADF6 /* GameScene.swift */,
-				5F1BEEE0292C5C560074ADF6 /* GameScene.sks */,
+				5FEC19B8293678F4008239D6 /* GameScene.sks */,
+				5FEC19B9293678F5008239D6 /* GameScene.swift */,
 				5FDA94E9293146D200A9AFF7 /* GameSceneDelegate.swift */,
 				5F6814CC2931302200A648E6 /* SceneDidLoad.swift */,
 				5F1BEEDF292C5C560074ADF6 /* ViewDidMove.swift */,
@@ -789,7 +789,6 @@
 				5F1BEFB7292C5C780074ADF6 /* level64.sks in Resources */,
 				5F1BEFDC292C5C780074ADF6 /* level79.sks in Resources */,
 				5F1BEFBE292C5C780074ADF6 /* level68.sks in Resources */,
-				5F1BEEFB292C5C560074ADF6 /* GameScene.sks in Resources */,
 				5F1BEFE0292C5C780074ADF6 /* level36.sks in Resources */,
 				5F1BEFB4292C5C780074ADF6 /* level65.sks in Resources */,
 				5F1BEEBE292C5A270074ADF6 /* Assets.xcassets in Resources */,
@@ -815,6 +814,7 @@
 				5F1BEFC3292C5C780074ADF6 /* hexTileSet.sks in Resources */,
 				5F1BEF20292C5C6C0074ADF6 /* Dah.m4a in Resources */,
 				5F1BEFC6292C5C780074ADF6 /* level56.sks in Resources */,
+				5FEC19BA293678F5008239D6 /* GameScene.sks in Resources */,
 				5F1BEF9D292C5C780074ADF6 /* level10.sks in Resources */,
 				5F1BEFE9292C5C780074ADF6 /* level34.sks in Resources */,
 				5F1BEF9B292C5C780074ADF6 /* level39.sks in Resources */,
@@ -881,6 +881,7 @@
 				5F1BEED3292C5BE60074ADF6 /* ScreenSize.swift in Sources */,
 				5F1BEED2292C5BE60074ADF6 /* Global.swift in Sources */,
 				5F1BEEF6292C5C560074ADF6 /* AddPuck.swift in Sources */,
+				5FEC19BB293678F5008239D6 /* GameScene.swift in Sources */,
 				5F1BEF0D292C5C560074ADF6 /* DrawParallax.swift in Sources */,
 				5F1BEF0B292C5C560074ADF6 /* DrawWalls.swift in Sources */,
 				5FDA94F52934786800A9AFF7 /* Retina.swift in Sources */,
@@ -909,7 +910,6 @@
 				5F1BEF01292C5C560074ADF6 /* GetReady.swift in Sources */,
 				5F1BEF07292C5C560074ADF6 /* DrawCenterCourt.swift in Sources */,
 				5F1BEED6292C5BE60074ADF6 /* Speech.swift in Sources */,
-				5F1BEEFC292C5C560074ADF6 /* GameScene.swift in Sources */,
 				5F1BEEF9292C5C560074ADF6 /* CocoaTouch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -986,7 +986,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1040,7 +1040,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1057,7 +1057,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 103;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
@@ -1067,12 +1067,13 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ufoemoji.spacebar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1091,7 +1092,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 103;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
@@ -1101,12 +1102,13 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ufoemoji.spacebar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
