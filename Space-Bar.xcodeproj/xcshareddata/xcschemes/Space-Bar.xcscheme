@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5F1BEEAC292C5A260074ADF6"
+               BlueprintIdentifier = "5FEC19C429367DEE008239D6"
                BuildableName = "Space-Bar.app"
                BlueprintName = "Space-Bar"
                ReferencedContainer = "container:Space-Bar.xcodeproj">
@@ -32,8 +32,9 @@
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = ""
-      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      disablePerformanceAntipatternChecker = "YES"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -44,7 +45,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5F1BEEAC292C5A260074ADF6"
+            BlueprintIdentifier = "5FEC19C429367DEE008239D6"
             BuildableName = "Space-Bar.app"
             BlueprintName = "Space-Bar"
             ReferencedContainer = "container:Space-Bar.xcodeproj">
@@ -61,7 +62,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5F1BEEAC292C5A260074ADF6"
+            BlueprintIdentifier = "5FEC19C429367DEE008239D6"
             BuildableName = "Space-Bar.app"
             BlueprintName = "Space-Bar"
             ReferencedContainer = "container:Space-Bar.xcodeproj">

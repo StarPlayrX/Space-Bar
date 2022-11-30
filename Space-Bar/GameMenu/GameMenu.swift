@@ -1,33 +1,22 @@
 //
-//  ParentalScene.swift
-//  Fidget
+//  GameScene.swift
+//  Space-Bar
 //
 //  Created by Todd Bruss on 10/5/22.
 //  Copyright © 2022 Todd Bruss. All rights reserved.
 //
 
 import SpriteKit
+//import GameplayKit
 
 class GameMenu: SKScene {
-    
-    override func sceneDidLoad() {
-        var g = Global.shared
-        
+    override func sceneDidLoad() {        
         g.showCursor = true
         g.runningGame = false
-        
-        
+    
         #if targetEnvironment(macCatalyst)
         NSCursor.unhide()
         #endif
-        
-       
-        GameScene.shared = GameScene()
-    }
-    
-    
-     var prefersHomeIndicatorAutoHidden: Bool {
-        return true
     }
     
     var keyPressed = false
@@ -65,7 +54,7 @@ class GameMenu: SKScene {
                 func puckRight() {
                     settings.puck = settings.puck < Global.shared.gameBall.count - 1 ? settings.puck + 1 : 0
                 }
-                
+
                 func puckCommon() {
                     let ball = Global.shared.gameBall
                     let text = Global.shared.gameBallText
@@ -132,21 +121,35 @@ class GameMenu: SKScene {
                     keyPressed = true
                     
                     let runcode = SKAction.run { [self] in
-                        
-                        guard let gameScene = GameScene(fileNamed:"GameScene") else { return }
-                        GameScene.shared = gameScene
-                        GameScene.shared .scaleMode = .aspectFit
-                        view?.showsFPS = false
-                        view?.showsNodeCount = false
-                        view?.showsPhysics = false
-                        view?.showsFields = false
-                        view?.clearsContextBeforeDrawing = true
-                        view?.isAsynchronous = true
-                        view?.ignoresSiblingOrder = true
-                        view?.clipsToBounds = true
-                        view?.backgroundColor = SKColor.black
-                        view?.isMultipleTouchEnabled = false
-                        view?.presentScene(GameScene.shared , transition: SKTransition.fade(withDuration: 2.0))
+                        DispatchQueue.main.async {
+                            if let scene = SKScene(fileNamed: "GameScene") {
+                                    gScene = scene
+                                // Get the SKScene from the loaded GKScene
+                               // if let sceneNode = scene.rootNode as! GameScene? {
+                                    
+                                    // Copy gameplay related content over to the scene
+                                    //sceneNode.entities = scene.entities
+                                    //sceneNode.graphs = scene.graphs
+                                    scene.scaleMode = .aspectFit
+                                    
+                                    // Present the scene
+                                    if let view = self.view as SKView? {
+                                        scene.speed = 1.0
+                                        view.showsFPS = false
+                                        view.showsNodeCount = false
+                                        view.showsPhysics = false
+                                        view.showsFields = false
+                                        view.clearsContextBeforeDrawing = true
+                                        view.isAsynchronous = true
+                                        view.ignoresSiblingOrder = true
+                                        view.clipsToBounds = true
+                                        view.backgroundColor = SKColor.black
+                                        view.isMultipleTouchEnabled = false
+                                        view.presentScene(scene, transition: SKTransition.fade(withDuration: 2.0))
+                                    }
+                              //  }
+                            }
+                        }
                     }
                     
                     let fade1 = SKAction.fadeAlpha(to: 0.7, duration:TimeInterval(0.15))
@@ -159,9 +162,7 @@ class GameMenu: SKScene {
     }
     
     override func didMove(to view: SKView) {
-        
-        var g = Global.shared
-        
+                
         g.showCursor = true
         
         #if targetEnvironment(macCatalyst)

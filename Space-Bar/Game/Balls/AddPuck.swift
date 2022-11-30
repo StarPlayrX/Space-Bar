@@ -74,7 +74,11 @@ extension GameScene {
         let negative: CGFloat = swapper ? 1 : -1
         swapper.toggle()
         
-        return CGVector(dx: (velocity + CGFloat(settings.currentlevel) / 100) / CGFloat(ratio) * negative, dy: velocity + CGFloat(settings.currentlevel) / 50)
+        #if targetEnvironment(macCatalyst)
+            return CGVector(dx: (velocity + CGFloat(settings.currentlevel) / 100) / CGFloat(ratio) * negative, dy: velocity + CGFloat(settings.currentlevel) / 50)
+        #else
+            return CGVector(dx: (velocity + CGFloat(settings.currentlevel) / 50) / CGFloat(ratio) * negative, dy: velocity + CGFloat(settings.currentlevel) / 25)
+        #endif
     }
     
     func addExtraBall() {

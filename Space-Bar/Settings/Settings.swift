@@ -17,6 +17,7 @@ struct Settings: Codable {
     var highscore   : Int  =  0
     var lives       : Int  =  3
     var sound       : Bool =  true
+    var height      : CGFloat? = nil
 }
 
 struct AppSettings {

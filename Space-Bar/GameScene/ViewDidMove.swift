@@ -9,9 +9,6 @@
 import Foundation
 import SpriteKit
 
-
-
-
 extension GameScene {
     override func didMove(to view: SKView) {
         g.showCursor = false
@@ -43,15 +40,15 @@ extension GameScene {
         scene?.addChild(anchorNode)
         
         //MARK: - Game Frame
+        
+        bonusLives(minor: true, major: false, large: true)
+
         let frame = CGRect(x: -centerWidth, y: -centerHeight, width: width, height: height)
         drawEdgeLoop(frame)
-        
         drawParallax()
-    
-        bonusLives(minor: true, major: false, large: true)
-        
         drawHUD()
         drawMidCorners()
+        drawMidEdges()
         drawCenterCourt()
         drawWalls()
         drawGoal()

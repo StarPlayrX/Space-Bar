@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SpriteKit
+import AVFoundation
 
 struct Global {
     static var shared = Global()
@@ -46,8 +47,7 @@ struct Global {
 }
 
 // Global Vars used outside, some are required
-var settings = Settings() //required
-
+var settings = Settings() 
 var initialScreenSize = CGSize()
 var yCoverMacOS = CGFloat(0)
 var widthMacOS = CGFloat(0)
@@ -57,3 +57,8 @@ var heightiOS = CGFloat(1300)
 var displayIsRetina: Bool = false
 var displayDensity: Double = 1.0
 var resettingGameBoard = false
+var gScene = SKScene()
+var g = Global.shared
+var gameSceneDelegate: GameSceneDelegate! //required
+var paddleNode = SKSpriteNode() //required
+let synthesizer = AVSpeechSynthesizer()

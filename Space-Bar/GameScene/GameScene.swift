@@ -1,27 +1,20 @@
 //
 //  GameScene.swift
-//  Space Bar
+//  Space-Bar
 //
-//  Created by Todd Bruss on 10/5/22.
-//  Copyright © 2022 Todd Bruss. All rights reserved.
+//  Created by Todd Bruss on 11/29/22.
 //
 
 import SpriteKit
 
-
 class GameScene: SKScene {
-    static var shared = GameScene()
     
-    var paddleNode = SKSpriteNode() //required
-    var gameSceneDelegate: GameSceneDelegate! //required
-    var g = Global.shared
-
     let paddle = CGFloat(130)
     let center = CGFloat(2)
     let leftBorder = CGFloat(4)
     let rightBorder = CGFloat(2)
     let xOffset = CGFloat(32)
-
+    
     var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
@@ -32,7 +25,13 @@ class GameScene: SKScene {
     var timer = Timer()
     let ratio = CGFloat(2)
     let zero = CGFloat(0)
-    var velocity = CGFloat(650)
+    
+    #if targetEnvironment(macCatalyst)
+        var velocity = CGFloat(650)
+    #else
+        var velocity = CGFloat(666)
+    #endif
+    
     var ballNode    = SKSpriteNode()
     var extraNode   = SKSpriteNode()
     var tennisNode  = SKSpriteNode()
@@ -44,7 +43,7 @@ class GameScene: SKScene {
         removeAllChildren()
         removeFromParent()
     }
-
+    
     // Our Game's Actors
     var bricksChecksum = 0
     var bricksChecksumPrev = 1
@@ -62,7 +61,7 @@ class GameScene: SKScene {
     let goalCategory     : UInt32 = 128
     let midFieldCategory : UInt32 = 256
     let middieCategory   : UInt32 = 512
-
+    
     var space : SKReferenceNode? = nil
     
     //Positioning variables
@@ -79,11 +78,20 @@ class GameScene: SKScene {
     let scoreLabel = SKLabelNode(fontNamed:"emulogic")
     let levelLabel = SKLabelNode(fontNamed:"emulogic")
     let livesLabel = SKLabelNode(fontNamed:"SpaceBarColors")
-
-    let goalSound   = SKAction.playSoundFileNamed("Dah.m4a", waitForCompletion: false)
-    let brickSound  = SKAction.playSoundFileNamed("Bip.m4a", waitForCompletion: false)
-    let paddleSound = SKAction.playSoundFileNamed("Knock.m4a", waitForCompletion: false)
-    let wallSound   = SKAction.playSoundFileNamed("Dat.m4a", waitForCompletion: false)
+    
+    //MARK: New Bug on iOS 16.1 - Simulator gets a deadlock when trying to play sounds
+#if targetEnvironment(simulator)
+    let goalSound   = SKAction()
+    let brickSound  = SKAction()
+    let wallSound   = SKAction()
+    let paddleSound = SKAction()
+#else
+    let goalSound   = SKAction.playSoundFileNamed("Dah.mp3", waitForCompletion: false)
+    let brickSound  = SKAction.playSoundFileNamed("Bip.mp3", waitForCompletion: false)
+    let wallSound   = SKAction.playSoundFileNamed("Dat.mp3", waitForCompletion: false)
+    let paddleSound = SKAction.playSoundFileNamed("Knock.mp3", waitForCompletion: false)
+#endif
+    
     
     //corners
     let corneredge    = CGFloat(32)
@@ -108,3 +116,5 @@ class GameScene: SKScene {
         3: ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣"],
     ]
 }
+
+

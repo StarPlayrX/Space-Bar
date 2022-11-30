@@ -8,8 +8,10 @@
 import Foundation
 import SpriteKit
 
-#if targetEnvironment(macCatalyst)
 extension GameScene: GameSceneDelegate {
+    
+    static let shared = GameScene()
+    
     func removeLeft() {
         paddleNode.removeAction(forKey: g.moveLeft)
     }
@@ -19,14 +21,14 @@ extension GameScene: GameSceneDelegate {
     }
         
     func goLeft() {
-        if paddleNode.position.x >= (paddle / center) + xOffset {
+        if paddleNode.position.x >= (paddle / 2) + xOffset  {
             let action = SKAction.moveTo(x: paddleNode.position.x - xOffset, duration: 0.05)
             paddleNode.run(action)
         }
     }
     
     func goRight() {
-        if paddleNode.position.x <= frame.width - (paddle / center) - xOffset  {
+        if paddleNode.position.x <= frame.width - paddle - xOffset * 2 {
             let action = SKAction.moveTo(x: paddleNode.position.x + xOffset, duration: 0.05)
             paddleNode.run(action)
         }
@@ -56,9 +58,9 @@ extension GameScene: GameSceneDelegate {
     }
     
     func playPause() {
-        // For some reason still have to use a Global here for gScene. Odd, doesn't run correctly using the local
-        GameScene.shared.isPaused.toggle()
-        GameScene.shared.speed = GameScene.shared.isPaused ? 0 : 1
+        //MARK: For some reason still have to use a Global here for gScene. Odd, doesn't run correctly using the local
+        gScene.isPaused.toggle()
+        gScene.speed = gScene.isPaused ? 0 : 1
     }
 }
 
@@ -67,9 +69,9 @@ extension GameViewController {
         for press in presses {
             guard let key = press.key else { continue }
             if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || key.charactersIgnoringModifiers == "a" {
-                GameScene.shared.gameSceneDelegate?.removeLeft()
+                gameSceneDelegate?.removeLeft()
             } else if key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow || key.charactersIgnoringModifiers == "d" {
-                GameScene.shared.gameSceneDelegate?.removeRight()
+                gameSceneDelegate?.removeRight()
             }
         }
     }
@@ -79,45 +81,48 @@ extension GameViewController {
         for press in presses {
             guard let key = press.key else { continue }
             if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || key.charactersIgnoringModifiers == "a" {
-                GameScene.shared.gameSceneDelegate?.moveLeft()
+                gameSceneDelegate?.moveLeft()
             }
             
             
             #if targetEnvironment(macCatalyst)
             if key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow || key.charactersIgnoringModifiers == "w" {
                 UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
-                    heightMacOS += 10
+                    heightMacOS += 2
                     widthMacOS = heightMacOS / 2
                     
                     windowScene.sizeRestrictions?.minimumSize = CGSize(width: widthMacOS, height: heightMacOS)
                     windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
+                    
+                    settings.height = heightMacOS
                 }
             }
             
             if key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow || key.charactersIgnoringModifiers == "s" {
                 UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
-                    heightMacOS -= 10
+                    heightMacOS -= 2
                     widthMacOS = heightMacOS / 2
                     
                     windowScene.sizeRestrictions?.minimumSize = CGSize(width: widthMacOS, height: heightMacOS)
                     windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
+                    
+                    settings.height = heightMacOS
                 }
             }
             #endif
 
             
             if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || key.charactersIgnoringModifiers == "a" {
-                GameScene.shared.gameSceneDelegate?.moveLeft()
+                gameSceneDelegate?.moveLeft()
             }
             
             if key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow || key.charactersIgnoringModifiers == "d" {
-                GameScene.shared.gameSceneDelegate?.moveRight()
+                gameSceneDelegate?.moveRight()
             }
             
             if key.charactersIgnoringModifiers == " " {
-                GameScene().gameSceneDelegate?.playPause()
+                gameSceneDelegate?.playPause()
             }
         }
     }
 }
-#endif

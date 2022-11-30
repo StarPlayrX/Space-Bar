@@ -29,8 +29,6 @@ extension GameScene {
             }
         }
         
-        drawBricks(BricksTileMap: tilemap)
-        
         var x: CGFloat = 0
         
         if xPos.indices.contains(settings.currentlevel) {
@@ -40,5 +38,10 @@ extension GameScene {
         space?.position = CGPoint(x: x, y: centerHeight - 296)
         space?.xScale = 0.9
         space?.yScale = 0.9
+        space?.alpha = 0
+        DispatchQueue.main.async {
+            self.drawBricks(BricksTileMap: tilemap)
+            self.space?.alpha = 1
+        }
     }
 }

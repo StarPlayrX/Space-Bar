@@ -29,8 +29,8 @@ extension GameScene {
         topWall.position = CGPoint(x: 0, y: height / 2 - 60)
         topWall.size = topWallSize
         topWall.physicsBody?.restitution = 1.0
-        topWall.name = "wall"
-        topWall.alpha = 0.667
+        topWall.name = "resetcounter"
+        topWall.alpha = 1.0
         anchorNode.addChild(topWall)
         
         let upperLeftWall = SKSpriteNode()
@@ -52,7 +52,7 @@ extension GameScene {
         upperLeftWall.size = upperLeftWallSize
         upperLeftWall.physicsBody?.restitution = 1.0
         upperLeftWall.name = "wall"
-        upperLeftWall.alpha = 0.667
+        upperLeftWall.alpha = 1.0
         anchorNode.addChild(upperLeftWall)
         
         let upperRightWall = SKSpriteNode()
@@ -74,7 +74,7 @@ extension GameScene {
         upperRightWall.size = upperRightWallSize
         upperRightWall.physicsBody?.restitution = 1.0
         upperRightWall.name = "wall"
-        upperRightWall.alpha = 0.667
+        upperRightWall.alpha = 1.0
         anchorNode.addChild(upperRightWall)
         
         let lowerLeftWall = SKSpriteNode()
@@ -95,8 +95,8 @@ extension GameScene {
         lowerLeftWall.position = CGPoint(x: -centerWidth + 2, y: -centerHeight / 2 + 18)
         lowerLeftWall.size = lowerLeftWallSize
         lowerLeftWall.physicsBody?.restitution = 1.0
-        lowerLeftWall.name = "wall"
-        lowerLeftWall.alpha = 0.667
+        lowerLeftWall.name = "resetcounter"
+        lowerLeftWall.alpha = 1.0
         anchorNode.addChild(lowerLeftWall)
         
         let lowerRightWall = SKSpriteNode()
@@ -117,8 +117,8 @@ extension GameScene {
         lowerRightWall.position = CGPoint(x: centerWidth - 2, y: -centerHeight / 2 + 18)
         lowerRightWall.size = lowerRightWallSize
         lowerRightWall.physicsBody?.restitution = 1.0
-        lowerRightWall.name = "wall"
-        lowerRightWall.alpha = 0.667
+        lowerRightWall.name = "resetcounter"
+        lowerRightWall.alpha = 1.0
         anchorNode.addChild(lowerRightWall)
         
         let recessWallNodeR = SKSpriteNode()
@@ -139,7 +139,7 @@ extension GameScene {
         recessWallNodeR.size = CGSize(width: (width + 2) / 3, height: 4)
         recessWallNodeR.physicsBody?.restitution = 1.0
         recessWallNodeR.name = "wall"
-        recessWallNodeR.alpha = 0.667
+        recessWallNodeR.alpha = 1.0
         anchorNode.addChild(recessWallNodeR)
         
         let recessWallNodeL = SKSpriteNode()
@@ -160,7 +160,7 @@ extension GameScene {
         recessWallNodeL.size = CGSize(width: (width + 2) / 3, height: 4)
         recessWallNodeL.physicsBody?.restitution = 1.0
         recessWallNodeL.name = "wall"
-        recessWallNodeL.alpha = 0.667
+        recessWallNodeL.alpha = 1.0
         anchorNode.addChild(recessWallNodeL)
     }
 }

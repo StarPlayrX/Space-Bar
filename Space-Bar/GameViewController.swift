@@ -1,57 +1,18 @@
 //
 //  GameViewController.swift
-//  Space Bar
+//  Space-Bar
 //
-//  Created by Todd Bruss on 10/5/22.
-//  Copyright © 2022 Todd Bruss. All rights reserved.
+//  Created by Todd Bruss on 11/29/22.
 //
 
 import UIKit
 import SpriteKit
+//import GameplayKit
 import AVFoundation
-import GameplayKit
 
 
 class GameViewController: UIViewController {
-   
-    var g = Global.shared
-    let nc = NotificationCenter.default
-    let startGame = Notification.Name("loadGameView")
-    override var prefersHomeIndicatorAutoHidden: Bool {
-       return true
-    }
-   
-    override var preferredScreenEdgesDeferringSystemGestures: UIRectEdge {
-        return UIRectEdge.bottom
-    }
-    
-    @objc func loadGameMenu() {
-        if let view = view as? SKView,
-           let scene = SKScene(fileNamed: "GameMenu") {
-            
-            initialScreenSize = CGSize(width: view.frame.width, height: view.frame.height)
-            scene.scaleMode = .aspectFit
-            view.ignoresSiblingOrder = true
-            view.showsFields = false
-            view.showsPhysics = false
-            view.isAsynchronous = true
-            view.isMultipleTouchEnabled = false
-            view.isOpaque = true
-            view.allowsTransparency = false
-            view.showsFPS = false
-            view.showsNodeCount = false
-            view.presentScene(scene, transition: SKTransition.fade(withDuration: 2.0))
-        }
-    }
-   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    
-        //MARK: A Space Oddity - Game Over code never finishes without this, prevents endless loop
-        nc.addObserver(self,selector: #selector(self.loadGameMenu), name: startGame, object: nil)
-        nc.post(name: startGame, object: nil)
-        
-        #if !targetEnvironment(macCatalyst)
+    func runAudioSession() {
         let audioSession = AVAudioSession.sharedInstance()
         
         if settings.sound {
@@ -61,9 +22,52 @@ class GameViewController: UIViewController {
         }
         
         try? audioSession.setActive(true)
+    }
+    
+    func runGameMenu() {
+        // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
+        // including entities and graphs.
+        if let scene = SKScene(fileNamed: "GameMenu") {
+            // Get the SKScene from the loaded GKScene
+            //if let rootNode = gkScene.rootNode as! GameMenu? {
+                
+                // Copy gameplay related content over to the scene
+                //sceneNode.entities = scene.entities
+                //sceneNode.graphs = scene.graphs
+                
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                
+                // Present the scene
+                if let view = self.view as! SKView? {
+                    view.ignoresSiblingOrder = true
+                    view.showsFPS = false
+                    view.showsNodeCount = false
+                    view.isMultipleTouchEnabled = false
+                    view.presentScene(scene, transition: SKTransition.fade(withDuration: 2.0))
+                }
+            //}
+        }
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        #if targetEnvironment(macCatalyst)
+        runAudioSession()
         #endif
+        DispatchQueue.main.async {
+            self.runGameMenu()
+        }
     }
 
+    override var prefersHomeIndicatorAutoHidden: Bool {
+       return true
+   }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     override var shouldAutorotate: Bool {
         return true
     }
@@ -80,9 +84,10 @@ class GameViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
-
-    override var prefersStatusBarHidden: Bool {
-        return true
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -112,13 +117,10 @@ class GameViewController: UIViewController {
                 let fullScreenNone = 9
                 
                 property("level", object: window, set: [floating], clear: [])
+
                 property("styleMask", object: window, set: [resizable], clear: [])
                 property("collectionBehavior", object: window, set: [fullScreenNone], clear: [fullScreenPrimary, fullScreenAuxiliary])
             }
         }
     }
-    
-    
-
 }
-

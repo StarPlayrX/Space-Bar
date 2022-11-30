@@ -8,6 +8,7 @@
 
 import Foundation
 import SpriteKit
+import GameplayKit
 
 extension GameScene {
     func didBegin(_ contact: SKPhysicsContact) {
@@ -36,17 +37,40 @@ extension GameScene {
             let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(swapper2 ? 1 : -1), duration: 2)
             firstBody.node?.run(rotateAction)
         }
-
+        
         if name2.contains("ball") {
             swapper3.toggle()
             let rotateAction = SKAction.rotate(byAngle: .pi * CGFloat(swapper3 ? 1 : -1), duration: 2)
             secondBody.node?.run(rotateAction)
         }
-    
-        switch catMask {
         
-        case powerCategory | wallCategory, ballCategory | wallCategory:
-            if settings.sound { run(wallSound) }
+        switch catMask {
+            
+        case ballCategory | wallCategory:
+            if settings.sound {
+                DispatchQueue.main.async { [self] in
+                    run(wallSound)
+                }
+            }
+            
+            if let a = firstBody.node {
+                if a.name == "resetcounter" {
+                    ballCounter = 5
+                }
+            }
+            
+            if let a = secondBody.node {
+                if a.name == "resetcounter" {
+                    ballCounter = 5
+                }
+            }
+            break
+        case powerCategory | wallCategory:
+            if settings.sound {
+                DispatchQueue.main.async { [self] in
+                    run(wallSound)
+                }
+            }
         case ballCategory | midFieldCategory :
             ballCounter = ballTimeOut
         case fireBallCategory | brickCategory:
@@ -57,7 +81,11 @@ extension GameScene {
                 checker(firstBody)
             }
         case powerCategory | brickCategory:
-            if settings.sound { run(brickSound) }
+            if settings.sound {
+                DispatchQueue.main.async { [self] in
+                    run(brickSound)
+                }
+            }
             gameScore += 1
             scoreLabel.text = String(gameScore)
             if let a = secondBody.node {
@@ -65,8 +93,12 @@ extension GameScene {
                 checker(firstBody)
             }
         case ballCategory | brickCategory :
+            if settings.sound {
+                DispatchQueue.main.async { [self] in
+                    run(brickSound)
+                }
+            }
             ballCounter = ballTimeOut
-            if settings.sound { run(brickSound) }
             gameScore += 1
             scoreLabel.text = String(gameScore)
             if let a = secondBody.node {
@@ -78,7 +110,7 @@ extension GameScene {
                 a.physicsBody = nil
                 a.name = ""
                 a.removeFromParent()
-
+                
                 if name == "extraball" {
                     if gameLives > 0 {
                         return
@@ -91,8 +123,12 @@ extension GameScene {
             ballCounter = ballTimeOut
             
             if gameLives > 0 {
+                if settings.sound {
+                    DispatchQueue.main.async { [self] in
+                        run(goalSound)
+                    }
+                }
                 gameLives -= 1
-                if settings.sound { run(goalSound) }
                 let puck = Global.shared.gameBall[settings.puck]
                 livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives - 1 : 0)
             }
@@ -124,7 +160,7 @@ extension GameScene {
                 
                 let action3 = SKAction.run { [self] in
                     removeFireBall(willFade: false)
-
+                    
                     let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
                     
                     let wait1 = SKAction.wait(forDuration: 0.5)
@@ -152,28 +188,44 @@ extension GameScene {
                     }
                     
                     let runcode = SKAction.run {
-                        NotificationCenter.default.post(name: Notification.Name("loadGameView"), object: nil)
+                        if let scene = SKScene(fileNamed: "GameMenu"), let view = self.view as SKView? {
+                            scene.scaleMode = .aspectFill
+                            view.ignoresSiblingOrder = true
+                            view.showsFPS = false
+                            view.showsNodeCount = false
+                            view.isMultipleTouchEnabled = false
+                            view.presentScene(scene, transition: SKTransition.crossFade(withDuration: 2.0))
+                        }
                     }
                     
                     self.anchorNode.run(SKAction.sequence([wait1,gameOverCode,wait2,runcode]))
                 }
-          
+                
                 let seq = SKAction.sequence([action2, action1, action3])
                 scene?.run(seq)
             }
         case powerCategory | paddleCategory:
-            if settings.sound { run(paddleSound) }
+            if settings.sound {
+                DispatchQueue.main.async { [self] in
+                    run(paddleSound)
+                }
+            }
             scoreLabel.text = String(gameScore)
             
         case ballCategory | paddleCategory:
+            if settings.sound {
+                DispatchQueue.main.async { [self] in
+                    run(paddleSound)
+                }
+            }
+            
             ballCounter = ballTimeOut
-            if settings.sound { run(paddleSound) }
             scoreLabel.text = String(gameScore)
             
             if let b = secondBody.node {
-
-                let dy = CGFloat.random(in:  0...1)
-
+                
+                let dy = CGFloat.random(in: 0...1)
+                
                 b.physicsBody?.applyImpulse(CGVector(dx: 0, dy: dy))
             }
         default:

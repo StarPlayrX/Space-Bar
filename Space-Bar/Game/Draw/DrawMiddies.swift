@@ -15,18 +15,18 @@ extension GameScene {
         let leftMidNode = SKSpriteNode()
         let leftMidTexture = SKTexture(imageNamed: "leftmid")
         leftMidNode.texture = leftMidTexture
-        leftMidNode.size = CGSize(width: 32, height: 64)
-        leftMidNode.position = CGPoint(x: -centerWidth + (corneredge / 2) + 2, y: 0)
-        leftMidNode.alpha = 0.667
+        leftMidNode.size = CGSize(width: 36, height: 64)
+        leftMidNode.position = CGPoint(x: -centerWidth + (corneredge / 2), y: 0)
+        leftMidNode.alpha = 1.0
         anchorNode.addChild(leftMidNode)
         
         //right mid corner piece, removed physicsBody, using corner edges instead, this is for looks only
         let rightMidNode = SKSpriteNode()
         let rightMidTexture = SKTexture(imageNamed: "rightmid")
         rightMidNode.texture = rightMidTexture
-        rightMidNode.size = CGSize(width: 32, height: 64)
+        rightMidNode.size = CGSize(width: 36, height: 64)
         rightMidNode.position = CGPoint(x: centerWidth - (corneredge / 2) - 2, y: 0)
-        rightMidNode.alpha = 0.667
+        rightMidNode.alpha = 1.0
         anchorNode.addChild(rightMidNode)
     }
     
@@ -45,7 +45,7 @@ extension GameScene {
         leftMidNode.physicsBody?.categoryBitMask = wallCategory
         leftMidNode.physicsBody?.collisionBitMask = wallCategory + ballCategory
         leftMidNode.physicsBody?.restitution = 1.0
-        leftMidNode.name = "wall"
+        leftMidNode.name = "resetcounter"
         leftMidNode.physicsBody?.mass = 1
         leftMidNode.physicsBody?.isDynamic = false
         leftMidNode.physicsBody?.affectedByGravity = false
@@ -65,7 +65,7 @@ extension GameScene {
         rightMidNode.physicsBody?.categoryBitMask = wallCategory
         rightMidNode.physicsBody?.collisionBitMask = wallCategory + ballCategory
         rightMidNode.physicsBody?.restitution = 1.0
-        rightMidNode.name = "wall"
+        rightMidNode.name = "resetcounter"
         rightMidNode.physicsBody?.mass = 1
         rightMidNode.physicsBody?.isDynamic = false
         rightMidNode.physicsBody?.affectedByGravity = false

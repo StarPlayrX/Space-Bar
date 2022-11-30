@@ -61,7 +61,7 @@ extension GameScene {
                 if let lvl = levelLabel.text, let score = scoreLabel.text, settings.sound, gameLives > 1 {
                     try? speech("\(bonus) \(lvl). Score \(score). You have \(gameLives) lives. Get Ready!")
                 } else if let lvl = levelLabel.text, let score = scoreLabel.text, settings.sound, gameLives == 1 {
-                    try? speech("\(bonus) \(lvl). Score \(score). You have \(gameLives) life remaining. Get Ready!")
+                    try? speech("\(bonus) \(lvl). Score \(score). You have \(gameLives) life remaining.")
                 } else if let lvl = levelLabel.text, let score = scoreLabel.text, settings.sound {
                     try? speech("\(bonus) \(lvl). Score \(score). You have no lives remaining.")
                 }

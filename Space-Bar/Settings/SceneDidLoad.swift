@@ -12,9 +12,7 @@ extension GameScene: SKPhysicsContactDelegate {
     override func sceneDidLoad() {
         speed = 1
         
-        #if targetEnvironment(macCatalyst)
         gameSceneDelegate = self
-        #endif
         
         physicsWorld.gravity.dx = 0
         physicsWorld.gravity.dy = 0

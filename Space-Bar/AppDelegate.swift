@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -19,25 +18,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         appSettings.loadUserDefaults()
         
-        let MacCatalystVerison = UIDevice.current.systemVersion
         
         #if targetEnvironment(macCatalyst)
+        let MacCatalystVerison = UIDevice.current.systemVersion
+
         UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
             windowScene.titlebar?.titleVisibility = .hidden
             yCoverMacOS = 32
 
-            if MacCatalystVerison.starts(with: "10.15") {
+            if let height = settings.height {
+                heightMacOS = height
+                widthMacOS = heightMacOS / 2
+            } else if MacCatalystVerison.starts(with: "10.15") {
                 heightMacOS = 1300
-                widthMacOS = heightMacOS / 2
-                
-                windowScene.sizeRestrictions?.minimumSize = CGSize(width: widthMacOS, height: heightMacOS)
-                windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
             } else {
-                heightMacOS = windowScene.screen.bounds.height - 122
-                widthMacOS = heightMacOS / 2
-                windowScene.sizeRestrictions?.minimumSize = CGSize(width: widthMacOS, height: heightMacOS)
-                windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
+                heightMacOS = windowScene.screen.bounds.height - 120
             }
+            
+            widthMacOS = heightMacOS / 2
+            windowScene.sizeRestrictions?.minimumSize = CGSize(width: widthMacOS, height: heightMacOS)
+            windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
         }
         #endif
     
