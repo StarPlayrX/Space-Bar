@@ -11,6 +11,12 @@ import UIKit
 import SpriteKit
 import AVFoundation
 
+struct MoveState {
+    static var shared = MoveState()
+    var moveLeft: Bool  = false
+    var moveRight: Bool = false
+}
+
 struct Global {
     static var shared = Global()
     let gameBall: [String] = ["🤩","🥳","😏","😒","😞","😔","😟","😕"]
@@ -50,8 +56,8 @@ struct Global {
 var settings = Settings() 
 var initialScreenSize = CGSize()
 var yCoverMacOS = CGFloat(0)
-var widthMacOS = CGFloat(0)
-var heightMacOS = CGFloat(0)
+var windowWidth = CGFloat(0)
+var windowHeight = CGFloat(0)
 var widthiOS = CGFloat(650)
 var heightiOS = CGFloat(1300)
 var displayIsRetina: Bool = false
@@ -62,3 +68,4 @@ var g = Global.shared
 var gameSceneDelegate: GameSceneDelegate! //required
 var paddleNode = SKSpriteNode() //required
 let synthesizer = AVSpeechSynthesizer()
+

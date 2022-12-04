@@ -31,7 +31,7 @@ extension GameScene {
         levelLabel.text = String(settings.currentlevel + 1)
         levelLabel.fontSize = 36
         levelLabel.fontColor = .systemRed
-        levelLabel.alpha = 1.0
+        levelLabel.alpha = 0.7
         anchorNode.addChild(levelLabel)
         
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right

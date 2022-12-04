@@ -11,6 +11,14 @@ import SpriteKit
 import GameplayKit
 
 extension GameScene {
+    func playSound(action: SKAction) {
+        if settings.sound {
+            DispatchQueue.global(qos: .userInteractive).async { [self] in
+                run(action)
+            }
+        }
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
         guard
             let _ = contact.bodyA.node,
@@ -47,11 +55,7 @@ extension GameScene {
         switch catMask {
             
         case ballCategory | wallCategory:
-            if settings.sound {
-                DispatchQueue.main.async { [self] in
-                    run(wallSound)
-                }
-            }
+            playSound(action: wallSound)
             
             if let a = firstBody.node {
                 if a.name == "resetcounter" {
@@ -66,11 +70,7 @@ extension GameScene {
             }
             break
         case powerCategory | wallCategory:
-            if settings.sound {
-                DispatchQueue.main.async { [self] in
-                    run(wallSound)
-                }
-            }
+            playSound(action: wallSound)
         case ballCategory | midFieldCategory :
             ballCounter = ballTimeOut
         case fireBallCategory | brickCategory:
@@ -81,11 +81,8 @@ extension GameScene {
                 checker(firstBody)
             }
         case powerCategory | brickCategory:
-            if settings.sound {
-                DispatchQueue.main.async { [self] in
-                    run(brickSound)
-                }
-            }
+            playSound(action: brickSound)
+
             gameScore += 1
             scoreLabel.text = String(gameScore)
             if let a = secondBody.node {
@@ -93,11 +90,8 @@ extension GameScene {
                 checker(firstBody)
             }
         case ballCategory | brickCategory :
-            if settings.sound {
-                DispatchQueue.main.async { [self] in
-                    run(brickSound)
-                }
-            }
+            playSound(action: brickSound)
+
             ballCounter = ballTimeOut
             gameScore += 1
             scoreLabel.text = String(gameScore)
@@ -123,11 +117,8 @@ extension GameScene {
             ballCounter = ballTimeOut
             
             if gameLives > 0 {
-                if settings.sound {
-                    DispatchQueue.main.async { [self] in
-                        run(goalSound)
-                    }
-                }
+                playSound(action: goalSound)
+
                 gameLives -= 1
                 let puck = Global.shared.gameBall[settings.puck]
                 livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives - 1 : 0)
@@ -189,7 +180,7 @@ extension GameScene {
                     
                     let runcode = SKAction.run {
                         if let scene = SKScene(fileNamed: "GameMenu"), let view = self.view as SKView? {
-                            scene.scaleMode = .aspectFill
+                            scene.scaleMode = .aspectFit
                             view.ignoresSiblingOrder = true
                             view.showsFPS = false
                             view.showsNodeCount = false
@@ -205,11 +196,8 @@ extension GameScene {
                 scene?.run(seq)
             }
         case powerCategory | paddleCategory:
-            if settings.sound {
-                DispatchQueue.main.async { [self] in
-                    run(paddleSound)
-                }
-            }
+            playSound(action: goalSound)
+
             scoreLabel.text = String(gameScore)
             
         case ballCategory | paddleCategory:

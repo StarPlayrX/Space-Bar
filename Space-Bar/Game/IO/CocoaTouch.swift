@@ -35,21 +35,24 @@ extension GameScene {
     }
 }
 
-#if targetEnvironment(macCatalyst)
 extension GameScene: Arrow {
     func unhide() {
         g.showCursor = true
+        #if targetEnvironment(macCatalyst)
         NSCursor.unhide()
+        #endif
     }
     
     func hide() {
         g.showCursor = false
+        #if targetEnvironment(macCatalyst)
         NSCursor.hide()
+        #endif
     }
 
     func moveWithMouse(pos: CGPoint, duration: Double) {
 
-        var xScale = (( widthiOS - paddle / center - rightBorder ) / widthMacOS ) * pos.x
+        var xScale = (( widthiOS - paddle / center - rightBorder ) / windowWidth ) * pos.x
         
         if xScale < paddle / center + leftBorder {
             xScale = paddle / center + leftBorder
@@ -59,17 +62,18 @@ extension GameScene: Arrow {
         paddleNode.run(action)
     }
     
+    @available(iOS 13.0, *)
     @objc func mouseDidMove(_ recognizer: UIHoverGestureRecognizer) {
         guard let view = recognizer.view else { return }
         
         let pos = recognizer.location(in: view)
-        
+
         if pos == CGPoint.zero {
             if !g.showCursor {
                 unhide()
             }
         }
-        
+
         switch recognizer.state {
             
         case .began, .changed:
@@ -87,4 +91,4 @@ extension GameScene: Arrow {
         }
     }
 }
-#endif
+

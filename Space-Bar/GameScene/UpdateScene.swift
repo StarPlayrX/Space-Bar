@@ -29,10 +29,26 @@ extension GameScene {
                 return
             }
             
-            let minSpeed = CGFloat(99)
-            let maxSpeed = CGFloat(750)
-            let brakesX = 2.5
-            let brakesY = 5
+            //MARK: If the node is offscreen, nix in 1 second
+            if node.name == "ball" {
+                if (node.position.x < -node.size.width / 2.0 || node.position.x > self.size.width + node.size.width / 2.0
+                    || node.position.y < -node.size.height / 2.0 || node.position.y > self.size.height + node.size.height / 2.0) {
+                    ballCounter = 1
+                }
+            }
+        
+            #if targetEnvironment(macCatalyst)
+                let minSpeed = CGFloat(50)
+                let maxSpeed = CGFloat(700)
+                let brakesX = 2.5
+                let brakesY = 5
+            #else
+                let minSpeed = CGFloat(100)
+                let maxSpeed = CGFloat(800)
+                let brakesX = 5
+                let brakesY = 10
+            #endif
+            
 
             let half  = CGFloat(settings.currentlevel + 1) / 2
             let quart = CGFloat(settings.currentlevel + 1) / 4

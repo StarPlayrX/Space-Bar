@@ -9,18 +9,29 @@
 import Foundation
 import SpriteKit
 
+
 extension GameScene {
     override func didMove(to view: SKView) {
+
         g.showCursor = false
-        
         #if targetEnvironment(macCatalyst)
         NSCursor.hide()
-        let mouseInput = UIHoverGestureRecognizer(
-            target: self,
-            action: #selector(mouseDidMove(_:)))
-        view.addGestureRecognizer(mouseInput)
         #endif
         
+        if #available(iOS 13.0, *) {
+            let mouseInput = UIHoverGestureRecognizer(
+                target: self,
+                action: #selector(mouseDidMove(_:)))
+            
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                #if !targetEnvironment(macCatalyst)
+                view.bounds.size = CGSize(width: windowWidth, height: windowHeight)
+                #endif
+            }
+            
+            view.addGestureRecognizer(mouseInput)
+        }
+            
         screenType = ScreenSize.shared.setSceneSizeForGame(scene: self, size: initialScreenSize)
         
         guard
@@ -45,7 +56,8 @@ extension GameScene {
 
         let frame = CGRect(x: -centerWidth, y: -centerHeight, width: width, height: height)
         drawEdgeLoop(frame)
-        drawParallax()
+        
+
         drawHUD()
         drawMidCorners()
         drawMidEdges()

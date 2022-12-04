@@ -22,14 +22,14 @@ extension GameScene: GameSceneDelegate {
         
     func goLeft() {
         if paddleNode.position.x >= (paddle / 2) + xOffset  {
-            let action = SKAction.moveTo(x: paddleNode.position.x - xOffset, duration: 0.05)
+            let action = SKAction.moveTo(x: paddleNode.position.x - xOffset, duration: xTimer)
             paddleNode.run(action)
         }
     }
     
     func goRight() {
         if paddleNode.position.x <= frame.width - paddle - xOffset * 2 {
-            let action = SKAction.moveTo(x: paddleNode.position.x + xOffset, duration: 0.05)
+            let action = SKAction.moveTo(x: paddleNode.position.x + xOffset, duration: xTimer)
             paddleNode.run(action)
         }
     }
@@ -39,7 +39,7 @@ extension GameScene: GameSceneDelegate {
             self.goLeft()
         }
         
-        let wait = SKAction.wait(forDuration: 0.05)
+        let wait = SKAction.wait(forDuration: xTimer)
         let seq = SKAction.sequence([goLeft,wait])
         let rep = SKAction.repeatForever(seq)
         
@@ -51,7 +51,7 @@ extension GameScene: GameSceneDelegate {
             self.goRight()
         }
         
-        let wait = SKAction.wait(forDuration: 0.05)
+        let wait = SKAction.wait(forDuration: xTimer)
         let seq = SKAction.sequence([goRight,wait])
         let rep = SKAction.repeatForever(seq)
         paddleNode.run(rep, withKey: g.moveRight)
@@ -68,60 +68,87 @@ extension GameViewController {
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         for press in presses {
             guard let key = press.key else { continue }
-            if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || key.charactersIgnoringModifiers == "a" {
-                gameSceneDelegate?.removeLeft()
-            } else if key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow || key.charactersIgnoringModifiers == "d" {
-                gameSceneDelegate?.removeRight()
+            
+            switch key {
+                case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || k.charactersIgnoringModifiers == "a":
+            
+                if MoveState.shared.moveLeft {
+                    gameSceneDelegate?.removeLeft()
+                    MoveState.shared.moveLeft = false
+                }
+                
+                case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow || k.charactersIgnoringModifiers == "d":
+                if MoveState.shared.moveRight {
+                    gameSceneDelegate?.removeRight()
+                    MoveState.shared.moveRight = false
+                }
+                
+            default:
+                MoveState.shared.moveLeft = false
+                MoveState.shared.moveRight = false
             }
         }
     }
-    
-    
+
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        
+        #if targetEnvironment(macCatalyst)
+        func resizeWindow(amount: CGFloat) {
+            UIApplication.shared.connectedScenes.map { $0 as! UIWindowScene }.forEach { windowScene in
+                windowHeight += amount
+                windowWidth = windowHeight / 2
+                windowScene.sizeRestrictions?.minimumSize = CGSize(width: windowWidth, height: windowHeight)
+                windowScene.sizeRestrictions?.maximumSize = CGSize(width: windowWidth, height: windowHeight)
+                settings.height = windowHeight
+            }
+        }
+        #endif
+            
         for press in presses {
             guard let key = press.key else { continue }
-            if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || key.charactersIgnoringModifiers == "a" {
+            
+            switch key {
+                case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || k.charactersIgnoringModifiers == "a":
+                
+                if MoveState.shared.moveRight {
+                    gameSceneDelegate?.removeRight()
+                    MoveState.shared.moveRight = false
+                }
+                
                 gameSceneDelegate?.moveLeft()
-            }
-            
-            
+                MoveState.shared.moveLeft = true
+                
+                case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow || k.charactersIgnoringModifiers == "d":
+                
+                if MoveState.shared.moveLeft {
+                    gameSceneDelegate?.removeLeft()
+                    MoveState.shared.moveLeft = false
+                }
+
+                gameSceneDelegate?.moveRight()
+                MoveState.shared.moveRight = true
+                
+                case let k where k.charactersIgnoringModifiers == " ":
+                gameSceneDelegate?.playPause()
+        
             #if targetEnvironment(macCatalyst)
-            if key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow || key.charactersIgnoringModifiers == "w" {
-                UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
-                    heightMacOS += 2
-                    widthMacOS = heightMacOS / 2
-                    
-                    windowScene.sizeRestrictions?.minimumSize = CGSize(width: widthMacOS, height: heightMacOS)
-                    windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
-                    
-                    settings.height = heightMacOS
-                }
-            }
-            
-            if key.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow || key.charactersIgnoringModifiers == "s" {
-                UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
-                    heightMacOS -= 2
-                    widthMacOS = heightMacOS / 2
-                    
-                    windowScene.sizeRestrictions?.minimumSize = CGSize(width: widthMacOS, height: heightMacOS)
-                    windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
-                    
-                    settings.height = heightMacOS
-                }
-            }
+                case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow || k.charactersIgnoringModifiers == "w":
+                resizeWindow(amount: 2)
+                case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow || k.charactersIgnoringModifiers == "s":
+                resizeWindow(amount: -2)
             #endif
 
-            
-            if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || key.charactersIgnoringModifiers == "a" {
-                gameSceneDelegate?.moveLeft()
-            }
-            
-            if key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow || key.charactersIgnoringModifiers == "d" {
-                gameSceneDelegate?.moveRight()
-            }
-            
-            if key.charactersIgnoringModifiers == " " {
-                gameSceneDelegate?.playPause()
+            default:
+                
+                if MoveState.shared.moveLeft {
+                    gameSceneDelegate?.removeLeft()
+                    MoveState.shared.moveLeft = false
+                }
+                
+                if MoveState.shared.moveRight {
+                    gameSceneDelegate?.removeRight()
+                    MoveState.shared.moveRight = false
+                }
             }
         }
     }

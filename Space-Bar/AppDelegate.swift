@@ -7,37 +7,67 @@
 
 import UIKit
 
+
+//
+//var boundsObservation: NSKeyValueObservation?
+//
+//func beginObservingBounds() {
+//    boundsObservation = observe(\.window?.bounds.size) { capturedSelf, _ in
+//        // ...
+//        print("HELLO")
+//    }
+//}
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    
     var window: UIWindow?
+    
+  
+
     
     let appSettings = AppSettings()
     
+
+ 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         appSettings.loadUserDefaults()
-        
-        
+
         #if targetEnvironment(macCatalyst)
         let MacCatalystVerison = UIDevice.current.systemVersion
 
         UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
             windowScene.titlebar?.titleVisibility = .hidden
+        
             yCoverMacOS = 32
 
             if let height = settings.height {
-                heightMacOS = height
-                widthMacOS = heightMacOS / 2
+                windowHeight = height
+                windowWidth = windowHeight / 2
             } else if MacCatalystVerison.starts(with: "10.15") {
-                heightMacOS = 1300
+                windowHeight = 1300
             } else {
-                heightMacOS = windowScene.screen.bounds.height - 120
+                windowHeight = windowScene.screen.bounds.height - 120
             }
             
-            widthMacOS = heightMacOS / 2
-            windowScene.sizeRestrictions?.minimumSize = CGSize(width: widthMacOS, height: heightMacOS)
-            windowScene.sizeRestrictions?.maximumSize = CGSize(width: widthMacOS, height: heightMacOS)
+            windowWidth = windowHeight / 2
+            windowScene.sizeRestrictions?.minimumSize = CGSize(width: windowWidth, height: windowHeight)
+            windowScene.sizeRestrictions?.maximumSize = CGSize(width: windowWidth, height: windowHeight)
+        }
+        #else
+        
+        windowHeight = 1300
+        windowWidth = windowHeight / 2
+        
+        if #available(iOS 13.0, *) {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                if let height = window?.bounds.height {
+                    windowHeight = height
+                    windowWidth = height / 2
+                }
+            }
         }
         #endif
     

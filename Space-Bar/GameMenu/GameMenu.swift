@@ -145,7 +145,7 @@ class GameMenu: SKScene {
                                         view.clipsToBounds = true
                                         view.backgroundColor = SKColor.black
                                         view.isMultipleTouchEnabled = false
-                                        view.presentScene(scene, transition: SKTransition.fade(withDuration: 2.0))
+                                        view.presentScene(scene)
                                     }
                               //  }
                             }

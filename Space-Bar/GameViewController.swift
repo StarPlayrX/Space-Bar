@@ -11,7 +11,14 @@ import SpriteKit
 import AVFoundation
 
 
+
 class GameViewController: UIViewController {
+    
+   
+    
+   
+    
+    
     func runAudioSession() {
         let audioSession = AVAudioSession.sharedInstance()
         
@@ -36,7 +43,7 @@ class GameViewController: UIViewController {
                 //sceneNode.graphs = scene.graphs
                 
                 // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
+                scene.scaleMode = .aspectFit
                 
                 // Present the scene
                 if let view = self.view as! SKView? {
@@ -122,5 +129,35 @@ class GameViewController: UIViewController {
                 property("collectionBehavior", object: window, set: [fullScreenNone], clear: [fullScreenPrimary, fullScreenAuxiliary])
             }
         }
+        
     }
 }
+
+//func isFullScreen() -> Bool
+//{
+//    guard let windows = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) else {
+//        return false
+//    }
+//
+//    for window in windows as NSArray
+//    {
+//        guard let winInfo = window as? NSDictionary else { continue }
+//        
+//        if winInfo["kCGWindowOwnerName"] as? String == "Dock",
+//           winInfo["kCGWindowName"] as? String == "Fullscreen Backdrop"
+//        {
+//            return true
+//        }
+//    }
+//    
+//    return false
+//}
+//
+//var item = isFullScreen() {
+//    didSet { //called when item changes
+//        print("isFullScreen", item)
+//    }
+//    willSet {
+//        print("isFullScreen", item)
+//    }
+//}

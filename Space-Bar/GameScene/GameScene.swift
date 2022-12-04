@@ -13,7 +13,8 @@ class GameScene: SKScene {
     let center = CGFloat(2)
     let leftBorder = CGFloat(4)
     let rightBorder = CGFloat(2)
-    let xOffset = CGFloat(32)
+    let xOffset = CGFloat(34)
+    let xTimer = CGFloat(0.03)
     
     var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -29,7 +30,7 @@ class GameScene: SKScene {
     #if targetEnvironment(macCatalyst)
         var velocity = CGFloat(650)
     #else
-        var velocity = CGFloat(666)
+        var velocity = CGFloat(700)
     #endif
     
     var ballNode    = SKSpriteNode()
