@@ -38,10 +38,11 @@ extension GameScene {
         space?.position = CGPoint(x: x, y: centerHeight - 296)
         space?.xScale = 0.9
         space?.yScale = 0.9
-        space?.alpha = 0
-        DispatchQueue.main.async {
-            self.drawBricks(BricksTileMap: tilemap)
-            self.space?.alpha = 1
-        }
+        let fadeOut = SKAction.fadeOut(withDuration: 1.0)
+        space?.run(fadeOut)
+        drawBricks(BricksTileMap: tilemap)
+        let fadeIn = SKAction.fadeIn(withDuration: 1.0)
+        space?.run(fadeIn)
+
     }
 }

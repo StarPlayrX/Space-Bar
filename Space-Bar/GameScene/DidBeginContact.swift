@@ -13,9 +13,7 @@ import GameplayKit
 extension GameScene {
     func playSound(action: SKAction) {
         if settings.sound {
-            DispatchQueue.global(qos: .userInteractive).async { [self] in
-                run(action)
-            }
+            run(action)
         }
     }
     
@@ -201,11 +199,7 @@ extension GameScene {
             scoreLabel.text = String(gameScore)
             
         case ballCategory | paddleCategory:
-            if settings.sound {
-                DispatchQueue.main.async { [self] in
-                    run(paddleSound)
-                }
-            }
+            playSound(action: paddleSound)
             
             ballCounter = ballTimeOut
             scoreLabel.text = String(gameScore)

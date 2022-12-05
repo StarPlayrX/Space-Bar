@@ -13,10 +13,10 @@ class GameMenu: SKScene {
     override func sceneDidLoad() {        
         g.showCursor = true
         g.runningGame = false
-    
-        #if targetEnvironment(macCatalyst)
+        
+#if targetEnvironment(macCatalyst)
         NSCursor.unhide()
-        #endif
+#endif
     }
     
     var keyPressed = false
@@ -54,7 +54,7 @@ class GameMenu: SKScene {
                 func puckRight() {
                     settings.puck = settings.puck < Global.shared.gameBall.count - 1 ? settings.puck + 1 : 0
                 }
-
+                
                 func puckCommon() {
                     let ball = Global.shared.gameBall
                     let text = Global.shared.gameBallText
@@ -121,33 +121,27 @@ class GameMenu: SKScene {
                     keyPressed = true
                     
                     let runcode = SKAction.run { [self] in
-                        DispatchQueue.main.async {
-                            if let scene = SKScene(fileNamed: "GameScene") {
-                                    gScene = scene
-                                // Get the SKScene from the loaded GKScene
-                               // if let sceneNode = scene.rootNode as! GameScene? {
-                                    
-                                    // Copy gameplay related content over to the scene
-                                    //sceneNode.entities = scene.entities
-                                    //sceneNode.graphs = scene.graphs
-                                    scene.scaleMode = .aspectFit
-                                    
-                                    // Present the scene
-                                    if let view = self.view as SKView? {
-                                        scene.speed = 1.0
-                                        view.showsFPS = false
-                                        view.showsNodeCount = false
-                                        view.showsPhysics = false
-                                        view.showsFields = false
-                                        view.clearsContextBeforeDrawing = true
-                                        view.isAsynchronous = true
-                                        view.ignoresSiblingOrder = true
-                                        view.clipsToBounds = true
-                                        view.backgroundColor = SKColor.black
-                                        view.isMultipleTouchEnabled = false
-                                        view.presentScene(scene)
-                                    }
-                              //  }
+                        if let scene = SKScene(fileNamed: "GameScene") {
+                            gScene = scene
+                            
+                            //sceneNode.entities = scene.entities
+                            //sceneNode.graphs = scene.graphs
+                            scene.scaleMode = .aspectFit
+                            
+                            // Present the scene
+                            if let view = self.view as SKView? {
+                                scene.speed = 1.0
+                                view.showsFPS = false
+                                view.showsNodeCount = false
+                                view.showsPhysics = false
+                                view.showsFields = false
+                                view.clearsContextBeforeDrawing = true
+                                view.isAsynchronous = true
+                                view.ignoresSiblingOrder = true
+                                view.clipsToBounds = true
+                                view.backgroundColor = SKColor.black
+                                view.isMultipleTouchEnabled = false
+                                view.presentScene(scene)
                             }
                         }
                     }
@@ -162,13 +156,13 @@ class GameMenu: SKScene {
     }
     
     override func didMove(to view: SKView) {
-                
+        
         g.showCursor = true
         
-        #if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst)
         NSCursor.unhide()
-        #endif
-       
+#endif
+        
         settings.level = 0
         scene?.alpha = 0.0
         
@@ -191,7 +185,7 @@ class GameMenu: SKScene {
             label.text = "© 2022 by Todd Bruss, all rights reserved"
             scene?.addChild(label)
         }
-       
+        
         
         let highScoreText: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
         let highScoreLabel: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
@@ -362,7 +356,7 @@ class GameMenu: SKScene {
             
             let rotation = Global.shared.rotation
             let levels   = Global.shared.levels
-
+            
             let sprite = SKSpriteNode(imageNamed: texture)
             let spc = CGFloat(220)
             let vspc = CGFloat(55)

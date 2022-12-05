@@ -10,11 +10,9 @@ import AVFoundation
 
 func speech(_ text: String) throws {
     #if !targetEnvironment(simulator)
-    DispatchQueue.main.async {
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
         utterance.volume = 0.45
         synthesizer.speak(utterance)
-    }
     #endif
 }

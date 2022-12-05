@@ -62,9 +62,8 @@ class GameViewController: UIViewController {
         #if targetEnvironment(macCatalyst)
         runAudioSession()
         #endif
-        DispatchQueue.main.async {
-            self.runGameMenu()
-        }
+        
+        self.runGameMenu()
     }
 
     override var prefersHomeIndicatorAutoHidden: Bool {
