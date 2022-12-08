@@ -12,7 +12,7 @@ import GameKit
 import GameplayKit
 
 class GameViewController: UIViewController {
-
+    
     func runAudioSession() {
         let audioSession = AVAudioSession.sharedInstance()
         
@@ -27,80 +27,62 @@ class GameViewController: UIViewController {
     
     func authenticateLocalPlayer() {
         let localPlayer = GKLocalPlayer.local
-           localPlayer.authenticateHandler = {(viewController, error) -> Void in
-               print(localPlayer.displayName)
-               //print(localPlayer.gamePlayerID)
-               
-             //  if gameScore > settings.highscore, GKLocalPlayer.local.isAuthenticated || 1 == 1 {
-                   let scoreReporter = GKScore(leaderboardIdentifier: "grp.spaceBarHighScores")
-                   scoreReporter.value = Int64(102)
-                   let scoreArray: [GKScore] = [scoreReporter]
-
-                   GKScore.report(scoreArray, withCompletionHandler: {error -> Void in
-                       if error != nil {
-                           print("GAMEKIT:", error as Any)
-                       }
-                       
-                   })
-               
-                    
-                print(GKScore(leaderboardIdentifier: "grp.spaceBarHighScores", player: localPlayer))
-              // }
-               
-//               if viewController != nil {
-//                    print("HELLO")
-//                   self.present(viewController!, animated: true, completion: nil)
-//               } else {
-//                   print("WORLD")
-//                   print((GKLocalPlayer.local.isAuthenticated))
-//               }
-           }
-       }
-    
-    // SpaceBariOSiPadOSmacOS
-    
+        localPlayer.authenticateHandler = {(viewController, error) -> Void in
+            print(localPlayer.displayName)
+            
+//            let scoreReporter = GKScore(leaderboardIdentifier: "grp.spaceBarHighScores")
+//            scoreReporter.value = Int64(102)
+//            let scoreArray: [GKScore] = [scoreReporter]
+            
+//            GKScore.report(scoreArray, withCompletionHandler: {error -> Void in
+//                if error != nil {
+//                    print("GAMEKIT:", error as Any)
+//                }
+//
+//            })
+//
+            
+            // }
+            
+            //               if viewController != nil {
+            //                    print("HELLO")
+            //                   self.present(viewController!, animated: true, completion: nil)
+            //               } else {
+            //                   print("WORLD")
+            //                   print((GKLocalPlayer.local.isAuthenticated))
+            //               }
+        }
+    }
     
     func runGameMenu() {
-        // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
-        // including entities and graphs.
-        if let scene = SKScene(fileNamed: "GameLeader") {
-            
-        
-            // Get the SKScene from the loaded GKScene
-        // if let rootNode = scene.rootNode as! GameMenu? {
-                
-                // Copy gameplay related content over to the scene
-               // rootNode.entities = gkScene.entities
-               // rootNode.graphs = gkScene.graphs
-                // Set the scale mode to scale to fit the window
+        if let scene = SKScene(fileNamed: "GameMenu") {
             scene.scaleMode = .aspectFit
-                
-                // Present the scene
-                if let view = self.view as! SKView? {
-                    view.ignoresSiblingOrder = true
-                    view.showsFPS = false
-                    view.showsNodeCount = false
-                    view.isMultipleTouchEnabled = false
-                    view.presentScene(scene, transition: SKTransition.fade(withDuration: 2.0))
-                }
-           }
-        //}
+            
+            // Present the scene
+            if let view = self.view as! SKView? {
+                view.ignoresSiblingOrder = true
+                view.showsFPS = false
+                view.showsNodeCount = false
+                view.isMultipleTouchEnabled = false
+                view.presentScene(scene, transition: SKTransition.fade(withDuration: 2.0))
+            }
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         authenticateLocalPlayer()
         
         
-        #if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst)
         runAudioSession()
-        #endif
+#endif
         self.runGameMenu()
-
+        
     }
-
+    
     override var prefersHomeIndicatorAutoHidden: Bool {
-       return true
-   }
+        return true
+    }
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -109,7 +91,7 @@ class GameViewController: UIViewController {
     override var shouldAutorotate: Bool {
         return true
     }
-
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .phone || UIDevice.current.userInterfaceIdiom == .pad {
             return [.portrait, .portraitUpsideDown]
@@ -117,7 +99,7 @@ class GameViewController: UIViewController {
             return .all
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
@@ -132,18 +114,18 @@ class GameViewController: UIViewController {
         super.viewDidAppear(animated)
         
         view.backgroundColor = .black
-
-
+        
+        
         func bitSet(_ bits: [Int]) -> UInt {
             return bits.reduce(0) { $0 | (1 << $1) }
         }
-
+        
         func property(_ property: String, object: NSObject, set: [Int], clear: [Int]) {
             if let value = object.value(forKey: property) as? UInt {
                 object.setValue((value & ~bitSet(clear)) | bitSet(set), forKey: property)
             }
         }
-
+        
         // disable full-screen button
         if  let NSApplication = NSClassFromString("NSApplication") as? NSObject.Type,
             let sharedApplication = NSApplication.value(forKeyPath: "sharedApplication") as? NSObject,
@@ -151,14 +133,14 @@ class GameViewController: UIViewController {
         {
             for window in windows {
                 let floating = 1
-
+                
                 let resizable = 3
                 let fullScreenPrimary = 7
                 let fullScreenAuxiliary = 8
                 let fullScreenNone = 9
                 
                 property("level", object: window, set: [floating], clear: [])
-
+                
                 property("styleMask", object: window, set: [resizable], clear: [])
                 property("collectionBehavior", object: window, set: [fullScreenNone], clear: [fullScreenPrimary, fullScreenAuxiliary])
             }

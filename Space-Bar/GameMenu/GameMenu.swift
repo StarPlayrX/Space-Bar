@@ -151,6 +151,42 @@ class GameMenu: SKScene {
                     let fade2 = SKAction.fadeAlpha(to: 1.0, duration:TimeInterval(0.15))
                     touchedNode.run(SKAction.sequence([fade1,myDecay,fade2,runcode]))
                 }
+                
+                if name == "leader" && !keyPressed {
+                    if keyPressed { return }
+                    keyPressed = true
+                    
+                    let runcode = SKAction.run { [self] in
+                        if let scene = SKScene(fileNamed: "GameLeader") {
+                            //gScene = scene
+                            
+                            //sceneNode.entities = scene.entities
+                            //sceneNode.graphs = scene.graphs
+                            scene.scaleMode = .aspectFit
+                            
+                            // Present the scene
+                            if let view = self.view as SKView? {
+                                scene.speed = 1.0
+                                view.showsFPS = false
+                                view.showsNodeCount = false
+                                view.showsPhysics = false
+                                view.showsFields = false
+                                view.clearsContextBeforeDrawing = true
+                                view.isAsynchronous = true
+                                view.ignoresSiblingOrder = true
+                                view.clipsToBounds = true
+                                view.backgroundColor = SKColor.black
+                                view.isMultipleTouchEnabled = false
+                                view.presentScene(scene)
+                            }
+                        }
+                    }
+                    
+                    let fade1 = SKAction.fadeAlpha(to: 0.7, duration:TimeInterval(0.15))
+                    let myDecay = SKAction.wait(forDuration: 0.15)
+                    let fade2 = SKAction.fadeAlpha(to: 1.0, duration:TimeInterval(0.15))
+                    touchedNode.run(SKAction.sequence([fade1,myDecay,fade2,runcode]))
+                }
             }
         }
     }

@@ -30,6 +30,8 @@ class GameLeader: SKScene {
     var textLabel: SKLabelNode = SKLabelNode(fontNamed: "CourierNeue")
     var textLabel2: SKLabelNode = SKLabelNode(fontNamed: "CourierNeue")
     
+     
+                
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches as Set<UITouch>, with: event)
         for touch: AnyObject in touches {
@@ -38,13 +40,12 @@ class GameLeader: SKScene {
             
             if let name = touchedNode.name {
                 
-                if name == "enter" && !keyPressed {
+                if name == "gamemenu" && !keyPressed {
                     if keyPressed { return }
                     keyPressed = true
                     
                     let runcode = SKAction.run { [self] in
-                        if let scene = SKScene(fileNamed: "GameScene") {
-                            gScene = scene
+                        if let scene = SKScene(fileNamed: "GameMenu") {
                             
                             //sceneNode.entities = scene.entities
                             //sceneNode.graphs = scene.graphs
@@ -85,7 +86,7 @@ class GameLeader: SKScene {
         NSCursor.unhide()
 #endif
         
-        let spacer = CGFloat(82)
+        let spacer = CGFloat(100)
         let topTwenty: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
         let playerRank: SKLabelNode = SKLabelNode(fontNamed: "Helvetica-Bold")
         let playerLabel: SKLabelNode = SKLabelNode(fontNamed: "Helvetica-Bold")
