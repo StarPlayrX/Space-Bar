@@ -91,4 +91,3 @@ extension GameScene: Arrow {
         }
     }
 }
-

@@ -14,9 +14,9 @@ class GameMenu: SKScene {
         g.showCursor = true
         g.runningGame = false
         
-#if targetEnvironment(macCatalyst)
+    #if targetEnvironment(macCatalyst)
         NSCursor.unhide()
-#endif
+    #endif
     }
     
     var keyPressed = false
@@ -159,9 +159,9 @@ class GameMenu: SKScene {
         
         g.showCursor = true
         
-#if targetEnvironment(macCatalyst)
+    #if targetEnvironment(macCatalyst)
         NSCursor.unhide()
-#endif
+    #endif
         
         settings.level = 0
         scene?.alpha = 0.0
@@ -211,7 +211,6 @@ class GameMenu: SKScene {
             scene?.addChild(highScoreText)
         }
         
-        //animals Button
         //Left
         defineSprite (
             texture: "switchleft",
@@ -231,7 +230,6 @@ class GameMenu: SKScene {
             fontsize: Float(150)
         ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel, soundfxLabel: soundfxLabel, soundfxTextLabel: soundfxTextLabel, lvlLabel: lvlLabel, lvlTextLabel: lvlTextLabel)
         
-        //animals Button
         //Right
         defineSprite (
             texture: "switchright",
@@ -269,7 +267,6 @@ class GameMenu: SKScene {
             fontsize: Float(150)
         ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel, soundfxLabel: soundfxLabel, soundfxTextLabel: soundfxTextLabel, lvlLabel: lvlLabel, lvlTextLabel: lvlTextLabel)
         
-        //animals Button
         //Right
         defineSprite (
             texture: "switchright",
@@ -307,7 +304,6 @@ class GameMenu: SKScene {
             fontsize: Float(150)
         ).drawHud( puckLabel: puckLabel, puckTextLabel: puckTextLabel, soundfxLabel: soundfxLabel, soundfxTextLabel: soundfxTextLabel, lvlLabel: lvlLabel, lvlTextLabel: lvlTextLabel)
         
-        //animals Button
         //Right
         defineSprite (
             texture: "switchright",
@@ -353,7 +349,6 @@ class GameMenu: SKScene {
             lvlLabel: SKLabelNode,
             lvlTextLabel: SKLabelNode)
         {
-            
             let rotation = Global.shared.rotation
             let levels   = Global.shared.levels
             
@@ -387,7 +382,6 @@ class GameMenu: SKScene {
             }
             
             if name == "puck-right", let pos = scene.childNode(withName: "pucks")?.position {
-                
                 sprite.position = pos
                 sprite.position.x += spc
             }
@@ -422,7 +416,6 @@ class GameMenu: SKScene {
             }
             
             if name == "lvl-left", let pos = scene.childNode(withName: "level")?.position {
-                
                 sprite.position = pos
                 sprite.position.x -= spc
                 

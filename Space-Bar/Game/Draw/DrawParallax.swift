@@ -20,14 +20,12 @@ extension GameScene {
         let moveGroundSpritesForever = SKAction.repeatForever(SKAction.sequence([moveGroundSprite,resetGroundSprite]))
         
         for i in -1...1 {
-            autoreleasepool {
-                let sprite = SKSpriteNode(texture: starryNightTexture)
-                sprite.position = CGPoint(x: -centerWidth, y: CGFloat(i) * sprite.size.height)
-                sprite.run(moveGroundSpritesForever)
-                backParalax.addChild(sprite)
-                backParalax.zPosition = -10
-                backParalax.speed = 1
-            }
+            let sprite = SKSpriteNode(texture: starryNightTexture)
+            sprite.position = CGPoint(x: -centerWidth, y: CGFloat(i) * sprite.size.height)
+            sprite.run(moveGroundSpritesForever)
+            backParalax.addChild(sprite)
+            backParalax.zPosition = -10
+            backParalax.speed = 1
         }
         anchorNode.addChild(backParalax)
     }

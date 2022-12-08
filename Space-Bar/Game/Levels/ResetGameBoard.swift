@@ -46,7 +46,7 @@ extension GameScene {
             let getReadyLabel = SKLabelNode(fontNamed:"emulogic")
             let delay = SKAction.wait(forDuration: 1.5)
             
-            let levelUp = SKAction.run { [unowned self] in
+            let levelUp = SKAction.run { [self] in
                 let getReadyText = "GET READY"
                 getReadyLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
                 getReadyLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
@@ -72,7 +72,7 @@ extension GameScene {
                 getReadyLabel.run(fadeAlpha)
             }
             
-            let startLevel = SKAction.run { [unowned self] in
+            let startLevel = SKAction.run { [self] in
                 addPuck()
                 livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives - 1 : 0)
 

@@ -72,14 +72,6 @@ extension GameScene {
             if abs(body.velocity.dy) > CGFloat(maxSpeed + half) {
                 body.velocity.dy <= zero ? body.applyImpulse(CGVector(dx: 0, dy: brakesY)) : body.applyImpulse(CGVector(dx: 0, dy: -brakesY))
             }
-            
-//            if abs(body.angularDamping) != 0 {
-//                body.angularDamping = 0
-//            }
-//            
-//            if abs(body.linearDamping) != 0 {
-//                body.linearDamping = 0
-//            }
         }
     }
 }

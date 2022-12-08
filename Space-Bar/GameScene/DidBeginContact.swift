@@ -154,7 +154,7 @@ extension GameScene {
                     
                     let wait1 = SKAction.wait(forDuration: 0.5)
                     let wait2 = SKAction.wait(forDuration: 1.0)
-                    let gameOverCode = SKAction.run { [unowned self] in
+                    let gameOverCode = SKAction.run { [self] in
                         g.runningGame = false
                         let getReadyText = "GAME OVER"
                         getReadyLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center

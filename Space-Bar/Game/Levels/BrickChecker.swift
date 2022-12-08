@@ -33,7 +33,7 @@ extension GameScene {
             let a = SKAction.fadeAlpha(to: 0, duration: 0.25)
             let b = SKAction.removeFromParent()
             let c = SKAction.wait(forDuration: 0.5)
-            let d = SKAction.run { [unowned self] in
+            let d = SKAction.run { [self] in
                 resetGameBoard(lives: true)
             }
             

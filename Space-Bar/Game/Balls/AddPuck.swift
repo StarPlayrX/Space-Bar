@@ -12,7 +12,6 @@ import SpriteKit
 extension GameScene {
     
     func addPuck() {
-        
         let ball = "ball"
         
         ballCounter = ballTimeOut
@@ -23,7 +22,6 @@ extension GameScene {
             }
         }
         
-        //ballNode = nil
         ballNode = SKSpriteNode()
         
         let ballEmoji = SKLabelNode(fontNamed:"SpaceBarColors")
@@ -82,17 +80,7 @@ extension GameScene {
     }
     
     func addExtraBall() {
-        
         let extraball = "extraball"
-        
-        // Ensures no pucks pre-exist
-//        for whatDaPuck in anchorNode.children {
-//            if let name = whatDaPuck.name, name == extraball {
-//                whatDaPuck.removeFromParent()
-//            }
-//        }
-        
-        //ballNode = nil
         extraNode = SKSpriteNode()
         
         let extraBallEmoji = SKLabelNode(fontNamed:"SpaceBarColors")
@@ -117,7 +105,6 @@ extension GameScene {
         extraNode.physicsBody?.categoryBitMask = ballCategory
         extraNode.physicsBody?.contactTestBitMask = paddleCategory + wallCategory + goalCategory
         extraNode.physicsBody?.collisionBitMask = paddleCategory + brickCategory + wallCategory
-        extraNode.zPosition = 50
         extraNode.physicsBody?.affectedByGravity = false
         extraNode.physicsBody?.isDynamic = true
         extraNode.physicsBody?.allowsRotation = true
@@ -125,9 +112,10 @@ extension GameScene {
         extraNode.physicsBody?.linearDamping = 0
         extraNode.physicsBody?.angularDamping = 0
         extraNode.physicsBody?.restitution = 1.0
-
         extraNode.physicsBody?.mass = 1.0
         extraNode.physicsBody?.fieldBitMask = 0
+        
+        extraNode.zPosition = 50
         extraNode.name = extraball
         extraNode.position = CGPoint(x: 0, y: -100)
         extraNode.speed = CGFloat(1.0)

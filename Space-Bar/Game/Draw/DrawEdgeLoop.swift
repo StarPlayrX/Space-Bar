@@ -11,7 +11,7 @@ import SpriteKit
 
 extension GameScene {
     func drawEdgeLoop(_ frame: CGRect) {
-        //border for the paddle, ball and our beer
+        //MARK: border for the paddle, ball and our beer
         let edgeLoop = SKNode()
         edgeLoop.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
         edgeLoop.physicsBody?.isDynamic = false

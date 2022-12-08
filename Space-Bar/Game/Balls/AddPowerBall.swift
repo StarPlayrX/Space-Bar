@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 extension GameScene {
-    //addPower
+    //MARK: Add Tennis
     func addTennisBall() {
         removePowerBall()
         
@@ -61,7 +61,7 @@ extension GameScene {
         anchorNode.addChild(tennisNode)
     }
     
-    
+    //MARK: Add Fire
     func shootFireBalls() {
         let fireBallNode = SKSpriteNode()
         
@@ -111,21 +111,10 @@ extension GameScene {
         fireBallNode.alpha =  1.0
         fireBallNode.blendMode = .multiply
         
-   
-        
         let fireRnd2 = Float.random(in: -0.25...0.25)
         fireBallNode.physicsBody?.velocity = CGVector(dx: velocity / 1.3 * CGFloat(fireRnd2), dy: velocity / 1.1)
         
         gFireBallNode = fireBallNode.copy() as! SKSpriteNode
         scene?.addChild(gFireBallNode)
-  
-    }
-    
-    func scaleNode() {
-       
     }
 }
-
-var gFireBallNode = SKSpriteNode()
-
-

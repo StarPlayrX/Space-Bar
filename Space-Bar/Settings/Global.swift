@@ -68,4 +68,4 @@ var g = Global.shared
 var gameSceneDelegate: GameSceneDelegate! //required
 var paddleNode = SKSpriteNode() //required
 let synthesizer = AVSpeechSynthesizer()
-
+var gFireBallNode = SKSpriteNode()

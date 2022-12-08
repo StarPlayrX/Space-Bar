@@ -6,8 +6,8 @@
 //
 
 import UIKit
-
-
+import SwiftUI
+//import SpriteKit
 //
 //var boundsObservation: NSKeyValueObservation?
 //
@@ -18,23 +18,125 @@ import UIKit
 //    }
 //}
 
+
+/*
+ 
+ func runGameMenu() {
+     // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
+     // including entities and graphs.
+     if let gkScene = GKScene(fileNamed: "GameMenu") {
+         
+     
+         // Get the SKScene from the loaded GKScene
+         if let rootNode = gkScene.rootNode as! GameMenu? {
+             
+             // Copy gameplay related content over to the scene
+            // rootNode.entities = gkScene.entities
+            // rootNode.graphs = gkScene.graphs
+             // Set the scale mode to scale to fit the window
+             rootNode.scaleMode = .aspectFit
+             
+             // Present the scene
+             if let view = self.view as! SKView? {
+                 view.ignoresSiblingOrder = true
+                 view.showsFPS = false
+                 view.showsNodeCount = false
+                 view.isMultipleTouchEnabled = false
+                 view.presentScene(rootNode, transition: SKTransition.fade(withDuration: 2.0))
+             }
+         }
+     }
+ }
+ 
+ 
+ 
+ */
+
+
+//struct Item: Identifiable {
+//    let id = UUID()
+//    var item: String
+//    var description: String = "This is the item description"
+//    var quantity: Int = 1
+//    var price: Double = 0
+//}
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    
     var window: UIWindow?
-    
-  
-
-    
     let appSettings = AppSettings()
-    
-
- 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         appSettings.loadUserDefaults()
+        //if #available(iOS 13.0, *) {
+//            struct ContentView: View {
+//                var scene: SKScene {
+//                    guard let scene = SKScene(fileNamed: "GameMenu") else { return SKScene() }
+//                    return scene
+//                }
+//
+//                var body: some View {
+//
+//                    GeometryReader { (geometry) in
+//
+//                        //  SpriteView(scene: scene)
+//                        List {
+//
+//                                        Section {
+//                                            HStack() {
+//
+//                                                Text("StarPlayrX")
+//                                                    .multilineTextAlignment(.leading)
+//                                                    .frame(width: geometry.size.width / 4, alignment: .leading)
+//
+//
+//                                                Text("114")
+//                                                    .multilineTextAlignment(.leading)
+//                                                    .frame(width: geometry.size.width / 4, alignment: .leading)
+//                                                Text("1")
+//                                                    .multilineTextAlignment(.leading)
+//                                                    .frame(width: geometry.size.width / 4, alignment: .leading)
+//                                                Text("2")
+//                                                    .multilineTextAlignment(.leading)
+//                                                    .frame(width: geometry.size.width / 4, alignment: .leading)
+//                                            }
+//                                        } header: {
+//                                            HStack() {
+//                                                Text("Player")
+//                                                    .multilineTextAlignment(.leading)
+//                                                    .frame(width: geometry.size.width / 4, alignment: .leading)
+//                                                Text("Score")
+//                                                    .multilineTextAlignment(.leading)
+//                                                    .frame(width: geometry.size.width / 4, alignment: .leading)
+//                                                Text("Start Level")
+//                                                    .multilineTextAlignment(.leading)
+//                                                    .frame(width: geometry.size.width / 4, alignment: .leading)
+//                                                Text("End Level")
+//                                                    .multilineTextAlignment(.leading)
+//                                                    .frame(width: geometry.size.width / 4, alignment: .leading)
+//                                            }
+//                                            .padding(.leading, 55)
+//
+//                                        }
+//
+//                                    }
+//                        .listStyle(.plain)
+//                    }
+//
+////                    SpriteKitContainer(scene: scene)
+////                        .edgesIgnoringSafeArea(.all)
+//                }
+//            }
+            
+            
+           // let vc = UIHostingController(rootView: ContentView())
+          //  window?.rootViewController = vc
+      //  }
+//        } else {
+//            // Fallback on earlier versions
+//        }
 
+        
         #if targetEnvironment(macCatalyst)
         let MacCatalystVerison = UIDevice.current.systemVersion
 
@@ -76,19 +178,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
         appSettings.saveUserDefaults()
         
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         appSettings.saveUserDefaults()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        appSettings.saveUserDefaults()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -99,6 +198,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         appSettings.saveUserDefaults()
     }
-    
 }
-

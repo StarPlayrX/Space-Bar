@@ -11,13 +11,9 @@ import SpriteKit
 extension GameScene: SKPhysicsContactDelegate {
     override func sceneDidLoad() {
         drawParallax()
-
         speed = 1
-        
         gameSceneDelegate = self
-        
-        physicsWorld.gravity.dx = 0
-        physicsWorld.gravity.dy = 0
+        physicsWorld.gravity = CGVector.zero
         physicsWorld.contactDelegate = self
     }
 }

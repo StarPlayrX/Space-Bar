@@ -93,7 +93,6 @@ class GameScene: SKScene {
     let paddleSound = SKAction.playSoundFileNamed("Knock.mp3", waitForCompletion: false)
 #endif
     
-    
     //corners
     let corneredge    = CGFloat(32)
     let cornertopedge = CGFloat(86)
@@ -117,5 +116,3 @@ class GameScene: SKScene {
         3: ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣"],
     ]
 }
-
-

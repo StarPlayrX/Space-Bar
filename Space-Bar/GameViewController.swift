@@ -7,18 +7,12 @@
 
 import UIKit
 import SpriteKit
-//import GameplayKit
 import AVFoundation
-
-
+import GameKit
+import GameplayKit
 
 class GameViewController: UIViewController {
-    
-   
-    
-   
-    
-    
+
     func runAudioSession() {
         let audioSession = AVAudioSession.sharedInstance()
         
@@ -31,19 +25,55 @@ class GameViewController: UIViewController {
         try? audioSession.setActive(true)
     }
     
+    func authenticateLocalPlayer() {
+        let localPlayer = GKLocalPlayer.local
+           localPlayer.authenticateHandler = {(viewController, error) -> Void in
+               print(localPlayer.displayName)
+               //print(localPlayer.gamePlayerID)
+               
+             //  if gameScore > settings.highscore, GKLocalPlayer.local.isAuthenticated || 1 == 1 {
+                   let scoreReporter = GKScore(leaderboardIdentifier: "grp.spaceBarHighScores")
+                   scoreReporter.value = Int64(102)
+                   let scoreArray: [GKScore] = [scoreReporter]
+
+                   GKScore.report(scoreArray, withCompletionHandler: {error -> Void in
+                       if error != nil {
+                           print("GAMEKIT:", error as Any)
+                       }
+                       
+                   })
+               
+                    
+                print(GKScore(leaderboardIdentifier: "grp.spaceBarHighScores", player: localPlayer))
+              // }
+               
+//               if viewController != nil {
+//                    print("HELLO")
+//                   self.present(viewController!, animated: true, completion: nil)
+//               } else {
+//                   print("WORLD")
+//                   print((GKLocalPlayer.local.isAuthenticated))
+//               }
+           }
+       }
+    
+    // SpaceBariOSiPadOSmacOS
+    
+    
     func runGameMenu() {
         // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
         // including entities and graphs.
-        if let scene = SKScene(fileNamed: "GameMenu") {
+        if let scene = SKScene(fileNamed: "GameLeader") {
+            
+        
             // Get the SKScene from the loaded GKScene
-            //if let rootNode = gkScene.rootNode as! GameMenu? {
+        // if let rootNode = scene.rootNode as! GameMenu? {
                 
                 // Copy gameplay related content over to the scene
-                //sceneNode.entities = scene.entities
-                //sceneNode.graphs = scene.graphs
-                
+               // rootNode.entities = gkScene.entities
+               // rootNode.graphs = gkScene.graphs
                 // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFit
+            scene.scaleMode = .aspectFit
                 
                 // Present the scene
                 if let view = self.view as! SKView? {
@@ -53,17 +83,19 @@ class GameViewController: UIViewController {
                     view.isMultipleTouchEnabled = false
                     view.presentScene(scene, transition: SKTransition.fade(withDuration: 2.0))
                 }
-            //}
-        }
+           }
+        //}
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        authenticateLocalPlayer()
+        
         
         #if targetEnvironment(macCatalyst)
         runAudioSession()
         #endif
-        
         self.runGameMenu()
+
     }
 
     override var prefersHomeIndicatorAutoHidden: Bool {
@@ -98,6 +130,9 @@ class GameViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        view.backgroundColor = .black
+
 
         func bitSet(_ bits: [Int]) -> UInt {
             return bits.reduce(0) { $0 | (1 << $1) }
@@ -131,32 +166,3 @@ class GameViewController: UIViewController {
         
     }
 }
-
-//func isFullScreen() -> Bool
-//{
-//    guard let windows = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) else {
-//        return false
-//    }
-//
-//    for window in windows as NSArray
-//    {
-//        guard let winInfo = window as? NSDictionary else { continue }
-//        
-//        if winInfo["kCGWindowOwnerName"] as? String == "Dock",
-//           winInfo["kCGWindowName"] as? String == "Fullscreen Backdrop"
-//        {
-//            return true
-//        }
-//    }
-//    
-//    return false
-//}
-//
-//var item = isFullScreen() {
-//    didSet { //called when item changes
-//        print("isFullScreen", item)
-//    }
-//    willSet {
-//        print("isFullScreen", item)
-//    }
-//}

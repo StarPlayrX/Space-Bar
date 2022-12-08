@@ -9,9 +9,6 @@ import Foundation
 import SpriteKit
 
 extension GameScene: GameSceneDelegate {
-    
-    static let shared = GameScene()
-    
     func removeLeft() {
         paddleNode.removeAction(forKey: g.moveLeft)
     }

@@ -41,7 +41,7 @@ struct ScreenSize {
             screenType = .iAny
         }
         
-        //Settling on a one size fits all otherwise it throws of the screen ratio in the game.
+        //MARK: Settling on a one size fits all otherwise it throws of the screen ratio in the game.
         scene.size = CGSize(width: width, height: height)
         
         return screenType

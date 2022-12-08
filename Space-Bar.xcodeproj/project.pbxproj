@@ -144,6 +144,9 @@
 		5F4E329329368A5E0028DBC7 /* DrawParallax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4E327C29368A5E0028DBC7 /* DrawParallax.swift */; };
 		5F4E329529368A750028DBC7 /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4E329429368A750028DBC7 /* Speech.swift */; };
 		5F4E329729368A900028DBC7 /* LevelPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4E329629368A900028DBC7 /* LevelPosition.swift */; };
+		5F5E03CE2940DE1400CD8D85 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5E03CD2940DE1400CD8D85 /* Container.swift */; };
+		5F5E03D229415BF600CD8D85 /* GameLeader.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5F5E03D029415BF600CD8D85 /* GameLeader.sks */; };
+		5F5E03D329415BF600CD8D85 /* GameLeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5E03D129415BF600CD8D85 /* GameLeader.swift */; };
 		5FA85591293695BC00D988A9 /* SceneDidLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA85590293695BC00D988A9 /* SceneDidLoad.swift */; };
 		5FCE24592936C9CB0015C6ED /* Dah.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5FCE24552936C9CB0015C6ED /* Dah.mp3 */; };
 		5FCE245A2936C9CB0015C6ED /* Knock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5FCE24562936C9CB0015C6ED /* Knock.mp3 */; };
@@ -296,6 +299,9 @@
 		5F4E327C29368A5E0028DBC7 /* DrawParallax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawParallax.swift; sourceTree = "<group>"; };
 		5F4E329429368A750028DBC7 /* Speech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speech.swift; sourceTree = "<group>"; };
 		5F4E329629368A900028DBC7 /* LevelPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelPosition.swift; sourceTree = "<group>"; };
+		5F5E03CD2940DE1400CD8D85 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		5F5E03D029415BF600CD8D85 /* GameLeader.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = GameLeader.sks; path = "Space-Bar/GameLeader/GameLeader.sks"; sourceTree = SOURCE_ROOT; };
+		5F5E03D129415BF600CD8D85 /* GameLeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameLeader.swift; path = "Space-Bar/GameLeader/GameLeader.swift"; sourceTree = SOURCE_ROOT; };
 		5FA85590293695BC00D988A9 /* SceneDidLoad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDidLoad.swift; sourceTree = "<group>"; };
 		5FCE24552936C9CB0015C6ED /* Dah.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Dah.mp3; path = "/Users/todd/SpaceBar2/Space-Bar/Space-Bar/Sounds/Dah.mp3"; sourceTree = "<absolute>"; };
 		5FCE24562936C9CB0015C6ED /* Knock.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Knock.mp3; path = "/Users/todd/SpaceBar2/Space-Bar/Space-Bar/Sounds/Knock.mp3"; sourceTree = "<absolute>"; };
@@ -626,6 +632,16 @@
 			path = Draw;
 			sourceTree = "<group>";
 		};
+		5F5E03CF29415BE400CD8D85 /* GameLeader */ = {
+			isa = PBXGroup;
+			children = (
+				5F5E03D129415BF600CD8D85 /* GameLeader.swift */,
+				5F5E03D029415BF600CD8D85 /* GameLeader.sks */,
+			);
+			name = GameLeader;
+			path = GameMenu/GameLeader;
+			sourceTree = "<group>";
+		};
 		5FEC19BC29367DEE008239D6 = {
 			isa = PBXGroup;
 			children = (
@@ -646,8 +662,10 @@
 			isa = PBXGroup;
 			children = (
 				5FEC19C829367DEE008239D6 /* AppDelegate.swift */,
+				5F5E03CD2940DE1400CD8D85 /* Container.swift */,
 				5FEC19D029367DEE008239D6 /* GameViewController.swift */,
 				5F4E315A293681C40028DBC7 /* Info.plist */,
+				5F5E03CF29415BE400CD8D85 /* GameLeader */,
 				5F4B0B212936B23E005245AB /* GameMenu */,
 				5F4B0B222936B253005245AB /* GameScene */,
 				5F4E326029368A5E0028DBC7 /* Game */,
@@ -773,6 +791,7 @@
 				5F4E3237293689DD0028DBC7 /* level63.sks in Resources */,
 				5F4E320C293689DD0028DBC7 /* level74.sks in Resources */,
 				5F4E3249293689DD0028DBC7 /* level19.sks in Resources */,
+				5F5E03D229415BF600CD8D85 /* GameLeader.sks in Resources */,
 				5F4E3232293689DD0028DBC7 /* level57.sks in Resources */,
 				5F4E322F293689DD0028DBC7 /* level55.sks in Resources */,
 				5F4E320F293689DD0028DBC7 /* level76.sks in Resources */,
@@ -867,6 +886,7 @@
 				5F4E329029368A5E0028DBC7 /* DrawHUD.swift in Sources */,
 				5F4E328629368A5E0028DBC7 /* BrickChecker.swift in Sources */,
 				5F4E3169293682A30028DBC7 /* ScreenSize.swift in Sources */,
+				5F5E03D329415BF600CD8D85 /* GameLeader.swift in Sources */,
 				5F4E327E29368A5E0028DBC7 /* RemovePowerBall.swift in Sources */,
 				5F4E328829368A5E0028DBC7 /* TileMapRun.swift in Sources */,
 				5F4E328329368A5E0028DBC7 /* UpdateScene.swift in Sources */,
@@ -877,6 +897,7 @@
 				5F4E328D29368A5E0028DBC7 /* DrawCenterCourt.swift in Sources */,
 				5F4E327F29368A5E0028DBC7 /* AddPowerBall.swift in Sources */,
 				5F4E328029368A5E0028DBC7 /* CocoaTouch.swift in Sources */,
+				5F5E03CE2940DE1400CD8D85 /* Container.swift in Sources */,
 				5FEC19C929367DEE008239D6 /* AppDelegate.swift in Sources */,
 				5F4E329529368A750028DBC7 /* Speech.swift in Sources */,
 			);
@@ -1025,7 +1046,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
@@ -1033,6 +1054,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = gamekit;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
@@ -1042,7 +1064,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ufoemoji.spacebar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1061,7 +1083,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
@@ -1069,6 +1091,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = gamekit;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
@@ -1078,7 +1101,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ufoemoji.spacebar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
