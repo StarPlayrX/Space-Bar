@@ -34,29 +34,10 @@ class GameViewController: UIViewController {
                 let rnd = Int.random(in: 1...9999)
                 playerName = "Player \(rnd)"
             }
-            
-            print("playername", playerName)
-//            let scoreReporter = GKScore(leaderboardIdentifier: "grp.spaceBarHighScores")
-//            scoreReporter.value = Int64(102)
-//            let scoreArray: [GKScore] = [scoreReporter]
-            
-//            GKScore.report(scoreArray, withCompletionHandler: {error -> Void in
-//                if error != nil {
-//                    print("GAMEKIT:", error as Any)
-//                }
-//
-//            })
-//
-            
-            // }
-            
-            //               if viewController != nil {
-            //                    print("HELLO")
-            //                   self.present(viewController!, animated: true, completion: nil)
-            //               } else {
-            //                   print("WORLD")
-            //                   print((GKLocalPlayer.local.isAuthenticated))
-            //               }
+                        
+            DispatchQueue.global(qos: .background).async {
+                getData()
+            }
         }
     }
     

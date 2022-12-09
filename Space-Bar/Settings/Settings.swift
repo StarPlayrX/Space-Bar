@@ -79,6 +79,10 @@ struct AppSettings {
         } else {
             leaderRunDown()
         }
+        
+        DispatchQueue.global(qos:.background).async {
+            getData()
+        }
     }
 }
 

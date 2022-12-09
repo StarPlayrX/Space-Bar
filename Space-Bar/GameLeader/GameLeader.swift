@@ -76,9 +76,7 @@ class GameLeader: SKScene {
         }
     }
     
-    override func didMove(to view: SKView) {
-        
-
+    override func didMove(to view: SKView) {        
         g.showCursor = true
         
     #if targetEnvironment(macCatalyst)

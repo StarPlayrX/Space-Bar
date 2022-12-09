@@ -145,6 +145,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            // Fallback on earlier versions
 //        }
 
+       // sendText()
+        
+        
         
         #if targetEnvironment(macCatalyst)
         let MacCatalystVerison = UIDevice.current.systemVersion
