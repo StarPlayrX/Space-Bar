@@ -343,6 +343,7 @@
 				5FEC19CE29367DEE008239D6 /* GameScene.swift */,
 				5F4E316A2936887A0028DBC7 /* GameScene.sks */,
 				5F4E316C2936898B0028DBC7 /* GameSceneDelegate.swift */,
+				5FA85590293695BC00D988A9 /* SceneDidLoad.swift */,
 				5F4E325E293689F20028DBC7 /* ViewDidMove.swift */,
 				5F4E326C29368A5E0028DBC7 /* DidBeginContact.swift */,
 				5F4E326A29368A5E0028DBC7 /* UpdateScene.swift */,
@@ -354,7 +355,6 @@
 			isa = PBXGroup;
 			children = (
 				5F4E326B29368A5E0028DBC7 /* SetHighScore.swift */,
-				5FA85590293695BC00D988A9 /* SceneDidLoad.swift */,
 				5F4E329629368A900028DBC7 /* LevelPosition.swift */,
 				5F4E31642936827E0028DBC7 /* Global.swift */,
 				5F4E3166293682980028DBC7 /* Settings.swift */,

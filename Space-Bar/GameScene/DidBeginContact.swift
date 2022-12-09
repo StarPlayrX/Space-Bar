@@ -177,6 +177,8 @@ extension GameScene {
                     }
                     
                     let runcode = SKAction.run {
+                        self.setHighScore()
+
                         if let scene = SKScene(fileNamed: "GameMenu"), let view = self.view as SKView? {
                             scene.scaleMode = .aspectFit
                             view.ignoresSiblingOrder = true
@@ -213,7 +215,5 @@ extension GameScene {
         default:
             break
         }
-        
-        setHighScore()
     }
 }

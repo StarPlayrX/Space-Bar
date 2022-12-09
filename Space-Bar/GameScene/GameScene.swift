@@ -9,7 +9,7 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    let paddle = CGFloat(130)
+    let paddle = CGFloat(120)
     let center = CGFloat(2)
     let leftBorder = CGFloat(4)
     let rightBorder = CGFloat(2)
@@ -27,12 +27,7 @@ class GameScene: SKScene {
     let ratio = CGFloat(2)
     let zero = CGFloat(0)
     
-    #if targetEnvironment(macCatalyst)
-        var velocity = CGFloat(650)
-    #else
-        var velocity = CGFloat(700)
-    #endif
-    
+    var velocity    = CGFloat(700)    
     var ballNode    = SKSpriteNode()
     var extraNode   = SKSpriteNode()
     var tennisNode  = SKSpriteNode()

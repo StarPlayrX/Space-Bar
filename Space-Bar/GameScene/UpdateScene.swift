@@ -37,39 +37,31 @@ extension GameScene {
                 }
             }
         
-            #if targetEnvironment(macCatalyst)
-                let minSpeed = CGFloat(50)
-                let maxSpeed = CGFloat(700)
-                let brakesX = 2.5
-                let brakesY = 5
-            #else
-                let minSpeed = CGFloat(100)
-                let maxSpeed = CGFloat(800)
-                let brakesX = 5
-                let brakesY = 10
-            #endif
+            let minSpeed = CGFloat(100)
+            let maxSpeed = CGFloat(900 + settings.currentlevel + 1)
+            let brakesX = 5
+            let brakesY = 10
             
-
-            let half  = CGFloat(settings.currentlevel + 1) / 2
-            let quart = CGFloat(settings.currentlevel + 1) / 4
+            let level  = CGFloat(settings.currentlevel + 1)
+            let halfLevel = CGFloat(settings.currentlevel + 1) / 2
 
             //MARK: Min Speed dy (Thrust)
-            if abs(body.velocity.dy) < CGFloat(minSpeed + half) {
+            if abs(body.velocity.dy) < CGFloat(minSpeed + level) {
                 body.velocity.dy <= zero ? body.applyImpulse(CGVector(dx: 0, dy: -brakesY)) : body.applyImpulse(CGVector(dx: 0, dy: brakesY))
             }
             
             //MARK: Min Speed dx (Thrust)
-            if abs(body.velocity.dx) < CGFloat(minSpeed + quart) {
+            if abs(body.velocity.dx) < CGFloat(minSpeed + halfLevel) {
                 body.velocity.dx <= zero ? body.applyImpulse(CGVector(dx: -brakesX, dy: 0)) : body.applyImpulse(CGVector(dx: brakesX, dy: 0))
             }
     
             //MARK: Max Speed dx (Breaks)
-            if abs(body.velocity.dx) > CGFloat(maxSpeed + quart) {
+            if abs(body.velocity.dx) > CGFloat(maxSpeed + halfLevel) {
                 body.velocity.dx <= zero ? body.applyImpulse(CGVector(dx: brakesX, dy: 0)) : body.applyImpulse(CGVector(dx: -brakesX, dy: 0))
             }
     
             //MARK: Max Speed dy (Breaks)
-            if abs(body.velocity.dy) > CGFloat(maxSpeed + half) {
+            if abs(body.velocity.dy) > CGFloat(maxSpeed + level) {
                 body.velocity.dy <= zero ? body.applyImpulse(CGVector(dx: 0, dy: brakesY)) : body.applyImpulse(CGVector(dx: 0, dy: -brakesY))
             }
         }

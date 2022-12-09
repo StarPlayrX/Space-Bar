@@ -69,3 +69,16 @@ var gameSceneDelegate: GameSceneDelegate! //required
 var paddleNode = SKSpriteNode() //required
 let synthesizer = AVSpeechSynthesizer()
 var gFireBallNode = SKSpriteNode()
+var playerName = "Player"
+
+struct LeaderBoard: Codable {
+    var  score      : Int
+    var  playerName : String
+    var `start`     : Int
+    var `stop`      : Int
+    var  date       : Date
+}
+
+
+
+var leaderBoard = [LeaderBoard]()

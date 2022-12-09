@@ -18,7 +18,7 @@ extension GameScene {
         let paddle = SKSpriteNode()
         
         if MacCatalystVerison.starts(with: "10.15") {
-            let size = CGSize(width: 130, height: 40)
+            let size = CGSize(width: 120, height: 40)
             paddle.physicsBody = SKPhysicsBody(rectangleOf: size, center: CGPoint.zero)
             paddle.size = size
         } else {

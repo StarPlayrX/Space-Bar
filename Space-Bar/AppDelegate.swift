@@ -68,6 +68,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         appSettings.loadUserDefaults()
+        appSettings.loadLeaderboard()
+
+        
+       // leaderBoard[2] = LeaderBoard(score: 20, playerName: "Player X", start: 1, stop: 100, date: Date())
+       // leaderBoard[1] = LeaderBoard(score: 20, playerName: "Player X", start: 10, stop: 100, date: Date())
+//
+//        leaderBoard.sort(by: {($1.score, $1.stop, $0.start) < ($0.score, $0.stop, $1.start)})
+//        leaderBoard = Array(leaderBoard[0..<20])
+
         //if #available(iOS 13.0, *) {
 //            struct ContentView: View {
 //                var scene: SKScene {

@@ -119,7 +119,8 @@ class GameMenu: SKScene {
                 if name == "enter" && !keyPressed {
                     if keyPressed { return }
                     keyPressed = true
-                    
+                    settings.startlevel = settings.currentlevel
+
                     let runcode = SKAction.run { [self] in
                         if let scene = SKScene(fileNamed: "GameScene") {
                             gScene = scene
@@ -497,7 +498,7 @@ class GameMenu: SKScene {
             lvlTextLabel.text = "level \(settings.currentlevel + 1)"
             lvlLabel.zRotation = CGFloat(Int(rotation[settings.currentlevel % rotation.count]).degrees)
             
-            let fadein = SKAction.fadeAlpha(to: 1.0, duration: 0.5)
+            let fadein = SKAction.fadeAlpha(to: 1.0, duration: 0.0)
             scene.run(fadein)
         }
     }

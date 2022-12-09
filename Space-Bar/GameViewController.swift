@@ -25,11 +25,17 @@ class GameViewController: UIViewController {
         try? audioSession.setActive(true)
     }
     
-    func authenticateLocalPlayer() {
+    func getGameCenterName() {
         let localPlayer = GKLocalPlayer.local
-        localPlayer.authenticateHandler = {(viewController, error) -> Void in
-            print(localPlayer.displayName)
+        localPlayer.authenticateHandler = {(_, error) -> Void in
+            playerName = localPlayer.displayName
             
+            if error != nil {
+                let rnd = Int.random(in: 1...9999)
+                playerName = "Player \(rnd)"
+            }
+            
+            print("playername", playerName)
 //            let scoreReporter = GKScore(leaderboardIdentifier: "grp.spaceBarHighScores")
 //            scoreReporter.value = Int64(102)
 //            let scoreArray: [GKScore] = [scoreReporter]
@@ -70,7 +76,7 @@ class GameViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        authenticateLocalPlayer()
+        getGameCenterName()
         
         
 #if targetEnvironment(macCatalyst)

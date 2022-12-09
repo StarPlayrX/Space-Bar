@@ -39,7 +39,6 @@ extension GameScene {
             livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives : 0)
             levelLabel.text = String(settings.currentlevel + 1)
             scoreLabel.text = String(gameScore)
-            setHighScore()
             appSettings.saveUserDefaults()
             drawLevel()
             
