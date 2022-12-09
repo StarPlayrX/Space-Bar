@@ -8,7 +8,6 @@
 
 import Foundation
 import SpriteKit
-import GameKit
 
 extension GameScene {
     func setHighScore() {

@@ -9,7 +9,6 @@ import UIKit
 import SpriteKit
 import AVFoundation
 import GameKit
-import GameplayKit
 
 class GameViewController: UIViewController {
     
@@ -26,18 +25,16 @@ class GameViewController: UIViewController {
     }
     
     func getGameCenterName() {
+        let rnd = Int.random(in: 1000...9999)
+        playerName = "Space-Man \(rnd)"
+        
         let localPlayer = GKLocalPlayer.local
         localPlayer.authenticateHandler = {(_, error) -> Void in
             playerName = localPlayer.displayName
-            
-            if error != nil {
-                let rnd = Int.random(in: 1...9999)
-                playerName = "Player \(rnd)"
-            }
-                        
-            DispatchQueue.global(qos: .background).async {
-                getData()
-            }
+        }
+        
+        DispatchQueue.global(qos: .background).async {
+            getData()
         }
     }
     
