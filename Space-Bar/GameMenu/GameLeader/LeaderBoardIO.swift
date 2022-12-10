@@ -43,19 +43,21 @@ func getData() {
 
 
 func sendText(score: Int, player: String, start: Int, stop: Int) {
+    
     var player = player.replacingOccurrences(of: " ", with: "_")
     player = removeSpecialChars(player)
     
     let checksum = player.count + score + start + stop
     let pinpoint = "http://pearsc.com/spacebarup/\(player)/\(score)/\(start)/\(stop)/\(checksum)"
     Async.api.Text(endpoint: pinpoint, timeOut: 5 ) {  air in
-        if air == "air" {
-            DispatchQueue.global(qos: .background).async {
-                getData()
-            }
-        } else {
-            print("AIR", air)
-        }
+        
+        // Do nothing
+        
+//        if air == "air" {
+//            DispatchQueue.global(qos: .background).async {
+//                getData()
+//            }
+//        }
     }
 }
 

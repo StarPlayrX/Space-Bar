@@ -87,7 +87,6 @@ class GameLeader: SKScene {
         let spacer = CGFloat(20)
         let fontsize = CGFloat(26)
 
-        let topTwenty: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
         let playerRank: SKLabelNode = SKLabelNode(fontNamed: "Helvetica-Bold")
         let playerLabel: SKLabelNode = SKLabelNode(fontNamed: "Helvetica-Bold")
         let playerScore: SKLabelNode = SKLabelNode(fontNamed: "Helvetica-Bold")
@@ -152,7 +151,6 @@ class GameLeader: SKScene {
             let v = CGFloat(i * 50 + 50)
             if let hiScorePos = scene?.childNode(withName: "leaderboard")?.position {
                 
-                let topTwenty: SKLabelNode = SKLabelNode(fontNamed: "emulogic")
                 let playerRank: SKLabelNode = SKLabelNode(fontNamed: "Helvetica")
                 let playerLabel: SKLabelNode = SKLabelNode(fontNamed: "Helvetica")
                 let playerScore: SKLabelNode = SKLabelNode(fontNamed: "Helvetica")
