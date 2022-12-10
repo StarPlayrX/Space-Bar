@@ -14,15 +14,15 @@ extension GameScene {
         settings.highscore = gameScore > settings.highscore ? gameScore : settings.highscore
         settings.highlevel = settings.currentlevel > settings.highlevel ? settings.currentlevel : settings.highlevel
     
-        if let start = settings.startlevel {
-            let lb = LeaderBoard(score: gameScore, playerName: playerName, start: start + 1, stop: settings.currentlevel + 1, date: Date())
+        if let start = settings.startlevel, let player = settings.player {
+            let lb = LeaderBoard(score: gameScore, playerName: player, start: start + 1, stop: settings.currentlevel + 1, date: Date())
             leaderBoard.append(lb)
             AppSettings().saveLeaderBoard()
             
             //MARK: Send Score to the server
             
             DispatchQueue.global(qos: .background).async { [self] in
-                sendText(score: gameScore, player: playerName, start: start + 1, stop: settings.currentlevel + 1)
+                sendText(score: gameScore, player: player, start: start + 1, stop: settings.currentlevel + 1)
             }
         }
     }

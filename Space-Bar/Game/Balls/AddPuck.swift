@@ -11,16 +11,20 @@ import SpriteKit
 
 extension GameScene {
     
-    func addPuck() {
+    func addPuck(override: Bool = false) {
         let ball = "ball"
         
         ballCounter = ballTimeOut
         // Ensures no pucks pre-exist
-        for whatDaPuck in anchorNode.children {
-            if let name = whatDaPuck.name, name == ball {
-                whatDaPuck.removeFromParent()
+        
+        if !override {
+            for whatDaPuck in anchorNode.children {
+                if let name = whatDaPuck.name, name == ball {
+                    whatDaPuck.removeFromParent()
+                }
             }
         }
+    
         
         ballNode = SKSpriteNode()
         
@@ -31,7 +35,7 @@ extension GameScene {
         ballEmoji.position = CGPoint(x: 0, y: 0)
         ballEmoji.zPosition = 50
         ballEmoji.text = Global.shared.gameBall[settings.puck]
-        ballEmoji.fontSize = 50 //* 2
+        ballEmoji.fontSize = 48 //* 2
         
         let rnd = arc4random_uniform(UInt32(360))
         ballEmoji.zRotation = CGFloat(Int(rnd).degrees)
@@ -40,7 +44,7 @@ extension GameScene {
             ballNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
             // This fall back should not happen, but we may use this in the future for iOS' that fail
-            ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 25)
+            ballNode.physicsBody = SKPhysicsBody(circleOfRadius: 24)
         }
         
         ballNode.physicsBody?.categoryBitMask = ballCategory
@@ -85,7 +89,7 @@ extension GameScene {
         extraBallEmoji.position = CGPoint(x: 0, y: 0)
         extraBallEmoji.zPosition = 50
         extraBallEmoji.text = Global.shared.gameBall[settings.puck + 2 % 8]
-        extraBallEmoji.fontSize = 50 //* 2
+        extraBallEmoji.fontSize = 48 //* 2
         
         let rnd = arc4random_uniform(UInt32(360))
         extraBallEmoji.zRotation = CGFloat(Int(rnd).degrees)
@@ -94,7 +98,7 @@ extension GameScene {
             extraNode.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.1, size: texture.size())
         } else {
             // This fall back should not happen, but we may use this in the future for iOS' that fail
-            extraNode.physicsBody = SKPhysicsBody(circleOfRadius: 25)
+            extraNode.physicsBody = SKPhysicsBody(circleOfRadius: 24)
         }
         
         extraNode.physicsBody?.categoryBitMask = ballCategory

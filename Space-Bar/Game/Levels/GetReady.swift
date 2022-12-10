@@ -24,7 +24,7 @@ extension GameScene {
             getReadyLabel.position = CGPoint.zero
             getReadyLabel.zPosition = 50
             getReadyLabel.text = getReady
-            getReadyLabel.fontSize = 46
+            getReadyLabel.fontSize = 48
             getReadyLabel.alpha = 1.0
             anchorNode.addChild(getReadyLabel)
             
@@ -72,7 +72,7 @@ extension GameScene {
         //MARK: Extra Ball 20, 40, 60, 80, 100
         if bonusLevel % 20 == 0 {
             addExtraBall()
-            
+            addPuck(override: true)
             //MARK: Shoot FireBalls 10, 30, 50, 70, 90
         } else if bonusLevel % 10 == 0 {
             for _ in 1...3 {

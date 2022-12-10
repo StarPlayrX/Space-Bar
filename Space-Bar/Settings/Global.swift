@@ -69,7 +69,7 @@ var gameSceneDelegate: GameSceneDelegate! //required
 var paddleNode = SKSpriteNode() //required
 let synthesizer = AVSpeechSynthesizer()
 var gFireBallNode = SKSpriteNode()
-var playerName = "Player"
+var pauseLabel = SKLabelNode(fontNamed:"AppleColorEmoji")
 
 struct LeaderBoard: Codable {
     var  score      : Int
@@ -78,7 +78,5 @@ struct LeaderBoard: Codable {
     var `stop`      : Int
     var  date       : Date
 }
-
-
 
 var leaderBoard = [LeaderBoard]()

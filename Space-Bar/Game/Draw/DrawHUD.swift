@@ -13,6 +13,21 @@ extension GameScene {
     func drawHUD() {
         let puck = Global.shared.gameBall[settings.puck]
 
+        pauseLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
+        pauseLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+        pauseLabel.position = CGPoint(x: -centerWidth + 54, y: -centerHeight + labelspace + 4)
+        pauseLabel.zPosition = 50
+        pauseLabel.numberOfLines = 1
+        pauseLabel.text = "⏸"
+        pauseLabel.name = "pause"
+        pauseLabel.fontSize = 40
+        pauseLabel.alpha = 1.0
+        pauseLabel.fontColor = .white
+        pauseLabel.alpha = 0.7
+        pauseLabel.colorBlendFactor = .greatestFiniteMagnitude
+        pauseLabel.fontColor = .systemBlue
+        anchorNode.addChild(pauseLabel)
+        
         livesLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
         livesLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
         livesLabel.position = CGPoint(x: centerWidth - 9.5, y: -centerHeight + labelspace)

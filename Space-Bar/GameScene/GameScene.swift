@@ -74,7 +74,7 @@ class GameScene: SKScene {
     let scoreLabel = SKLabelNode(fontNamed:"emulogic")
     let levelLabel = SKLabelNode(fontNamed:"emulogic")
     let livesLabel = SKLabelNode(fontNamed:"SpaceBarColors")
-    
+
     //MARK: New Bug on iOS 16.1 - Simulator gets a deadlock when trying to play sounds
 #if targetEnvironment(simulator)
     let goalSound   = SKAction()

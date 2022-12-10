@@ -27,7 +27,17 @@ extension GameScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { touchDown(atPoint: t.location(in: self)) }
+        super.touchesBegan(touches as Set<UITouch>, with: event)
+        for touch: AnyObject in touches {
+            let location: CGPoint = touch.location(in: self)
+            let touchedNode = atPoint(location)
+            
+            if let name = touchedNode.name, name == "pause" {
+                playPause()
+            } else {
+                touchDown(atPoint: touch.location(in: self))
+            }
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {

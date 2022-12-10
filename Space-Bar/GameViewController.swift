@@ -8,7 +8,6 @@
 import UIKit
 import SpriteKit
 import AVFoundation
-import GameKit
 
 class GameViewController: UIViewController {
     
@@ -22,20 +21,6 @@ class GameViewController: UIViewController {
         }
         
         try? audioSession.setActive(true)
-    }
-    
-    func getGameCenterName() {
-        let rnd = Int.random(in: 1000...9999)
-        playerName = "Space-Man \(rnd)"
-        
-        let localPlayer = GKLocalPlayer.local
-        localPlayer.authenticateHandler = {(_, error) -> Void in
-            playerName = localPlayer.displayName
-        }
-        
-        DispatchQueue.global(qos: .background).async {
-            getData()
-        }
     }
     
     func runGameMenu() {
@@ -54,9 +39,7 @@ class GameViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        getGameCenterName()
-        
-        
+        setGamerTag()
 #if targetEnvironment(macCatalyst)
         runAudioSession()
 #endif

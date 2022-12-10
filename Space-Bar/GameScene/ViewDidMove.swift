@@ -55,8 +55,6 @@ extension GameScene {
 
         let frame = CGRect(x: -centerWidth, y: -centerHeight, width: width, height: height)
         drawEdgeLoop(frame)
-        
-
         drawHUD()
         drawMidCorners()
         drawMidEdges()

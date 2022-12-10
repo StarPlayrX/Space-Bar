@@ -53,7 +53,7 @@ extension GameScene {
                 getReadyLabel.position = CGPoint(x: 0, y: 0)
                 getReadyLabel.zPosition = 50
                 getReadyLabel.text = getReadyText
-                getReadyLabel.fontSize = 46
+                getReadyLabel.fontSize = 48
                 getReadyLabel.alpha = 1.0
                 anchorNode.addChild(getReadyLabel)
                 

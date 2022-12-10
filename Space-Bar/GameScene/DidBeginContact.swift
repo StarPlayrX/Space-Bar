@@ -102,7 +102,7 @@ extension GameScene {
                 a.physicsBody = nil
                 a.name = ""
                 a.removeFromParent()
-                
+              
                 if name == "extraball" {
                     if gameLives > 0 {
                         return
@@ -122,12 +122,12 @@ extension GameScene {
                 livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives - 1 : 0)
             }
             
-            if gameLives > 0 && name != "extraball" {
+            if (settings.currentlevel + 1) % 20 == 0 {
+                addExtraBall()
+                addPuck(override: true)
+                return
+            } else if gameLives > 0 && name != "extraball" {
                 addPuck()
-                
-                if (settings.currentlevel + 1) % 20 == 0 {
-                    addExtraBall()
-                }
                 return
             }
             
@@ -163,7 +163,7 @@ extension GameScene {
                         getReadyLabel.position = CGPoint(x: 0, y: 0)
                         getReadyLabel.zPosition = 50
                         getReadyLabel.text = getReadyText
-                        getReadyLabel.fontSize = 46
+                        getReadyLabel.fontSize = 48
                         getReadyLabel.alpha = 1.0
                         anchorNode.addChild(getReadyLabel)
                         
@@ -196,7 +196,7 @@ extension GameScene {
                 scene?.run(seq)
             }
         case powerCategory | paddleCategory:
-            playSound(action: goalSound)
+            playSound(action: paddleSound)
 
             scoreLabel.text = String(gameScore)
             

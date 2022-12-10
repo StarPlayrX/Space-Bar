@@ -10,7 +10,13 @@ import SpriteKit
 //import GameplayKit
 
 class GameMenu: SKScene {
-    override func sceneDidLoad() {        
+    override func sceneDidLoad() {
+        checker()
+        
+        DispatchQueue.global(qos: .background).async {
+            getData()
+        }
+    
         g.showCursor = true
         g.runningGame = false
         
@@ -194,9 +200,7 @@ class GameMenu: SKScene {
     
     override func didMove(to view: SKView) {
         
-        DispatchQueue.global(qos: .background).async {
-            getData()
-        }
+     
         
         g.showCursor = true
         

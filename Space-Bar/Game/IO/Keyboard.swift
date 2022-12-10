@@ -58,6 +58,13 @@ extension GameScene: GameSceneDelegate {
         //MARK: For some reason still have to use a Global here for gScene. Odd, doesn't run correctly using the local
         gScene.isPaused.toggle()
         gScene.speed = gScene.isPaused ? 0 : 1
+        
+        if gScene.isPaused {
+            pauseLabel.text = "▶️"
+        } else {
+            pauseLabel.text = "⏸"
+        }
+        
     }
 }
 
@@ -67,14 +74,14 @@ extension GameViewController {
             guard let key = press.key else { continue }
             
             switch key {
-                case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || k.charactersIgnoringModifiers == "a":
+            case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || k.charactersIgnoringModifiers == "d" || k.charactersIgnoringModifiers == "c" || k.charactersIgnoringModifiers == "]":
             
                 if MoveState.shared.moveLeft {
                     gameSceneDelegate?.removeLeft()
                     MoveState.shared.moveLeft = false
                 }
                 
-                case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow || k.charactersIgnoringModifiers == "d":
+            case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow || k.charactersIgnoringModifiers == "g" || k.charactersIgnoringModifiers == "5" || k.charactersIgnoringModifiers == "6":
                 if MoveState.shared.moveRight {
                     gameSceneDelegate?.removeRight()
                     MoveState.shared.moveRight = false
@@ -105,7 +112,7 @@ extension GameViewController {
             guard let key = press.key else { continue }
             
             switch key {
-                case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || k.charactersIgnoringModifiers == "a":
+                case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow || k.charactersIgnoringModifiers == "d" || k.charactersIgnoringModifiers == "c" || k.charactersIgnoringModifiers == "]":
                 
                 if MoveState.shared.moveRight {
                     gameSceneDelegate?.removeRight()
@@ -115,7 +122,7 @@ extension GameViewController {
                 gameSceneDelegate?.moveLeft()
                 MoveState.shared.moveLeft = true
                 
-                case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow || k.charactersIgnoringModifiers == "d":
+            case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow || k.charactersIgnoringModifiers == "g" || k.charactersIgnoringModifiers == "5" || k.charactersIgnoringModifiers == "6":
                 
                 if MoveState.shared.moveLeft {
                     gameSceneDelegate?.removeLeft()
@@ -125,13 +132,13 @@ extension GameViewController {
                 gameSceneDelegate?.moveRight()
                 MoveState.shared.moveRight = true
                 
-                case let k where k.charactersIgnoringModifiers == " ":
+                case let k where k.charactersIgnoringModifiers == " " || k.charactersIgnoringModifiers == "q":
                 gameSceneDelegate?.playPause()
         
             #if targetEnvironment(macCatalyst)
-                case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow || k.charactersIgnoringModifiers == "w":
+                case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow || k.charactersIgnoringModifiers == "r":
                 resizeWindow(amount: 2)
-                case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow || k.charactersIgnoringModifiers == "s":
+                case let k where k.charactersIgnoringModifiers == UIKeyCommand.inputDownArrow || k.charactersIgnoringModifiers == "f":
                 resizeWindow(amount: -2)
             #endif
 
