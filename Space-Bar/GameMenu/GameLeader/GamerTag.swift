@@ -12,7 +12,7 @@ import GameKit
 func gamerTagAutoGenerator() {
     let n = Int.random(in: 0..<randomNames.count)
     let r = Int.random(in: 1000...9999)
-
+    
     if settings.player == nil {
         settings.player = "\(randomNames[n])\(r)"
     } else if let player = settings.player, player.isEmpty {
@@ -29,27 +29,18 @@ var randomNames = ["2600Hz", "5thElement", "8BitGamer", "AbstractSpace", "Acoust
 
 func setGamerTag() {
     gamerTagAutoGenerator()
-    
-    let MacCatalystVersion = UIDevice.current.systemVersion
 
-    //MARK: - Comment out lines 35 through 40 if you don't want to use GameCenter's GamerTags
-    
-    //Game Center works very poorly with MacCatalyst 10.15
-    if !MacCatalystVersion.starts(with: "10.15") {
-         if case let lp = GKLocalPlayer.local, !lp.isAuthenticated {
-             lp.authenticateHandler = {(_, _) -> Void in
-                  
-                 if !lp.displayName.isEmpty && lp.displayName.count > 3 {
-                     settings.player = lp.displayName
-                 } else {
-                     gamerTagAutoGenerator()
-                 }
-                 
-             }
-         // Check if game tag changed
-         } else if case let lp = GKLocalPlayer.local.displayName, !lp.isEmpty, lp.count > 3, lp != settings.player {
-             settings.player = lp
-         }
+    if case let lp = GKLocalPlayer.local, !lp.isAuthenticated {
+        lp.authenticateHandler = {(_, error) -> Void in
+            if !lp.displayName.isEmpty && lp.displayName.count > 3 {
+                settings.player = lp.displayName
+            } else {
+                gamerTagAutoGenerator()
+            }
+        }
+        // Check if game tag changed
+    } else if case let lp = GKLocalPlayer.local.displayName, !lp.isEmpty, lp.count > 3, lp != settings.player {
+        settings.player = lp
     }
-
 }
+
