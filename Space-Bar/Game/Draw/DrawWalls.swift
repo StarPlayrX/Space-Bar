@@ -29,7 +29,7 @@ extension GameScene {
         topWall.position = CGPoint(x: 0, y: height / 2 - 60)
         topWall.size = topWallSize
         topWall.physicsBody?.restitution = 1.0
-        topWall.name = "resetcounter"
+        topWall.name = "wall"
         topWall.alpha = 1.0
         anchorNode.addChild(topWall)
         
@@ -95,7 +95,7 @@ extension GameScene {
         lowerLeftWall.position = CGPoint(x: -centerWidth + 2, y: -centerHeight / 2 + 18)
         lowerLeftWall.size = lowerLeftWallSize
         lowerLeftWall.physicsBody?.restitution = 1.0
-        lowerLeftWall.name = "resetcounter"
+        lowerLeftWall.name = "wall"
         lowerLeftWall.alpha = 1.0
         anchorNode.addChild(lowerLeftWall)
         
@@ -117,7 +117,7 @@ extension GameScene {
         lowerRightWall.position = CGPoint(x: centerWidth - 2, y: -centerHeight / 2 + 18)
         lowerRightWall.size = lowerRightWallSize
         lowerRightWall.physicsBody?.restitution = 1.0
-        lowerRightWall.name = "resetcounter"
+        lowerRightWall.name = "wall"
         lowerRightWall.alpha = 1.0
         anchorNode.addChild(lowerRightWall)
         

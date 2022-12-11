@@ -59,6 +59,11 @@ extension GameScene {
         drawMidCorners()
         drawMidEdges()
         drawCenterCourt()
+        drawCenterTopQuadrantA()
+        drawCenterTopQuadrantB()
+        drawCenterBottomQuadrantB()
+        drawCenterBottomQuadrantB()
+
         drawWalls()
         drawGoal()
         drawPaddle()

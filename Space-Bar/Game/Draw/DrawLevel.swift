@@ -11,7 +11,7 @@ import SpriteKit
 
 extension GameScene {
     func drawLevel() {
-        ballCounter = ballTimeOut * 2
+        ballCounter = ballTimeOut * 3
         
         let lvlStr = String(settings.currentlevel + 1)
         let filename = "level\(lvlStr).sks"

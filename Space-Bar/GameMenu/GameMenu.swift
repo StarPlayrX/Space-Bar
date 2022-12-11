@@ -208,13 +208,13 @@ class GameMenu: SKScene {
             let darkColor = UIColor(displayP3Red: 0.7, green: 0.7, blue: 0.7, alpha: 1)
             label.fontColor = darkColor
             label.name = "copyright"
-            label.fontSize = 31
+            label.fontSize = 29.4
             label.horizontalAlignmentMode = .center
             label.verticalAlignmentMode = .center
             label.position = pos
             label.position.y -= 90
             label.alpha = 1.0
-            label.text = "© 2022 by Todd Bruss, all rights reserved"
+            label.text = "© 2022 by Todd Bruss, All Rights Reserved"
             scene?.addChild(label)
         }
         

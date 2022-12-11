@@ -27,7 +27,7 @@ class GameScene: SKScene {
     let ratio = CGFloat(2)
     let zero = CGFloat(0)
     
-    var velocity    = CGFloat(700)    
+    var velocity    = CGFloat(650)    
     var ballNode    = SKSpriteNode()
     var extraNode   = SKSpriteNode()
     var tennisNode  = SKSpriteNode()

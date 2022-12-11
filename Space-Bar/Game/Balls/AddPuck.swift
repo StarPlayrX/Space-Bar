@@ -14,7 +14,7 @@ extension GameScene {
     func addPuck(override: Bool = false) {
         let ball = "ball"
         
-        ballCounter = ballTimeOut
+        ballCounter = ballTimeOut * 2
         // Ensures no pucks pre-exist
         
         if !override {

@@ -76,16 +76,16 @@ class GameLeader: SKScene {
     #endif
         
         let spacer = CGFloat(30)
-        let fontsize = CGFloat(28)
+        let fontsize = CGFloat(30)
         let cutoff = Int(22)
 
         let spceColumn = CGFloat(-3)
         let rankColumn  = CGFloat(-355)
         let rankColumnB = CGFloat(-300)
 
-        let plyrColumn = CGFloat(-280)
-        let scorColumn = CGFloat(75)
-        let strtColumn = CGFloat(235)
+        let plyrColumn = CGFloat(-270)
+        let scorColumn = CGFloat(80)
+        let strtColumn = CGFloat(225)
         let stopColumn = CGFloat(310)
         
         let fontName = "Noteworthy-Bold"
