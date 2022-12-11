@@ -125,34 +125,30 @@ class GameMenu: SKScene {
                     settings.startlevel = settings.currentlevel
 
                     let runcode = SKAction.run { [self] in
-                        if let scene = SKScene(fileNamed: "GameScene") {
+                        if let scene = SKScene(fileNamed: "GameScene"), let view = self.view as SKView? {
                             gScene = scene
                             
-                            //sceneNode.entities = scene.entities
-                            //sceneNode.graphs = scene.graphs
                             scene.scaleMode = .aspectFit
                             
                             // Present the scene
-                            if let view = self.view as SKView? {
-                                view.showsFPS = false
-                                view.showsNodeCount = false
-                                view.showsPhysics = false
-                                view.showsFields = false
-                                view.clearsContextBeforeDrawing = true
-                                view.isAsynchronous = true
-                                view.ignoresSiblingOrder = true
-                                view.clipsToBounds = true
-                                view.backgroundColor = SKColor.black
-                                view.isMultipleTouchEnabled = false
-                                view.presentScene(scene, transition: SKTransition.fade(withDuration: 1.0))
-                            }
+                            view.showsFPS = true
+                            view.showsNodeCount = true
+                            view.showsPhysics = true
+                            view.showsFields = false
+                            view.clearsContextBeforeDrawing = true
+                            view.isAsynchronous = true
+                            view.ignoresSiblingOrder = true
+                            view.clipsToBounds = true
+                            view.backgroundColor = SKColor.black
+                            view.isMultipleTouchEnabled = false
+                            view.presentScene(scene)
                         }
                     }
                     
                     let fade1 = SKAction.fadeAlpha(to: 0.7, duration:TimeInterval(0.15))
                     let myDecay = SKAction.wait(forDuration: 0.15)
                     let fade2 = SKAction.fadeAlpha(to: 1.0, duration:TimeInterval(0.15))
-                    touchedNode.run(SKAction.sequence([fade1,myDecay,fade2,runcode]))
+                    touchedNode.run(SKAction.sequence([fade1,myDecay,fade2,myDecay,runcode]))
                 }
                 
                 if name == "leader" && !keyPressed {
@@ -213,15 +209,17 @@ class GameMenu: SKScene {
             sprite.name = "enter"
             scene?.addChild(sprite)
             
-            let label = SKLabelNode(fontNamed: "HelveticaNeue")
-            label.fontColor = UIColor.white
+            let label = SKLabelNode(fontNamed: "Noteworthy-Bold")
+            
+            let darkColor = UIColor(displayP3Red: 0.7, green: 0.7, blue: 0.7, alpha: 1)
+            label.fontColor = darkColor
             label.name = "copyright"
-            label.fontSize = 30
+            label.fontSize = 31
             label.horizontalAlignmentMode = .center
             label.verticalAlignmentMode = .center
             label.position = pos
             label.position.y -= 90
-            label.alpha = 0.5
+            label.alpha = 1.0
             label.text = "© 2022 by Todd Bruss, all rights reserved"
             scene?.addChild(label)
         }

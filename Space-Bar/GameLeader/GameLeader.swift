@@ -79,13 +79,16 @@ class GameLeader: SKScene {
         
         let spacer = CGFloat(30)
         let fontsize = CGFloat(28)
-        
+        let cutoff = Int(22)
+
         let spceColumn = CGFloat(-3)
-        let rankColumn = CGFloat(-355)
+        let rankColumn  = CGFloat(-355)
+        let rankColumnB = CGFloat(-300)
+
         let plyrColumn = CGFloat(-280)
-        let scorColumn = CGFloat(100)
-        let strtColumn = CGFloat(232.5)
-        let stopColumn = CGFloat(312.5)
+        let scorColumn = CGFloat(75)
+        let strtColumn = CGFloat(235)
+        let stopColumn = CGFloat(310)
         
         let fontName = "Noteworthy-Bold"
         let playerRank: SKLabelNode = SKLabelNode(fontNamed: fontName)
@@ -100,7 +103,7 @@ class GameLeader: SKScene {
         
         if let hiScorePos = scene?.childNode(withName: "leaderboard")?.position {
             playerRank.position.y = hiScorePos.y - spacer
-            playerRank.position.x = rankColumn + spceColumn * 4
+            playerRank.position.x = rankColumn + spceColumn * 3
             playerRank.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
             playerRank.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
             playerRank.alpha = 1.0
@@ -110,7 +113,7 @@ class GameLeader: SKScene {
             addChild(playerRank)
             
             playerLabel.position.y = hiScorePos.y - spacer
-            playerLabel.position.x = plyrColumn  + spceColumn * 2
+            playerLabel.position.x = plyrColumn  + spceColumn * 1.5
             playerLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
             playerLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
             playerLabel.alpha = 1.0
@@ -130,7 +133,7 @@ class GameLeader: SKScene {
             addChild(playerScore)
             
             playerStart.position.y = hiScorePos.y - spacer
-            playerStart.position.x = strtColumn + spceColumn
+            playerStart.position.x = strtColumn + spceColumn * 1.5
             playerStart.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
             playerStart.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
             playerStart.alpha = 1.0
@@ -140,7 +143,7 @@ class GameLeader: SKScene {
             addChild(playerStart)
 
             playerStop.position.y = hiScorePos.y - spacer
-            playerStop.position.x = stopColumn + spceColumn * 2
+            playerStop.position.x = stopColumn + spceColumn * 1.5
             playerStop.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
             playerStop.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
             playerStop.alpha = 1.0
@@ -165,22 +168,22 @@ class GameLeader: SKScene {
                 toggleColor.toggle()
                 
                 playerRank.position.y = hiScorePos.y - spacer - v
-                playerRank.position.x = rankColumn
-                playerRank.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+                playerRank.position.x = rankColumnB
+                playerRank.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.right
                 playerRank.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
                 playerRank.alpha = 1.0
                 playerRank.text = "\(i + 1)."
-                playerRank.fontSize = fontsize + 2
+                playerRank.fontSize = fontsize
                 playerRank.fontColor = toggleColor ? darkColor : lightColor
                 addChild(playerRank)
                 
                 playerLabel.position.y = hiScorePos.y - spacer - v
-                playerLabel.position.x = plyrColumn + spceColumn
+                playerLabel.position.x = plyrColumn + spceColumn * 2
                 playerLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
                 playerLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
                 playerLabel.alpha = 1.0
                 
-                var player = String(leaderBoard[i].playerName.prefix(20))
+                var player = String(leaderBoard[i].playerName.prefix(cutoff))
                 player = player.replacingOccurrences(of: "_", with: "")
                 player = player.replacingOccurrences(of: "%20", with: "")
 
