@@ -10,7 +10,7 @@ import SpriteKit
 
 class GameMenu: SKScene {
     override func sceneDidLoad() {
-        checker()
+        gamerTagAutoGenerator()
         
         AppSettings().loadLeaderboard()
     
@@ -125,17 +125,17 @@ class GameMenu: SKScene {
                     settings.startlevel = settings.currentlevel
 
                     let runcode = SKAction.run { [self] in
-                        if let scene = SKScene(fileNamed: "GameScene"), let view = self.view as SKView? {
+                        if let scene = SKScene(fileNamed: "GameScene"), let view = self.view {
                             gScene = scene
                             
                             scene.scaleMode = .aspectFit
                             
                             // Present the scene
-                            view.showsFPS = true
-                            view.showsNodeCount = true
-                            view.showsPhysics = true
+                            view.showsFPS = false
+                            view.showsNodeCount = false
+                            view.showsPhysics = false
                             view.showsFields = false
-                            view.clearsContextBeforeDrawing = true
+                            view.clearsContextBeforeDrawing = false
                             view.isAsynchronous = true
                             view.ignoresSiblingOrder = true
                             view.clipsToBounds = true
@@ -156,27 +156,21 @@ class GameMenu: SKScene {
                     keyPressed = true
                     
                     let runcode = SKAction.run { [self] in
-                        if let scene = SKScene(fileNamed: "GameLeader") {
-                            //gScene = scene
-                            
-                            //sceneNode.entities = scene.entities
-                            //sceneNode.graphs = scene.graphs
+                        if let scene = SKScene(fileNamed: "GameLeader"), let view = self.view {
                             scene.scaleMode = .aspectFit
                             
                             // Present the scene
-                            if let view = self.view as SKView? {
-                                view.showsFPS = false
-                                view.showsNodeCount = false
-                                view.showsPhysics = false
-                                view.showsFields = false
-                                view.clearsContextBeforeDrawing = true
-                                view.isAsynchronous = true
-                                view.ignoresSiblingOrder = true
-                                view.clipsToBounds = true
-                                view.backgroundColor = SKColor.black
-                                view.isMultipleTouchEnabled = false
-                                view.presentScene(scene, transition: SKTransition.fade(withDuration: 1.0))
-                            }
+                            view.showsFPS = false
+                            view.showsNodeCount = false
+                            view.showsPhysics = false
+                            view.showsFields = false
+                            view.clearsContextBeforeDrawing = true
+                            view.isAsynchronous = true
+                            view.ignoresSiblingOrder = true
+                            view.clipsToBounds = true
+                            view.backgroundColor = SKColor.black
+                            view.isMultipleTouchEnabled = false
+                            view.presentScene(scene, transition: SKTransition.fade(withDuration: 1.0))
                         }
                     }
                     

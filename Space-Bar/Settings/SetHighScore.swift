@@ -14,7 +14,7 @@ extension GameScene {
         settings.highscore = gameScore > settings.highscore ? gameScore : settings.highscore
         settings.highlevel = settings.currentlevel > settings.highlevel ? settings.currentlevel : settings.highlevel
         
-        Space_Bar.checker()
+        gamerTagAutoGenerator()
 
         if let start = settings.startlevel, let player = settings.player {
             let lb = LeaderBoard(score: gameScore, playerName: player, start: start + 1, stop: settings.currentlevel + 1, date: Date())

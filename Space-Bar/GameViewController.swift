@@ -24,17 +24,15 @@ class GameViewController: UIViewController {
     }
     
     func runGameMenu() {
-        if let scene = SKScene(fileNamed: "GameMenu") {
+        if let scene = SKScene(fileNamed: "GameMenu"), let view = self.view as? SKView {
             scene.scaleMode = .aspectFit
-            
+
             // Present the scene
-            if let view = self.view as! SKView? {
-                view.ignoresSiblingOrder = true
-                view.showsFPS = false
-                view.showsNodeCount = false
-                view.isMultipleTouchEnabled = false
-                view.presentScene(scene, transition: SKTransition.fade(withDuration: 1.0))
-            }
+            view.ignoresSiblingOrder = true
+            view.showsFPS = false
+            view.showsNodeCount = false
+            view.isMultipleTouchEnabled = false
+            view.presentScene(scene, transition: SKTransition.fade(withDuration: 1.0))
         }
     }
     override func viewDidLoad() {

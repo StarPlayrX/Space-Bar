@@ -12,20 +12,24 @@ import SpriteKit
 extension GameScene {
     func drawPaddle() {
         
-        //add our paddle
-        let paddleTexture = SKTexture(imageNamed: "paddle")
-
+        
+        
+        
         let paddle = SKSpriteNode()
-
-        let size = CGSize(width: 80, height: 40)
-        let centerRect = SKPhysicsBody(rectangleOf: size, center: CGPoint.zero)
+        let paddleTexture = SKTexture(imageNamed: "paddle")
+        
+        let centerRect = SKPhysicsBody(rectangleOf: CGSize(width: 80, height: 40), center: CGPoint.zero)
         paddle.size = CGSize(width: 120, height: 40)
         
-        let circleLeft = SKPhysicsBody(circleOfRadius: 20, center: CGPoint(x: -40, y: 0))
+        let circleLeft  = SKPhysicsBody(circleOfRadius: 20, center: CGPoint(x: -40, y: 0))
         let circleRight = SKPhysicsBody(circleOfRadius: 20, center: CGPoint(x: 40, y: 0))
     
+        //MARK: Paddle ( )===( )
+        
         //MARK: Bug or Feature?: Had to use two cloned PhysicsBodies on the Edges to prevent unwanted rotation
-        paddle.physicsBody = SKPhysicsBody(bodies: [circleLeft,circleLeft,centerRect,circleRight,circleRight])
+        paddle.physicsBody = SKPhysicsBody(bodies: [circleLeft, circleLeft, centerRect, circleRight, circleRight])
+        
+        
         paddle.texture = paddleTexture
         paddle.physicsBody?.friction = 0.0
         paddle.physicsBody?.allowsRotation = false
@@ -49,5 +53,8 @@ extension GameScene {
         addChild(paddle)
         
        
+        
+        
+        
     }
 }

@@ -40,24 +40,22 @@ class GameLeader: SKScene {
                     keyPressed = true
                     
                     let runcode = SKAction.run { [self] in
-                        if let scene = SKScene(fileNamed: "GameMenu") {
+                        if let scene = SKScene(fileNamed: "GameMenu"), let view = self.view  {
                             
                             scene.scaleMode = .aspectFit
                             
                             // Present the scene
-                            if let view = self.view as SKView? {
-                                view.showsFPS = false
-                                view.showsNodeCount = false
-                                view.showsPhysics = false
-                                view.showsFields = false
-                                view.clearsContextBeforeDrawing = true
-                                view.isAsynchronous = true
-                                view.ignoresSiblingOrder = true
-                                view.clipsToBounds = true
-                                view.backgroundColor = SKColor.black
-                                view.isMultipleTouchEnabled = false
-                                view.presentScene(scene, transition: SKTransition.fade(withDuration: 1.0))
-                            }
+                            view.showsFPS = false
+                            view.showsNodeCount = false
+                            view.showsPhysics = false
+                            view.showsFields = false
+                            view.clearsContextBeforeDrawing = true
+                            view.isAsynchronous = true
+                            view.ignoresSiblingOrder = true
+                            view.clipsToBounds = true
+                            view.backgroundColor = SKColor.black
+                            view.isMultipleTouchEnabled = false
+                            view.presentScene(scene, transition: SKTransition.fade(withDuration: 1.0))
                         }
                     }
                     

@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 extension GameScene {
-    func checker(_ firstBody: SKPhysicsBody) {
+    func isLevelCompleted(_ firstBody: SKPhysicsBody) {
         
         if resettingGameBoard { return }
         
@@ -34,7 +34,9 @@ extension GameScene {
             let b = SKAction.removeFromParent()
             let c = SKAction.wait(forDuration: 0.5)
             let d = SKAction.run { [self] in
-                resetGameBoard(lives: true)
+                DispatchQueue.global(qos: .background).async {
+                    self.resetGameBoard(lives: true)
+                }
             }
             
             if let ball = firstBody.node {
