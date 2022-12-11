@@ -91,7 +91,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //func beginObservingBounds() {
 //    boundsObservation = observe(\.window?.bounds.size) { capturedSelf, _ in
 //        // ...
-//        print("HELLO")
 //    }
 //}
 

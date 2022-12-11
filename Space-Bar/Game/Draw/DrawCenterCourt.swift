@@ -30,25 +30,35 @@ extension GameScene {
         centerCourtLineNode.color = .systemRed
         centerCourtLineNode.alpha = 0.5
         centerCourtLineNode.name = "CenterLine"
-        centerCourtLineNode.physicsBody = centerLineBody
-        centerCourtLineNode.physicsBody?.contactTestBitMask = ballCategory
-        centerCourtLineNode.physicsBody?.categoryBitMask = midFieldCategory
-        centerCourtLineNode.physicsBody?.collisionBitMask = midFieldCategory + ballCategory
-        centerCourtLineNode.physicsBody?.isDynamic = false
-        centerCourtLineNode.physicsBody?.affectedByGravity = false
         centerCourtLineNode.size = centerCourtLineSize
         centerCourtLineNode.position = CGPoint.zero
         anchorNode.addChild(centerCourtLineNode)
     }
     
-    func drawCenterTopQuadrantA() {
-        //MARK: centercourt line
-        let quad = SKSpriteNode()
-        let centerCourtLineSize = CGSize(width:centerWidth * 2 - 96, height: 4)
+    func drawCenterMidQuadrant() {
+        let midQuad = SKSpriteNode()
+        let centerCourtLineSize = CGSize(width:centerWidth * 2 - 192, height: 4)
         let centerLineBody = SKPhysicsBody(rectangleOf: centerCourtLineSize)
-        quad.color = .clear
-        quad.alpha = 0.1
+        midQuad.color = .clear
+        midQuad.alpha = 0.5
+        midQuad.name = "CenterLine"
+        midQuad.physicsBody = centerLineBody
+        midQuad.physicsBody?.contactTestBitMask = ballCategory
+        midQuad.physicsBody?.categoryBitMask = midFieldCategory
+        midQuad.physicsBody?.collisionBitMask = midFieldCategory + ballCategory
+        midQuad.physicsBody?.isDynamic = false
+        midQuad.physicsBody?.affectedByGravity = false
+        midQuad.size = centerCourtLineSize
+        midQuad.position = CGPoint.zero
+        anchorNode.addChild(midQuad)
+    }
+    
+    func drawCenterTopQuadrantA() {
+        let quad = SKSpriteNode()
+        let centerCourtLineSize = CGSize(width:centerWidth * 2 - 192, height: 4)
+        let centerLineBody = SKPhysicsBody(rectangleOf: centerCourtLineSize)
         quad.name = "TopQuadA"
+        quad.color = .clear
         quad.physicsBody = centerLineBody
         quad.physicsBody?.contactTestBitMask = ballCategory
         quad.physicsBody?.categoryBitMask = midFieldCategory
@@ -61,12 +71,11 @@ extension GameScene {
     }
     
     func drawCenterTopQuadrantB() {
-        //MARK: centercourt line
         let quad = SKSpriteNode()
-        let centerCourtLineSize = CGSize(width:centerWidth * 2 - 96, height: 4)
+        let centerCourtLineSize = CGSize(width:centerWidth * 2 - 192, height: 4)
         let centerLineBody = SKPhysicsBody(rectangleOf: centerCourtLineSize)
-        quad.color = .clear
         quad.name = "TopQuadB"
+        quad.color = .clear
         quad.physicsBody = centerLineBody
         quad.physicsBody?.contactTestBitMask = ballCategory
         quad.physicsBody?.categoryBitMask = midFieldCategory
@@ -79,12 +88,11 @@ extension GameScene {
     }
     
     func drawCenterBottomQuadrantA() {
-        //MARK: centercourt line
         let quad = SKSpriteNode()
-        let centerCourtLineSize = CGSize(width:centerWidth * 2 - 96, height: 4)
+        let centerCourtLineSize = CGSize(width:centerWidth * 2 - 192, height: 4)
         let centerLineBody = SKPhysicsBody(rectangleOf: centerCourtLineSize)
-        quad.color = .clear
         quad.name = "BtmQuadA"
+        quad.color = .clear
         quad.physicsBody = centerLineBody
         quad.physicsBody?.contactTestBitMask = ballCategory
         quad.physicsBody?.categoryBitMask = midFieldCategory
@@ -97,12 +105,11 @@ extension GameScene {
     }
     
     func drawCenterBottomQuadrantB() {
-        //MARK: centercourt line
         let quad = SKSpriteNode()
-        let centerCourtLineSize = CGSize(width:centerWidth * 2 - 96, height: 4)
+        let centerCourtLineSize = CGSize(width:centerWidth * 2 - 192, height: 4)
         let centerLineBody = SKPhysicsBody(rectangleOf: centerCourtLineSize)
-        quad.color = .clear
         quad.name = "BtmQuadB"
+        quad.color = .clear
         quad.physicsBody = centerLineBody
         quad.physicsBody?.contactTestBitMask = ballCategory
         quad.physicsBody?.categoryBitMask = midFieldCategory

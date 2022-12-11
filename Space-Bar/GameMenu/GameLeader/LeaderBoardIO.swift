@@ -19,8 +19,8 @@ import Foundation
 import UIKit
 
 //Completion Handlers
-typealias DataHandler             = (_ data:Data?) -> Void
-typealias TextHandler             = (_ text:String?) -> Void
+typealias DataHandler = (_ data:Data?) -> Void
+typealias TextHandler = (_ text:String?) -> Void
 
 func getOnlineLeaderBoardData() {
     let dataUrl = "https://pearsc.com/spacebarlb"
@@ -35,7 +35,7 @@ func getOnlineLeaderBoardData() {
             let lb = try jsonDecoder.decode([LeaderBoard].self, from: data)
             leaderBoard = lb
         } catch {
-            print("Leaderboard Error:", error)
+            //Do Nothing
         }
     }
 }

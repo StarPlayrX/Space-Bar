@@ -39,7 +39,6 @@ extension GameScene {
         paddle.physicsBody?.fieldBitMask = 0
         paddle.physicsBody?.affectedByGravity = false
         paddle.physicsBody?.mass = 2
-        paddle.physicsBody?.pinned = true
         paddle.physicsBody?.isResting = true
         paddle.physicsBody?.restitution = 1.0
         paddle.physicsBody?.contactTestBitMask = ballCategory

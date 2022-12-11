@@ -45,7 +45,7 @@ extension GameScene {
         leftMidNode.physicsBody?.categoryBitMask = wallCategory
         leftMidNode.physicsBody?.collisionBitMask = wallCategory + ballCategory
         leftMidNode.physicsBody?.restitution = 1.0
-        leftMidNode.name = "wall"
+        leftMidNode.name = "middie"
         leftMidNode.physicsBody?.mass = 1
         leftMidNode.physicsBody?.isDynamic = false
         leftMidNode.physicsBody?.affectedByGravity = false
@@ -65,7 +65,7 @@ extension GameScene {
         rightMidNode.physicsBody?.categoryBitMask = wallCategory
         rightMidNode.physicsBody?.collisionBitMask = wallCategory + ballCategory
         rightMidNode.physicsBody?.restitution = 1.0
-        rightMidNode.name = "wall"
+        rightMidNode.name = "middie"
         rightMidNode.physicsBody?.mass = 1
         rightMidNode.physicsBody?.isDynamic = false
         rightMidNode.physicsBody?.affectedByGravity = false

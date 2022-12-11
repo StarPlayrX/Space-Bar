@@ -79,6 +79,50 @@ extension GameScene {
         }
     }
     
+    func randomizer(_ secondBody: SKPhysicsBody) {
+        if let b = secondBody.node {
+            let dy = CGFloat.random(in: -2...2)
+            let dx = CGFloat.random(in: -5...5)
+            b.physicsBody?.applyImpulse(CGVector(dx: dx, dy: dy))
+        }
+    }
+    
+    func ballVsGoal(_ firstBody: SKPhysicsBody) {
+        if let a = firstBody.node, let name = firstBody.node?.name {
+            a.physicsBody = nil
+            a.name = ""
+            a.removeFromParent()
+            
+            if name == "extraball" {
+                if gameLives > 0 {
+                    return
+                }
+            }
+        } else {
+            return
+        }
+        ballCounter = ballTimeOut
+        if gameLives > 0 {
+            playSound(action: goalSound)
+            
+            gameLives -= 1
+            let puck = Global.shared.gameBall[settings.puck]
+            livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives - 1 : 0)
+        }
+        if (settings.currentlevel + 1) % 20 == 0 {
+            addExtraBall()
+            addPuck(override: true)
+            return
+        } else if gameLives > 0 && name != "extraball" {
+            addPuck()
+            return
+        }
+        if gameLives < 0 {
+            gameLives = 0
+            livesLabel.text = ""
+        }
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
         guard
             let _ = contact.bodyA.node,
@@ -113,28 +157,27 @@ extension GameScene {
         }
         
         switch catMask {
-            
         case ballCategory | wallCategory:
             playSound(action: wallSound)
+            if let name = secondBody.node?.name, name == "middie" {
+                randomizer(secondBody)
+            }
         case powerCategory | wallCategory:
             playSound(action: wallSound)
+            if let name = secondBody.node?.name, name == "middie" {
+                randomizer(secondBody)
+            }
         case ballCategory | midFieldCategory :
             ballCounter = ballTimeOut
-            
-            if let name = secondBody.node?.name {
-                print(name)
-            }
         case fireBallCategory | brickCategory:
             gameScore += 2
             scoreLabel.text = String(gameScore)
             if let a = secondBody.node {
                 a.removeFromParent()
                 isLevelCompleted(firstBody)
-                
             }
         case powerCategory | brickCategory:
             playSound(action: brickSound)
-
             gameScore += 1
             scoreLabel.text = String(gameScore)
             if let a = secondBody.node {
@@ -143,9 +186,7 @@ extension GameScene {
             }
         case ballCategory | brickCategory :
             playSound(action: brickSound)
-
-            ballCounter = ballTimeOut 
-            print("BallHit")
+            ballCounter = ballTimeOut
             gameScore += 1
             scoreLabel.text = String(gameScore)
             if let a = secondBody.node {
@@ -153,59 +194,15 @@ extension GameScene {
                 isLevelCompleted(firstBody)
             }
         case ballCategory | goalCategory:
-            if let a = firstBody.node, let name = firstBody.node?.name {
-                a.physicsBody = nil
-                a.name = ""
-                a.removeFromParent()
-              
-                if name == "extraball" {
-                    if gameLives > 0 {
-                        return
-                    }
-                }
-            } else {
-                return
-            }
-            
-            ballCounter = ballTimeOut
-            
-            if gameLives > 0 {
-                playSound(action: goalSound)
-
-                gameLives -= 1
-                let puck = Global.shared.gameBall[settings.puck]
-                livesLabel.text = String(repeating: puck + "\u{2005}", count: gameLives > 0 ? gameLives - 1 : 0)
-            }
-            
-            if (settings.currentlevel + 1) % 20 == 0 {
-                addExtraBall()
-                addPuck(override: true)
-                return
-            } else if gameLives > 0 && name != "extraball" {
-                addPuck()
-                return
-            }
-            
-            if gameLives < 0 {
-                gameLives = 0
-                livesLabel.text = ""
-            }
-            
+            ballVsGoal(firstBody)
             isGameOver()
         case powerCategory | paddleCategory:
             playSound(action: paddleSound)
-
             scoreLabel.text = String(gameScore)
-            
         case ballCategory | paddleCategory:
             playSound(action: paddleSound)
             scoreLabel.text = String(gameScore)
-            
-            if let b = secondBody.node {
-                let dy = CGFloat.random(in: -2...2)
-                let dx = CGFloat.random(in: -5...5)
-                b.physicsBody?.applyImpulse(CGVector(dx: dx, dy: dy))
-            }
+            randomizer(secondBody)
         default:
             break
         }
