@@ -26,10 +26,7 @@ class GameLeader: SKScene {
         removeAllChildren()
         removeFromParent()
     }
-    
-    var textLabel: SKLabelNode = SKLabelNode(fontNamed: "CourierNeue")
-    var textLabel2: SKLabelNode = SKLabelNode(fontNamed: "CourierNeue")
-    
+        
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches as Set<UITouch>, with: event)
         for touch: AnyObject in touches {
@@ -45,13 +42,10 @@ class GameLeader: SKScene {
                     let runcode = SKAction.run { [self] in
                         if let scene = SKScene(fileNamed: "GameMenu") {
                             
-                            //sceneNode.entities = scene.entities
-                            //sceneNode.graphs = scene.graphs
                             scene.scaleMode = .aspectFit
                             
                             // Present the scene
                             if let view = self.view as SKView? {
-                                scene.speed = 1.0
                                 view.showsFPS = false
                                 view.showsNodeCount = false
                                 view.showsPhysics = false
@@ -62,7 +56,7 @@ class GameLeader: SKScene {
                                 view.clipsToBounds = true
                                 view.backgroundColor = SKColor.black
                                 view.isMultipleTouchEnabled = false
-                                view.presentScene(scene)
+                                view.presentScene(scene, transition: SKTransition.fade(withDuration: 1.0))
                             }
                         }
                     }
@@ -83,29 +77,40 @@ class GameLeader: SKScene {
         NSCursor.unhide()
     #endif
         
+        let spacer = CGFloat(30)
+        let fontsize = CGFloat(28)
         
-        let spacer = CGFloat(20)
-        let fontsize = CGFloat(26)
-
-        let playerRank: SKLabelNode = SKLabelNode(fontNamed: "Helvetica-Bold")
-        let playerLabel: SKLabelNode = SKLabelNode(fontNamed: "Helvetica-Bold")
-        let playerScore: SKLabelNode = SKLabelNode(fontNamed: "Helvetica-Bold")
-        let playerStart: SKLabelNode = SKLabelNode(fontNamed: "Helvetica-Bold")
-        let playerStop: SKLabelNode = SKLabelNode(fontNamed: "Helvetica-Bold")
-
+        let spceColumn = CGFloat(-3)
+        let rankColumn = CGFloat(-355)
+        let plyrColumn = CGFloat(-280)
+        let scorColumn = CGFloat(100)
+        let strtColumn = CGFloat(232.5)
+        let stopColumn = CGFloat(312.5)
+        
+        let fontName = "Noteworthy-Bold"
+        let playerRank: SKLabelNode = SKLabelNode(fontNamed: fontName)
+        let playerLabel: SKLabelNode = SKLabelNode(fontNamed: fontName)
+        let playerScore: SKLabelNode = SKLabelNode(fontNamed: fontName)
+        let playerStart: SKLabelNode = SKLabelNode(fontNamed: fontName)
+        let playerStop: SKLabelNode = SKLabelNode(fontNamed: fontName)
+        
+        var toggleColor = true
+        let lightColor   = UIColor(displayP3Red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+        let darkColor    = UIColor(displayP3Red: 0.7, green: 0.7, blue: 0.7, alpha: 1)
+        
         if let hiScorePos = scene?.childNode(withName: "leaderboard")?.position {
             playerRank.position.y = hiScorePos.y - spacer
-            playerRank.position.x = -340
+            playerRank.position.x = rankColumn + spceColumn * 4
             playerRank.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
             playerRank.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
             playerRank.alpha = 1.0
             playerRank.text = "Rank"
-            playerRank.fontSize = fontsize - 1
+            playerRank.fontSize = fontsize
             playerRank.fontColor = .systemBlue
             addChild(playerRank)
             
             playerLabel.position.y = hiScorePos.y - spacer
-            playerLabel.position.x = -255
+            playerLabel.position.x = plyrColumn  + spceColumn * 2
             playerLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
             playerLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
             playerLabel.alpha = 1.0
@@ -115,32 +120,32 @@ class GameLeader: SKScene {
             addChild(playerLabel)
             
             playerScore.position.y = hiScorePos.y - spacer
-            playerScore.position.x = 30
+            playerScore.position.x = scorColumn + spceColumn
             playerScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
             playerScore.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
             playerScore.alpha = 1.0
             playerScore.text = "Score"
-            playerScore.fontSize = fontsize - 1
+            playerScore.fontSize = fontsize
             playerScore.fontColor = .systemBlue
             addChild(playerScore)
             
             playerStart.position.y = hiScorePos.y - spacer
-            playerStart.position.x = 180
+            playerStart.position.x = strtColumn + spceColumn
             playerStart.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
             playerStart.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
             playerStart.alpha = 1.0
             playerStart.text = "Start"
-            playerStart.fontSize = fontsize - 1
+            playerStart.fontSize = fontsize
             playerStart.fontColor = .systemBlue
             addChild(playerStart)
 
             playerStop.position.y = hiScorePos.y - spacer
-            playerStop.position.x = 275
+            playerStop.position.x = stopColumn + spceColumn * 2
             playerStop.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
             playerStop.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
             playerStop.alpha = 1.0
             playerStop.text = "End"
-            playerStop.fontSize = fontsize - 1
+            playerStop.fontSize = fontsize
             playerStop.fontColor = .systemBlue
             
             addChild(playerStop)
@@ -151,66 +156,76 @@ class GameLeader: SKScene {
             let v = CGFloat(i * 50 + 50)
             if let hiScorePos = scene?.childNode(withName: "leaderboard")?.position {
                 
-                let playerRank: SKLabelNode = SKLabelNode(fontNamed: "Helvetica")
-                let playerLabel: SKLabelNode = SKLabelNode(fontNamed: "Helvetica")
-                let playerScore: SKLabelNode = SKLabelNode(fontNamed: "Helvetica")
-                let playerStart: SKLabelNode = SKLabelNode(fontNamed: "Helvetica")
-                let playerStop: SKLabelNode = SKLabelNode(fontNamed: "Helvetica")
+                let playerRank: SKLabelNode = SKLabelNode(fontNamed: fontName)
+                let playerLabel: SKLabelNode = SKLabelNode(fontNamed: fontName)
+                let playerScore: SKLabelNode = SKLabelNode(fontNamed: fontName)
+                let playerStart: SKLabelNode = SKLabelNode(fontNamed: fontName)
+                let playerStop: SKLabelNode = SKLabelNode(fontNamed: fontName)
         
+                toggleColor.toggle()
+                
                 playerRank.position.y = hiScorePos.y - spacer - v
-                playerRank.position.x = -340
+                playerRank.position.x = rankColumn
                 playerRank.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
                 playerRank.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
                 playerRank.alpha = 1.0
                 playerRank.text = "\(i + 1)."
-                playerRank.fontSize = fontsize
-                playerRank.fontColor = .white
+                playerRank.fontSize = fontsize + 2
+                playerRank.fontColor = toggleColor ? darkColor : lightColor
                 addChild(playerRank)
                 
                 playerLabel.position.y = hiScorePos.y - spacer - v
-                playerLabel.position.x = -255
+                playerLabel.position.x = plyrColumn + spceColumn
                 playerLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
                 playerLabel.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
                 playerLabel.alpha = 1.0
                 
                 var player = String(leaderBoard[i].playerName.prefix(20))
-                player = player.replacingOccurrences(of: "_", with: " ")
-                player = player.replacingOccurrences(of: "%20", with: " ")
+                player = player.replacingOccurrences(of: "_", with: "")
+                player = player.replacingOccurrences(of: "%20", with: "")
+
+                if player.contains("whitemeat") {
+                    player = "MaxaMillion"
+                }
+                
+                player = player.replacingOccurrences(of: " ", with: "")
 
                 playerLabel.text = player
                 playerLabel.fontSize = fontsize
-                playerLabel.fontColor = .white
+                playerLabel.fontColor = toggleColor ? darkColor : lightColor
+
                 addChild(playerLabel)
                 
                 playerScore.position.y = hiScorePos.y - spacer - v
-                playerScore.position.x = 30
+                playerScore.position.x = scorColumn
                 playerScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
                 playerScore.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
                 playerScore.alpha = 1.0
                 playerScore.text = String("\(leaderBoard[i].score)".prefix(6))
                 playerScore.fontSize = fontsize
-                playerScore.fontColor = .white
+                playerScore.fontColor = toggleColor ? darkColor : lightColor
+
                 addChild(playerScore)
                 
                 playerStart.position.y = hiScorePos.y - spacer - v
-                playerStart.position.x = 180
+                playerStart.position.x = strtColumn
                 playerStart.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
                 playerStart.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
                 playerStart.alpha = 1.0
                 playerStart.text = "\(leaderBoard[i].start)"
                 playerStart.fontSize = fontsize
-                playerStart.fontColor = .white
+                playerStart.fontColor = toggleColor ? darkColor : lightColor
+
                 addChild(playerStart)
 
                 playerStop.position.y = hiScorePos.y - spacer - v
-                playerStop.position.x = 275
+                playerStop.position.x = stopColumn
                 playerStop.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
                 playerStop.verticalAlignmentMode = SKLabelVerticalAlignmentMode.baseline
                 playerStop.alpha = 1.0
                 playerStop.text = "\(leaderBoard[i].stop)"
                 playerStop.fontSize = fontsize
-                playerStop.fontColor = .white
-                
+                playerStop.fontColor = toggleColor ? darkColor : lightColor
                 addChild(playerStop)
             }
         }

@@ -7,15 +7,12 @@
 //
 
 import SpriteKit
-//import GameplayKit
 
 class GameMenu: SKScene {
     override func sceneDidLoad() {
         checker()
         
-        DispatchQueue.global(qos: .background).async {
-            getData()
-        }
+        AppSettings().loadLeaderboard()
     
         g.showCursor = true
         g.runningGame = false
@@ -137,7 +134,6 @@ class GameMenu: SKScene {
                             
                             // Present the scene
                             if let view = self.view as SKView? {
-                                scene.speed = 1.0
                                 view.showsFPS = false
                                 view.showsNodeCount = false
                                 view.showsPhysics = false
@@ -148,7 +144,7 @@ class GameMenu: SKScene {
                                 view.clipsToBounds = true
                                 view.backgroundColor = SKColor.black
                                 view.isMultipleTouchEnabled = false
-                                view.presentScene(scene)
+                                view.presentScene(scene, transition: SKTransition.fade(withDuration: 1.0))
                             }
                         }
                     }
@@ -173,7 +169,6 @@ class GameMenu: SKScene {
                             
                             // Present the scene
                             if let view = self.view as SKView? {
-                                scene.speed = 1.0
                                 view.showsFPS = false
                                 view.showsNodeCount = false
                                 view.showsPhysics = false
@@ -184,7 +179,7 @@ class GameMenu: SKScene {
                                 view.clipsToBounds = true
                                 view.backgroundColor = SKColor.black
                                 view.isMultipleTouchEnabled = false
-                                view.presentScene(scene)
+                                view.presentScene(scene, transition: SKTransition.fade(withDuration: 1.0))
                             }
                         }
                     }

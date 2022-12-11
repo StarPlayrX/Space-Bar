@@ -55,7 +55,6 @@ extension GameScene {
         tennisNode.physicsBody?.fieldBitMask = 0
         tennisNode.name = "fireball"
         tennisNode.position = CGPoint.zero
-        tennisNode.speed = CGFloat(1.0)
         tennisNode.physicsBody?.velocity = ballSpeed()
         tennisNode.addChild(powerTexture)
         anchorNode.addChild(tennisNode)
@@ -107,7 +106,6 @@ extension GameScene {
         fireBallNode.name = "fireball"
         fireBallNode.addChild(fireBallTexture)
         fireBallNode.position = CGPoint(x: paddleNode.position.x, y: paddleNode.position.y + 50)
-        fireBallNode.speed = CGFloat(1.0)
         fireBallNode.alpha =  1.0
         fireBallNode.blendMode = .multiply
         

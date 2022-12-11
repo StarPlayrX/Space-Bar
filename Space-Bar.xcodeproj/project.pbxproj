@@ -639,9 +639,10 @@
 		5F5E03CF29415BE400CD8D85 /* GameLeader */ = {
 			isa = PBXGroup;
 			children = (
+				5FFCCD3E2944E24500E1E0AF /* GamerTag.swift */,
 				5F5E03D129415BF600CD8D85 /* GameLeader.swift */,
-				5F5E03D42942C50B00CD8D85 /* LeaderBoardIO.swift */,
 				5F5E03D029415BF600CD8D85 /* GameLeader.sks */,
+				5F5E03D42942C50B00CD8D85 /* LeaderBoardIO.swift */,
 			);
 			name = GameLeader;
 			path = GameMenu/GameLeader;
@@ -669,7 +670,6 @@
 				5FEC19C829367DEE008239D6 /* AppDelegate.swift */,
 				5F5E03CD2940DE1400CD8D85 /* Container.swift */,
 				5FEC19D029367DEE008239D6 /* GameViewController.swift */,
-				5FFCCD3E2944E24500E1E0AF /* GamerTag.swift */,
 				5F4E315A293681C40028DBC7 /* Info.plist */,
 				5F5E03CF29415BE400CD8D85 /* GameLeader */,
 				5F4B0B212936B23E005245AB /* GameMenu */,
@@ -1054,7 +1054,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 123;
+				CURRENT_PROJECT_VERSION = 125;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";
@@ -1091,7 +1091,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Space-Bar/Space-Bar.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 123;
+				CURRENT_PROJECT_VERSION = 125;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Space-Bar/Info.plist";

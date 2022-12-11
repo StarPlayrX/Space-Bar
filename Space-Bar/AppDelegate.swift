@@ -4,9 +4,86 @@
 //
 //  Created by Todd Bruss on 11/21/22.
 //
-
 import UIKit
 import SwiftUI
+
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    var window: UIWindow?
+    let appSettings = AppSettings()
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        appSettings.loadUserDefaults()
+        appSettings.loadLeaderboard()
+        
+        #if targetEnvironment(macCatalyst)
+        let MacCatalystVerison = UIDevice.current.systemVersion
+
+        UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
+            windowScene.titlebar?.titleVisibility = .hidden
+        
+            yCoverMacOS = 32
+
+            if let height = settings.height {
+                windowHeight = height
+                windowWidth = windowHeight / 2
+            } else if MacCatalystVerison.starts(with: "10.15") {
+                windowHeight = 1300
+            } else {
+                windowHeight = windowScene.screen.bounds.height - 120
+            }
+            
+            windowWidth = windowHeight / 2
+            windowScene.sizeRestrictions?.minimumSize = CGSize(width: windowWidth, height: windowHeight)
+            windowScene.sizeRestrictions?.maximumSize = CGSize(width: windowWidth, height: windowHeight)
+        }
+        #else
+        
+        windowHeight = 1300
+        windowWidth = windowHeight / 2
+        
+        if #available(iOS 13.0, *) {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                if let height = window?.bounds.height {
+                    windowHeight = height
+                    windowWidth = height / 2
+                }
+            }
+        }
+        #endif
+    
+        
+        return true
+    }
+    
+    func ditto() {
+        appSettings.loadUserDefaults()
+        appSettings.loadLeaderboard()
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        appSettings.saveUserDefaults()
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        ditto()
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        setGamerTag()
+        ditto()
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        appSettings.saveUserDefaults()
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        appSettings.saveUserDefaults()
+    }
+}
+
+
+
 //import SpriteKit
 //
 //var boundsObservation: NSKeyValueObservation?
@@ -36,7 +113,6 @@ import SwiftUI
              // Set the scale mode to scale to fit the window
              rootNode.scaleMode = .aspectFit
              
-             // Present the scene
              if let view = self.view as! SKView? {
                  view.ignoresSiblingOrder = true
                  view.showsFPS = false
@@ -61,23 +137,15 @@ import SwiftUI
 //    var price: Double = 0
 //}
 
-@main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
-    let appSettings = AppSettings()
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        appSettings.loadUserDefaults()
-        appSettings.loadLeaderboard()
 
-        
-       // leaderBoard[2] = LeaderBoard(score: 20, playerName: "Player X", start: 1, stop: 100, date: Date())
-       // leaderBoard[1] = LeaderBoard(score: 20, playerName: "Player X", start: 10, stop: 100, date: Date())
+
+// leaderBoard[2] = LeaderBoard(score: 20, playerName: "Player X", start: 1, stop: 100, date: Date())
+// leaderBoard[1] = LeaderBoard(score: 20, playerName: "Player X", start: 10, stop: 100, date: Date())
 //
 //        leaderBoard.sort(by: {($1.score, $1.stop, $0.start) < ($0.score, $0.stop, $1.start)})
 //        leaderBoard = Array(leaderBoard[0..<20])
 
-        //if #available(iOS 13.0, *) {
+ //if #available(iOS 13.0, *) {
 //            struct ContentView: View {
 //                var scene: SKScene {
 //                    guard let scene = SKScene(fileNamed: "GameMenu") else { return SKScene() }
@@ -136,78 +204,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 ////                        .edgesIgnoringSafeArea(.all)
 //                }
 //            }
-            
-            
-           // let vc = UIHostingController(rootView: ContentView())
-          //  window?.rootViewController = vc
-      //  }
+     
+     
+    // let vc = UIHostingController(rootView: ContentView())
+   //  window?.rootViewController = vc
+//  }
 //        } else {
 //            // Fallback on earlier versions
 //        }
 
-       // sendText()
-        
-        
-        
-        #if targetEnvironment(macCatalyst)
-        let MacCatalystVerison = UIDevice.current.systemVersion
-
-        UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.forEach { windowScene in
-            windowScene.titlebar?.titleVisibility = .hidden
-        
-            yCoverMacOS = 32
-
-            if let height = settings.height {
-                windowHeight = height
-                windowWidth = windowHeight / 2
-            } else if MacCatalystVerison.starts(with: "10.15") {
-                windowHeight = 1300
-            } else {
-                windowHeight = windowScene.screen.bounds.height - 120
-            }
-            
-            windowWidth = windowHeight / 2
-            windowScene.sizeRestrictions?.minimumSize = CGSize(width: windowWidth, height: windowHeight)
-            windowScene.sizeRestrictions?.maximumSize = CGSize(width: windowWidth, height: windowHeight)
-        }
-        #else
-        
-        windowHeight = 1300
-        windowWidth = windowHeight / 2
-        
-        if #available(iOS 13.0, *) {
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                if let height = window?.bounds.height {
-                    windowHeight = height
-                    windowWidth = height / 2
-                }
-            }
-        }
-        #endif
-    
-        
-        return true
-    }
-    
-    func applicationWillResignActive(_ application: UIApplication) {
-        appSettings.saveUserDefaults()
-        
-    }
-    
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        appSettings.saveUserDefaults()
-    }
-    
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        appSettings.saveUserDefaults()
-    }
-    
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        appSettings.saveUserDefaults()
-    }
-    
-    
-    func applicationWillTerminate(_ application: UIApplication) {
-        appSettings.saveUserDefaults()
-    }
-}
+// sendText()
+ 
+ 

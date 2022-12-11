@@ -66,7 +66,6 @@ extension GameScene {
         ballNode.physicsBody?.fieldBitMask = 0
         ballNode.name = ball
         extraNode.position = CGPoint(x: 0, y: -100)
-        ballNode.speed = CGFloat(1.0)
         ballNode.addChild(ballEmoji)
         ballNode.physicsBody?.velocity = ballSpeed()
         anchorNode.addChild(ballNode)
@@ -117,7 +116,6 @@ extension GameScene {
         extraNode.zPosition = 50
         extraNode.name = extraball
         extraNode.position = CGPoint(x: 0, y: -100)
-        extraNode.speed = CGFloat(1.0)
         extraNode.physicsBody?.velocity = ballSpeed()
         extraNode.addChild(extraBallEmoji)
         anchorNode.addChild(extraNode)

@@ -33,16 +33,15 @@ class GameViewController: UIViewController {
                 view.showsFPS = false
                 view.showsNodeCount = false
                 view.isMultipleTouchEnabled = false
-                view.presentScene(scene, transition: SKTransition.fade(withDuration: 2.0))
+                view.presentScene(scene, transition: SKTransition.fade(withDuration: 1.0))
             }
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        setGamerTag()
-#if targetEnvironment(macCatalyst)
+    #if targetEnvironment(macCatalyst)
         runAudioSession()
-#endif
+    #endif
         self.runGameMenu()
         
     }
@@ -81,7 +80,6 @@ class GameViewController: UIViewController {
         super.viewDidAppear(animated)
         
         view.backgroundColor = .black
-        
         
         func bitSet(_ bits: [Int]) -> UInt {
             return bits.reduce(0) { $0 | (1 << $1) }

@@ -22,7 +22,7 @@ import UIKit
 typealias DataHandler             = (_ data:Data?) -> Void
 typealias TextHandler             = (_ text:String?) -> Void
 
-func getData() {
+func getOnlineLeaderBoardData() {
     let dataUrl = "https://pearsc.com/spacebarlb"
     
     Async.api.CommanderData(endpoint: dataUrl, method: "getData") { (data) in
@@ -43,21 +43,13 @@ func getData() {
 
 
 func sendText(score: Int, player: String, start: Int, stop: Int) {
-    
     var player = player.replacingOccurrences(of: " ", with: "_")
     player = removeSpecialChars(player)
     
     let checksum = player.count + score + start + stop
     let pinpoint = "http://pearsc.com/spacebarup/\(player)/\(score)/\(start)/\(stop)/\(checksum)"
     Async.api.Text(endpoint: pinpoint, timeOut: 5 ) {  air in
-        
-        // Do nothing
-        
-//        if air == "air" {
-//            DispatchQueue.global(qos: .background).async {
-//                getData()
-//            }
-//        }
+        AppSettings().loadLeaderboard()
     }
 }
 

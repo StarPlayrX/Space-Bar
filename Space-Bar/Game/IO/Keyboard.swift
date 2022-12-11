@@ -57,7 +57,6 @@ extension GameScene: GameSceneDelegate {
     func playPause() {
         //MARK: For some reason still have to use a Global here for gScene. Odd, doesn't run correctly using the local
         gScene.isPaused.toggle()
-        gScene.speed = gScene.isPaused ? 0 : 1
         
         if gScene.isPaused {
             pauseLabel.text = "▶️"

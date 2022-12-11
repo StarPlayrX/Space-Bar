@@ -82,7 +82,7 @@ struct AppSettings {
         }
         
         DispatchQueue.global(qos:.background).async {
-            getData()
+            getOnlineLeaderBoardData()
         }
     }
 }

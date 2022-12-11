@@ -25,7 +25,6 @@ extension GameScene {
             sprite.run(moveGroundSpritesForever)
             backParalax.addChild(sprite)
             backParalax.zPosition = -10
-            backParalax.speed = 1
         }
         anchorNode.addChild(backParalax)
     }
